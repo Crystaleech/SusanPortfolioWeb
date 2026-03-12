@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <script>
+        (function() {
+            var lang = localStorage.getItem('siteLang');
+            if (lang === 'zh') {
+                document.documentElement.lang = 'zh-CN';
+                document.documentElement.classList.add('zh-initial');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderator - Project Detail</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0b0f19', // Slightly bluer/lighter than pure black
+                        'deep-space': '#111827',
+                        accent: '#ef4444', // Brighter red
+                        'accent-light': '#fca5a5',
+                        slate: '#94a3b8',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --accent: #ef4444;
+            --accent-glow: rgba(239, 68, 68, 0.4);
+        }
+        body {
+            /* Brighter, deep gradient foundation */
+            background-color: #0f172a;
+            background-image: 
+                radial-gradient(circle at 50% 0%, #2a1b1b 0%, transparent 60%),
+                linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 1. Enhanced Grid Background (Translucent/Space feel) */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            /* Lighter, clearer grid */
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%);
+        }
+
+        /* 2. Ambient Glow / Depth */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 30%, rgba(220, 38, 38, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Typography & Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; border: 2px solid #0f172a; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+        ::selection { background-color: var(--accent); color: white; }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        /* Glassmorphism Panels */
+        .content-panel {
+            /* Lighter, more transparent glass */
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .content-panel:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(239, 68, 68, 0.1);
+        }
+        
+        /* Tech decorations (Subtle corners) */
+        .tech-corner-tl {
+            position: absolute; top: -1px; left: -1px; width: 6px; height: 6px;
+            border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
+            opacity: 0.7;
+        }
+        .tech-corner-br {
+            position: absolute; bottom: -1px; right: -1px; width: 6px; height: 6px;
+            border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
+            opacity: 0.7;
+        }
+
+        .meta-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-family: 'Fira Code', monospace;
+            color: #cbd5e1;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .meta-chip:hover {
+            border-color: var(--accent);
+            color: white;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Hero HUD Lines (More subtle) */
+        .hud-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            pointer-events: none;
+        }
+        .hud-line.vertical {
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        }
+
+        /* Screenshot Card */
+        .screenshot-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border-radius: 4px;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .screenshot-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            z-index: 10;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+        .screenshot-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.85;
+            transition: opacity 0.3s, transform 0.5s;
+        }
+        .screenshot-card:hover img { opacity: 1; transform: scale(1.02); }
+        .media-video-card {
+            width: 96%;
+            margin-right: auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        .media-video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            flex: 1;
+            min-height: 0;
+        }
+        @media (max-width: 1024px) {
+            .media-video-card {
+                width: 100%;
+            }
+        }
+
+        /* Bilingual Toggles */
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: inline; }
+        body.zh-mode { font-family: "PingFang SC", "Microsoft YaHei", "Inter", sans-serif; }
+    </style>
+</head>
+<body class="antialiased font-sans min-h-screen text-base selection:bg-accent/30 selection:text-white">
+    <script>
+        (function() {
+            if (document.documentElement.classList.contains('zh-initial')) {
+                document.body.classList.add('zh-mode');
+                document.documentElement.classList.remove('zh-initial');
+            }
+        })();
+    </script>
+
+    <!-- Nav: Lighter, floating feel -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-[#0f172a]/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Back Link -->
+                <a href="projects.html" class="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-display font-bold text-sm tracking-widest uppercase">
+                    <span class="text-accent group-hover:-translate-x-1 transition-transform">&lt;</span>
+                    <span class="lang-en">BACK TO PROJECTS</span><span class="lang-zh">返回项目列表</span>
+                </a>
+                
+                <div class="flex items-center gap-8">
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex gap-8 text-xs font-medium uppercase tracking-widest text-slate-400">
+                        <a href="#overview" class="hover:text-accent transition-colors"><span class="lang-en">Overview</span><span class="lang-zh">概览</span></a>
+                        <a href="#gameplay" class="hover:text-accent transition-colors"><span class="lang-en">Gameplay</span><span class="lang-zh">机制</span></a>
+                        <a href="#system" class="hover:text-accent transition-colors"><span class="lang-en">System</span><span class="lang-zh">系统</span></a>
+                        <a href="#data" class="hover:text-accent transition-colors"><span class="lang-en">Data</span><span class="lang-zh">架构</span></a>
+                    </div>
+                    
+                    <!-- Language Toggle -->
+                    <button id="lang-toggle" class="relative group px-3 py-1.5 overflow-hidden rounded border border-white/20 hover:border-accent/50 transition-colors">
+                        <div class="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform"></div>
+                        <span id="lang-toggle-label" class="relative z-10 font-display text-xs font-bold text-slate-300 group-hover:text-white uppercase tracking-wider">中文</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <!-- Hero Section: Taller, Spacious, Translucent -->
+        <section id="overview" class="relative min-h-[85vh] flex items-center justify-center border-b border-white/5 overflow-hidden">
+            
+            <!-- Dynamic Background Glow -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <!-- Decorative Lines -->
+            <div class="hud-line top-[20%] left-0 w-full h-px"></div>
+            <div class="hud-line bottom-[20%] left-0 w-full h-px"></div>
+            <div class="hud-line vertical top-0 left-[20%] w-px h-full"></div>
+            <div class="hud-line vertical top-0 right-[20%] w-px h-full"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.5fr_1fr] gap-16 items-center w-full">
+                
+                <!-- Left: Typography -->
+                <div class="space-y-8 animate-fade-in delay-100">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 border border-accent/30 rounded-full bg-accent/5 text-accent text-[10px] font-mono tracking-widest uppercase mb-4">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+                            <span class="lang-en">System Online</span><span class="lang-zh">系统运行中</span>
+                        </div>
+                        
+                        <h1 class="text-6xl md:text-8xl font-display font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-slate-200 to-slate-500 leading-[0.9] drop-shadow-lg mb-4">
+                            <span class="lang-en">MODERATOR</span><span class="lang-zh">审核员模拟器</span>
+                        </h1>
+                        
+                        <p class="text-xl md:text-2xl text-slate-400 font-light tracking-wide border-l-2 border-accent/50 pl-4">
+                            <span class="lang-en">Content Moderation Simulation</span><span class="lang-zh">网络内容审核模拟系统</span>
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <span class="meta-chip"><span class="lang-en">Solo Dev</span><span class="lang-zh">独立开发</span></span>
+                        <span class="meta-chip"><span class="lang-en">Unity</span><span class="lang-zh">Unity 引擎</span></span>
+                        <span class="meta-chip"><span class="lang-en">Data-Driven</span><span class="lang-zh">数据驱动</span></span>
+                        <span class="meta-chip"><span class="lang-en">2026</span><span class="lang-zh">2026</span></span>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="https://crystaleech.itch.io/moderator" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-red-500 text-white font-display font-bold uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_40px_rgba(239,68,68,0.6)] rounded-sm overflow-hidden">
+                            <span class="relative z-10 flex items-center gap-3">
+                                <span class="lang-en">Initialize Protocol</span><span class="lang-zh">启动审核程序</span>
+                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Glass Panel Briefing -->
+                <div class="animate-fade-in delay-200">
+                    <div class="content-panel p-8 rounded-lg relative overflow-hidden">
+<!-- Decorative glow inside panel -->
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-accent/10 rounded-full blur-2xl"></div>
+
+                        <div class="tech-corner-tl"></div>
+                        <div class="tech-corner-br"></div>
+                        
+                        <h2 class="text-white/90 font-display font-bold text-sm tracking-widest mb-6 uppercase flex items-center gap-3">
+                            <span class="w-4 h-[1px] bg-accent"></span>
+                            <span class="lang-en">Mission Briefing</span><span class="lang-zh">任务简报</span>
+                        </h2>
+                        
+                        <p class="text-slate-300 text-sm leading-7 mb-6">
+                            <span class="lang-en">You are the first line of defense. As a newly hired moderator, you must filter a relentless stream of user content. Your choices determine the platform's fate: <strong>Order</strong> or <strong>Chaos</strong>?</span>
+                            <span class="lang-zh">你是网络防线的第一道关卡。作为新入职的审核员，你必须过滤无情的用户内容流。你的选择决定了平台的命运：是<strong>秩序</strong>，还是<strong>混乱</strong>？</span>
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6 pt-6 border-t border-white/10">
+                            <div>
+                                <span class="block text-xs font-mono text-slate-500 uppercase mb-1">Genre</span>
+                                <span class="text-sm text-white font-medium"><span class="lang-en">Simulation / Strategy</span><span class="lang-zh">模拟 / 策略</span></span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-mono text-slate-500 uppercase mb-1">Theme</span>
+                                <span class="text-sm text-white font-medium"><span class="lang-en">Dystopian / Cyber</span><span class="lang-zh">反乌托邦 / 赛博</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 animate-bounce">
+                <span class="text-[10px] font-mono uppercase tracking-widest">Scroll</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+            </div>
+        </section>
+
+        <!-- Media Strip: Glass Cards -->
+        <section class="py-20 border-b border-white/5 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex items-center justify-between mb-10">
+                    <h2 class="text-2xl font-display font-bold text-white uppercase tracking-wider flex items-center gap-4">
+                        <span class="lang-en">Visual Logs</span><span class="lang-zh">实机演示</span>
+                        <span class="h-px w-20 bg-accent/50"></span>
+                    </h2>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+                    <!-- Left: Video (scales to match right column height) -->
+                    <div class="screenshot-card relative group media-video-card">
+                        <video controls class="w-full block opacity-90 group-hover:opacity-100 transition-opacity">
+                            <source src="Moderator/moderator-demo.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4 pointer-events-none">
+                            <span class="text-xs font-mono text-accent uppercase tracking-wider"><span class="lang-en">00_Full_Runthrough</span><span class="lang-zh">00_完整流程演示</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Grid -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <!-- Top Left (moved from left side) -->
+                        <div class="screenshot-card aspect-video relative group">
+                            <img src="Moderator/moderator-title.png" alt="Title">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                <span class="text-xs font-mono text-accent uppercase tracking-wider"><span class="lang-en">01_Login_Screen</span><span class="lang-zh">01_登录界面</span></span>
+                            </div>
+                        </div>
+                        <!-- Top Right (moved from left side) -->
+                        <div class="screenshot-card aspect-video relative group">
+                            <img src="Moderator/moderator-onboarding.png" alt="Onboarding">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                <span class="text-xs font-mono text-accent uppercase tracking-wider"><span class="lang-en">02_Training</span><span class="lang-zh">02_入职培训</span></span>
+                            </div>
+                        </div>
+                        <!-- Bottom Left -->
+                        <div class="screenshot-card aspect-video relative group">
+                            <img src="Moderator/moderator-gameplay1.png" alt="Gameplay">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                <span class="text-xs font-mono text-accent uppercase tracking-wider"><span class="lang-en">03_Queue_View</span><span class="lang-zh">03_审核队列</span></span>
+                            </div>
+                        </div>
+                        <!-- Bottom Right -->
+                        <div class="screenshot-card aspect-video relative group">
+                            <img src="Moderator/moderator-gameplay2.png" alt="In-game">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                <span class="text-xs font-mono text-accent uppercase tracking-wider"><span class="lang-en">04_Feedback</span><span class="lang-zh">04_系统反馈</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Mechanics: Clean Layout -->
+        <section id="gameplay" class="py-24 relative">
+             <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-accent/5 to-transparent pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-16">
+                    
+                    <!-- Left: Description -->
+                    <div class="lg:col-span-4 space-y-8">
+                        <div>
+                            <h2 class="text-3xl font-display font-bold text-white uppercase tracking-wider mb-4">
+                                <span class="lang-en">Core Protocols</span><span class="lang-zh">核心机制</span>
+                            </h2>
+                            <div class="h-1 w-12 bg-accent rounded-full"></div>
+                        </div>
+                        
+                        <p class="text-slate-400 text-base leading-7">
+                            <span class="lang-en">Posts flow into your terminal. You have seconds to categorize them. Every click is final. Every click shifts the platform's stability.</span>
+                            <span class="lang-zh">帖子不断涌入终端。你只有几秒钟的时间进行归类。每一次点击都是不可撤销的，每一次点击都会改变平台的稳定性。</span>
+                        </p>
+                        
+                        <!-- Timeline steps -->
+                        <div class="relative pl-6 border-l border-white/10 space-y-8 py-2">
+                            <div class="relative">
+                                <span class="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-slate-700 border-2 border-[#0f172a]"></span>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-1"><span class="lang-en">Analyze</span><span class="lang-zh">分析</span></h4>
+                                <p class="text-xs text-slate-500"><span class="lang-en">Read content & context</span><span class="lang-zh">阅读内容与语境</span></p>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-accent animate-pulse border-2 border-[#0f172a]"></span>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-1"><span class="lang-en">Execute Action</span><span class="lang-zh">执行操作</span></h4>
+                                <p class="text-xs text-slate-500"><span class="lang-en">Choose 1 of 4 actions</span><span class="lang-zh">从4种操作中选择</span></p>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-slate-700 border-2 border-[#0f172a]"></span>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-1"><span class="lang-en">Update</span><span class="lang-zh">更新</span></h4>
+                                <p class="text-xs text-slate-500"><span class="lang-en">Real-time metric shift</span><span class="lang-zh">实时指标变动</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Action Cards (Grid) -->
+                    <div class="lg:col-span-8 grid md:grid-cols-2 gap-6">
+                        <!-- Promote -->
+                        <div class="content-panel p-6 rounded border-l-2 border-l-green-500 group">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display font-bold text-white text-lg uppercase tracking-wider group-hover:text-green-400 transition-colors"><span class="lang-en">Promote</span><span class="lang-zh">推广</span></h3>
+                                <span class="text-[10px] font-mono text-green-400 bg-green-400/10 px-2 py-1 rounded">++EXP</span>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                <span class="lang-en">Boost visibility for high-quality content. Increases community happiness significantly.</span>
+                                <span class="lang-zh">提升优质内容的曝光度。显著提升社区满意度。</span>
+                            </p>
+                        </div>
+
+                        <!-- Send -->
+                        <div class="content-panel p-6 rounded border-l-2 border-l-slate-400 group">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display font-bold text-white text-lg uppercase tracking-wider group-hover:text-slate-300 transition-colors"><span class="lang-en">Send</span><span class="lang-zh">放行</span></h3>
+                                <span class="text-[10px] font-mono text-slate-400 bg-slate-400/10 px-2 py-1 rounded">STANDARD</span>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                <span class="lang-en">Allow standard content. Minor impact on metrics. The baseline operation.</span>
+                                <span class="lang-zh">允许普通内容通过。对指标影响较小。这是最基准的操作。</span>
+                            </p>
+                        </div>
+
+                        <!-- Limit -->
+                        <div class="content-panel p-6 rounded border-l-2 border-l-yellow-500 group">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display font-bold text-white text-lg uppercase tracking-wider group-hover:text-yellow-400 transition-colors"><span class="lang-en">Limit</span><span class="lang-zh">限流</span></h3>
+                                <span class="text-[10px] font-mono text-yellow-400 bg-yellow-400/10 px-2 py-1 rounded">RESTRICT</span>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                <span class="lang-en">Suppress suspicious content without removal. Safety up, Happiness down.</span>
+                                <span class="lang-zh">压制可疑内容的传播。提升安全性，降低满意度。</span>
+                            </p>
+                        </div>
+
+                        <!-- Ban -->
+                        <div class="content-panel p-6 rounded border-l-2 border-l-red-500 group">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display font-bold text-white text-lg uppercase tracking-wider group-hover:text-red-400 transition-colors"><span class="lang-en">Ban</span><span class="lang-zh">封禁</span></h3>
+                                <span class="text-[10px] font-mono text-red-400 bg-red-400/10 px-2 py-1 rounded">DELETE</span>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                <span class="lang-en">Remove harmful content. Max Safety boost, major Happiness penalty.</span>
+                                <span class="lang-zh">移除有害内容。最大程度提升安全性，但大幅降低满意度。</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System & Data: Modern Layout -->
+        <section id="system" class="py-24 border-y border-white/5 bg-black/20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16">
+                    
+                    <!-- System Metrics -->
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-4 mb-6">
+                             <div class="p-2 bg-accent/10 rounded">
+                                <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                            </div>
+                            <h2 class="text-2xl font-display font-bold text-white uppercase tracking-wider">
+                                <span class="lang-en">System Metrics</span><span class="lang-zh">系统指标</span>
+                            </h2>
+                        </div>
+                        
+                        <div class="bg-[#0b0f19] border border-white/10 p-8 rounded shadow-2xl relative overflow-hidden">
+                            <!-- Graph Background -->
+                            <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px); background-size: 20px 20px;"></div>
+                            
+                            <div class="relative z-10 grid gap-8">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between text-xs font-mono uppercase text-slate-400 tracking-wider">
+                                        <span><span class="lang-en">Community Happiness</span><span class="lang-zh">社区满意度</span></span>
+                                        <span class="text-blue-400 font-bold">LIVE</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-800/50 rounded-full overflow-hidden border border-white/5">
+                                        <div class="h-full w-3/4 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                                    </div>
+                                    <p class="text-xs text-slate-500"><span class="lang-en">Represents user satisfaction. Low values trigger user exodus.</span><span class="lang-zh">代表用户满意度。数值过低会导致用户流失。</span></p>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <div class="flex justify-between text-xs font-mono uppercase text-slate-400 tracking-wider">
+                                        <span><span class="lang-en">Information Safety</span><span class="lang-zh">信息安全性</span></span>
+                                        <span class="text-red-400 font-bold">CRITICAL</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-800/50 rounded-full overflow-hidden border border-white/5">
+                                        <div class="h-full w-1/2 bg-gradient-to-r from-red-600 to-red-400 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
+                                    </div>
+                                    <p class="text-xs text-slate-500"><span class="lang-en">Represents platform integrity. Low values trigger legal action.</span><span class="lang-zh">代表平台完整性。数值过低会引发法律风险。</span></p>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 pt-6 border-t border-white/10 flex items-center gap-3">
+                                <span class="relative flex h-3 w-3">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                                </span>
+                                <p class="text-xs text-red-200 font-mono tracking-wide">
+                                    <span class="lang-en">FAILURE CONDITION: METRIC < 50</span>
+                                    <span class="lang-zh">失败判定：任意指标 < 50</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Architecture -->
+                    <div id="data" class="space-y-8">
+                         <div class="flex items-center gap-4 mb-6">
+                            <div class="p-2 bg-accent/10 rounded">
+                                <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                            </div>
+                            <h2 class="text-2xl font-display font-bold text-white uppercase tracking-wider">
+                                <span class="lang-en">Data Architecture</span><span class="lang-zh">数据架构</span>
+                            </h2>
+                        </div>
+
+                        <div class="relative group">
+                            <!-- Glowing border effect -->
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-accent to-purple-600 rounded blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                            
+                            <div class="relative bg-[#0b0f19] p-5 rounded font-mono text-xs border border-white/10 text-slate-300">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4 text-slate-500 text-[10px] uppercase tracking-widest">
+                                    <span>post_schema.json</span>
+                                    <span>READ_ONLY</span>
+                                </div>
+<pre class="overflow-x-auto custom-scrollbar">
+<span class="text-purple-400">{</span>
+  <span class="text-sky-300">"id"</span>: <span class="text-emerald-300">"post_042"</span>,
+  <span class="text-sky-300">"content"</span>: <span class="text-emerald-300">"Suspicious link detected..."</span>,
+  <span class="text-sky-300">"actions"</span>: <span class="text-purple-400">{</span>
+    <span class="text-sky-300">"promote"</span>: <span class="text-purple-400">{</span> 
+        <span class="text-sky-300">"happiness"</span>: <span class="text-amber-300">+10</span>, 
+        <span class="text-sky-300">"safety"</span>: <span class="text-amber-300">-20</span> 
+    <span class="text-purple-400">}</span>,
+    <span class="text-sky-300">"limit"</span>: <span class="text-purple-400">{</span> 
+        <span class="text-sky-300">"happiness"</span>: <span class="text-amber-300">-5</span>, 
+        <span class="text-sky-300">"safety"</span>: <span class="text-amber-300">+15</span> 
+    <span class="text-purple-400">}</span>
+  <span class="text-purple-400">}</span>
+<span class="text-purple-400">}</span></pre>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-slate-400 leading-relaxed border-l-2 border-slate-700 pl-4">
+                            <span class="lang-en">The gameplay is driven by external JSON files, enabling rapid iteration of game balance and content without recompiling.</span>
+                            <span class="lang-zh">游戏循环完全由外部 JSON 文件驱动。这种设计允许在不重新编译代码的情况下，快速进行内容迭代和数值平衡调整。</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus: Clean Cards -->
+        <section id="design-focus" class="py-24">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Design Focus -->
+                    <div class="content-panel p-10 rounded-lg">
+                        <h3 class="font-display font-bold text-lg text-white mb-6 uppercase tracking-wider border-b border-white/10 pb-4">
+                            <span class="lang-en">Design Philosophy</span><span class="lang-zh">设计哲学</span>
+                        </h3>
+                        <ul class="space-y-6 text-sm text-slate-300">
+                            <li class="flex gap-4">
+                                <span class="text-accent font-display font-bold text-lg opacity-50">01</span>
+                                <div>
+                                    <strong class="block text-white mb-1"><span class="lang-en">Non-binary Morality</span><span class="lang-zh">非二元道德观</span></strong>
+                                    <span class="lang-en opacity-80">There are rarely "correct" answers, only trade-offs between competing values.</span>
+                                    <span class="lang-zh opacity-80">游戏中鲜有绝对的“正确”答案，只有不同维度价值观之间的取舍。</span>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <span class="text-accent font-display font-bold text-lg opacity-50">02</span>
+                                <div>
+                                    <strong class="block text-white mb-1"><span class="lang-en">Systemic Pressure</span><span class="lang-zh">系统性压力</span></strong>
+                                    <span class="lang-en opacity-80">Difficulty comes from the accumulation of small decisions, not mechanical skill.</span>
+                                    <span class="lang-zh opacity-80">难度来源于微小决策的累积效应，而非机械操作的熟练度。</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tech Focus -->
+                    <div class="content-panel p-10 rounded-lg">
+                        <h3 class="font-display font-bold text-lg text-white mb-6 uppercase tracking-wider border-b border-white/10 pb-4">
+                            <span class="lang-en">Tech Stack</span><span class="lang-zh">技术栈</span>
+                        </h3>
+                        <div class="grid grid-cols-2 gap-8 text-sm">
+                            <div>
+                                <h4 class="text-slate-500 uppercase text-[10px] font-bold mb-3 tracking-widest">Key Features</h4>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent rounded-full"></span> JSON Parsing</li>
+                                    <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent rounded-full"></span> Event System</li>
+                                    <li class="flex items-center gap-2"><span class="w-1 h-1 bg-accent rounded-full"></span> Dynamic UI</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-500 uppercase text-[10px] font-bold mb-3 tracking-widest">Future Roadmap</h4>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-500 rounded-full"></span> Viral Events</li>
+                                    <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-500 rounded-full"></span> Trust Metric</li>
+                                    <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-500 rounded-full"></span> Daily Quotas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 border-t border-white/5 bg-[#0b0f19] text-center relative z-10">
+            <div class="text-slate-600 text-xs font-mono uppercase tracking-[0.2em] hover:text-accent transition-colors cursor-default">
+                <span class="lang-en">End of Line</span><span class="lang-zh">终端会话结束</span>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        function applySavedLang() {
+            var isZh = localStorage.getItem('siteLang') === 'zh';
+            document.body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh-CN' : 'en';
+            document.title = isZh ? '审核员模拟器 - 项目详情' : 'Moderator - Project Detail';
+            var label = document.getElementById('lang-toggle-label');
+            if (label) label.textContent = isZh ? 'EN' : '中文';
+        }
+        applySavedLang();
+
+        document.getElementById('lang-toggle').addEventListener('click', function() {
+            var isZh = !document.body.classList.contains('zh-mode');
+            localStorage.setItem('siteLang', isZh ? 'zh' : 'en');
+            applySavedLang();
+        });
+    </script>
+</body>
+</html>

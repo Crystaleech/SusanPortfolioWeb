@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Log: Sushi Go Go Go</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --salmon: #FF8BA7;
+            --salmon-light: #FFC6D3;
+            --rice: #FDFBF7;
+            --nori: #2C3E50;
+            --wasabi: #A8D5BA;
+            --soy: #5D4037;
+            --bg-color: #F0F4F8;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --paper-line: #E1E8ED;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--nori);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-image: radial-gradient(var(--salmon-light) 1px, transparent 1px);
+            background-size: 20px 20px;
+            padding-top: 80px; /* Space for fixed navbar */
+        }
+
+        /* Navigation Bar */
+        .sushi-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 3px solid var(--salmon);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--salmon);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .back-link:hover {
+            transform: scale(1.05);
+        }
+
+        .back-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--salmon);
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>') no-repeat center;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>') no-repeat center;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-shortcuts {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--nori);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--salmon);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--salmon);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            background: var(--rice);
+            border: 2px solid var(--salmon);
+            color: var(--salmon);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: 10px;
+        }
+
+        .lang-switch:hover {
+            background: var(--salmon);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(255, 139, 167, 0.4);
+        }
+
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: inline; }
+
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .badge-container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: var(--card-shadow);
+            border: 3px solid var(--salmon);
+            transform: rotate(-2deg);
+            position: relative;
+        }
+
+        .badge-container::before {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background-color: var(--salmon);
+            border-radius: 50%;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-family: 'Indie Flower', cursive;
+            font-size: 3rem;
+            color: var(--salmon);
+            margin: 10px 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-weight: 700;
+            color: var(--soy);
+            font-size: 1.1rem;
+        }
+
+        /* Shift Details (Metadata) */
+        .shift-details {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: var(--wasabi);
+            color: var(--nori);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tag.role { background: var(--salmon-light); color: var(--soy); }
+
+        /* Notebook Layout - STRICT 2 COLUMN GRID */
+        .notebook {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Strict two columns */
+            gap: 30px; /* Increased gap for better separation */
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden; /* Prevents overflow from rotated elements */
+            border-top: 5px solid var(--salmon);
+            transition: transform 0.3s ease;
+            height: 100%; /* Stretch to fill grid cell height */
+            box-sizing: border-box;
+            scroll-margin-top: 90px; /* Adjust for fixed header */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-family: 'Indie Flower', cursive;
+            color: var(--salmon);
+            border-bottom: 2px dashed var(--salmon-light);
+            padding-bottom: 10px;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Full Width Card spans both columns */
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        /* Specific Card Styles */
+        .gameplay-loop ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .gameplay-loop li {
+            background: var(--bg-color);
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--wasabi);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .key-icon {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 0 #ddd;
+        }
+
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .score-table td {
+            padding: 8px;
+            border-bottom: 1px solid var(--paper-line);
+        }
+
+        .score-points {
+            font-weight: 800;
+            color: var(--salmon);
+            text-align: right;
+        }
+
+        .highlight-box {
+            background-color: var(--rice);
+            border: 2px solid var(--paper-line);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* Stickers/Decoration */
+        .sticker {
+            position: absolute;
+            opacity: 0.2;
+            z-index: 0;
+            pointer-events: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--salmon);
+        }
+
+        .sticker-1 { top: 10px; right: 10px; background-color: var(--salmon-light); transform: rotate(15deg); }
+        .sticker-2 { bottom: -10px; left: -10px; background-color: var(--wasabi); transform: rotate(-10deg); }
+
+        /* Contribution List */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--wasabi);
+            border-radius: 3px;
+        }
+
+        /* Square Icons */
+        .square-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 8px;
+            background-color: var(--salmon);
+            border-radius: 3px;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        /* Media / Gallery Styles */
+        .media-frame {
+            background: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 15px auto; /* Center in container */\n            position: relative;
+            transition: transform 0.3s;
+            max-width: 100%; /* Prevent overflow */
+        }
+        
+        .media-frame:hover {
+            transform: rotate(0deg) !important;
+            z-index: 10;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .media-frame img, .media-frame video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .media-caption {
+            font-family: 'Indie Flower', cursive;
+            text-align: center;
+            color: var(--soy);
+            margin-top: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .tape {
+            position: absolute;
+            width: 90px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.4);
+            pointer-events: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-bottom: 40px;
+            font-family: 'Indie Flower', cursive;
+            color: var(--nori);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .notebook { grid-template-columns: 1fr; } /* Stack on mobile */\n            h1 { font-size: 2rem; }
+            .nav-shortcuts { display: none; } /* Hide shortcuts on mobile */
+            .sushi-nav { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="sushi-nav">
+        <div class="nav-left">
+            <a href="projects.html" class="back-link">
+                <span class="back-icon"></span>
+                <span class="lang-en">Back to Project</span>
+                <span class="lang-zh">返回项目页</span>
+            </a>
+        </div>
+        <div class="nav-right">
+            <div class="nav-shortcuts">
+                <a href="#mission-brief" class="nav-link"><span class="lang-en">Overview</span><span class="lang-zh">概览</span></a>
+                <a href="#manual" class="nav-link"><span class="lang-en">Controls</span><span class="lang-zh">操作</span></a>
+                <a href="#workflow" class="nav-link"><span class="lang-en">Gameplay</span><span class="lang-zh">玩法</span></a>
+                <a href="#scoring" class="nav-link"><span class="lang-en">Scoring</span><span class="lang-zh">计分</span></a>
+                <a href="#visuals" class="nav-link"><span class="lang-en">Visuals</span><span class="lang-zh">视觉</span></a>
+                <a href="#notes" class="nav-link"><span class="lang-en">Design</span><span class="lang-zh">设计</span></a>
+                <a href="#log" class="nav-link"><span class="lang-en">Log</span><span class="lang-zh">日志</span></a>
+            </div>
+            <button onclick="toggleLang()" class="lang-switch">
+                <span class="lang-en">中文</span><span class="lang-zh">EN</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <div class="badge-container">
+                <h1>Sushi Go Go Go</h1>
+                <div class="subtitle">Cooking Simulation Prototype</div>
+                <div class="shift-details">
+                    <span class="tag role">Unity Programmer & Gameplay Designer</span>
+                    <span class="tag">Team Size: 3</span>
+                    <span class="tag">~2 Weeks</span>
+                    <span class="tag">Unity Engine</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="notebook">
+            <!-- Row 1: Mission Brief (Full Width) -->
+            <div class="card card-full" id="mission-brief">
+                <div class="sticker sticker-1"></div>
+                <h2><span class="square-icon"></span> Mission Brief (Overview)</h2>
+                <p><strong>Sushi Go Go Go</strong> is a fast-paced cooking simulation prototype where players prepare sushi under time pressure. You take the role of a new sushi apprentice on their first day of work.</p>
+                
+                <!-- Video Section -->
+                <div class="media-frame" style="transform: rotate(1deg); max-width: 80%;">
+                    <div class="tape" style="top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);"></div>
+                    <video controls muted autoplay loop>
+                        <source src="Sushigogogo/SushiGoGoGo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="media-caption">Gameplay Demo: Lunch Rush!</div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Task:</strong> Cut fish, assemble sushi, and plate dishes as quickly and accurately as possible.<br>
+                    <strong>Focus:</strong> Precision-based cooking interactions, rewarding accurate cuts and efficient workflow.<br>
+                    <strong>Inspiration:</strong> Cooking Mama (exploring physical interaction systems).
+                </div>
+            </div>
+
+            <!-- Row 2: Controls & Workflow (Split) -->
+            <div class="card" id="manual">
+                <h2><span class="square-icon"></span> Manual (Controls)</h2>
+                <p>Primary Playable Version (Mouse-based):</p>
+                <div class="controls-grid">
+                    <div class="control-item"><span class="key-icon">LMB</span> Slice Fish</div>
+                    <div class="control-item"><span class="key-icon">RMB</span> Grab/Place</div>
+                </div>
+                
+                <p style="margin-top: 15px; font-size: 0.9em;"><strong>Interactable Items:</strong> Knife, Fish, Rice balls, Plates.</p>
+                <hr style="border:0; border-top:1px dashed #ddd; margin: 15px 0;">
+                <p style="font-size: 0.85em; color: #666;"><em>Experimental Feature:</em> Leap Motion gesture support was prototyped (Finger slice, Pinch grab) but mouse remains the main stable input.</p>
+            </div>
+
+            <div class="card" id="workflow">
+                <h2><span class="square-icon"></span> Workflow (Gameplay)</h2>
+                <div class="gameplay-loop">
+                    <ul>
+                        <li><span class="square-icon" style="background-color: var(--wasabi);"></span> 1. Cut the fish</li>
+                        <li><span class="square-icon" style="background-color: var(--wasabi);"></span> 2. Combine fish with rice</li>
+                        <li><span class="square-icon" style="background-color: var(--wasabi);"></span> 3. Plate the sushi</li>
+                    </ul>
+                </div>
+
+                <p style="text-align: center; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span class="square-icon" style="background-color: var(--nori);"></span> <strong>Repeat until shift ends</strong> <span class="square-icon" style="background-color: var(--nori);"></span>
+                </p>
+                <p style="text-align: center; font-size: 0.9em;">Balance <strong>Speed</strong> vs <strong>Precision</strong></p>
+            </div>
+
+            <!-- Row 3: Scoring & Visuals (Split) -->
+            <div class="card" id="scoring">
+                <div class="sticker sticker-2"></div>
+                <h2><span class="square-icon"></span> Wage Calculation (Scoring)</h2>
+                <p>Points represent wages earned during the shift.</p>
+                <table class="score-table">
+                    <tr><td>Perfect Cut</td><td class="score-points">+15</td></tr>
+                    <tr><td>Good Cut</td><td class="score-points">+10</td></tr>
+                    <tr><td>Acceptable Cut</td><td class="score-points">+5</td></tr>
+                    <tr><td>Incorrect Cut</td><td class="score-points">0</td></tr>
+                    <tr><td>Assembly/Plating</td><td class="score-points">+5 ea</td></tr>
+                </table>
+                <div style="text-align: center; margin-top: 10px; font-weight: bold; color: var(--salmon);">
+                    Example Perfect Sushi: 25 Points
+                </div>
+            </div>
+
+            <div class="card" id="visuals" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <h2><span class="square-icon"></span> Visual Evolution</h2>
+                <!-- Prototype (Top) -->
+                <div class="media-frame" style="transform: rotate(-1deg); margin: 5px auto; width: 90%;">
+                    <div class="tape" style="top: -8px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 60px; height: 20px;"></div>
+                    <img src="Sushigogogo/4fd0bc899f99b7c1506f6a732dea8d71.png" alt="Early Sketch">
+                    <div class="media-caption" style="font-size: 0.8rem; color: #888;">Early Prototype</div>
+                </div>
+
+                <!-- Final (Bottom) -->
+                <div class="media-frame" style="transform: rotate(1deg); margin: 5px auto; width: 90%;">
+                    <div class="tape" style="top: -6px; right: 20%; transform: rotate(5deg); width: 60px; height: 20px;"></div>
+                    <img src="Sushigogogo/572c23bbb88f533ecd6f02d60f77f06f.png" alt="Final Gameplay">
+                    <div class="media-caption" style="font-size: 0.8rem;">Final Version</div>
+                </div>
+            </div>
+
+            <!-- Row 4: Chef's Notes (Full Width) -->
+            <div class="card card-full" id="notes">
+                <h2><span class="square-icon"></span> Chef's Notes (Design & Feedback)</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div>
+                        <h3 style="font-size: 1.1rem; color: var(--nori);">Design Philosophy</h3>
+                        <ul class="checklist">
+                            <li><strong>Precision-Based:</strong> No auto-cooking. Rewards control.</li>
+                            <li><strong>Physical Interaction:</strong> Manual actions simulate the real station feel.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.1rem; color: var(--nori);">Playtest Feedback</h3>
+                        <p style="display: flex; align-items: center; margin-bottom: 5px;"><span class="square-icon" style="background-color: var(--wasabi);"></span> Easy to understand, good visuals.</p>
+                        <p style="display: flex; align-items: center;"><span class="square-icon" style="background-color: #F1C40F;"></span> Knife placement initially confusing (Improved in iterations).</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="background: #e8f5e9; border-color: var(--wasabi);">
+                    <strong>Iterations:</strong> Added tutorials, sound feedback for cutting, and UI for money/time to improve readability.
+                </div>
+            </div>
+
+            <!-- Row 5: Logs & Expansion (Split) -->
+            <div class="card" id="log">
+                <h2><span class="square-icon"></span> My Shift Log (Contributions)</h2>
+                <ul class="checklist">
+                    <li>Unity gameplay programming</li>
+                    <li>Core sushi preparation mechanics</li>
+                    <li>Fish cutting & slicing system</li>
+                    <li>Sushi assembly & plating logic</li>
+                    <li>Score & wage system</li>
+                    <li>Game timer & UI feedback</li>
+                    <li>Workstation environment setup</li>
+                    <li>Gameplay tuning & testing</li>
+                </ul>
+            </div>
+
+            <div class="card" id="future">
+                <h2><span class="square-icon"></span> Future Menu (Expansion)</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 8px; display: flex; align-items: center;"><span class="square-icon" style="background-color: var(--salmon);"></span> <strong>More Fish:</strong> Salmon, Tuna, Eel, Tamago.</li>
+                    <li style="margin-bottom: 8px; display: flex; align-items: center;"><span class="square-icon" style="background-color: var(--soy);"></span> <strong>Orders:</strong> Specific requests (e.g., "2 Salmon Nigiri").</li>
+                    <li style="margin-bottom: 8px; display: flex; align-items: center;"><span class="square-icon" style="background-color: #E74C3C;"></span> <strong>Torch Cooking:</strong> Aburi style (searing).</li>
+                    <li style="margin-bottom: 8px; display: flex; align-items: center;"><span class="square-icon" style="background-color: var(--wasabi);"></span> <strong>Co-op:</strong> Multiplayer kitchen roles (Cutter, Rice Maker, Plater).</li>
+                </ul>
+            </div>
+
+            <!-- Row 6: End Report (Full Width) -->
+            <div class="card card-full" id="reflection">
+                <h2><span class="square-icon"></span> End of Shift Report (Reflection)</h2>
+                <p><strong>Tutorials are key:</strong> Players must understand the task immediately.</p>
+                <p><strong>Scope Management:</strong> Starting simple allowed us to polish the core loop within 2 weeks.</p>
+                <p><strong>Tech Balance:</strong> Innovative inputs (Leap Motion) are exciting, but stable fallbacks (Mouse) are essential for reliability.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Signed, Apprentice Dev • Sushi Go Go Go Project Log</p>
+        </footer>
+    </div>
+
+    <script>
+        const zhMap = {
+            "Work Log: Sushi Go Go Go": "工作日志：寿司冲冲冲",
+            "Sushi Go Go Go": "寿司冲冲冲",
+            "Cooking Simulation Prototype": "烹饪模拟原型",
+            "Unity Programmer & Gameplay Designer": "Unity 程序员 & 玩法设计",
+            "Team Size: 3": "团队规模：3人",
+            "~2 Weeks": "约 2 周",
+            "Unity Engine": "Unity 引擎",
+            "Mission Brief (Overview)": "任务简报 (概览)",
+            "Manual (Controls)": "操作手册 (控制)",
+            "Workflow (Gameplay)": "工作流程 (玩法)",
+            "Wage Calculation (Scoring)": "工资计算 (计分)",
+            "Visual Evolution": "视觉演变",
+            "Chef's Notes (Design & Feedback)": "主厨笔记 (设计与反馈)",
+            "My Shift Log (Contributions)": "轮班日志 (贡献)",
+            "Future Menu (Expansion)": "未来菜单 (扩展)",
+            "End of Shift Report (Reflection)": "轮班总结 (反思)",
+            "Gameplay Demo: Lunch Rush!": "玩法演示：午餐高峰！",
+            "Early Prototype": "早期原型",
+            "Final Version": "最终版本",
+            "Design Philosophy": "设计哲学",
+            "Playtest Feedback": "试玩反馈",
+            
+            // Content Paragraphs
+            "Sushi Go Go Go is a fast-paced cooking simulation prototype where players prepare sushi under time pressure. You take the role of a new sushi apprentice on their first day of work.": "《寿司冲冲冲》是一款快节奏的烹饪模拟原型，玩家需要在时间压力下制作寿司。你将扮演一名刚入职第一天的寿司学徒。",
+            "Task:": "任务：",
+            "Cut fish, assemble sushi, and plate dishes as quickly and accurately as possible.": "尽可能快速且准确地切鱼、组装寿司并摆盘。",
+            "Focus:": "重点：",
+            "Precision-based cooking interactions, rewarding accurate cuts and efficient workflow.": "基于精度的烹饪交互，奖励精准的切割和高效的工作流程。",
+            "Inspiration:": "灵感：",
+            "Cooking Mama (exploring physical interaction systems).": "《料理妈妈》（探索物理交互系统）。",
+            "Primary Playable Version (Mouse-based):": "主要可玩版本（鼠标操作）：",
+            "LMB": "左键",
+            "Slice Fish": "切鱼",
+            "RMB": "右键",
+            "Grab/Place": "抓取/放置",
+            "Interactable Items:": "可交互物品：",
+            "Knife, Fish, Rice balls, Plates.": "刀、鱼、饭团、盘子。",
+            "Experimental Feature:": "实验性功能：",
+            "Leap Motion gesture support was prototyped (Finger slice, Pinch grab) but mouse remains the main stable input.": "曾制作 Leap Motion 手势支持原型（手指切割、捏取），但鼠标仍是主要稳定输入方式。",
+            "1. Cut the fish": "1. 切鱼",
+            "2. Combine fish with rice": "2. 将鱼与米饭结合",
+            "3. Plate the sushi": "3. 寿司摆盘",
+            "Repeat until shift ends": "重复直到轮班结束",
+            "Balance": "平衡",
+            "Speed": "速度",
+            "vs": "vs",
+            "Precision": "精度",
+            "Points represent wages earned during the shift.": "分数代表轮班期间赚取的工资。",
+            "Perfect Cut": "完美切割",
+            "Good Cut": "良好切割",
+            "Acceptable Cut": "可接受切割",
+            "Incorrect Cut": "错误切割",
+            "Assembly/Plating": "组装/摆盘",
+            "+5 ea": "+5/个",
+            "Example Perfect Sushi: 25 Points": "示例完美寿司：25分",
+            "Precision-Based:": "基于精度：",
+            "No auto-cooking. Rewards control.": "无自动烹饪。奖励操作控制。",
+            "Physical Interaction:": "物理交互：",
+            "Manual actions simulate the real station feel.": "手动操作模拟真实工位感觉。",
+            "Easy to understand, good visuals.": "易于理解，视觉效果好。",
+            "Knife placement initially confusing (Improved in iterations).": "刀具放置最初令人困惑（已在迭代中改进）。",
+            "Iterations:": "迭代：",
+            "Added tutorials, sound feedback for cutting, and UI for money/time to improve readability.": "增加了教程、切割音效反馈以及金钱/时间 UI 以提高可读性。",
+            "Unity gameplay programming": "Unity 玩法编程",
+            "Core sushi preparation mechanics": "核心寿司制作机制",
+            "Fish cutting & slicing system": "切鱼与切片系统",
+            "Sushi assembly & plating logic": "寿司组装与摆盘逻辑",
+            "Score & wage system": "分数与工资系统",
+            "Game timer & UI feedback": "游戏计时器与 UI 反馈",
+            "Workstation environment setup": "工作站环境搭建",
+            "Gameplay tuning & testing": "玩法调整与测试",
+            "More Fish:": "更多鱼类：",
+            "Salmon, Tuna, Eel, Tamago.": "三文鱼、金枪鱼、鳗鱼、玉子烧。",
+            "Orders:": "订单：",
+            "Specific requests (e.g., \"2 Salmon Nigiri\").": "特定要求（如“2个三文鱼手握”）。",
+            "Torch Cooking:": "喷枪烹饪：",
+            "Aburi style (searing).": "炙烤风格。",
+            "Co-op:": "合作模式：",
+            "Multiplayer kitchen roles (Cutter, Rice Maker, Plater).": "多人厨房角色（切鱼工、捏饭工、摆盘工）。",
+            "Tutorials are key:": "教程是关键：",
+            "Players must understand the task immediately.": "玩家必须立即理解任务。",
+            "Scope Management:": "范围管理：",
+            "Starting simple allowed us to polish the core loop within 2 weeks.": "从简单开始使我们能在2周内打磨好核心循环。",
+            "Tech Balance:": "技术平衡：",
+            "Innovative inputs (Leap Motion) are exciting, but stable fallbacks (Mouse) are essential for reliability.": "创新输入（Leap Motion）令人兴奋，但稳定的备选方案（鼠标）对于可靠性至关重要。",
+            "Signed, Apprentice Dev • Sushi Go Go Go Project Log": "签名：学徒开发者 • 寿司冲冲冲项目日志"
+        };
+
+        const enMap = Object.fromEntries(Object.entries(zhMap).map(([en, zh]) => [zh, en]));
+
+        function normalizeText(text) {
+            return text.replace(/\s+/g, " ").trim();
+        }
+
+        function replaceTextNodes(root, dictionary) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    if (!node.parentElement) return NodeFilter.FILTER_REJECT;
+                    if (node.parentElement.closest("script, style, .lang-switch, .lang-en, .lang-zh")) return NodeFilter.FILTER_REJECT;
+                    if (!normalizeText(node.nodeValue || "")) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            textNodes.forEach((node) => {
+                const raw = node.nodeValue || "";
+                const leading = (raw.match(/^\s*/) || [""])[0];
+                const trailing = (raw.match(/\s*$/) || [""])[0];
+                const core = raw.slice(leading.length, raw.length - trailing.length);
+                const key = normalizeText(core);
+                if (dictionary[key]) {
+                    node.nodeValue = leading + dictionary[key] + trailing;
+                }
+            });
+        }
+
+        function applyLang(isZh) {
+            document.body.classList.toggle("zh-mode", isZh);
+            document.documentElement.lang = isZh ? "zh" : "en";
+            document.title = isZh ? "工作日志：寿司冲冲冲" : "Work Log: Sushi Go Go Go";
+            replaceTextNodes(document.body, isZh ? zhMap : enMap);
+            localStorage.setItem("siteLang", isZh ? "zh" : "en");
+        }
+
+        function toggleLang() {
+            applyLang(!document.body.classList.contains("zh-mode"));
+        }
+
+        window.toggleLang = toggleLang;
+        // Check local storage or default to English (false)
+        applyLang(localStorage.getItem("siteLang") === "zh");
+    </script>
+
+</body>
+</html>

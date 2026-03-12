@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhuguang - Elegant Chinese Style</title>
+    <script>
+        if (localStorage.getItem('siteLang') === 'zh') {
+            window.location.replace('zhuguang.html');
+        } else {
+            localStorage.setItem('siteLang', 'en');
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'porcelain': '#fafafa',
+                        'mist': '#e8f1f0',
+                        'willow': '#a8c3b0',
+                        'ink': '#2c3e50',
+                        'shadow': '#d1d9e6',
+                        'paper': '#f5f2e9',
+                        'bamboo': '#8a9a5b',
+                        'lotus': '#e6a8a8',
+                    },
+                    fontFamily: {
+                        serif: ["Noto Serif SC", "serif"],
+                        script: ["Ma Shan Zheng", "cursive"],
+                        light: ["ZCOOL QingKe HuangYou", "sans-serif"],
+                        elegant: ["ZCOOL XiaoWei", "serif"]
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background:
+                linear-gradient(135deg, #f0f7f4 0%, #e8f1f0 25%, #e0ebe9 50%, #d8e5e2 75%, #d0dfdc 100%),
+                radial-gradient(circle at 20% 80%, rgba(168, 195, 176, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(138, 154, 91, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+            color: #2c3e50;
+            font-family: "Noto Serif SC", serif;
+            overflow-x: hidden;
+        }
+        .minimal-nav {
+            backdrop-filter: blur(15px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.92) 100%);
+            border-bottom: 1px solid rgba(168, 195, 176, 0.15);
+        }
+        .nav-link {
+            padding: 0.5rem 1rem;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            font-family: "ZCOOL XiaoWei", serif;
+            font-size: 0.9rem;
+        }
+        .elegant-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .section-title {
+            font-family: "ZCOOL XiaoWei", serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .mini-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(168, 195, 176, 0.18);
+            border-radius: 16px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .clean-list { list-style: none; padding-left: 0; }
+        .clean-list li { margin-bottom: 0.75rem; padding-left: 1.2rem; position: relative; }
+        .clean-list li::before { content: "·"; position: absolute; left: 0; color: #a8c3b0; }
+        .hero-section {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .game-title {
+            font-family: "Ma Shan Zheng", cursive;
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+        .grid-small {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="minimal-nav fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="projects.html" class="nav-link flex items-center gap-2">
+                <span class="text-willow">←</span>
+                <span>Back</span>
+            </a>
+            <div class="flex gap-6 items-center">
+                <a href="#overview" class="nav-link">Overview</a>
+                <a href="#design" class="nav-link">Design</a>
+                <a href="#story" class="nav-link">Story</a>
+                <a href="#video" class="nav-link">Video</a>
+                <button onclick="localStorage.setItem('siteLang','zh'); window.location.href='zhuguang.html';" class="nav-link border border-willow/30 rounded-lg px-3 py-1">中文</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 pb-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section id="overview" class="hero-section animate-fade-in">
+                <div class="text-center mb-6">
+                    <div class="text-xs text-willow uppercase tracking-widest mb-2 font-elegant">Third-Person Action Stealth Level Demo</div>
+                    <div class="text-xs text-willow uppercase tracking-widest mb-4 font-elegant">12-Day Prototype Project · Theme: Scale (Enlarge / Shrink) + Museum</div>
+                    <h1 class="game-title mb-4">逐光</h1>
+                    <div class="flex flex-wrap justify-center gap-2 mb-6">
+                        <span class="mini-tag">Scale Shift</span>
+                        <span class="mini-tag">Museum Stealth</span>
+                        <span class="mini-tag">Mental Attack</span>
+                        <span class="mini-tag">Keycards</span>
+                        <span class="mini-tag">Laser Jumps</span>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="elegant-panel">
+                        <h2 class="section-title">Core Experience</h2>
+                        <p class="text-ink/80 leading-relaxed mb-4">
+                            A single-player third-person action-stealth demo. The core loop is dual survival logic from size-shifting: the teapot form handles scouting and stealth, while the human form handles high-risk breakthroughs.
+                        </p>
+                        <p class="text-ink/60 text-sm leading-relaxed">
+                            Built in 12 days as a prototype to validate the core mechanic and level experience: two rule sets inside the same space, timing windows for progression, and stealth routes shaped by light and shadow.
+                        </p>
+                    </div>
+                    <div class="elegant-panel">
+                        <h2 class="section-title">Document Scope</h2>
+                        <p class="text-ink/80 leading-relaxed">
+                            Author: Xiaohan Zhang<br>
+                            This page captures the full design thread of the demo, including:
+                        </p>
+                        <ul class="clean-list mt-3">
+                            <li>Core mechanic</li>
+                            <li>Level structure</li>
+                            <li>Rule systems</li>
+                            <li>Design intent</li>
+                            <li>Story & walkthrough</li>
+                            <li>Designed-but-unimplemented features</li>
+                            <li>Next-stage expansion direction</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="design" class="mt-12">
+                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">Design Logic</h2>
+                <div class="grid-small">
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Level Type</h3>
+                        <p class="text-ink/80 leading-relaxed">
+                            A linear progression level. Players start in the storeroom, collect key items in sequence, and reach the exhibit platform.
+                        </p>
+                    </div>
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Progression Conditions</h3>
+                        <ul class="clean-list">
+                            <li>Storeroom key</li>
+                            <li>Exhibit corridor key</li>
+                            <li>Main hall ID card</li>
+                        </ul>
+                    </div>
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Form Switching</h3>
+                        <p class="text-ink/80 leading-relaxed">
+                            Key: <strong>Tab</strong>. Switch between teapot and human form. Teapot is safer for stealth; human form enables mental attack but increases exposure risk.
+                        </p>
+                    </div>
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Mental Attack Window</h3>
+                        <p class="text-ink/80 leading-relaxed">
+                            In human form, hold <strong>Left Mouse</strong> to perform a mental attack. Enemies enter a 30-second stagger when mental value reaches zero - both a reward and strict time pressure.
+                        </p>
+                    </div>
+                    <div class="elegant-panel">
+                        <h3 class="section-title">HP Rules</h3>
+                        <ul class="clean-list">
+                            <li>Teapot and human HP pools are separate.</li>
+                            <li>Human HP zero: forced back to teapot, no future human switch.</li>
+                            <li>Teapot HP zero: fail state ("Shattered Porcelain").</li>
+                        </ul>
+                    </div>
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Enemy Behavior</h3>
+                        <p class="text-ink/80 leading-relaxed">
+                            Guard #2 joins patrol only after Guard #1 is attacked for the first time, making first aggression a key difficulty spike.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="elegant-panel mt-6">
+                    <h3 class="section-title">Gameplay Loop Diagram</h3>
+                    <p class="text-ink/60 text-sm leading-relaxed mb-4">
+                        A concise view of what the player repeatedly does moment-to-moment in the level.
+                    </p>
+                    <div class="bg-white/60 p-4 rounded-lg backdrop-blur-sm border border-mist/40 overflow-x-auto">
+                        <pre class="font-mono text-sm leading-relaxed text-ink/80 whitespace-pre">Observe Environment
+        ↓
+Switch Form (Tab)
+        ↓
+Plan Timing
+        ↓
+Mental Attack (Human Form)
+        ↓
+Enemy Stunned (30s Window)
+        ↓
+Collect Key / ID
+        ↓
+Return to Stealth (Teapot Form)
+        ↓
+Progress to Next Area</pre>
+                    </div>
+                    <p class="text-ink/80 leading-relaxed mt-4">
+                        Core loop: <strong>Observe → Plan → Attack → Escape</strong>
+                    </p>
+                </div>
+            </section>
+
+            <section id="story" class="mt-12">
+                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">Story and Walkthrough</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Story Setup</h3>
+                        <p class="text-ink/80 leading-relaxed">
+                            The protagonist is a once-beloved teapot spirit, now abandoned in a storeroom and fading from memory. One night, another teapot spirit proposes an identity swap at the exhibit platform.
+                        </p>
+                    </div>
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Play Flow</h3>
+                        <ul class="clean-list">
+                            <li>Exit storeroom and obtain the first key.</li>
+                            <li>Observe patrol routes using teapot form.</li>
+                            <li>Use human form to trigger stagger and loot key items.</li>
+                            <li>Cross laser corridor and reach final platform.</li>
+                            <li>Success ending: "To the Light". Failure ending: "Shattered Porcelain".</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="elegant-panel mt-6">
+                    <h3 class="section-title">Level Flow Diagram</h3>
+                    <p class="text-ink/60 text-sm leading-relaxed mb-4">Shows how the player progresses through the level.</p>
+                    <div class="bg-white/60 p-4 rounded-lg backdrop-blur-sm border border-mist/40 overflow-x-auto">
+                        <pre class="font-mono text-sm leading-relaxed text-ink/80 whitespace-pre">[Storage Room]
+     │
+     │  (Find White Key)
+     ▼
+[Storage Corridor]
+     │
+     │  (Observe Patrol Routes)
+     ▼
+[Security Area]
+     │
+     │  (Mental Attack Guard)
+     │
+     │  (Get Hallway Key)
+     ▼
+[Laser Corridor]
+     │
+     │  (Jump Through Lasers)
+     ▼
+[Main Exhibition Hall]
+     │
+     │  (Use ID Card)
+     ▼
+[Display Stage]
+     │
+     ▼
+[Ending: To the Light]</pre>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-mist/30">
+                        <p class="text-ink/80 leading-relaxed mb-2"><strong>Fail condition:</strong></p>
+                        <div class="bg-white/50 p-4 rounded-lg backdrop-blur-sm border border-mist/30 overflow-x-auto">
+                            <pre class="font-mono text-sm leading-relaxed text-ink/80 whitespace-pre">Teapot HP = 0
+        ↓
+Ending: Shattered Porcelain</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="elegant-panel mt-6">
+                    <h3 class="section-title">Designed but Not Fully Implemented</h3>
+                    <p class="text-ink/80 leading-relaxed">
+                        A right-click teleport prototype and a multi-path environmental puzzle system were validated but cut from the core demo due to production scope and collision stability risks in tight indoor spaces.
+                    </p>
+                </div>
+            </section>
+
+            <section id="video" class="mt-12">
+                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">Demo Video</h2>
+                <div class="elegant-panel">
+                    <p class="text-ink/80 leading-relaxed mb-4">
+                        Full level run (about 7 minutes), covering key mechanics: form switching, mental attack timing, and laser traversal.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-4">
+                        <span class="mini-tag">Duration: ~7 min</span>
+                        <span class="mini-tag">Resolution: 1920×1080</span>
+                        <span class="mini-tag">Format: MP4</span>
+                    </div>
+                    <div class="media-video-embed">
+                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116215104143749&bvid=BV11dczz3Ef1&cid=36643602438&p=1"
+                                scrolling="no"
+                                border="0"
+                                frameborder="no"
+                                framespacing="0"
+                                allowfullscreen="true"></iframe>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-mist/30">
+                        <h4 class="font-elegant text-ink mb-3">What the video shows</h4>
+                        <ul class="clean-list">
+                            <li>Form switching (teapot ↔ human)</li>
+                            <li>Mental attack and the 30-second window</li>
+                            <li>Laser jumping segment</li>
+                            <li>Full level flow from storeroom to the exhibit platform</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-12">
+                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">Future Direction</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Cultural Design Approach</h3>
+                        <div class="space-y-3 text-ink/80 leading-relaxed">
+                            <p>
+                                Cultural elements should not only be "seen" as decoration, but also be perceived and used as functional parts of level design.
+                            </p>
+                            <p>
+                                In daytime, the museum is an orderly curated space; at night, it becomes a shared field where spirit-objects coexist and the boundaries of time and space begin to loosen.
+                            </p>
+                            <p>
+                                A practical next step is the "traditional costumes and jewelry corridor": patrol routes circle around key display cabinets, lights focus on exhibits, and shadow zones naturally support stealth traversal.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="elegant-panel">
+                        <h3 class="section-title">Next Level Concept</h3>
+                        <div class="space-y-3 text-ink/80 leading-relaxed">
+                            <p>
+                                In Level 1 ("To the Light"), the protagonist chases the spotlight on the display platform. In Level 2, that goal shifts toward real natural light.
+                            </p>
+                            <p>
+                                Structurally, the game moves from closed corridor progression to vertical spaces and route choices.
+                            </p>
+                            <p>
+                                Lightweight AI spirit NPCs can be introduced as one-time helpers (briefly distracting patrols or opening temporary passages) without adding heavy system burden.
+                            </p>
+                            <p>
+                                Final objective: under pressure from layered mechanisms and multiple choices, the player truly escapes the museum and sees the first beam of natural light.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-10 text-center text-ink/50 text-sm">
+        <p>© 2026 Zhuguang Demo</p>
+        <p class="mt-2">Design & Documentation: Xiaohan Zhang</p>
+    </footer>
+</body>
+</html>

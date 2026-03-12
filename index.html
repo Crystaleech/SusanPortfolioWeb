@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine SiuHam Zhang - Game Designer</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#050b14', /* Darker background */
+                        'deep-blue': '#0a192f',
+                        'neon-blue': '#00ffff',
+                        'neon-purple': '#bd00ff',
+                        'neon-green': '#39ff14',
+                        slate: '#8892b0',
+                        white: '#e6f1ff',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s infinite',
+                        'slide-in': 'slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.5, filter: 'blur(40px)' },
+                            '50%': { opacity: 0.8, filter: 'blur(60px)' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateY(50px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --neon-blue: #00ffff;
+            --neon-purple: #bd00ff;
+        }
+
+        body {
+            background-color: #050b14;
+            color: #8892b0;
+            overflow: hidden; /* Prevent scrolling for full screen feel */
+        }
+
+        /* Neon Glow for Name (replaces glitch) */
+        .neon-name {
+            color: #ffffff;
+            text-shadow:
+                0 0 10px rgba(0, 255, 255, 0.55),
+                0 0 24px rgba(0, 255, 255, 0.30),
+                0 0 42px rgba(189, 0, 255, 0.22);
+        }
+
+        /* Hover Reveal for Right Panel */
+        .reveal-panel {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .reveal-panel:hover {
+            clip-path: polygon(0% 0, 100% 0, 100% 100%, 0% 100%);
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(10, 25, 47, 0.9) 100%);
+        }
+
+        /* Right-to-Left Transparent Box for Navigation */
+        .nav-transparent-box {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 50;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(to left, rgba(5, 11, 20, 0.8) 0%, rgba(5, 11, 20, 0.4) 50%, rgba(5, 11, 20, 0) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        /* Nav Box Styling */
+        .nav-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(5, 11, 20, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.85rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-box:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Active State */
+        .nav-box.active {
+            background: white;
+            color: #050b14;
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Language Toggle */
+        .lang-switch {
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            padding: 8px 12px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .lang-switch:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: block; }
+        body.zh-mode span.lang-zh { display: inline; }
+        body.zh-mode span.lang-en { display: none; }
+    </style>
+</head>
+<body class="h-screen w-full flex flex-col md:flex-row relative">
+
+    <!-- Background Grid -->
+    <div class="absolute inset-0 z-0 pointer-events-none"
+         style="background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px;">
+    </div>
+
+    <!-- Navigation: Right-to-Left Transparent Box -->
+    <div class="nav-transparent-box pointer-events-auto">
+        <a href="index.html" class="nav-box active"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
+        <a href="projects.html" class="nav-box"><span class="lang-en">Project</span><span class="lang-zh">项目</span></a>
+        <a href="contact.html" class="nav-box"><span class="lang-en">About me</span><span class="lang-zh">关于我</span></a>
+
+        <button onclick="toggleLang()" class="lang-switch">
+            <span class="lang-en">中文</span><span class="lang-zh">EN</span>
+        </button>
+    </div>
+
+    <!-- Left Column: Info -->
+    <div class="relative w-full md:w-5/12 h-full flex flex-col justify-center px-8 md:px-16 z-10 bg-navy/80 backdrop-blur-sm border-r border-white/5">
+        <div class="space-y-8 animate-slide-in">
+            <!-- Name -->
+            <h1 id="homeName" class="neon-name font-cyber font-black text-5xl md:text-7xl leading-tight tracking-tighter mb-2" data-en="CELINE SIUHAM ZHANG" data-zh="张笑菡">
+                <span class="lang-en">CELINE<br>SIUHAM<br>ZHANG</span>
+                <span class="lang-zh">张笑菡</span>
+            </h1>
+
+            <!-- Title -->
+            <div class="flex items-center gap-4">
+                <div class="h-px w-12 bg-neon-blue"></div>
+                <h2 class="text-neon-blue font-display text-xl md:text-2xl tracking-[0.2em] uppercase">
+                    <span class="lang-en">Game Designer</span><span class="lang-zh">游戏设计师</span>
+                </h2>
+            </div>
+
+            <!-- Intro -->
+            <p class="text-slate text-sm md:text-base leading-relaxed max-w-md font-light border-l-2 border-white/10 pl-4">
+                <span class="lang-en">Narrative-driven designer specializing in immersive worldbuilding and strategic content marketing. Architect of engaging digital experiences.</span>
+<span class="lang-zh">叙事，关卡，系统主导的游戏设计师，专注于沉浸式世界观构建与战略性内容营销。致力于打造具有美学凝聚力与市场共鸣的数字化体验。</span>
+            </p>
+
+            <!-- Contact -->
+            <div class="pt-8">
+                <a href="mailto:susa525795546@gmail.com" class="group flex items-center gap-4 text-white hover:text-neon-blue transition-all">
+                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-neon-blue group-hover:bg-neon-blue/10 rounded-full transition-all">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xs text-slate uppercase tracking-widest mb-1"><span class="lang-en">Get in touch</span><span class="lang-zh">联系我</span></span>
+                        <span class="font-mono text-sm tracking-wide">susa525795546@gmail.com</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute bottom-8 left-8 font-mono text-xs text-slate/30">
+            Based in Pasadena, CA / Shanghai, CN
+        </div>
+    </div>
+
+    <!-- Right Column: Interactive Link Area -->
+    <a href="contact.html" class="reveal-panel relative w-full md:w-7/12 h-full block group overflow-hidden cursor-pointer">
+        <!-- Background Image/Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-deep-blue via-navy to-black"></div>
+
+        <!-- Animated Glow Orbs -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-neon-blue/20 rounded-full blur-[100px] animate-pulse-glow"></div>
+        <div class="absolute top-1/3 right-1/3 w-[300px] h-[300px] bg-neon-purple/20 rounded-full blur-[80px] animate-pulse-glow" style="animation-delay: 1s;"></div>
+
+        <!-- Content -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
+            <!-- Big Arrow Circle -->
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full border border-neon-blue/50 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-neon-blue group-hover:border-neon-blue transition-all duration-500 shadow-[0_0_30px_rgba(0,255,255,0.2)]">
+                <i data-lucide="arrow-right" class="w-10 h-10 md:w-12 md:h-12 text-neon-blue group-hover:text-navy transition-colors duration-300"></i>
+            </div>
+
+            <h2 class="text-4xl md:text-6xl font-cyber font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate/50 group-hover:text-white transition-all duration-500 tracking-wider">
+                <span class="lang-en">ABOUT ME</span><span class="lang-zh">关于我</span>
+            </h2>
+            <p class="mt-4 text-neon-blue font-mono text-sm tracking-[0.3em] opacity-70 group-hover:opacity-100 group-hover:tracking-[0.5em] transition-all duration-500 uppercase">
+                <span class="lang-en">Discover More</span><span class="lang-zh">探索更多</span>
+            </p>
+        </div>
+
+        <!-- Grid Lines Overlay -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTAgNDBMMCAwTDQwIDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgwLDI1NSwyNTUsMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiAvPjwvc3ZnPg==')] opacity-30"></div>
+    </a>
+
+    <script>
+        lucide.createIcons();
+
+        function applySavedLang() {
+            const isZh = localStorage.getItem('siteLang') === 'zh';
+            document.body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh' : 'en';
+            document.title = isZh ? '张笑菡 - 游戏设计师' : 'Celine SiuHam Zhang - Game Designer';
+        }
+
+        function toggleLang() {
+            const isZh = !document.body.classList.contains('zh-mode');
+            document.body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh' : 'en';
+            localStorage.setItem('siteLang', isZh ? 'zh' : 'en');
+            document.title = isZh ? '张笑菡 - 游戏设计师' : 'Celine SiuHam Zhang - Game Designer';
+        }
+
+        applySavedLang();
+    </script>
+</body>
+</html>

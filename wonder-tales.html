@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonder Tales - Project Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#09060f',
+                        wine: '#612533',
+                        ember: '#d46a57',
+                        parchment: '#f4ece1',
+                        fog: '#b7aba0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                        title: ['Cinzel Decorative', 'serif'],
+                        body: ['Cormorant Garamond', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            font-size: 90%;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 10%, rgba(212, 106, 87, 0.12), transparent 35%), #09060f;
+            color: #d7d0c9;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpolygon points='48,2 94,48 48,94 2,48' fill='none' stroke='%23d6b978' stroke-opacity='0.28' stroke-width='1.2'/%3E%3Cpolygon points='48,14 82,48 48,82 14,48' fill='none' stroke='%23d6b978' stroke-opacity='0.22' stroke-width='1'/%3E%3Cpolygon points='48,25 71,48 48,71 25,48' fill='none' stroke='%23d6b978' stroke-opacity='0.18' stroke-width='0.9'/%3E%3Cpolygon points='48,34 62,48 48,62 34,48' fill='%23d6b978' fill-opacity='0.24'/%3E%3C/svg%3E");
+            background-size: 86px 86px;
+            background-repeat: repeat;
+            opacity: 0.36;
+        }
+
+        nav,
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        ::selection {
+            background: #d46a57;
+            color: #09060f;
+        }
+
+        .line-grid {
+            background-image: none;
+        }
+        .lang-switch {
+            border: 1px solid rgba(212, 106, 87, 0.55);
+            color: #f4ece1;
+            padding: 0.45rem 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.3s;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .lang-switch:hover {
+            background: rgba(212, 106, 87, 0.16);
+            border-color: rgba(212, 106, 87, 0.9);
+        }
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: inline; }
+
+        .section-head {
+            font-family: 'Cinzel Decorative', serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 900;
+            position: relative;
+            display: inline-block;
+            padding: 0.25rem 0 0.25rem 1rem;
+            border-left: 3px solid rgba(212, 106, 87, 0.85);
+        }
+
+        .section-head .sigil { display: none; }
+
+        .section-head-no-border {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .title-text {
+            display: inline-block;
+        }
+
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0.6rem 0 0.2rem;
+            color: rgba(226, 116, 106, 0.92);
+            position: relative;
+        }
+
+        .gold-divider::before,
+        .gold-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(226, 116, 106, 0.88);
+        }
+
+        .gold-divider::before { margin-right: 0.9rem; }
+        .gold-divider::after { margin-left: 0.9rem; }
+
+        .gold-divider .end-diamond {
+            width: 7px;
+            height: 7px;
+            border: 1px solid rgba(226, 116, 106, 0.9);
+            transform: rotate(45deg);
+            position: absolute;
+            top: 50%;
+            margin-top: -3.5px;
+            background: transparent;
+        }
+
+        .gold-divider .end-diamond.left { left: 0; }
+        .gold-divider .end-diamond.right { right: 0; }
+
+        .gold-divider .ornament {
+            width: 44px;
+            height: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .gold-divider .ornament::before,
+        .gold-divider .ornament::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 9px;
+            height: 9px;
+            border: 1px solid rgba(226, 116, 106, 0.95);
+            background: rgba(226, 116, 106, 0.95);
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .gold-divider .ornament::before { left: 0; }
+        .gold-divider .ornament::after { right: 0; }
+
+        .gold-divider .ornament i {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 14px;
+            height: 14px;
+            border: 1.2px solid rgba(226, 116, 106, 0.95);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .gold-divider .ornament i::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border: 1px solid rgba(226, 116, 106, 0.95);
+            transform: translate(-50%, -50%);
+        }
+
+        .lead-copy {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: #e8d8c8;
+        }
+
+        /* 含 mini-panel 的网格：同行等高、取消 stagger 以横向对齐 */
+        .mini-panel-grid {
+            align-items: stretch;
+        }
+        .mini-panel-grid > * {
+            margin-top: 0 !important;
+        }
+        .mini-panel {
+            border: 1px solid rgba(212, 106, 87, 0.18);
+            background: rgba(18, 12, 24, 0.58);
+            padding: 1.1rem 1.2rem;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.2rem;
+            line-height: 1.65;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mini-panel::before {
+            content: none;
+        }
+
+        .mini-panel.paper-lite::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 15% 25%, rgba(244, 236, 225, 0.03) 0 1px, transparent 1px), radial-gradient(circle at 70% 40%, rgba(244, 236, 225, 0.025) 0 1px, transparent 1px);
+            background-size: 180px 180px;
+            pointer-events: none;
+        }
+
+        .mini-panel::after {
+            content: none;
+        }
+
+        .mini-panel.paper-lite::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.14), inset 0 0 0 1px rgba(212, 106, 87, 0.06);
+            pointer-events: none;
+        }
+
+        .mini-panel h4 {
+            font-family: 'Chakra Petch', sans-serif;
+            text-transform: uppercase;
+            color: #f4ece1;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rhythm-divider {
+            margin-top: 2rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 106, 87, 0.35), transparent);
+        }
+
+        /* 角色图下方装饰分割线：浅玫瑰粉线 + 菱形，无背景 */
+        .divider-ornate {
+            margin-top: 2rem;
+            padding: 6px 0;
+            background: transparent;
+        }
+        /* Step2 与 Research 之间的分割线：无背景，与上方间距一致 */
+        .divider-ornate--banner {
+            margin-top: 1.5rem;
+            padding: 6px 0;
+            background: transparent;
+        }
+        .divider-ornate--banner .divider-ornate__line {
+            transform: translateY(6px);
+        }
+        .divider-ornate__line {
+            position: relative;
+            height: 24px;
+            width: 100%;
+        }
+        .divider-ornate__line::before,
+        .divider-ornate__line::after {
+            content: none;
+        }
+        .divider-ornate__line .divider-ornate__bar {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            margin-top: -0.5px;
+            height: 1px;
+            background: rgba(212, 150, 155, 0.9);
+            max-width: none;
+            margin: -0.5px 0 0 0;
+        }
+        .divider-ornate__end {
+            width: 10px;
+            height: 10px;
+            border: 1px solid rgba(212, 150, 155, 0.9);
+            background: transparent;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 50%;
+            margin-top: -5px;
+        }
+        .divider-ornate__end--l { left: 0; margin-right: 0; }
+        .divider-ornate__end--r { right: 0; margin-left: 0; }
+        .divider-ornate__center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -10px 0 0 -10px;
+            flex-shrink: 0;
+        }
+        .divider-ornate__center::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: rgba(212, 150, 155, 0.95);
+            transform: rotate(45deg);
+            position: absolute;
+        }
+        .divider-ornate__center::after {
+            content: "";
+            width: 14px;
+            height: 14px;
+            border: 1px solid rgba(212, 150, 155, 0.9);
+            transform: rotate(45deg);
+            position: absolute;
+        }
+
+        .section-frame {
+            border: 1px solid rgba(212, 106, 87, 0.16);
+            background: linear-gradient(180deg, rgba(97, 37, 51, 0.12), rgba(9, 6, 15, 0.5));
+            position: relative;
+        }
+        .panel-shift-up-36 {
+            margin-top: -9rem;
+        }
+        .panel-shift-up-24 {
+            margin-top: -6rem;
+        }
+        .panel-shift-up-12 {
+            margin-top: -3rem;
+        }
+
+        .section-frame::before {
+            content: none;
+        }
+
+        .section-frame::after {
+            content: none;
+        }
+
+        .ornate-frame {
+            border: 2px solid rgba(212, 106, 87, 0.7);
+            padding: 10px;
+            position: relative;
+            background: linear-gradient(145deg, rgba(212, 106, 87, 0.1), rgba(9, 6, 15, 0.55));
+        }
+
+        .ornate-frame::before {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border: 1px solid rgba(244, 236, 225, 0.3);
+            background-image: linear-gradient(45deg, rgba(212, 106, 87, 0.16) 25%, transparent 25%, transparent 50%, rgba(212, 106, 87, 0.16) 50%, rgba(212, 106, 87, 0.16) 75%, transparent 75%, transparent);
+            background-size: 18px 18px;
+            pointer-events: none;
+        }
+
+        .hero-portrait-wrap {
+            height: 100%;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .hero-portrait-frame {
+            width: 100%;
+            height: 100%;
+            min-height: 620px;
+            padding: 14px;
+            border: 1px solid rgba(214, 185, 120, 0.6);
+            background: linear-gradient(155deg, rgba(60, 29, 44, 0.5), rgba(16, 10, 20, 0.82));
+            box-shadow: inset 0 0 0 1px rgba(214, 185, 120, 0.22), 0 0 28px rgba(97, 37, 51, 0.3);
+            position: relative;
+        }
+
+        .hero-portrait-frame::before {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border: 1px solid rgba(214, 185, 120, 0.28);
+            pointer-events: none;
+        }
+
+        .hero-portrait-frame::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            border: 1px solid rgba(214, 185, 120, 0.18);
+            pointer-events: none;
+            clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+        }
+
+        .hero-portrait-window {
+            height: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(214, 185, 120, 0.4);
+            position: relative;
+        }
+
+        .hero-portrait-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            transform: scale(1.08);
+            transition: transform 0.8s ease;
+        }
+
+        .hero-portrait-window:hover .hero-portrait-image {
+            transform: scale(1.12);
+        }
+
+        .media-box {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 106, 87, 0.22);
+            background: rgba(18, 12, 24, 0.62);
+        }
+
+        .media-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            transition: transform 0.7s ease;
+        }
+
+        .media-box:hover img {
+            transform: scale(1.03);
+        }
+
+        .aligned-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .aligned-item {
+            flex: 1 1 180px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            height: 220px;
+        }
+
+        .aligned-item img {
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: center top;
+            border: 1px solid rgba(212, 106, 87, 0.26);
+            background: rgba(18, 12, 24, 0.72);
+            display: block;
+        }
+
+        .aligned-item.red-wash img {
+            box-shadow: inset 0 0 0 999px rgba(97, 37, 51, 0.22);
+        }
+
+        .harmony-200 .aligned-item { height: 200px; }
+        .harmony-230 .aligned-item { height: 230px; }
+        .harmony-260 .aligned-item { height: 260px; }
+        .harmony-300 .aligned-item { height: 300px; }
+        .aligned-gallery.harmony-200 {
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .aligned-gallery.harmony-200 .aligned-item {
+            flex: 1 1 0;
+            min-width: 0;
+            overflow: hidden;
+        }
+        .aligned-gallery.harmony-200 .aligned-item img {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .card-gallery-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 0.75rem;
+            flex-wrap: nowrap;
+        }
+
+        .card-gallery-row .aligned-item {
+            flex: 1 1 0;
+            min-width: 0;
+            height: 200px;
+        }
+
+        .character-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.25rem;
+            flex-wrap: nowrap;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .character-box {
+            flex: 1 1 0;
+            min-width: 0;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(212, 106, 87, 0.26);
+            background: rgba(18, 12, 24, 0.72);
+            overflow: hidden;
+        }
+
+        .character-box .char-img-wrap {
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .character-box .char-img-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            object-position: center center;
+            display: block;
+        }
+
+        .character-box .char-name {
+            width: 100%;
+            padding: 0.5rem 0.25rem 0.75rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #e8d8c8;
+            font-family: 'Cormorant Garamond', serif;
+            border-top: 1px solid rgba(212, 106, 87, 0.15);
+        }
+
+        .letter-paper {
+            background: linear-gradient(180deg, rgba(244, 236, 225, 0.08) 0%, rgba(232, 220, 200, 0.06) 100%);
+            border: 1px solid rgba(212, 106, 87, 0.28);
+            box-shadow: inset 0 0 0 1px rgba(244, 236, 225, 0.06), 0 4px 24px rgba(0, 0, 0, 0.25);
+            padding: 2.5rem 3rem 3rem;
+            max-width: 42rem;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .preview-gallery-row .letter-paper {
+            max-width: calc(100% - 2rem);
+            margin: 0;
+        }
+
+        .letter-paper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(212, 106, 87, 0.2), transparent);
+        }
+
+        .letter-paper .journal-date {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            color: rgba(212, 106, 87, 0.95);
+            margin-top: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-paper .journal-date:first-of-type {
+            margin-top: 0;
+        }
+
+        .letter-paper .journal-body {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            line-height: 1.75;
+            color: #d4c8b8;
+            text-align: left;
+        }
+
+        .letter-paper .journal-body p {
+            margin-bottom: 1rem;
+            text-indent: 0;
+        }
+
+        .letter-paper .journal-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .preview-gallery-row {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .card-gallery-column {
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .card-gallery-title-wrap {
+            border-left: 3px solid rgba(212, 106, 87, 0.85);
+            padding-left: 1rem;
+            margin-left: -1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-gallery-column .section-head .title-text {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 900px) {
+            .preview-gallery-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-column-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .card-column-vertical .card-slot {
+            width: 100%;
+            display: block;
+        }
+
+        .card-column-vertical .card-slot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid rgba(212, 106, 87, 0.32);
+            box-sizing: border-box;
+        }
+
+        .card-column-vertical .card-slot.red-wash img {
+            box-shadow: inset 0 0 0 999px rgba(97, 37, 51, 0.22);
+        }
+
+        .gallery-tint::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(97, 37, 51, 0.24);
+            pointer-events: none;
+        }
+
+        .stagger-panels {
+            gap: 1rem;
+        }
+
+        .pillars-grid {
+            align-items: stretch;
+        }
+        .pillars-grid > * {
+            margin-top: 0;
+        }
+        .pillars-grid article {
+            display: flex;
+            flex-direction: column;
+        }
+        .pillars-grid article ul {
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .stagger-panels > *:nth-child(2n) {
+                margin-top: 0.4rem;
+            }
+            .stagger-panels > *:nth-child(3n) {
+                margin-top: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .aligned-item {
+                height: 170px;
+            }
+            .harmony-260 .aligned-item,
+            .harmony-300 .aligned-item {
+                height: 210px;
+            }
+            .card-gallery-row {
+                flex-wrap: wrap;
+            }
+            .card-gallery-row .aligned-item {
+                flex: 1 1 120px;
+                height: 180px;
+            }
+            .character-row {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .character-box {
+                flex: 1 1 140px;
+                max-width: 180px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased font-body">
+    <nav class="fixed top-0 w-full z-50 bg-ink/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-20 flex items-center justify-between">
+                <a href="projects.html" class="font-display text-ember tracking-widest uppercase hover:text-parchment transition-colors">Back To Projects</a>
+                <div class="flex items-center gap-4 md:gap-8">
+                    <div class="hidden md:flex items-center gap-8 text-sm font-mono uppercase tracking-wider">
+                        <a href="#summary" class="hover:text-ember transition-colors">Summary</a>
+                        <a href="#pillars" class="hover:text-ember transition-colors">Pillars</a>
+                        <a href="#design" class="hover:text-ember transition-colors">Design</a>
+                        <a href="#research" class="hover:text-ember transition-colors">Research</a>
+                        <a href="#setting" class="hover:text-ember transition-colors">Setting</a>
+                    </div>
+                    <button onclick="toggleLang()" class="lang-switch">
+                        <span class="lang-en">中文</span><span class="lang-zh">EN</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <section class="min-h-[78vh] line-grid flex items-center">
+            <div class="max-w-7xl mx-auto px-4 py-10 md:py-12 grid lg:grid-cols-2 gap-14 items-center">
+                <div class="space-y-8">
+                    <div class="font-mono text-xs tracking-[0.35em] text-ember uppercase">Project Detail / Wonder Tales</div>
+                    <h1 class="font-title text-6xl md:text-8xl text-parchment leading-[0.95] tracking-[0.08em]">
+                        <span class="lang-en">WONDER<br>TALES</span>
+                        <span class="lang-zh">鬼神奇谭</span>
+                    </h1>
+                    <p class="text-lg md:text-2xl italic text-fog border-l-4 border-ember pl-6">
+                        A narrative RPG concept blending ancient Chinese folklore with Western cosmic horror
+                    </p>
+                    <p class="max-w-xl text-xl leading-relaxed text-fog/90">
+                        Players step into the role of Western scholars entering a mysterious version of ancient China - uncovering spirits, curses, rituals, and forbidden forces through choices, relationships, and collectible story cards.
+                    </p>
+                    <div class="gold-divider" aria-hidden="true">
+                        <span class="end-diamond left"></span>
+                        <span class="ornament"><i></i></span>
+                        <span class="end-diamond right"></span>
+                    </div>
+                    <h2 class="section-head text-3xl md:text-4xl text-parchment mt-20 translate-y-6 md:translate-y-8">
+                        <span class="title-text">Game Summary</span>
+                    </h2>
+                </div>
+
+                <div class="hero-portrait-wrap">
+                    <div class="hero-portrait-frame">
+                        <div class="hero-portrait-window">
+                            <img src="images/human-live-in-a-peaceful-world.png" alt="Wonder Tales key visual" class="hero-portrait-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="pt-8 pb-24">
+            <div class="max-w-7xl mx-auto px-4 space-y-10">
+                <div class="-mt-8 md:-mt-10">
+                    <p class="lead-copy mb-6">
+                        Wonder Tales is a narrative-driven RPG concept that combines Chinese folklore traditions with Western cosmic horror. Players take the role of Western scholars entering a mysterious version of ancient China, where spirits, curses, and ritual practices hide something far older beneath the surface.
+                    </p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">
+                        Through narrative choices, relationship changes, and collectible story cards, players gradually uncover secrets hidden inside a world that first looks peaceful - until its rules begin to fracture.
+                    </p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">
+                        This page records not only what the game is, but also how the concept changed over time: the first version, what failed in paper prototype playtests, why I changed direction, and what still needs to be solved.
+                    </p>
+                </div>
+                <div class="mt-8">
+                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Core Statement</span></h2>
+                    <p class="lead-copy">
+                        A solo-friendly narrative RPG built around a loop of choice → relationships → story cards → new scenes → journal updates, where the outsider perspective makes cultural discovery readable - and cosmic horror escalates without replacing the folklore foundation.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-8 mini-panel-grid">
+                        <div class="mini-panel paper-lite">
+                            <h4>Narrative System Structure</h4>
+                            The narrative system connects player decisions, relationships, and story progression so choices create both immediate emotional consequences and long-term story impact.
+                        </div>
+                        <div class="mini-panel paper-lite">
+                            <h4>Narrative Loop</h4>
+                            Player Choice → Relationship Change → Card Unlock → New Story Scene → Journal Entry Update → Branching Narrative Path
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="snapshot" class="-mt-8 pt-2 pb-16">
+            <div class="max-w-7xl mx-auto px-4 space-y-10">
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Development Snapshot</span></h2>
+                    <div class="grid md:grid-cols-2 gap-4 text-fog text-xl mini-panel-grid">
+                        <div class="mini-panel paper-lite">
+                            <h4>Development Stage</h4>
+                            Pre-production / paper prototype. Completed: concept design, narrative system design, worldbuilding research, and TRPG-style paper playtests.
+                        </div>
+                        <div class="mini-panel paper-lite">
+                            <h4>Prototype Focus</h4>
+                            Tested narrative clarity, engagement with branching choices, and accessibility of cultural themes - before building a vertical slice for pacing and integration.
+                        </div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7 mt-10"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">My Role</span></h2>
+                    <div class="grid md:grid-cols-2 gap-4 text-fog text-xl mini-panel-grid">
+                        <div class="mini-panel paper-lite">
+                            <h4>Titles</h4>
+                            Game Designer · Narrative Designer · System Designer
+                        </div>
+                        <div class="mini-panel paper-lite">
+                            <h4>Responsibilities</h4>
+                            Designed branching routes, card-based narrative progression, and relationship mechanics; conducted paper prototype playtests; iterated the core concept based on feedback.
+                        </div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7 mt-10"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Player Experience Goals</span></h2>
+                    <div class="grid md:grid-cols-3 gap-4 text-fog text-xl mini-panel-grid">
+                        <div class="mini-panel paper-lite">
+                            <h4>Cultural Discovery</h4>
+                            Learn unfamiliar folklore traditions through outsider protagonists, so explanations feel natural instead of textbook.
+                        </div>
+                        <div class="mini-panel paper-lite">
+                            <h4>Mystery and Unease</h4>
+                            Encounters escalate from strange folklore events into cosmic-horror revelations of forbidden knowledge.
+                        </div>
+                        <div class="mini-panel paper-lite">
+                            <h4>Narrative Agency</h4>
+                            Choices reshape relationships, endings, and what the player learns about the hidden world.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pillars" class="-mt-8 pt-2 pb-10">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="section-head text-3xl md:text-4xl text-parchment mb-10"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Game Pillars</span></h2>
+                <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 pillars-grid">
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Cultural Horror</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Ritual practices, ghost beliefs, funerary customs, and folk magic shape events</li>
+                            <li>Folklore stays the foundation; cosmic dread escalates as a layer, not a replacement</li>
+                        </ul>
+                    </article>
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Choice-Driven Narrative</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Choices affect story progression, relationships, investigation paths, and endings</li>
+                            <li>Branching routes support replayability through meaningfully different outcomes</li>
+                        </ul>
+                    </article>
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Character-Centered</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Four protagonists, each revealing different angles of the larger mystery</li>
+                            <li>Relationship shifts create immediate emotional stakes and long-term story impact</li>
+                        </ul>
+                    </article>
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Story Cards</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Cards represent characters, items, knowledge, and story fragments</li>
+                            <li>Unlocking cards opens new scenes and expands the investigation journal</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="pt-12 pb-8 -mt-4">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="section-head text-4xl md:text-5xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Character Overview</span></h2>
+                <p class="lead-copy max-w-5xl mb-10">
+                    There are four playable characters, each starting in a different map. While they share similar traits, they exist in what feels like parallel worlds. Choosing a character determines which storyline you follow.
+                </p>
+                <div class="character-row">
+                    <div class="character-box">
+                        <div class="char-img-wrap"><img src="images/wonder-tales-char1.png" alt="Casper Galatea"></div>
+                        <div class="char-name">卡斯珀·加莱提亚</div>
+                    </div>
+                    <div class="character-box">
+                        <div class="char-img-wrap"><img src="images/wonder-tales-char2.png" alt="Randall Galatea"></div>
+                        <div class="char-name">兰德尔·加莱提亚</div>
+                    </div>
+                    <div class="character-box">
+                        <div class="char-img-wrap"><img src="images/wonder-tales-char3.png" alt="Valeria Ravilins"></div>
+                        <div class="char-name">瓦莱里娅·拉维林斯</div>
+                    </div>
+                    <div class="character-box">
+                        <div class="char-img-wrap"><img src="images/wonder-tales-char4.png" alt="Maurice Ravilins"></div>
+                        <div class="char-name">莫里斯·拉维林斯</div>
+                    </div>
+                </div>
+                <div class="divider-ornate" aria-hidden="true">
+                    <div class="divider-ornate__line">
+                        <span class="divider-ornate__bar"></span>
+                        <span class="divider-ornate__end divider-ornate__end--l"></span>
+                        <span class="divider-ornate__center"></span>
+                        <span class="divider-ornate__end divider-ornate__end--r"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="design" class="pt-0 pb-24">
+            <div class="max-w-7xl mx-auto px-4 space-y-10">
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Design Goals</span></h2>
+                    <div class="grid md:grid-cols-2 gap-5 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel paper-lite"><h4>Solo-friendly Development</h4>The game should be doable by one person, though team collaboration is possible.</div>
+                        <div class="mini-panel paper-lite"><h4>Comfort Zone</h4>The theme and mechanics should match what I am already good at.</div>
+                        <div class="mini-panel paper-lite"><h4>Low Cost</h4>Ideally, the only investment is time with no extra money spent.</div>
+                        <div class="mini-panel paper-lite"><h4>Market Gap</h4>Once the above are met, the concept should also have strong commercial potential.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h3 class="section-head text-3xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Step 1: What Kind of Game Do I Want to Make?</span></h3>
+                    <p class="lead-copy mb-6">I want a game that is narrative-driven, full of meaningful choices, rich in character and relationship-building, and built around a card system that adds emotional and strategic depth.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">
+                        At this stage, I did not start from visuals first. I started from production reality and my own strengths: if I have to build this mostly alone, the game loop must be writing-heavy, choice-driven, and systems-light enough to ship.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel paper-lite"><h4>Relationships</h4>I am good at writing complex relationships. Games with relationship systems tend to keep players longer and they also see about 25% higher revenue over their lifecycle.</div>
+                        <div class="mini-panel paper-lite"><h4>Rich Narrative</h4>Story-driven games earned $183M in 2020. They also boost player engagement by around 25%.</div>
+                        <div class="mini-panel paper-lite"><h4>Diverse Plotlines</h4>Multiple paths and endings encourage replayability, extending the game’s life.</div>
+                        <div class="mini-panel paper-lite"><h4>Player Choice</h4>Choice-based mechanics can increase in-game spending by up to 20%. According to ESA 2022, 74% of gamers say decision-making makes games more fun.</div>
+                        <div class="mini-panel paper-lite"><h4>Well-Developed Characters</h4>I enjoy creating vivid characters. 65% of RPG players are more likely to buy sequels or expansions if they feel connected to the characters. Strong characters can also lift average revenue per user by 15%.</div>
+                        <div class="mini-panel paper-lite"><h4>Card Mechanics</h4>Card systems add strategy and storytelling depth. Card-based RPGs often see 30% higher in-game spending through packs and exclusives.</div>
+                        <div class="mini-panel paper-lite"><h4>Interactive Gameplay</h4>Choices that matter boost engagement and satisfaction. 70% of players prefer games where their decisions affect the outcome.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h3 class="section-head text-3xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Step 2: Theme — When, Where, Who?</span></h3>
+                    <p class="lead-copy mb-6">
+                        I want a haunting journey through ancient China, blending fear, the supernatural, and stories about love, betrayal, and friendship. Cultural traditions and philosophical ideas should shape gameplay and make it emotionally and intellectually engaging.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel"><h4>Why Horror and Chinese Themes</h4>Horror games like Resident Evil and Silent Hill have loyal fanbases. Titles like Paper Bride and Detention show how Chinese folklore can stand out in a crowded market. Culturally specific stories attract global audiences curious about non-Western traditions.</div>
+                        <div class="mini-panel"><h4>Why Mystical and Religious Themes</h4>These themes add depth to puzzles and mystery-solving. A semi-authentic religious system keeps players curious. Subtle storytelling can teach players about Chinese culture in a natural way.</div>
+                        <div class="mini-panel"><h4>Market Example</h4>Paper Bride proves that Chinese folklore and puzzle-solving works across regions.</div>
+                        <div class="mini-panel"><h4>Market Example</h4>SMITE shows how mythology can drive engagement and recurring revenue.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="divider-ornate divider-ornate--banner" aria-hidden="true">
+                    <div class="divider-ornate__line">
+                        <span class="divider-ornate__bar"></span>
+                        <span class="divider-ornate__end divider-ornate__end--l"></span>
+                        <span class="divider-ornate__center"></span>
+                        <span class="divider-ornate__end divider-ornate__end--r"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="pt-0 pb-24 bg-transparent">
+            <div class="max-w-7xl mx-auto px-4 space-y-10">
+                <div class="section-frame p-8 panel-shift-up-12">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">First Stage Research: Chinese Folklore</span></h2>
+                    <div class="grid md:grid-cols-2 gap-6 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel"><h4>Paper Dolls</h4>Used in rituals and funerals, with the belief that painted eyes can grant spiritual power.</div>
+                        <div class="mini-panel"><h4>Ghost Marriage</h4>Arranged marriages for the dead, with historical cases inspiring female-perspective stories.</div>
+                        <div class="mini-panel"><h4>Puppetry</h4>A folk tradition and performance art where figures are controlled by rods or strings.</div>
+                        <div class="mini-panel"><h4>Witchcraft</h4>Rituals and spells used for healing, protection, or revenge, often viewed as dangerous.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Moodboard and Atmosphere</span></h2>
+                    <p class="lead-copy mb-6">Collected images and concept art to define an eerie, mystical, and ancient visual tone.</p>
+                    <div class="aligned-gallery harmony-200">
+                        <div class="aligned-item"><img src="images/moodboard-1.png" alt="Moodboard 1"></div>
+                        <div class="aligned-item"><img src="images/moodboard-2.png" alt="Moodboard 2"></div>
+                        <div class="aligned-item"><img src="images/moodboard-3.png" alt="Moodboard 3"></div>
+                        <div class="aligned-item"><img src="images/moodboard-4.jpg" alt="Moodboard 4"></div>
+                        <div class="aligned-item"><img src="images/moodboard-5.png" alt="Moodboard 5"></div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">First Stage Design</span></h2>
+                    <div class="space-y-3 text-fog">
+                        <div class="mini-panel"><h4>Vision</h4>Stay true to Chinese folklore, including ghosts, rituals, and mysticism, told through a native protagonist.</div>
+                        <div class="mini-panel"><h4>Audience</h4>Players interested in immersive cultural stories and Eastern traditions.</div>
+                        <div class="mini-panel"><h4>Design Goal</h4>Use global curiosity about unique cultures as a foundation for the game.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">First Stage Playtest (TRPG Format)</span></h2>
+                    <p class="lead-copy mb-6">Goal: Test narrative engagement, player choice, and mechanics through a mini TRPG campaign.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">
+                        This was a paper prototype phase, not a content showcase. I mainly used it to test if players could understand the world quickly, role-play naturally, and stay engaged in branching scenes without heavy onboarding.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel"><h4>How It Worked</h4>Players split into small groups with unique manuscripts, built custom characters, interacted with NPCs and maps under a time system, and reached different endings through choices.</div>
+                        <div class="mini-panel"><h4>What Worked</h4>Players liked the creative scenarios.</div>
+                        <div class="mini-panel"><h4>What Did Not Work</h4>Three issues appeared repeatedly: non-Chinese players needed too much background knowledge, purely Chinese modules felt monotonous over time, and custom player characters often felt like outsiders to the narrative logic.</div>
+                        <div class="mini-panel"><h4>Suggestions</h4>Simplify cultural references, add more dynamic and thrilling elements, and better integrate player characters into the world.</div>
+                        <div class="mini-panel"><h4>Solution</h4>I redesigned the protagonist as a Western outsider. This gave me a natural narrative reason to explain Chinese folklore in plain language and made player learning and character learning happen at the same pace.</div>
+                        <div class="mini-panel"><h4>New Core Statement</h4>The protagonists are outsiders. They experience, learn, and explain ancient Chinese folklore in ways that are easy for non-native audiences to understand, lowering the cultural entry barrier.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="setting" class="py-24 pb-28">
+            <div class="max-w-7xl mx-auto px-4 space-y-10">
+                <div class="section-frame p-8 panel-shift-up-36">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Second Stage Research and Design</span></h2>
+                    <div class="space-y-4 text-fog">
+                        <div class="mini-panel"><h4>Adding Western Horror</h4>This was not a random aesthetic mix. It was a response to playtest problems: I needed a structure that could keep Chinese folklore authentic while giving global players a familiar horror entry point.</div>
+                        <div class="mini-panel"><h4>Why Cthulhu Mythos</h4>I chose Cthulhu Mythos because its investigator framework and cosmic dread can sit beside ritual-based Chinese horror without replacing it.</div>
+                        <div class="mini-panel"><h4>H. P. Lovecraft</h4>Introduced ancient gods, cosmic horror, and forbidden knowledge through works including The Call of Cthulhu, At the Mountains of Madness, and The Shadow over Innsmouth.</div>
+                        <div class="mini-panel"><h4>COC TRPG Influence</h4>Players become investigators facing supernatural threats, with themes of investigation, survival, sanity, and cosmic horror.</div>
+                        <div class="mini-panel"><h4>Miskatonic University</h4>A fictional university in Arkham, Massachusetts, known for studying the occult, myths, and forbidden knowledge.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Final Game Setting</span></h2>
+                    <div class="grid md:grid-cols-2 gap-6 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel"><h4>Time and Place</h4>The game is set in 1797, when China was mostly closed to the outside world, blending history with fictional mysticism.</div>
+                        <div class="mini-panel"><h4>Main Characters</h4>Four recent graduates of Miskatonic University, each with different backgrounds, gender, and specialties that affect gameplay.</div>
+                        <div class="mini-panel"><h4>Story Premise</h4>In 1798, each protagonist enters China and finds chaos, madness, and ancient secrets beneath the appearance of peace.</div>
+                        <div class="mini-panel"><h4>Player Goal</h4>Explore a semi-historical, semi-fictional China through one chosen character and navigate rituals, cosmic disturbances, and hidden dangers.</div>
+                    </div>
+                    <p class="text-fog text-xl leading-relaxed mt-6">
+                        In short, the final direction keeps the Chinese core as the world foundation, uses the outsider perspective as the narrative bridge, and uses Western cosmic horror as pressure and escalation - not as the center.
+                    </p>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Iteration Path and Next Problems</span></h2>
+                    <div class="grid md:grid-cols-2 gap-4 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel"><h4>Path in One Line</h4>Chinese folklore only (v1) → paper prototype feedback → outsider protagonist + East-West horror fusion (v2).</div>
+                        <div class="mini-panel"><h4>What Is Clear Now</h4>The design intention is now consistent with production constraints: solo-friendly scope, choice-heavy narrative, and clear audience onboarding.</div>
+                        <div class="mini-panel"><h4>Open Problem 1</h4>How to keep cultural explanations simple without flattening historical depth and local nuance.</div>
+                        <div class="mini-panel"><h4>Open Problem 2</h4>How to balance relationship routes, card progression, and mystery pacing so replay value feels meaningful, not repetitive.</div>
+                        <div class="mini-panel"><h4>Open Problem 3</h4>How to maintain horror tension while supporting multiple protagonists and route branches with reasonable solo production cost.</div>
+                        <div class="mini-panel"><h4>Next Step</h4>Build a second-round vertical slice focused on one chapter, then validate readability, pacing, and branching clarity with cross-cultural testers.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <div class="preview-gallery-row">
+                        <div class="flex flex-col min-h-0">
+                            <h2 class="section-head text-4xl text-parchment mb-6"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">试阅</span></h2>
+                            <div class="letter-paper flex-1 min-h-0">
+                        <div class="journal-date">December, 1797</div>
+                        <div class="journal-body">
+                            <p>This day I filed the necessary papers for my graduation from Miskatonic University.</p>
+                        </div>
+                        <div class="journal-date">January, 1798</div>
+                        <div class="journal-body">
+                            <p>The matter has been approved.</p>
+                            <p>In this profession, to graduate is seldom a simple distinction; more often it is merely proof that one has survived what so many others did not.</p>
+                            <p>When I informed my advisor of my intention to depart for China, he regarded me with an expression I found difficult to interpret—part approval, and part something darker which I could not readily name. He had always possessed a certain fondness for the unexplored corners of the world.</p>
+                            <p>China, as it stands, has remained closed since the year of '57. Forty-one years of silence.</p>
+                            <p>By all official accounts, it is the one place upon this earth where nothing extraordinary occurs.</p>
+                            <p>That fact alone ought to have given me pause.</p>
+                            <p>As I stepped into the carriage, he laid a firm hand upon my shoulder—so firm that it seemed less the gesture of a teacher dismissing a pupil than of a man offering farewell to one who may not return.</p>
+                            <p>“Luck,” he said.</p>
+                        </div>
+                        <div class="journal-date">30 January, 1798</div>
+                        <div class="journal-body">
+                            <p>At last I have made landfall in China, having approached by the water route.</p>
+                            <p>The officials at the port were plainly unprepared for my arrival.</p>
+                            <p>Thus, after forty-one years, the wall which has sealed this land from the outside world has received its first small fracture.</p>
+                            <p>Should this journal ever fall into other hands—whenever or wherever that may be—know that by the time you read these words, you too will stand upon the threshold of the same depths into which I have now ventured.</p>
+                            <p>For that reason, I confess I welcome the thought of company.</p>
+                            <p>Luck.</p>
+                        </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col min-h-0 card-gallery-column">
+                            <div class="card-gallery-title-wrap">
+                                <h2 class="section-head section-head-no-border text-4xl text-parchment mb-0"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Card Gallery</span></h2>
+                            </div>
+                            <div class="card-column-vertical flex-1 min-h-0">
+                                <div class="card-slot"><img src="images/jiangnan-watertown.jpg" alt="Jiangnan Watertown"></div>
+                                <div class="card-slot red-wash"><img src="images/未命名作品 (1).png" alt="Card 1"></div>
+                                <div class="card-slot red-wash"><img src="images/未命名作品 (2).png" alt="Card 2"></div>
+                                <div class="card-slot red-wash"><img src="images/未命名作品 (3).png" alt="Card 3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        const zhMap = {
+            "Back To Projects": "返回项目页",
+            "Summary": "概览",
+            "Pillars": "支柱",
+            "Design": "设计",
+            "Research": "研究",
+            "Setting": "设定",
+            "Project Detail / Wonder Tales": "项目详情 / 鬼神奇谭",
+            "WONDER TALES": "鬼神奇谭",
+            "A narrative RPG concept blending ancient Chinese folklore with Western cosmic horror": "一款叙事 RPG 概念设计，融合中国古代民间传说与西方宇宙恐怖",
+            "Players step into the role of Western scholars entering a mysterious version of ancient China - uncovering spirits, curses, rituals, and forbidden forces through choices, relationships, and collectible story cards.": "玩家将扮演进入古代中国的西方学者，在选择、关系与可收集叙事卡牌的推动下，逐步揭开幽灵、诅咒、仪式与禁忌力量。",
+            "Game Summary": "游戏概述",
+            "Wonder Tales is a narrative-driven RPG concept that combines Chinese folklore traditions with Western cosmic horror. Players take the role of Western scholars entering a mysterious version of ancient China, where spirits, curses, and ritual practices hide something far older beneath the surface.": "《鬼神奇谭》是一款叙事驱动 RPG 概念设计，将中国民俗传统与西方宇宙恐怖结合。玩家扮演进入古代中国的西方学者，在幽灵、诅咒与仪式背后，逐步触碰到更古老、更不可名状的力量。",
+            "Through narrative choices, relationship changes, and collectible story cards, players gradually uncover secrets hidden inside a world that first looks peaceful - until its rules begin to fracture.": "通过叙事选择、关系变化与可收集叙事卡牌，玩家将逐步揭开一个“看似平静却规则正在碎裂”的世界里隐藏的秘密。",
+            "This page records not only what the game is, but also how the concept changed over time: the first version, what failed in paper prototype playtests, why I changed direction, and what still needs to be solved.": "这个页面不只说明游戏“是什么”，也记录概念如何一步步变化：最初版本、纸面原型测试中出现的问题、我为何调整方向，以及目前仍待解决的点。",
+            "Development Stage": "开发阶段",
+            "Pre-production / paper prototype. Completed: concept design, narrative system design, worldbuilding research, and TRPG-style paper playtests.": "当前处于预制作 / 纸面原型阶段。已完成：概念设计、叙事系统设计、世界观研究与 TRPG 式纸面试玩测试。",
+            "Prototype Focus": "原型测试重点",
+            "Tested narrative clarity, engagement with branching choices, and accessibility of cultural themes - before building a vertical slice for pacing and integration.": "已测试：叙事清晰度、分支选择的投入感、文化主题的可理解性；后续将制作纵向切片以验证节奏与系统整合。",
+            "Development Snapshot": "开发概览",
+            "Core Statement": "核心陈述",
+            "A solo-friendly narrative RPG built around a loop of choice → relationships → story cards → new scenes → journal updates, where the outsider perspective makes cultural discovery readable - and cosmic horror escalates without replacing the folklore foundation.": "这是一款适合单人制作的叙事 RPG：以「选择 → 关系变化 → 叙事卡解锁 → 新场景 → 日志更新」为核心循环。外来者视角让文化探索更易读；宇宙恐怖作为升级压力层出现，但不取代民俗作为世界地基。",
+            "Narrative System Structure": "叙事系统结构",
+            "The narrative system connects player decisions, relationships, and story progression so choices create both immediate emotional consequences and long-term story impact.": "叙事系统把玩家决策、角色关系与故事推进连在一起，让选择既产生即时的情绪后果，也带来长期的剧情影响。",
+            "Narrative Loop": "叙事循环",
+            "Player Choice → Relationship Change → Card Unlock → New Story Scene → Journal Entry Update → Branching Narrative Path": "玩家选择 → 关系变化 → 卡牌解锁 → 新故事场景 → 日志条目更新 → 分支叙事路径",
+            "My Role": "我的职责",
+            "Titles": "头衔",
+            "Game Designer · Narrative Designer · System Designer": "游戏设计 · 叙事设计 · 系统设计",
+            "Responsibilities": "职责内容",
+            "Designed branching routes, card-based narrative progression, and relationship mechanics; conducted paper prototype playtests; iterated the core concept based on feedback.": "设计叙事结构与分支路线、卡牌式叙事推进系统与关系机制；进行纸面原型试玩测试；根据反馈迭代核心概念方向。",
+            "Player Experience Goals": "玩家体验目标",
+            "Cultural Discovery": "文化探索",
+            "Learn unfamiliar folklore traditions through outsider protagonists, so explanations feel natural instead of textbook.": "通过外来者主角逐步理解陌生的民俗传统，让解释自然发生，而不是像在读教科书。",
+            "Mystery and Unease": "悬疑与不安",
+            "Encounters escalate from strange folklore events into cosmic-horror revelations of forbidden knowledge.": "遭遇将从怪异的民俗事件升级为“禁忌知识”的宇宙恐怖揭示。",
+            "Narrative Agency": "叙事能动性",
+            "Choices reshape relationships, endings, and what the player learns about the hidden world.": "选择将影响关系走向、结局结果，以及玩家能得知的“隐藏世界”信息。",
+            "Game Pillars": "游戏支柱",
+            "Cultural Horror": "文化恐怖",
+            "Ritual practices, ghost beliefs, funerary customs, and folk magic shape events": "仪式实践、鬼怪信仰、丧葬习俗与民间法术将共同塑造事件与主题。",
+            "Folklore stays the foundation; cosmic dread escalates as a layer, not a replacement": "民俗是基础；宇宙恐惧作为升级层出现，而非替换民俗本体。",
+            "Choice-Driven Narrative": "选择驱动叙事",
+            "Choices affect story progression, relationships, investigation paths, and endings": "玩家决定会影响剧情推进、角色关系、可用调查路径与结局结果。",
+            "Branching routes support replayability through meaningfully different outcomes": "分支路线通过“真正不同”的结果来支持重玩，而非形式化分岔。",
+            "Character-Centered": "以角色为中心",
+            "Four protagonists, each revealing different angles of the larger mystery": "四位主角分别从不同视角揭示更大的谜团。",
+            "Relationship shifts create immediate emotional stakes and long-term story impact": "关系变化带来即时情绪后果，并在长期层面改变叙事走向。",
+            "Story Cards": "叙事卡牌",
+            "Cards represent characters, items, knowledge, and story fragments": "卡牌承载角色、物品、超自然知识与故事碎片。",
+            "Unlocking cards opens new scenes and expands the investigation journal": "解锁卡牌会打开新事件，并扩充调查日志内容。",
+            "Cards": "卡牌系统",
+            "Relationships": "关系系统",
+            "I am good at writing complex relationships. Games with relationship systems tend to keep players longer and they also see about 25% higher revenue over their lifecycle.": "我擅长书写复杂的人物关系。带有关关系统的游戏通常能更长时间留住玩家，并在整个生命周期内实现约 25% 的更高收益。",
+            "Choose from four playable characters, each with their own background": "从四名可玩角色中选择，每人都有独立背景",
+            "Build connections with a variety of NPCs": "与不同 NPC 建立联系",
+            "Develop different types of relationships that add depth to the story": "发展多种关系形态，增加故事深度",
+            "Collections": "收集要素",
+            "Collect character cards, weapons, and items": "收集角色卡、武器与道具",
+            "Grow your inventory with meaningful finds": "通过有价值的发现扩充收藏",
+            "Unlock new endings through exploration and collection": "通过探索与收集解锁新的结局",
+            "Character Overview": "角色概览",
+            "There are four playable characters, each starting in a different map. While they share similar traits, they exist in what feels like parallel worlds. Choosing a character determines which storyline you follow.": "共有四名可玩角色，每位角色从不同地图开局。虽然他们有相似特质，却仿佛身处平行世界。你所选择的角色将决定后续体验的剧情线。",
+            "Design Goals": "设计目标",
+            "Solo-friendly Development": "适合单人开发",
+            "The game should be doable by one person, though team collaboration is possible.": "这个项目应当可以由一人完成，同时也支持团队协作。",
+            "Comfort Zone": "能力舒适区",
+            "The theme and mechanics should match what I am already good at.": "主题与机制应贴合我已掌握的能力。",
+            "Low Cost": "低成本",
+            "Ideally, the only investment is time with no extra money spent.": "理想情况下只投入时间，不额外投入资金。",
+            "Market Gap": "市场空缺",
+            "Once the above are met, the concept should also have strong commercial potential.": "满足以上条件后，概念本身也应具备较强商业潜力。",
+            "Step 1: What Kind of Game Do I Want to Make?": "第一步：我想做什么样的游戏？",
+            "I want a game that is narrative-driven, full of meaningful choices, rich in character and relationship-building, and built around a card system that adds emotional and strategic depth.": "我想做一款叙事驱动的游戏，包含有意义的选择、丰富的角色与关系构建，并围绕卡牌系统增加情感与策略深度。",
+            "At this stage, I did not start from visuals first. I started from production reality and my own strengths: if I have to build this mostly alone, the game loop must be writing-heavy, choice-driven, and systems-light enough to ship.": "在这个阶段，我不是先从视觉出发，而是先从生产现实和个人能力出发：如果项目主要由我独立推进，核心循环就必须以文本与选择为主，并保持系统复杂度可控，确保能真正做完。",
+            "Rich Narrative": "丰富叙事",
+            "Story-driven games earned $183M in 2020. They also boost player engagement by around 25%.": "叙事驱动游戏在 2020 年创造了 1.83 亿美元收入，并可将玩家参与度提升约 25%。",
+            "Diverse Plotlines": "多线剧情",
+            "Multiple paths and endings encourage replayability, extending the game’s life.": "多路径与多结局能提升重玩意愿，延长游戏生命周期。",
+            "Player Choice": "玩家选择",
+            "Choice-based mechanics can increase in-game spending by up to 20%. According to ESA 2022, 74% of gamers say decision-making makes games more fun.": "选择驱动机制可使游戏内消费提升最高约 20%。根据 ESA 2022，74% 玩家认为“做决定”会让游戏更有趣。",
+            "Well-Developed Characters": "角色塑造完善",
+            "I enjoy creating vivid characters. 65% of RPG players are more likely to buy sequels or expansions if they feel connected to the characters. Strong characters can also lift average revenue per user by 15%.": "我擅长塑造鲜明角色。若玩家与角色建立连接，65% 的 RPG 玩家更可能购买续作或扩展内容；强角色塑造还能将 ARPU 提升约 15%。",
+            "Card Mechanics": "卡牌机制",
+            "Card systems add strategy and storytelling depth. Card-based RPGs often see 30% higher in-game spending through packs and exclusives.": "卡牌系统可增加策略性与叙事深度。卡牌 RPG 常通过卡包与稀有内容实现约 30% 更高的游戏内消费。",
+            "Interactive Gameplay": "互动玩法",
+            "Choices that matter boost engagement and satisfaction. 70% of players prefer games where their decisions affect the outcome.": "有影响结果的选择可提升参与度与满意度。70% 玩家更偏好“决策影响结局”的游戏。",
+            "Step 2: Theme — When, Where, Who?": "第二步：主题——何时、何地、何人？",
+            "I want a haunting journey through ancient China, blending fear, the supernatural, and stories about love, betrayal, and friendship. Cultural traditions and philosophical ideas should shape gameplay and make it emotionally and intellectually engaging.": "我希望打造一段发生在古代中国的惊悚旅程，融合恐惧、超自然与爱、背叛、友情等主题。文化传统与哲学观念应参与塑造玩法，并带来情感与思考层面的投入。",
+            "Why Horror and Chinese Themes": "为何选择恐怖与中国主题",
+            "Horror games like Resident Evil and Silent Hill have loyal fanbases. Titles like Paper Bride and Detention show how Chinese folklore can stand out in a crowded market. Culturally specific stories attract global audiences curious about non-Western traditions.": "《生化危机》《寂静岭》等恐怖游戏拥有稳定且忠诚的受众。《纸嫁衣》《返校》证明中国民俗题材能在拥挤市场中脱颖而出。具有文化独特性的叙事也更容易吸引对非西方传统感兴趣的全球玩家。",
+            "Why Mystical and Religious Themes": "为何加入神秘与宗教元素",
+            "These themes add depth to puzzles and mystery-solving. A semi-authentic religious system keeps players curious. Subtle storytelling can teach players about Chinese culture in a natural way.": "这类主题可为解谜与探案提供更深层结构。半写实的宗教体系能持续激发玩家好奇心，也可通过细腻叙事自然传递中国文化。",
+            "Market Example": "市场案例",
+            "Paper Bride proves that Chinese folklore and puzzle-solving works across regions.": "《纸嫁衣》证明“中国民俗 + 解谜”在跨地区市场同样有效。",
+            "SMITE shows how mythology can drive engagement and recurring revenue.": "《神之浩劫》说明神话题材能够有效驱动参与度与持续收益。",
+            "First Stage Research: Chinese Folklore": "第一阶段研究：中国民间传说",
+            "Paper Dolls": "纸人",
+            "Used in rituals and funerals, with the belief that painted eyes can grant spiritual power.": "常用于仪式与丧葬文化，并有“点睛赋灵”的观念。",
+            "Ghost Marriage": "冥婚",
+            "Arranged marriages for the dead, with historical cases inspiring female-perspective stories.": "为逝者安排婚配，历史案例常启发女性视角叙事。",
+            "Puppetry": "傀儡戏",
+            "A folk tradition and performance art where figures are controlled by rods or strings.": "一种由杖或线操控木偶的民俗表演艺术。",
+            "Witchcraft": "巫术",
+            "Rituals and spells used for healing, protection, or revenge, often viewed as dangerous.": "用于治疗、护佑或复仇的仪式与咒术，常被视作危险力量。",
+            "Moodboard and Atmosphere": "情绪板与氛围",
+            "Collected images and concept art to define an eerie, mystical, and ancient visual tone.": "通过收集图像与概念素材，定义诡异、神秘、古意的视觉基调。",
+            "First Stage Design": "第一阶段设计",
+            "Vision": "愿景",
+            "Stay true to Chinese folklore, including ghosts, rituals, and mysticism, told through a native protagonist.": "忠于中国民间传说中的鬼怪、仪式与神秘性，并通过本土主角展开叙事。",
+            "Audience": "目标受众",
+            "Players interested in immersive cultural stories and Eastern traditions.": "对沉浸式文化叙事与东方传统感兴趣的玩家。",
+            "Design Goal": "设计目标",
+            "Use global curiosity about unique cultures as a foundation for the game.": "以全球玩家对独特文化的好奇心作为产品基础。",
+            "First Stage Playtest (TRPG Format)": "第一阶段试玩（TRPG 形式）",
+            "Goal: Test narrative engagement, player choice, and mechanics through a mini TRPG campaign.": "目标：通过小型 TRPG 战役测试叙事吸引力、玩家选择与机制表现。",
+            "This was a paper prototype phase, not a content showcase. I mainly used it to test if players could understand the world quickly, role-play naturally, and stay engaged in branching scenes without heavy onboarding.": "这是一轮纸面原型测试，不是内容展示。我主要想验证：玩家能否快速理解世界观、能否自然代入角色，以及在低引导成本下是否愿意持续投入分支剧情。",
+            "How It Worked": "实施方式",
+            "Players split into small groups with unique manuscripts, built custom characters, interacted with NPCs and maps under a time system, and reached different endings through choices.": "玩家分组后领取不同剧本，自建角色，在时间系统下与 NPC 与地图互动，并通过选择走向不同结局。",
+            "What Worked": "有效部分",
+            "Players liked the creative scenarios.": "玩家对创意场景反馈积极。",
+            "What Did Not Work": "问题部分",
+            "Three issues appeared repeatedly: non-Chinese players needed too much background knowledge, purely Chinese modules felt monotonous over time, and custom player characters often felt like outsiders to the narrative logic.": "反复出现了三类问题：非中文文化背景玩家需要预备知识过多；纯中式模块在连续体验中略显单一；玩家自建角色常常难以自然嵌入既有叙事逻辑。",
+            "Suggestions": "改进建议",
+            "Simplify cultural references, add more dynamic and thrilling elements, and better integrate player characters into the world.": "简化文化门槛，增加更具动感和刺激的内容，并加强玩家角色与世界观的融合。",
+            "Solution": "解决方案",
+            "I redesigned the protagonist as a Western outsider. This gave me a natural narrative reason to explain Chinese folklore in plain language and made player learning and character learning happen at the same pace.": "我将主角重设为西方“外来者”。这样一来，我就有了更自然的叙事理由去用更直白的语言解释中国民俗，也让玩家的学习过程和角色的认知过程保持同步。",
+            "New Core Statement": "新版核心陈述",
+            "The protagonists are outsiders. They experience, learn, and explain ancient Chinese folklore in ways that are easy for non-native audiences to understand, lowering the cultural entry barrier.": "主角群体均为外来者。他们在体验与学习中国古代民俗的过程中，也以更易理解的方式进行转译，降低非本土受众的文化进入门槛。",
+            "Second Stage Research and Design": "第二阶段研究与设计",
+            "Adding Western Horror": "加入西方恐怖元素",
+            "To reach a broader audience, the design blends Eastern folklore with Western horror while keeping the story authentic.": "为触达更广受众，设计上在保持叙事真实感的前提下融合东方民俗与西方恐怖。",
+            "Adding Western Horror": "加入西方恐怖元素",
+            "This was not a random aesthetic mix. It was a response to playtest problems: I needed a structure that could keep Chinese folklore authentic while giving global players a familiar horror entry point.": "这并不是随意的风格拼贴，而是对试玩问题的回应：我需要一种结构，既能保留中国民俗的真实感，也能给国际玩家一个熟悉的恐怖进入点。",
+            "Why Cthulhu Mythos": "为何选择克苏鲁神话",
+            "I chose Cthulhu Mythos because its investigator framework and cosmic dread can sit beside ritual-based Chinese horror without replacing it.": "我选择克苏鲁神话，是因为它的“调查者框架”与“宇宙恐惧”可以与中国仪式性恐怖并置，而不是替代后者。",
+            "H. P. Lovecraft": "H. P. 洛夫克拉夫特",
+            "Introduced ancient gods, cosmic horror, and forbidden knowledge through works including The Call of Cthulhu, At the Mountains of Madness, and The Shadow over Innsmouth.": "其作品如《克苏鲁的呼唤》《疯狂山脉》《印斯茅斯的阴影》构建了古神、宇宙恐怖与禁忌知识体系。",
+            "COC TRPG Influence": "《克苏鲁的呼唤》TRPG 影响",
+            "Players become investigators facing supernatural threats, with themes of investigation, survival, sanity, and cosmic horror.": "玩家以调查员身份面对超自然威胁，核心主题包括调查、生存、理智与宇宙恐怖。",
+            "Miskatonic University": "米斯卡托尼克大学",
+            "A fictional university in Arkham, Massachusetts, known for studying the occult, myths, and forbidden knowledge.": "位于马萨诸塞州阿卡姆的虚构大学，以研究神秘学、神话与禁忌知识闻名。",
+            "Final Game Setting": "最终游戏设定",
+            "Time and Place": "时间与地点",
+            "The game is set in 1797, when China was mostly closed to the outside world, blending history with fictional mysticism.": "游戏设定于 1797 年，中国对外仍相对封闭，整体基调融合历史与虚构神秘主义。",
+            "Main Characters": "主要角色",
+            "Four recent graduates of Miskatonic University, each with different backgrounds, gender, and specialties that affect gameplay.": "四位米斯卡托尼克大学应届毕业生，背景、性别与专长各异，并将影响玩法路径。",
+            "Story Premise": "剧情前提",
+            "In 1798, each protagonist enters China and finds chaos, madness, and ancient secrets beneath the appearance of peace.": "1798 年，主角们先后进入中国，在表面平静之下发现混乱、疯狂与古老秘密。",
+            "Player Goal": "玩家目标",
+            "Explore a semi-historical, semi-fictional China through one chosen character and navigate rituals, cosmic disturbances, and hidden dangers.": "以一名所选角色为视角，探索半历史半虚构的中国，并在仪式、宇宙异变与潜藏危机中前行。",
+            "In short, the final direction keeps the Chinese core as the world foundation, uses the outsider perspective as the narrative bridge, and uses Western cosmic horror as pressure and escalation - not as the center.": "简而言之，最终方向是：以中国文化核心作为世界地基，以“外来者视角”作为叙事桥梁，以西方宇宙恐怖作为压迫与升级机制，而非叙事中心。",
+            "Iteration Path and Next Problems": "迭代路径与下一步问题",
+            "Path in One Line": "一句话路径",
+            "Chinese folklore only (v1) → paper prototype feedback → outsider protagonist + East-West horror fusion (v2).": "纯中国民俗版本（v1）→ 纸面原型反馈 → 外来者主角 + 东西方恐怖融合版本（v2）。",
+            "What Is Clear Now": "当前已明确",
+            "The design intention is now consistent with production constraints: solo-friendly scope, choice-heavy narrative, and clear audience onboarding.": "目前设计意图已与制作约束对齐：单人可控范围、选择驱动叙事、以及更清晰的受众引导。",
+            "Open Problem 1": "待解问题 1",
+            "How to keep cultural explanations simple without flattening historical depth and local nuance.": "如何在降低文化门槛的同时，不牺牲历史层次与地方性细节。",
+            "Open Problem 2": "待解问题 2",
+            "How to balance relationship routes, card progression, and mystery pacing so replay value feels meaningful, not repetitive.": "如何平衡关系线、卡牌成长与悬疑节奏，让重玩价值“有新意”而非“重复劳动”。",
+            "Open Problem 3": "待解问题 3",
+            "How to maintain horror tension while supporting multiple protagonists and route branches with reasonable solo production cost.": "如何在多主角与分支并存的前提下，维持恐怖张力并控制单人制作成本。",
+            "Next Step": "下一步",
+            "Build a second-round vertical slice focused on one chapter, then validate readability, pacing, and branching clarity with cross-cultural testers.": "围绕单章制作第二轮纵向切片，再用跨文化测试者验证可读性、节奏与分支清晰度。",
+            "Card Gallery": "卡牌画廊",
+            "December, 1797": "1797 年 12 月",
+            "This day I filed the necessary papers for my graduation from Miskatonic University.": "今日，我已提交从米斯卡托尼克大学毕业所需的一切文件。",
+            "January, 1798": "1798 年 1 月",
+            "The matter has been approved.": "此事已获批准。",
+            "In this profession, to graduate is seldom a simple distinction; more often it is merely proof that one has survived what so many others did not.": "在这一行里，毕业一事很少只是荣誉，更常不过是证明你熬过了许多人未能熬过的路。",
+            "When I informed my advisor of my intention to depart for China, he regarded me with an expression I found difficult to interpret—part approval, and part something darker which I could not readily name. He had always possessed a certain fondness for the unexplored corners of the world.": "当我向导师告知我将启程前往中国时，他看着我，神情难以揣度，半是许可，半是某种更幽暗、我说不出意思的东西。他向来对世界上尚未被探明的角落怀着一种近乎偏执的眷恋。",
+            "China, as it stands, has remained closed since the year of '57. Forty-one years of silence.": "据现状所示，中国自 1757 年起长期封闭。四十一年的沉默。",
+            "By all official accounts, it is the one place upon this earth where nothing extraordinary occurs.": "按官方说法，这里是地球上唯一“不会发生非常之事”的地方。",
+            "That fact alone ought to have given me pause.": "仅凭这一点，本就足以让我迟疑。",
+            "As I stepped into the carriage, he laid a firm hand upon my shoulder—so firm that it seemed less the gesture of a teacher dismissing a pupil than of a man offering farewell to one who may not return.": "我踏上马车时，他重重按住我的肩膀，那力度更像一个人向可能不再归来的同伴告别，而非老师送别学生。",
+            "“Luck,” he said.": "“祝你好运。”他说。",
+            "30 January, 1798": "1798 年 1 月 30 日",
+            "At last I have made landfall in China, having approached by the water route.": "我终于经水路抵达中国，并已登陆。",
+            "The officials at the port were plainly unprepared for my arrival.": "港口官员显然并未预料到我的到来。",
+            "Thus, after forty-one years, the wall which has sealed this land from the outside world has received its first small fracture.": "于是，四十一年后，这道将此地与外界隔绝的高墙终于出现了第一道细小裂缝。",
+            "Should this journal ever fall into other hands—whenever or wherever that may be—know that by the time you read these words, you too will stand upon the threshold of the same depths into which I have now ventured.": "倘若此日志终有一日落入他人之手，无论在何时、何地，请知：当你读到这些字句之时，你也将立于同一座门槛之前；门后，是我此刻已踏入的深处。",
+            "For that reason, I confess I welcome the thought of company.": "正因如此，我必须承认：我欢迎“有人同行”这一念头。",
+            "Luck.": "愿你好运。"
+        };
+
+        const enMap = Object.fromEntries(Object.entries(zhMap).map(([en, zh]) => [zh, en]));
+
+        function normalizeText(text) {
+            return text.replace(/\s+/g, " ").trim();
+        }
+
+        function replaceTextNodes(root, dictionary) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    if (!node.parentElement) return NodeFilter.FILTER_REJECT;
+                    if (node.parentElement.closest("script, style, .lang-switch")) return NodeFilter.FILTER_REJECT;
+                    if (!normalizeText(node.nodeValue || "")) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            textNodes.forEach((node) => {
+                const raw = node.nodeValue || "";
+                const leading = (raw.match(/^\s*/) || [""])[0];
+                const trailing = (raw.match(/\s*$/) || [""])[0];
+                const core = raw.slice(leading.length, raw.length - trailing.length);
+                const key = normalizeText(core);
+                if (dictionary[key]) {
+                    node.nodeValue = leading + dictionary[key] + trailing;
+                }
+            });
+        }
+
+        function applyLang(isZh) {
+            document.body.classList.toggle("zh-mode", isZh);
+            document.documentElement.lang = isZh ? "zh" : "en";
+            document.title = isZh ? "鬼神奇谭 - 项目详情" : "Wonder Tales - Project Detail";
+            replaceTextNodes(document.body, isZh ? zhMap : enMap);
+            localStorage.setItem("siteLang", isZh ? "zh" : "en");
+        }
+
+        function toggleLang() {
+            applyLang(!document.body.classList.contains("zh-mode"));
+        }
+
+        window.toggleLang = toggleLang;
+        applyLang(localStorage.getItem("siteLang") === "zh");
+    </script>
+</body>
+</html>

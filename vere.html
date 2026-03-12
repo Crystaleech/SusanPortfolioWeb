@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vere - Project Detail</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#05030a', /* Very dark purple/black */
+                        purple: '#7e22ce',
+                        'light-purple': '#a855f7',
+                        'neon-purple': '#d8b4fe',
+                        white: '#e6f1ff',
+                        'deep-blue': '#00008B',
+                        'neon-green': '#39ff14',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Global Overrides */
+        :root {
+            --navy: #05030a;
+            --purple: #7e22ce;
+            --neon-purple: #d8b4fe;
+            --neon-green: #39ff14;
+            --deep-blue: #00008B;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05030a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--purple);
+        }
+
+        ::selection {
+            background-color: #581c87;
+            color: var(--neon-purple);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: block; }
+        body.zh-mode span.lang-zh { display: inline; }
+        body.zh-mode span.lang-en { display: none; }
+
+        /* GLITCH EFFECT CSS */
+        .glitch-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch {
+            position: relative;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 0px #7e22ce, -2px -2px 0px #d8b4fe; 
+            animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+        }
+
+        .glitch::before,
+.glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            20% { clip: rect(6px, 9999px, 86px, 0); }
+            40% { clip: rect(76px, 9999px, 3px, 0); }
+            60% { clip: rect(41px, 9999px, 66px, 0); }
+            80% { clip: rect(2px, 9999px, 19px, 0); }
+            100% { clip: rect(84px, 9999px, 75px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(24px, 9999px, 78px, 0); }
+            20% { clip: rect(98px, 9999px, 5px, 0); }
+            40% { clip: rect(11px, 9999px, 49px, 0); }
+            60% { clip: rect(67px, 9999px, 15px, 0); }
+            80% { clip: rect(56px, 9999px, 33px, 0); }
+            100% { clip: rect(32px, 9999px, 81px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(-2deg); }
+            20% { transform: skew(2deg); }
+            30% { transform: skew(0deg); }
+            40% { transform: skew(1deg); }
+            50% { transform: skew(-1deg); }
+            60% { transform: skew(0deg); }
+            70% { transform: skew(0deg); }
+            80% { transform: skew(0deg); }
+            90% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        /* Edgy Design */
+        .clip-sharp {
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% calc(100% - 15px),
+                calc(100% - 15px) 100%,
+                0 100%
+            );
+        }
+        
+        /* Floating HUD Elements */
+        .hud-line {
+            position: absolute;
+            background: rgba(126, 34, 206, 0.3);
+            pointer-events: none;
+        }
+
+        /* Custom Panel for Content */
+        .content-panel {
+            background: rgba(10, 5, 20, 0.6);
+            border: 1px solid rgba(126, 34, 206, 0.3);
+            backdrop-filter: blur(8px);
+            position: relative;
+        }
+        .content-panel::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 20px; height: 20px;
+            border-top: 2px solid var(--neon-purple);
+            border-left: 2px solid var(--neon-purple);
+        }
+        .content-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 20px; height: 20px;
+            border-bottom: 2px solid var(--neon-purple);
+            border-right: 2px solid var(--neon-purple);
+        }
+
+        /* Hero layout polish */
+        .hero-media-stack {
+            align-self: start;
+        }
+        .overview-panel {
+            background: linear-gradient(160deg, rgba(34, 16, 56, 0.68), rgba(10, 5, 20, 0.78));
+            border: 1px solid rgba(216, 180, 254, 0.34);
+            box-shadow: 0 0 0 1px rgba(126, 34, 206, 0.18) inset, 0 18px 40px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(10px);
+        }
+        .overview-panel p {
+            font-size: 0.99rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+        .overview-dropcap::first-letter {
+            float: left;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 3rem;
+            line-height: 0.88;
+            padding-right: 0.42rem;
+            color: var(--neon-purple);
+            text-shadow: 0 0 16px rgba(216, 180, 254, 0.35);
+            font-weight: 700;
+        }
+        .meta-chip {
+            border: 1px solid rgba(126, 34, 206, 0.4);
+            background: rgba(20, 10, 34, 0.55);
+            padding: 0.36rem 0.62rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .media-shell {
+            border: 1px solid rgba(216, 180, 254, 0.35);
+            background: linear-gradient(145deg, rgba(34, 16, 56, 0.42), rgba(7, 3, 15, 0.7));
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38), inset 0 0 0 1px rgba(126, 34, 206, 0.22);
+            padding: 0.7rem;
+        }
+        .media-shell::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(126, 34, 206, 0.22);
+            pointer-events: none;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+        }
+        .pillar-card {
+            transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+            border: 1px solid rgba(126, 34, 206, 0.35);
+        }
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(216, 180, 254, 0.65);
+            box-shadow: 0 0 0 1px rgba(216, 180, 254, 0.2) inset, 0 12px 28px rgba(126, 34, 206, 0.28);
+        }
+        .pillar-badge {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 35% 35%, rgba(216, 180, 254, 0.92), rgba(126, 34, 206, 0.86));
+            color: #05030a;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 0 18px rgba(216, 180, 254, 0.42);
+            margin-bottom: 0.65rem;
+        }
+
+    </style>
+</head>
+<body class="antialiased font-sans min-h-screen flex flex-col">
+
+    <!-- Navbar (Vere Specific) -->
+    <nav class="fixed w-full z-50 bg-navy/90 backdrop-blur-sm shadow-lg border-b border-purple/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Back to Projects -->
+                <div class="flex-shrink-0 relative group cursor-pointer animate-fade-in">
+                    <a href="projects.html" class="flex items-center gap-2 text-purple hover:text-neon-purple transition-colors">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                        <span class="font-display font-bold italic">BACK TO PROJECTS</span>
+                    </a>
+                </div>
+
+                <!-- Project Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#overview" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Overview</span><span class="lang-zh">概览</span>
+                        </a>
+                         <a href="#role" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">My Role</span><span class="lang-zh">我的职责</span>
+                        </a>
+                        <a href="#pillars" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Design Pillars</span><span class="lang-zh">设计支柱</span>
+                        </a>
+                        <a href="#story" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Story</span><span class="lang-zh">故事</span>
+                        </a>
+                        <a href="#controls" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Controls</span><span class="lang-zh">操作</span>
+                        </a>
+                        <a href="#team" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Team</span><span class="lang-zh">团队</span>
+                        </a>
+
+                        <!-- Lang Toggle -->
+                        <button onclick="toggleLang()" class="text-purple hover:bg-purple hover:text-white p-2 transition-all duration-300 flex items-center gap-2 border border-purple font-mono text-xs ml-4 clip-sharp">
+                            <i data-lucide="globe" class="w-4 h-4"></i>
+                            <span class="lang-en">中文</span><span class="lang-zh">EN</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-purple hover:text-white p-2 border border-purple">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-navy px-2 pt-2 pb-3 space-y-1 sm:px-3 border-b border-purple">
+            <a href="#overview" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Overview</a>
+            <a href="#role" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">My Role</a>
+            <a href="#pillars" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Design Pillars</a>
+            <a href="#story" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Story</a>
+            <a href="#controls" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Controls</a>
+            <button onclick="toggleLang()" class="w-full text-left text-white hover:text-neon-purple block px-3 py-4 text-base font-medium flex items-center gap-2 border-l-4 border-transparent hover:border-purple transition-all">
+                <i data-lucide="globe"class="w-4 h-4"></i>
+                <span class="lang-en">中文</span><span class="lang-zh">EN</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        
+        <!-- Banner / Hero -->
+        <section id="overview" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-navy">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 bg-gradient-to-br from-purple/10 to-transparent"></div>
+            <!-- Decorative Lines -->
+            <div class="hud-line top-1/4 left-0 w-full h-px"></div>
+            <div class="hud-line bottom-1/4 left-0 w-full h-px"></div>
+            <div class="hud-line top-0 left-1/4 w-px h-full"></div>
+            <div class="hud-line top-0 right-1/4 w-px h-full"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 w-full grid lg:grid-cols-[1.08fr_0.92fr] gap-10 lg:gap-14 items-start pt-8">
+                
+                <!-- Text Content -->
+                <div class="space-y-8 animate-fade-in delay-100 relative order-2 lg:order-1">
+                    <div class="glitch-wrapper mb-4">
+                        <h1 class="glitch text-8xl md:text-[10rem] font-display font-bold italic tracking-tighter leading-none" data-text="VERE">
+                            VERE
+                        </h1>
+                    </div>
+                    
+                    <div class="border-l-4 border-neon-purple pl-6 py-4 bg-purple/5 backdrop-blur-sm">
+                        <p class="text-xl md:text-2xl text-white italic font-serif leading-relaxed opacity-90">
+                            <span class="lang-en">“Something is terribly wrong with Vere’s world. Hallucinatory rifts tear through the sky, and strange objects fall……or float where they should not exist. She is pulled, again and again, into the glitches of fractured realities… Will she ever find her way home?”</span>
+                            <span class="lang-zh">“Vere的世界出了大问题。幻觉般的裂缝撕裂了天空，奇怪的物体坠落……或漂浮在它们本不该存在的地方。她一次又一次地被卷入破碎现实的故障中……她还能找到回家的路吗？”</span>
+                        </p>
+                    </div>
+
+                    <!-- Meta: Game Jam, Theme, Team, Engine -->
+                    <div class="flex flex-wrap gap-2 font-mono text-purple/90 mb-4">
+                        <span class="meta-chip lang-en">Game Jam Project (42 Hours)</span>
+                        <span class="meta-chip lang-zh">Game Jam 项目（42 小时）</span>
+                        <span class="meta-chip lang-en">Theme: Merge</span>
+                        <span class="meta-chip lang-zh">主题：Merge</span>
+                        <span class="meta-chip lang-en">Team Size: 10</span>
+                        <span class="meta-chip lang-zh">团队规模：10 人</span>
+                        <span class="meta-chip lang-en">Engine: Unity</span>
+                        <span class="meta-chip lang-zh">引擎：Unity</span>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="pt-6">
+                        <a href="https://forestw.itch.io/vere" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-purple text-white font-display font-bold uppercase tracking-widest hover:bg-neon-purple hover:text-navy transition-all clip-sharp group italic">
+                            <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+                            <span class="lang-en">Play on itch.io</span><span class="lang-zh">在 itch.io 试玩</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Media Showcase -->
+                <div class="space-y-4 animate-fade-in delay-300 order-1 lg:order-2 hero-media-stack lg:-mt-5">
+                    <!-- Video Trailer -->
+                    <div class="media-shell clip-sharp relative">
+                        <div class="w-full aspect-video bg-black border border-purple/30 clip-sharp shadow-[0_0_30px_rgba(126,34,206,0.3)] group relative overflow-hidden">
+                            <video controls autoplay loop muted class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+                                <source src="images/vere-trailer.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="absolute top-4 right-4 px-3 py-1 bg-neon-purple text-navy font-mono text-xs font-bold uppercase tracking-widest clip-sharp">
+                                Official Trailer
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Images Grid (Side by Side) -->
+                    <div class="media-shell clip-sharp relative">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="aspect-video bg-navy border border-purple/30 overflow-hidden relative group clip-sharp">
+                                <img src="images/vere-screen-1.png" alt="Gameplay 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-purple/10 group-hover:bg-transparent transition-colors"></div>
+                            </div>
+                            <div class="aspect-video bg-navy border border-purple/30 overflow-hidden relative group clip-sharp">
+                                <img src="images/vere-screen-2.png" alt="Gameplay 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-purple/10 group-hover:bg-transparent transition-colors"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Overview -->
+                <div class="lg:col-span-2 overview-panel p-5 md:p-7 clip-sharp">
+                    <h2 class="text-neon-purple font-display font-bold italic text-xl tracking-wider mb-4 uppercase">
+                        <span class="lang-en">Project Overview</span>
+                        <span class="lang-zh">项目概览</span>
+                    </h2>
+                    <p class="font-sans font-normal overview-dropcap lang-en">Vere is a narrative-driven experimental platformer created during a 42-hour game jam under the theme "Merge." The game takes place inside a corrupted video game stored on a forgotten floppy disk. As the digital world decays, fragments of the game's interface, unused assets, and broken systems begin to merge into the environment. Players navigate a collapsing digital landscape where the boundaries between game interface and world space no longer exist. UI elements become platforms, dialogue windows appear as physical obstacles, and fragments of the game's systems drift through space as environmental hazards.</p>
+                    <p class="font-sans font-normal overview-dropcap lang-zh">Vere 是一款在 42 小时 Game Jam 中、以「Merge」为主题创作的叙事向实验平台游戏。故事发生在一张被遗忘软盘中存储的、已损坏的游戏内部；随着数字世界腐朽，游戏界面碎片、未使用的资源与崩坏的系统开始与环境融合。玩家穿行于正在崩塌的数字景观中，游戏界面与世界空间的边界已不复存在。UI 元素变成平台，对话窗口成为实体障碍，游戏系统的碎片在空间中飘荡，化作环境危险。</p>
+                </div>
+            </div>
+            
+            <!-- Decor Text -->
+            <div class="absolute bottom-10 right-10 font-mono text-xs text-purple/40 tracking-[0.5em] hidden lg:block">
+                SYSTEM_FAILURE // ERROR_CODE: 0x404
+            </div>
+        </section>
+
+        <!-- Design Pillars -->
+        <section id="pillars" class="py-24 bg-[#0a0510] border-t border-purple/10">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-display font-bold italic text-white mb-16 text-center tracking-[0.2em]">
+                    <span class="lang-en">Design Pillars</span>
+                    <span class="lang-zh">设计支柱</span>
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="content-panel p-6 pillar-card">
+                        <div class="pillar-badge">1</div>
+                        <h3 class="text-neon-purple font-display font-bold italic text-xl mb-4"><span class="lang-en">Interface Becomes Environment</span><span class="lang-zh">界面即环境</span></h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4"><span class="lang-en">The central design idea is that elements normally outside the game world become part of the physical space. UI components such as health bars, dialogue boxes, and interface frames transform into: moving platforms, environmental hazards, navigational structures.</span><span class="lang-zh">核心设计理念是：通常位于游戏世界之外的元素成为物理空间的一部分。血条、对话框、界面框等 UI 组件转化为：移动平台、环境危险、导航结构。</span></p>
+                        <p class="text-slate-300 text-sm leading-relaxed"><span class="lang-en">This mechanic creates a meta-game experience, where players explore the internal structure of the game itself.</span><span class="lang-zh">这一机制创造出元游戏体验，玩家探索的是游戏自身的内部结构。</span></p>
+                    </div>
+                    <div class="content-panel p-6 pillar-card">
+                        <div class="pillar-badge">2</div>
+                        <h3 class="text-neon-purple font-display font-bold italic text-xl mb-4"><span class="lang-en">Glitch as Level Design</span><span class="lang-zh">故障即关卡设计</span></h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4"><span class="lang-en">Instead of traditional obstacles, the game world is built from digital corruption and merging systems. Broken UI fragments, drifting objects, and impossible geometry communicate that the game world is no longer stable.</span><span class="lang-zh">游戏世界由数字崩坏与融合系统构成，而非传统障碍。破碎的 UI 碎片、漂浮的物体与不可能几何传达出游戏世界已不再稳定。</span></p>
+                        <p class="text-slate-300 text-sm leading-relaxed"><span class="lang-en">This supports both the visual identity and the narrative theme of a collapsing digital space.</span><span class="lang-zh">这同时支撑了视觉身份与崩塌数字空间的叙事主题。</span></p>
+                    </div>
+                    <div class="content-panel p-6 pillar-card">
+                        <div class="pillar-badge">3</div>
+                        <h3 class="text-neon-purple font-display font-bold italic text-xl mb-4"><span class="lang-en">Narrative Through Environment</span><span class="lang-zh">通过环境叙事</span></h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4"><span class="lang-en">Rather than relying heavily on exposition, the story is conveyed through environmental design. The merging of UI elements and world objects reflects the game's narrative premise: the boundaries between system, interface, and world are dissolving.</span><span class="lang-zh">故事通过环境设计传达，而非依赖大量说明。UI 元素与世界物体的融合呼应叙事前提：系统、界面与世界的边界正在消解。</span></p>
+                        <p class="text-slate-300 text-sm leading-relaxed"><span class="lang-en">The player gradually realizes that Vere may not be escaping the world—but instead merging into a new reality beyond it.</span><span class="lang-zh">玩家逐渐意识到，Vere 或许不是在逃离世界，而是在融入其之外的新现实。</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Mechanic & Level Design & Player Goals & Challenges & Reflection -->
+        <section class="py-24 bg-navy relative overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none opacity-5" style="background-image: linear-gradient(#7e22ce 1px, transparent 1px), linear-gradient(90deg, #7e22ce 1px, transparent 1px); background-size: 60px 60px;"></div>
+            <div class="max-w-7xl mx-auto px-4 relative z-10 space-y-16">
+                <div class="content-panel p-8">
+                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Core Mechanic: UI Environmentalization</span><span class="lang-zh">核心机制：UI 环境化</span></h2>
+                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">The core mechanic transforms traditional UI elements into gameplay structures. Examples include: Health bars functioning as moving platforms; Dialogue windows acting as navigation gates; Interface frames forming environmental boundaries.</span><span class="lang-zh">核心机制将传统 UI 元素转化为玩法结构。例如：血条充当移动平台；对话窗口充当导航门；界面框构成环境边界。</span></p>
+                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">This mechanic reinforces the theme "Merge" by blending two normally separate layers: interface layer and world layer. Players are forced to interact with elements that normally exist outside the playable space.</span><span class="lang-zh">该机制通过融合两个通常分离的层面——界面层与世界层——强化「Merge」主题。玩家不得不与通常存在于可玩空间之外的元素互动。</span></p>
+                </div>
+                <div class="content-panel p-8">
+                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Level Design Approach</span><span class="lang-zh">关卡设计思路</span></h2>
+                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">Because the project was created within a 42-hour development window, the level design focused on modular interactions. Instead of building entirely new mechanics for each stage, we reused the core UI-environment mechanic in different contexts.</span><span class="lang-zh">项目在 42 小时开发窗口内完成，关卡设计聚焦模块化互动。我们在不同情境下复用核心 UI-环境机制，而非为每一阶段构建全新机制。</span></p>
+                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">Examples: platforming sequences using floating UI panels; navigation puzzles using interface frames; environmental hazards made from corrupted UI fragments. This approach allowed us to maintain design coherence while working under tight time constraints.</span><span class="lang-zh">例如：用悬浮 UI 面板做平台序列；用界面框做导航谜题；用损坏的 UI 碎片做环境危险。这一思路使我们在时间紧张下仍保持设计一致性。</span></p>
+                </div>
+                <div class="content-panel p-8">
+                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Player Experience Goals</span><span class="lang-zh">玩家体验目标</span></h2>
+                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">The intended player experience focuses on three elements: <strong>Disorientation</strong>—players should feel that the world itself is unstable and unfamiliar. <strong>Discovery</strong>—by interacting with UI structures in unexpected ways, players gradually understand the logic of the merged world. <strong>Narrative Curiosity</strong>—environmental storytelling encourages players to question what the world actually is.</span><span class="lang-zh">预期体验聚焦三点：<strong>迷失感</strong>——世界本身应显得不稳定、陌生。<strong>发现</strong>——通过非常规方式与 UI 结构互动，玩家逐渐理解融合世界的逻辑。<strong>叙事好奇</strong>——环境叙事促使玩家追问：这个世界究竟是什么。</span></p>
+                    <p class="text-neon-purple font-display italic text-lg"><span class="lang-en">Is Vere escaping a broken game… or entering a new reality created from its fragments?</span><span class="lang-zh">Vere 是在逃离一个崩坏的游戏……还是进入由其碎片构成的新现实？</span></p>
+                </div>
+                <div class="content-panel p-8">
+                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Design Challenges</span><span class="lang-zh">设计挑战</span></h2>
+                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">The primary challenge was balancing ambitious ideas with limited development time. The UI-environment concept had many possible variations, but implementing too many would have exceeded the scope of a 42-hour jam.</span><span class="lang-zh">主要挑战是在有限开发时间内平衡宏大想法。UI-环境概念有多种可能变体，但实现过多会超出 42 小时 Jam 的范围。</span></p>
+                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">To address this, the team focused on: one strong core mechanic; reusable interaction systems; visually distinctive environments. This allowed the game to deliver a clear concept without overextending development resources.</span><span class="lang-zh">为此团队聚焦：一个强有力的核心机制；可复用的交互系统；视觉上鲜明的环境。使游戏在不过度消耗资源的前提下传达清晰概念。</span></p>
+                </div>
+                <div class="content-panel p-8">
+                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Reflection</span><span class="lang-zh">反思</span></h2>
+                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">This project demonstrated the importance of strong central mechanics in rapid development environments. A clearly defined design concept helped the team align quickly despite the limited time frame.</span><span class="lang-zh">本项目体现了在快速开发环境中强有力核心机制的重要性。清晰的设计概念帮助团队在有限时间内快速对齐。</span></p>
+                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">Key lessons: Game jam projects benefit from a single strong mechanic rather than many small systems; Environmental storytelling can reinforce mechanical ideas; Mechanic reuse across levels helps maintain scope control.</span><span class="lang-zh">主要收获：Game Jam 项目更适合一个强核心机制而非多个小系统；环境叙事能强化机制理念；机制在关卡间复用有助于控制范围。</span></p>
+                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">If given more development time, I would expand the system further by introducing: interactive menu systems as puzzle mechanics; corrupted save-file environments; dynamic UI-based hazards that respond to player actions. These additions could deepen the idea of exploring the internal structure of a game world.</span><span class="lang-zh">若有更多开发时间，我会进一步拓展系统：将交互菜单系统作为谜题机制；损坏的存档文件环境；根据玩家行动变化的动态 UI 危险。这些扩展能深化「探索游戏世界内部结构」这一理念。</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section id="story" class="py-32 bg-[#0a0510] relative border-t border-purple/10">
+            <div class="max-w-5xl mx-auto px-4 text-center">
+<h2 class="text-4xl md:text-6xl font-display font-bold italic text-white mb-16 uppercase tracking-widest text-shadow-purple">
+                    <span class="lang-en">The Glitch Reality</span>
+<span class="lang-zh">故障现实</span>
+                </h2>
+                <div class="space-y-12 text-xl md:text-2xl text-slate-300 leading-relaxed font-light">
+                    <p>
+                        <span class="lang-en">Inside, the game world is falling apart. Fragments of flat UI and all the things that were never meant to exist and hurt anyone within the world merged and drift aimlessly through space.</span>
+                        <span class="lang-zh">在内部，游戏世界正在分崩离析。扁平UI的碎片以及所有本不该存在且会伤害世界内任何事物的物体融合在一起，在空间中漫无目的地漂浮。</span>
+                    </p>
+                    <p>
+                        <span class="lang-en">Vere must cross countless obstacles and get through relentless trials to find her way home… or so she believes. But beyond the flickering chaos of flying glitches everywhere lies something far greater than she ever imagined. The truth.</span>
+                        <span class="lang-zh">Vere必须跨越无数障碍，通过无情的试炼才能找到回家的路……至少她是这么认为的。但在到处闪烁的故障混乱之外，存在着比她想象中更伟大的东西。真相。</span>
+                    </p>
+                    
+                    <div class="py-12 flex justify-center">
+                        <div class="w-px h-24 bg-gradient-to-b from-transparent via-neon-purple to-transparent"></div>
+                    </div>
+                    
+                    <p class="text-3xl font-display italic text-neon-purple tracking-widest uppercase">
+                        <span class="lang-en">Vere… welcome merging into a new world.</span>
+                        <span class="lang-zh">Vere……欢迎融入新世界。</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls Section -->
+        <section id="controls" class="py-24 bg-black relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 relative z-10">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 class="text-4xl font-display font-bold italic text-white mb-12 border-l-8 border-neon-purple pl-6">
+                            <span class="lang-en">CONTROLS</span>
+                            <span class="lang-zh">操作指南</span>
+                        </h2>
+                        <ul class="space-y-6 font-mono text-sm md:text-base">
+                            <li class="flex items-center justify-between border-b border-purple/30 pb-4 group hover:pl-4 transition-all">
+                                <span class="text-slate-400 group-hover:text-white uppercase tracking-widest"><span class="lang-en">Movement</span><span class="lang-zh">移动</span></span>
+                                <span class="text-navy font-bold bg-neon-purple px-3 py-1 clip-sharp">WASD</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-purple/30 pb-4 group hover:pl-4 transition-all">
+                                <span class="text-slate-400 group-hover:text-white uppercase tracking-widest"><span class="lang-en">Jump</span><span class="lang-zh">跳跃</span></span>
+                                <span class="text-navy font-bold bg-neon-purple px-3 py-1 clip-sharp">SPACE</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-purple/30 pb-4 group hover:pl-4 transition-all">
+                                <span class="text-slate-400 group-hover:text-white uppercase tracking-widest"><span class="lang-en">Dialogue</span><span class="lang-zh">对话</span></span>
+                                <span class="text-navy font-bold bg-neon-purple px-3 py-1 clip-sharp">ENTER</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-purple/30 pb-4 group hover:pl-4 transition-all">
+                                <span class="text-slate-400 group-hover:text-white uppercase tracking-widest"><span class="lang-en">Skip Level</span><span class="lang-zh">跳过关卡</span></span>
+                                <span class="text-navy font-bold bg-neon-purple px-3 py-1 clip-sharp">TAB</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Visual Element -->
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-neon-purple blur-[50px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                        <div class="bg-navy/80 p-8 border border-purple/50 clip-sharp flex flex-col items-center justify-center min-h-[300px] backdrop-blur-sm relative z-10">
+                            <div class="grid grid-cols-3 gap-2 mb-4">
+                                <div></div>
+                                <div class="w-16 h-16 border-2 border-neon-purple/50 flex items-center justify-center text-white font-mono text-xl shadow-[0_0_15px_rgba(216,180,254,0.1)]">W</div>
+                                <div></div>
+                                <div class="w-16 h-16 border-2 border-neon-purple/50 flex items-center justify-center text-white font-mono text-xl shadow-[0_0_15px_rgba(216,180,254,0.1)]">A</div>
+                                <div class="w-16 h-16 border-2 border-neon-purple/50 flex items-center justify-center text-white font-mono text-xl shadow-[0_0_15px_rgba(216,180,254,0.1)]">S</div>
+                                <div class="w-16 h-16 border-2 border-neon-purple/50 flex items-center justify-center text-white font-mono text-xl shadow-[0_0_15px_rgba(216,180,254,0.1)]">D</div>
+                            </div>
+                            <div class="w-full max-w-[200px] h-12 border-2 border-neon-purple/50 flex items-center justify-center text-white font-mono text-sm mt-2">SPACE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Role + Credits (Side-by-side) -->
+        <section id="role" class="py-24 bg-navy border-t border-purple/10 relative overflow-hidden">
+            <!-- Background Grid -->
+            <div class="absolute inset-0 pointer-events-none opacity-5"
+                 style="background-image: linear-gradient(#7e22ce 1px, transparent 1px), linear-gradient(90deg, #7e22ce 1px, transparent 1px); background-size: 60px 60px;">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+                    <!-- My Role -->
+                    <div class="content-panel p-8 md:p-12 h-full">
+                        <h2 class="text-4xl font-display font-bold italic text-white mb-8 flex items-center gap-4">
+                            <span class="w-12 h-1 bg-neon-green"></span>
+                            <span class="lang-en">MY ROLE</span>
+                            <span class="lang-zh">我的职责</span>
+                        </h2>
+                        <div class="flex flex-wrap gap-4 mb-8">
+                            <span class="px-4 py-2 bg-purple/20 border border-neon-purple/50 text-neon-purple font-display font-bold italic uppercase tracking-wider clip-sharp">
+                                <span class="lang-en">Associate Director</span>
+                                <span class="lang-zh">副导演</span>
+                            </span>
+                            <span class="px-4 py-2 bg-purple/20 border border-neon-purple/50 text-neon-purple font-display font-bold italic uppercase tracking-wider clip-sharp">
+                                <span class="lang-en">Programmer</span>
+                                <span class="lang-zh">程序</span>
+                            </span>
+                            <span class="px-4 py-2 bg-purple/20 border border-neon-purple/50 text-neon-purple font-display font-bold italic uppercase tracking-wider clip-sharp">
+                                <span class="lang-en">Narrative Designer</span>
+                                <span class="lang-zh">叙事设计</span>
+                            </span>
+                        </div>
+                        <h3 class="text-neon-green font-display font-bold italic text-lg mb-4">
+                            <span class="lang-en">Key Contributions</span>
+                            <span class="lang-zh">主要贡献</span>
+                        </h3>
+                        <ul class="space-y-3 text-slate-300 leading-relaxed list-disc pl-6">
+                            <li><span class="lang-en">Designed the core gameplay mechanic: UI Environmentalization</span><span class="lang-zh">设计了核心玩法机制：UI 环境化</span></li>
+                            <li><span class="lang-en">Implemented interactive logic for multiple level mechanics</span><span class="lang-zh">实现了多关卡机制的交互逻辑</span></li>
+                            <li><span class="lang-en">Designed the narrative world concept and wrote dialogue sequences</span><span class="lang-zh">设计了叙事世界观并撰写对话段落</span></li>
+                            <li><span class="lang-en">Implemented cinematic camera effects to enhance storytelling</span><span class="lang-zh">实现了电影化镜头效果以强化叙事</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Credits -->
+                    <div id="team" class="content-panel p-8 md:p-12 h-full">
+                        <h2 class="text-4xl font-display font-bold italic text-white mb-8 flex items-center gap-4">
+                            <span class="w-12 h-1 bg-neon-purple"></span>
+                            <span class="lang-en">CREDITS</span>
+                            <span class="lang-zh">制作团队</span>
+                        </h2>
+
+                        <div class="space-y-7">
+                            <div>
+                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Director / Programmer / Technical Artist</div>
+                                <div class="text-white font-display font-bold">Bedi Ruan</div>
+                            </div>
+                            <div>
+                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Associate Director / Programmer</div>
+                                <div class="space-y-1">
+                                    <div class="text-white font-display font-bold">Susan Zhang</div>
+                                    <div class="text-white font-display font-bold">Jiu Duan</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Level Designers</div>
+                                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
+                                    <div class="text-slate-200">Kasper Chang</div>
+                                    <div class="text-slate-200">Forest Wu</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Artists</div>
+                                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
+                                    <div class="text-slate-200">Amy Wu</div>
+                                    <div class="text-slate-200">Huang Yuan</div>
+                                    <div class="text-slate-200">Raymond Zhang</div>
+                                    <div class="text-slate-200">Raina Wang</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Music</div>
+                                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
+                                    <div class="text-slate-200">Coco Luo</div>
+                                    <div class="text-slate-200">Oscar Yip</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script -->
+    <script>
+        lucide.createIcons();
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        function toggleLang() {
+            const body = document.body;
+            const isZh = !body.classList.contains('zh-mode');
+            body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh' : 'en';
+            localStorage.setItem('siteLang', isZh ? 'zh' : 'en');
+        }
+
+        (function applySavedLang() {
+            const isZh = localStorage.getItem('siteLang') === 'zh';
+            document.body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh' : 'en';
+        })();
+    </script>
+</body>
+</html>

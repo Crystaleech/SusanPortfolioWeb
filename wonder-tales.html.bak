@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonder Tales - Project Detail</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0a0505', /* Very dark red/black */
+                        red: {
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        },
+                        'cinnabar': '#e53e3e',
+                        white: '#fff1f2',
+                        'deep-blue': '#00008B',
+                        'neon-green': '#39ff14',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif'],
+                        mono: ['Fira Code', 'monospace'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Global Overrides */
+        :root {
+            --navy: #0a0505;
+            --cinnabar: #e53e3e;
+            --dark-red: #7f1d1d;
+            --neon-green: #39ff14;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: #fca5a5;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #7f1d1d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--cinnabar);
+        }
+
+        ::selection {
+            background-color: #7f1d1d;
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: block; }
+        body.zh-mode span.lang-zh { display: inline; }
+        body.zh-mode span.lang-en { display: none; }
+
+        /* Edgy Design */
+        .clip-sharp {
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% calc(100% - 20px),
+                calc(100% - 20px) 100%,
+                0 100%
+            );
+        }
+        
+        /* Red Panel Style */
+        .red-glass-panel {
+            background: rgba(127, 29, 29, 0.1);
+            border: 1px solid rgba(229, 62, 62, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .red-border-frame {
+            border: 2px solid var(--cinnabar);
+            box-shadow: 0 0 15px rgba(229, 62, 62, 0.3);
+            position: relative;
+        }
+
+        .red-border-frame::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid var(--cinnabar);
+            border-right: 2px solid var(--cinnabar);
+        }
+
+        /* Chinese Pattern Overlay */
+        .chinese-pattern {
+            background-image: radial-gradient(var(--dark-red) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+    </style>
+</head>
+<body class="antialiased font-sans min-h-screen flex flex-col">
+
+    <!-- Navbar (Red Theme) -->
+    <nav class="fixed w-full z-50 bg-navy/90 backdrop-blur-sm shadow-lg border-b border-red-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Back to Projects -->
+                <div class="flex-shrink-0 relative group cursor-pointer animate-fade-in">
+                    <a href="projects.html" class="flex items-center gap-2 text-red-500 hover:text-white transition-colors">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                        <span class="font-display font-bold">BACK</span>
+                    </a>
+                </div>
+
+                <!-- Project Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#summary" class="text-white hover:text-red-500 font-display px-2 py-1 transition-colors uppercase tracking-widest text-sm">
+                            <span class="lang-en">Summary</span><span class="lang-zh">概览</span>
+                        </a>
+                        <a href="#pillars" class="text-white hover:text-red-500 font-display px-2 py-1 transition-colors uppercase tracking-widest text-sm">
+                            <span class="lang-en">Pillars</span><span class="lang-zh">核心支柱</span>
+                        </a>
+                        <a href="#characters" class="text-white hover:text-red-500 font-display px-2 py-1 transition-colors uppercase tracking-widest text-sm">
+                            <span class="lang-en">Characters</span><span class="lang-zh">角色</span>
+                        </a>
+                        <a href="#setting" class="text-white hover:text-red-500 font-display px-2 py-1 transition-colors uppercase tracking-widest text-sm">
+                            <span class="lang-en">Setting</span><span class="lang-zh">背景设定</span>
+                        </a>
+
+                        <!-- Lang Toggle -->
+                        <button onclick="toggleLang()" class="text-red-500 hover:bg-red-500 hover:text-white p-2 transition-all duration-300 flex items-center gap-2 border border-red-500 font-mono text-xs ml-4">
+                            <i data-lucide="globe" class="w-4 h-4"></i>
+                            <span class="lang-en">CN</span><span class="lang-zh">EN</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-red-500 hover:text-white p-2 border border-red-500">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-navy px-2 pt-2 pb-3 space-y-1 sm:px-3 border-b border-red-900">
+            <a href="#summary" class="text-white hover:text-red-500 block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-red-500 transition-all">Summary</a>
+            <a href="#pillars" class="text-white hover:text-red-500 block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-red-500 transition-all">Pillars</a>
+            <a href="#characters" class="text-white hover:text-red-500 block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-red-500 transition-all">Characters</a>
+            <a href="#setting" class="text-white hover:text-red-500 block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-red-500 transition-all">Setting</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        
+        <!-- Banner / Hero -->
+        <section id="summary" class="relative min-h-[85vh] flex items-center overflow-hidden bg-navy">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="images/wonder-tales-cover.jpg" alt="Cover" class="w-full h-full object-cover opacity-30 mix-blend-luminosity">
+                <div class="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 w-full grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Text Content -->
+                <div class="space-y-8 animate-fade-in delay-100">
+                    <div class="inline-block border-2 border-red-500 px-4 py-1 text-red-500 font-mono text-sm tracking-widest uppercase mb-4">
+                        Project Detail
+                    </div>
+                    
+                    <h1 class="text-6xl md:text-8xl font-display font-bold text-white tracking-tighter leading-none" style="text-shadow: 4px 4px 0 #7f1d1d;">
+                        WONDER<br>TALES
+                    </h1>
+                    
+                    <div class="border-l-4 border-red-500 pl-6 py-4 bg-red-900/10 backdrop-blur-sm">
+                        <p class="text-xl md:text-2xl text-white font-serif italic leading-relaxed opacity-90">
+                            <span class="lang-en">"A haunting journey through ancient China, blending fear, the supernatural, and deep stories about love, betrayal, and friendship."</span>
+                            <span class="lang-zh">“一段穿越古代中国的诡秘旅程，融合了恐惧、超自然力量，以及关于爱、背叛与友谊的深沉故事。”</span>
+                        </p>
+                    </div>
+
+                    <p class="text-red-200 text-lg font-light leading-relaxed max-w-xl">
+                        <span class="lang-en">Wonder Tales is a narrative-driven RPG that mixes ancient Chinese folklore with Western-style supernatural horror (Cthulhu Mythos). Players take on the role of a Western protagonist exploring a mystical version of ancient China.</span>
+                        <span class="lang-zh">Wonder Tales 是一款叙事驱动的 RPG，将中国古代民间传说与西式超自然恐怖（克苏鲁神话）相结合。玩家将扮演一名西方主角，探索一个神秘的古代中国。</span>
+                    </p>
+                    
+                    <div class="flex gap-4 pt-4">
+                         <div class="px-4 py-2 bg-red-900/30 border border-red-500/50 text-red-300 text-xs font-mono uppercase">RPG / Visual Novel</div>
+                         <div class="px-4 py-2 bg-red-900/30 border border-red-500/50 text-red-300 text-xs font-mono uppercase">Horror</div>
+                         <div class="px-4 py-2 bg-red-900/30 border border-red-500/50 text-red-300 text-xs font-mono uppercase">Narrative</div>
+                    </div>
+                </div>
+
+                <!-- Right Side Visual Element -->
+                <div class="hidden lg:block relative h-full min-h-[500px] border-2 border-red-900/30 bg-red-900/5 backdrop-blur-sm p-8 flex items-center justify-center">
+                    <div class="text-center space-y-6">
+                        <div class="w-32 h-32 mx-auto border border-red-500 rotate-45 flex items-center justify-center">
+                            <div class="w-24 h-24 border border-red-500 rotate-90"></div>
+                        </div>
+                        <h3 class="text-3xl font-serif text-white uppercase tracking-[0.2em]">1797</h3>
+                        <p class="text-red-400 font-mono text-sm">QING DYNASTY x MISKATONIC UNIV.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Pillars Section -->
+        <section id="pillars" class="py-24 bg-[#0f0505] relative border-t border-red-900/30">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-16 text-center uppercase tracking-widest">
+                    <span class="lang-en">Game Pillars</span>
+                    <span class="lang-zh">核心支柱</span>
+                </h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Pillar 1 -->
+                    <div class="red-glass-panel p-6 hover:bg-red-900/20 transition-colors group">
+                        <div class="text-red-500 mb-4 opacity-50 group-hover:opacity-100 transition-opacity">01</div>
+                        <h3 class="text-xl font-bold text-white mb-3 font-display uppercase">
+                            <span class="lang-en">Replayability</span>
+                            <span class="lang-zh">多周目体验</span>
+                        </h3>
+                        <p class="text-sm text-red-200/70 leading-relaxed">
+                            <span class="lang-en">Meet different NPCs, unlock multiple endings, and experience storylines shaped by your choices.</span>
+                            <span class="lang-zh">邂逅不同的NPC，解锁多种结局，体验由你的选择塑造的独特故事线。</span>
+                        </p>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="red-glass-panel p-6 hover:bg-red-900/20 transition-colors group">
+                         <div class="text-red-500 mb-4 opacity-50 group-hover:opacity-100 transition-opacity">02</div>
+                        <h3 class="text-xl font-bold text-white mb-3 font-display uppercase">
+                            <span class="lang-en">Cards</span>
+                            <span class="lang-zh">卡牌系统</span>
+                        </h3>
+                         <p class="text-sm text-red-200/70 leading-relaxed">
+                            <span class="lang-en">Collect character cards, unlock special plots, and upgrade them to reveal personal stories.</span>
+                            <span class="lang-zh">收集角色卡牌，解锁特殊剧情，升级卡牌以揭示深层个人故事。</span>
+                        </p>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="red-glass-panel p-6 hover:bg-red-900/20 transition-colors group">
+                         <div class="text-red-500 mb-4 opacity-50 group-hover:opacity-100 transition-opacity">03</div>
+                        <h3 class="text-xl font-bold text-white mb-3 font-display uppercase">
+                            <span class="lang-en">Relationships</span>
+                            <span class="lang-zh">人际关系</span>
+                        </h3>
+                         <p class="text-sm text-red-200/70 leading-relaxed">
+                            <span class="lang-en">Build connections with NPCs. Choose from 4 playable characters, each with unique backgrounds.</span>
+                            <span class="lang-zh">与NPC建立联系。从4名背景各异的可玩角色中选择，体验不同的人际羁绊。</span>
+                        </p>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="red-glass-panel p-6 hover:bg-red-900/20 transition-colors group">
+                         <div class="text-red-500 mb-4 opacity-50 group-hover:opacity-100 transition-opacity">04</div>
+                        <h3 class="text-xl font-bold text-white mb-3 font-display uppercase">
+                            <span class="lang-en">Collections</span>
+                            <span class="lang-zh">收集要素</span>
+                        </h3>
+                         <p class="text-sm text-red-200/70 leading-relaxed">
+                            <span class="lang-en">Collect items, weapons, and cards. Unlock new endings through meaningful exploration.</span>
+                            <span class="lang-zh">收集物品、武器与卡牌。通过有意义的探索解锁全新结局。</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Characters Section -->
+        <section id="characters" class="py-24 bg-navy relative overflow-hidden">
+             <!-- Chinese Pattern Background -->
+            <div class="absolute inset-0 chinese-pattern pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-12 text-center uppercase tracking-widest">
+                    <span class="lang-en">Investigators</span>
+                    <span class="lang-zh">调查员</span>
+                </h2>
+                
+                <p class="text-center text-red-300 max-w-3xl mx-auto mb-16 font-light text-lg">
+                    <span class="lang-en">Four recent graduates of Miskatonic University. They share similar traits but exist in parallel worlds—choosing a character determines which storyline you follow.</span>
+                    <span class="lang-zh">四位密斯卡塔尼克大学的应届毕业生。他们虽有相似之处，却身处平行世界——选择一名角色，即选择了你将经历的独特故事线。</span>
+                </p>
+
+                <!-- Character Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                    <!-- Char 1 -->
+                    <div class="group relative aspect-[3/5] overflow-hidden border border-red-900/50 bg-black/50 hover:border-red-500 transition-colors">
+                        <img src="images/wonder-tales-char1.png" alt="Character 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white font-display text-sm">INVESTIGATOR 01</p>
+                        </div>
+                    </div>
+                    <!-- Char 2 -->
+                    <div class="group relative aspect-[3/5] overflow-hidden border border-red-900/50 bg-black/50 hover:border-red-500 transition-colors">
+                        <img src="images/wonder-tales-char2.png" alt="Character 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                         <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white font-display text-sm">INVESTIGATOR 02</p>
+                        </div>
+                    </div>
+                    <!-- Char 3 -->
+                    <div class="group relative aspect-[3/5] overflow-hidden border border-red-900/50 bg-black/50 hover:border-red-500 transition-colors">
+                        <img src="images/wonder-tales-char3.png" alt="Character 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                         <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white font-display text-sm">INVESTIGATOR 03</p>
+                        </div>
+                    </div>
+                    <!-- Char 4 -->
+                    <div class="group relative aspect-[3/5] overflow-hidden border border-red-900/50 bg-black/50 hover:border-red-500 transition-colors">
+                        <img src="images/wonder-tales-char4.png" alt="Character 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                         <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <p class="text-white font-display text-sm">INVESTIGATOR 04</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setting Section -->
+        <section id="setting" class="py-24 bg-[#1a0505] relative border-t border-red-900/30">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="red-border-frame p-8 md:p-12 bg-navy/80 relative">
+                    <h2 class="text-3xl font-serif font-bold text-white mb-8 border-b border-red-900 pb-4">
+                        <span class="lang-en">The Setting: 1797 China</span>
+                        <span class="lang-zh">背景设定：1797年 中国</span>
+                    </h2>
+                    
+                    <div class="space-y-6 text-red-100/80 leading-relaxed font-light">
+                        <p>
+                            <span class="lang-en">The game is set in 1797 (Qing Dynasty), when China was mostly closed to the outside world. This setting mixes historical fact with fictional mysticism, creating a rich backdrop for exploration.</span>
+                            <span class="lang-zh">游戏设定在1797年（清朝），当时中国对外界基本封闭。这一设定将历史事实与虚构的神秘主义相结合，为探索创造了丰富的背景。</span>
+                        </p>
+                        <p>
+                            <span class="lang-en">In 1798, each protagonist enters China. Trained at <strong>Miskatonic University</strong> to investigate the unexplained, they soon discover that beneath the surface of a peaceful empire lies chaos, madness, and ancient secrets.</span>
+                            <span class="lang-zh">1798年，每位主角进入中国。作为在<strong>密斯卡塔尼克大学</strong>受训调查未解之谜的毕业生，他们很快发现，在和平帝国的表象之下，潜藏着混乱、疯狂与古老的秘密。</span>
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-red-900/50 grid grid-cols-2 gap-4">
+                         <div class="text-center">
+                            <p class="text-red-500 text-xs font-mono uppercase mb-2">Primary Influence</p>
+                            <p class="text-white font-serif text-lg">Chinese Folklore</p>
+                         </div>
+                         <div class="text-center">
+                            <p class="text-red-500 text-xs font-mono uppercase mb-2">Secondary Influence</p>
+                            <p class="text-white font-serif text-lg">Cthulhu Mythos</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script -->
+    <script>
+        lucide.createIcons();
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        function toggleLang() {
+            const body = document.body;
+            if (body.classList.contains('zh-mode')) {
+                body.classList.remove('zh-mode');
+            } else {
+                body.classList.add('zh-mode');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <script>
+        if (localStorage.getItem('siteLang') === 'en') {
+            window.location.href = 'lynn-en.html';
+        } else {
+            localStorage.setItem('siteLang', 'zh');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林的养成日志 - Project Detail</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Ma+Shan+Zheng&family=Indie+Flower&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#fdfbf7',
+                        paperDark: '#f0eadd',
+                        ink: '#4a4036',
+                        inkLight: '#7d7063',
+                        highlight: '#ffeb85', // Yellow highlighter
+                        tape: 'rgba(255, 255, 255, 0.6)',
+                        
+                        // Happy Palette
+                        joyPink: '#ffb7b2',
+                        joyOrange: '#ffdac1',
+                        joyYellow: '#e2f0cb',
+                        joyGreen: '#b5ead7',
+                        joyBlue: '#c7ceea',
+                        
+                        accent: '#ff9a9e',
+                        accentDark: '#d66d71'
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'system-ui', 'sans-serif'],
+                        hand: ['Indie Flower', 'Ma Shan Zheng', 'cursive'],
+                        cute: ['ZCOOL KuaiLe', 'cursive']
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px)",
+                        'notebook-line': "repeating-linear-gradient(transparent, transparent 31px, #e2e8f0 31px, #e2e8f0 32px)"
+                    },
+                    boxShadow: {
+                        'sticker': '2px 3px 5px rgba(0,0,0,0.1)',
+                        'floating': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+                        'paper': '1px 1px 3px rgba(0,0,0,0.05), 5px 5px 15px rgba(0,0,0,0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fdfbf7;
+            background-image: 
+                radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #4a4036;
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Washi Tape Effect */
+        .washi-tape {
+            position: absolute;
+            height: 30px;
+            width: 100px;
+            background-color: rgba(255, 218, 193, 0.8);
+            opacity: 0.8;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .tape-top-center {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1deg);
+            width: 120px;
+            background: rgba(181, 234, 215, 0.7); /* Joy Green */
+        }
+        
+        .tape-corner {
+            top: -10px;
+            right: -25px;
+            transform: rotate(45deg);
+            background: rgba(255, 183, 178, 0.7); /* Joy Pink */
+            width: 80px;
+        }
+
+        /* Notebook Styles */
+        .notebook-card {
+            background: #fff;
+            border-radius: 12px; /* Smoother but not too round */
+            box-shadow: 2px 4px 12px rgba(0,0,0,0.06);
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(0,0,0,0.02);
+            height: 100%;
+        }
+
+        .notebook-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .handwritten-highlight {
+            position: relative;
+            display: inline-block;
+            z-index: 0;
+        }
+
+        .handwritten-highlight::after {
+            content: "";
+            position: absolute;
+            left: -0.2em;
+            bottom: 0.1em;
+            width: calc(100% + 0.4em);
+            height: 0.4em;
+            background-color: #b5ead7;
+            z-index: -1;
+            transform: rotate(-1deg);
+            border-radius: 4px;
+            opacity: 0.6;
+        }
+
+        .highlight-pink::after { background-color: #ffb7b2; }
+        .highlight-orange::after { background-color: #ffdac1; }
+        .highlight-blue::after { background-color: #c7ceea; }
+
+        .sticky-note {
+            background-color: #fff9c4;
+            box-shadow: 2px 4px 6px rgba(0,0,0,0.1);
+            transform: rotate(-1deg);
+            transition: transform 0.2s;
+        }
+        .sticky-note:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .polaroid {
+            background: white;
+            padding: 12px 12px 30px 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: rotate(1deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .polaroid:hover {
+            transform: scale(1.02) rotate(0deg) !important;
+            z-index: 20;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .doodle {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            font-family: 'Indie Flower', cursive;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #ff9a9e;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fdfbf7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffdac1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffb7b2;
+        }
+    </style>
+</head>
+<body class="selection:bg-joyGreen selection:text-ink">
+    
+    <!-- Background Doodles (SVG) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+        <!-- Top Right Sun -->
+        <svg class="absolute top-10 right-10 w-32 h-32 text-joyOrange opacity-20 animate-spin-slow" viewBox="0 0 100 100" fill="currentColor" style="animation-duration: 20s;">
+            <path d="M50 0 L55 35 L90 35 L60 55 L75 90 L50 70 L25 90 L40 55 L10 35 L45 35 Z" />
+        </svg>
+        <!-- Bottom Left Flower -->
+        <svg class="absolute bottom-10 left-10 w-24 h-24 text-joyPink opacity-20" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 50 m-40 0 a40 40 0 1 0 80 0 a40 40 0 1 0 -80 0 M50 50 m-20 0 a20 20 0 1 1 40 0 a20 20 0 1 1 -40 0" />
+        </svg>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sticky top-4 z-50 px-4 mb-8">
+        <div class="max-w-7xl mx-auto bg-white/90 backdrop-blur-sm rounded-full shadow-floating border-2 border-dashed border-joyBlue/50 px-6 py-3 flex items-center justify-between">
+            <a href="projects.html" class="flex items-center gap-2 text-ink hover:text-accent transition-colors font-cute text-lg">
+                <span class="bg-joyPink text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">←</span>
+                <span>返回</span>
+            </a>
+            <div class="hidden sm:flex items-center gap-6 text-inkLight">
+                <a href="#overview" class="nav-link hover:text-accent">项目概览</a>
+                <a href="#systems" class="nav-link hover:text-accent">核心系统</a>
+                <a href="#interaction" class="nav-link hover:text-accent">交互设计</a>
+                <a href="#structure" class="nav-link hover:text-accent">时间架构</a>
+                <a href="#gallery" class="nav-link hover:text-accent">画廊</a>
+                <a href="#reflection" class="nav-link hover:text-accent">思考与总结</a>
+                <a href="lynn-en.html" class="nav-link hover:text-accent font-bold ml-4" onclick="localStorage.setItem('siteLang', 'en')">EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container: Wider width (90% or max 7xl) -->
+    <main class="pt-8 pb-24 w-full max-w-[95%] 2xl:max-w-7xl mx-auto px-4 sm:px-6">
+        
+        <!-- Header Section with Video Side-by-Side -->
+        <header class="mb-16">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left: Title & Intro -->
+                <div class="text-center lg:text-left relative">
+                    <div class="inline-block relative mb-8">
+                        <div class="absolute -inset-1 bg-joyYellow rounded-lg rotate-2 opacity-50 blur-sm"></div>
+                        <div class="relative bg-white border-2 border-ink/10 rounded-xl p-8 shadow-sticker rotate-1">
+                            <div class="washi-tape tape-top-center"></div>
+                            <div class="text-sm font-hand text-accent tracking-widest uppercase mb-2">我的小游戏项目</div>
+                            <h1 class="text-5xl md:text-6xl font-cute text-ink mb-4 drop-shadow-sm">
+                                林的养成日志
+                            </h1>
+                            <p class="font-hand text-xl text-inkLight">林的一日恢复记录</p>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-xl mx-auto lg:mx-0 bg-white p-6 rounded-lg shadow-sm border-l-4 border-joyBlue transform -rotate-1">
+                        <p class="text-lg text-ink font-hand leading-relaxed">
+                            "并非每个故事都需要反转。有时候，我们只想看到：<span class="handwritten-highlight">当危机结束后，一个人如何重新学会生活。</span>"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Video (Moved Up) -->
+                <div class="relative group max-w-2xl mx-auto lg:mx-0 w-full">
+                    <div class="absolute -inset-2 bg-joyBlue/20 rotate-[-1deg] rounded-xl blur-sm transition-all group-hover:rotate-[-2deg] group-hover:bg-joyBlue/30"></div>
+                    <div class="notebook-card p-3 bg-white relative">
+                        <div class="washi-tape" style="top: -15px; left: 50%; transform: translateX(-50%) rotate(1deg); width: 140px; background-color: rgba(181, 234, 215, 0.8);"></div>
+                        <video controls class="w-full rounded border border-gray-100 shadow-inner" poster="Lynn/游戏截图.png">
+                            <source src="Lynn/Lynn.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="text-center mt-3 font-hand text-ink/60 text-lg">晨间日常演示</p>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- Overview Section -->
+        <section id="overview" class="mb-16 grid md:grid-cols-12 gap-8 items-start">
+            <!-- Left: Info Card (Wider span) -->
+            <div class="md:col-span-8 bg-white rounded-2xl p-8 shadow-paper relative overflow-hidden group h-full">
+                <div class="washi-tape" style="top: -10px; left: -20px; transform: rotate(-30deg); background: #ffdac1; width: 80px;"></div>
+                
+                <h2 class="text-3xl font-cute text-ink mb-6 flex items-center gap-3">
+                    <span class="text-joyPink">✿</span> 关于项目
+                </h2>
+                
+                <p class="text-ink leading-loose mb-6 font-medium text-lg">
+                    这是一个关于日常照料、情感陪伴和心理疗愈的<span class="font-bold text-accent">同人叙事模拟作品</span>，设想了原作故事结束后的另一种可能。
+                </p>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-joyYellow/30 p-4 rounded-xl text-center">
+                        <span class="block text-xs font-bold text-ink/50 uppercase tracking-wider mb-1">角色</span>
+                        <span class="font-hand text-lg font-bold">游戏策划</span>
+                    </div>
+                    <div class="bg-joyBlue/30 p-4 rounded-xl text-center">
+                        <span class="block text-xs font-bold text-ink/50 uppercase tracking-wider mb-1">引擎</span>
+                        <span class="font-hand text-lg font-bold">Unity</span>
+                    </div>
+                    <div class="bg-joyPink/30 p-4 rounded-xl text-center">
+                        <span class="block text-xs font-bold text-ink/50 uppercase tracking-wider mb-1">平台</span>
+                        <span class="font-hand text-lg font-bold">PC</span>
+                    </div>
+                    <div class="bg-joyOrange/30 p-4 rounded-xl text-center">
+                        <span class="block text-xs font-bold text-ink/50 uppercase tracking-wider mb-1">类型</span>
+                        <span class="font-hand text-lg font-bold">叙事模拟</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Handwritten Note -->
+            <div class="md:col-span-4 relative mt-4 md:mt-0 h-full flex items-center">
+                <div class="sticky-note p-6 bg-[#fffcdf] text-ink shadow-lg rotate-2 w-full">
+                    <div class="washi-tape" style="top: -15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.1); height: 25px; width: 60px;"></div>
+                    <h3 class="font-hand text-xl font-bold mb-3 text-ink/80 border-b border-ink/10 pb-2">设计动机</h3>
+                    <p class="font-hand text-lg leading-relaxed mb-4">
+                        比起戏剧性的情节，我更想关注那些细微的<span class="bg-joyGreen/30 px-1">联结瞬间</span>——共同的日常、安静的互动，以及微妙的情感递进。
+                    </p>
+                    <div class="text-right font-hand text-sm text-ink/50">~ 小寒</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Overview & Motivation Cards (Side by Side) -->
+        <section class="mb-20 grid md:grid-cols-2 gap-8">
+            <div class="notebook-card p-8 border-l-8 border-joyGreen bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBvcGFjaXR5PSIwLjAyIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyIiBmaWxsPSIjMDAwIi8+PC9zdmc+')]">
+                <h2 class="text-2xl font-cute text-ink mb-4">项目概览</h2>
+                <p class="text-lg text-ink/80 leading-relaxed mb-4">
+                    本项目是以角色林（Lynn）为核心的同人叙事模拟游戏。它不旨在续写或重构原作剧情，而是探索一种平行的可能性：当原作的危机解除后，日常生活会是什么样子？
+                </p>
+                <p class="text-lg text-ink/80 leading-relaxed">
+                    设计重点在于日常互动、情感陪伴以及渐进式的心理疗愈，让玩家体验一种更缓慢、更具反思性的叙事形式。
+                </p>
+            </div>
+
+            <div class="notebook-card p-8 border-l-8 border-joyPink">
+                <h2 class="text-2xl font-cute text-ink mb-4">设计动机</h2>
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <p class="text-lg text-ink/80 leading-relaxed mb-4">
+                            原作通过激烈的情节塑造了林这个角色。本项目则试图探索另一个设计视角：<span class="handwritten-highlight highlight-pink font-bold">故事结束之后发生了什么</span>？
+                        </p>
+                        <p class="text-lg text-ink/80 leading-relaxed">
+                            游戏不再关注戏剧性的冲突，而是审视一个角色如何通过日常琐事逐渐重建生活。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Systems (4 Columns now) -->
+        <section id="systems" class="mb-20">
+            <div class="text-center mb-10">
+                <span class="inline-block px-4 py-1 rounded-full bg-joyBlue/30 text-ink font-bold tracking-wider text-sm mb-2">GAMEPLAY</span>
+                <h2 class="text-4xl font-cute text-ink">核心系统</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border-2 border-dashed border-joyGreen/40 hover:border-joyGreen transition-colors group h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-joyGreen/20 flex items-center justify-center text-xl">⚡</div>
+                        <h3 class="text-xl font-bold text-ink group-hover:text-tealDeep transition-colors">体力值 (Energy)</h3>
+                    </div>
+                    <p class="text-ink/70 leading-relaxed">
+                        代表林的身体状况以及参与日常活动的能力。
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border-2 border-dashed border-joyPink/40 hover:border-joyPink transition-colors group h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-joyPink/20 flex items-center justify-center text-xl">💗</div>
+                        <h3 class="text-xl font-bold text-ink group-hover:text-accent transition-colors">精神状态 (Mental State)</h3>
+                    </div>
+                    <p class="text-ink/70 leading-relaxed">
+                        代表长期的情绪稳定性与心理压力水平。
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border-2 border-dashed border-joyOrange/40 hover:border-joyOrange transition-colors group h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-joyOrange/20 flex items-center justify-center text-xl">🤝</div>
+                        <h3 class="text-xl font-bold text-ink group-hover:text-peachDeep transition-colors">信赖度 (Trust)</h3>
+                    </div>
+                    <p class="text-ink/70 leading-relaxed">
+                        衡量林愿意在多大程度上依赖玩家并建立情感联结。
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border-2 border-dashed border-joyBlue/40 hover:border-joyBlue transition-colors group h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-joyBlue/20 flex items-center justify-center text-xl">🌍</div>
+                        <h3 class="text-xl font-bold text-ink group-hover:text-blue-600 transition-colors">社交值 (Socialization)</h3>
+                    </div>
+                    <p class="text-ink/70 leading-relaxed">
+                        代表林与外部世界逐渐重建的联系。
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-white/50 p-6 rounded-xl border border-white shadow-sm text-center max-w-2xl mx-auto">
+                <p class="text-ink/80 italic font-hand text-lg">
+                    "这些系统构成了一个动态平衡。过度保护林可能会增加信赖度，但会阻碍社交能力的成长。"
+                </p>
+            </div>
+        </section>
+
+        <!-- Interaction (Updated with images) -->
+        <section id="interaction" class="mb-20">
+             <div class="notebook-card p-8 bg-gradient-to-br from-white to-[#fffaf0]">
+                <div class="washi-tape tape-corner"></div>
+                <h2 class="text-3xl font-cute text-ink mb-6">交互设计 <span class="text-base font-hand text-ink/50 ml-2">Interaction Design</span></h2>
+                
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <span class="px-4 py-2 bg-joyPink/20 text-accentDark rounded-lg font-bold text-sm">触摸交互</span>
+                    <span class="px-4 py-2 bg-joyBlue/20 text-blue-600 rounded-lg font-bold text-sm">环境叙事</span>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Polaroid Style Cards with Images -->
+                    <!-- Card 1: Sleep -->
+                    <div class="polaroid rotate-[-2deg]">
+                        <div class="overflow-hidden rounded mb-3 border border-gray-100 h-48">
+                            <img src="Lynn/惊醒2.png" alt="睡眠交互" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <h4 class="font-hand font-bold text-xl text-center mb-1">睡觉</h4>
+                        <p class="text-sm text-center text-gray-500">休息与恢复</p>
+                    </div>
+
+                    <!-- Card 2: Bathing -->
+                    <div class="polaroid rotate-[1deg] translate-y-4">
+                        <div class="overflow-hidden rounded mb-3 border border-gray-100 h-48">
+                            <img src="Lynn/洗澡1.png" alt="沐浴交互" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <h4 class="font-hand font-bold text-xl text-center mb-1">洗澡</h4>
+                        <p class="text-sm text-center text-gray-500">日常照料</p>
+                    </div>
+
+                    <!-- Card 3: Balcony -->
+                    <div class="polaroid rotate-[-1deg]">
+                        <div class="overflow-hidden rounded mb-3 border border-gray-100 h-48">
+                            <img src="Lynn/窗帘（白天）10.png" alt="阳台交互" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <h4 class="font-hand font-bold text-xl text-center mb-1">开阳台门</h4>
+                        <p class="text-sm text-center text-gray-500">新鲜空气</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Time Structure -->
+        <section id="structure" class="mb-20">
+            <h2 class="text-3xl font-cute text-ink mb-8 text-center">时间结构 <span class="text-lg font-hand text-ink/50">Time Structure</span></h2>
+            
+            <div class="relative max-w-5xl mx-auto">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-joyBlue/30 rounded-full hidden md:block"></div>
+
+                <div class="space-y-8">
+                    <!-- Week 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group">
+                        <div class="order-1 w-full md:w-5/12 bg-white p-5 rounded-xl shadow-sticker text-right border-r-4 border-joyGreen hover:scale-105 transition-transform">
+                            <h3 class="font-bold text-lg text-ink">第一周 — 熟悉</h3>
+                            <p class="text-sm text-ink/70">建立基本的信任和生活规律。</p>
+                        </div>
+                        <div class="order-1 w-8 h-8 bg-joyGreen rounded-full z-10 border-4 border-white shadow-md hidden md:block"></div>
+                        <div class="order-1 w-full md:w-5/12"></div>
+                    </div>
+
+                    <!-- Week 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group">
+                        <div class="order-1 w-full md:w-5/12"></div>
+                        <div class="order-1 w-8 h-8 bg-joyPink rounded-full z-10 border-4 border-white shadow-md hidden md:block"></div>
+                        <div class="order-1 w-full md:w-5/12 bg-white p-5 rounded-xl shadow-sticker text-left border-l-4 border-joyPink hover:scale-105 transition-transform">
+                            <h3 class="font-bold text-lg text-ink">第二周 — 敞开</h3>
+                            <p class="text-sm text-ink/70">林开始更愿意分享她的想法。</p>
+                        </div>
+                    </div>
+
+                    <!-- Week 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group">
+                        <div class="order-1 w-full md:w-5/12 bg-white p-5 rounded-xl shadow-sticker text-right border-r-4 border-joyOrange hover:scale-105 transition-transform">
+                            <h3 class="font-bold text-lg text-ink">第三周 — 探索</h3>
+                            <p class="text-sm text-ink/70">重新与外部世界建立联系。</p>
+                        </div>
+                        <div class="order-1 w-8 h-8 bg-joyOrange rounded-full z-10 border-4 border-white shadow-md hidden md:block"></div>
+                        <div class="order-1 w-full md:w-5/12"></div>
+                    </div>
+
+                    <!-- Week 4 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group">
+                        <div class="order-1 w-full md:w-5/12"></div>
+                        <div class="order-1 w-8 h-8 bg-joyBlue rounded-full z-10 border-4 border-white shadow-md hidden md:block"></div>
+                        <div class="order-1 w-full md:w-5/12 bg-white p-5 rounded-xl shadow-sticker text-left border-l-4 border-joyBlue hover:scale-105 transition-transform">
+                            <h3 class="font-bold text-lg text-ink">第四周 — 反思</h3>
+                            <p class="text-sm text-ink/70">基于平衡照料的结局走向。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Endings (Grid 2 cols) -->
+            <div class="mt-12 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="bg-[#fff0f0] p-6 rounded-2xl border border-red-100">
+                    <h4 class="font-cute text-xl text-accentDark mb-2">依赖结局</h4>
+                    <p class="text-ink/70 text-sm">如果过度保护，林可能会变得在情感上过度依赖。</p>
+                </div>
+                <div class="bg-[#f0fff4] p-6 rounded-2xl border border-green-100">
+                    <h4 class="font-cute text-xl text-green-600 mb-2">康复结局</h4>
+                    <p class="text-ink/70 text-sm">平衡的方式将引导她过上稳定且自主的生活。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery (Restructured) -->
+        <section id="gallery" class="mb-20">
+            <div class="text-center mb-10">
+                <span class="inline-block px-4 py-1 rounded-full bg-joyOrange/30 text-ink font-bold tracking-wider text-sm mb-2">视觉</span>
+                <h2 class="text-4xl font-cute text-ink">游戏截图 <span class="text-lg font-hand text-ink/50">Screenshot Gallery</span></h2>
+            </div>
+
+            <!-- New Layout: 2 Columns (Left Big, Right 2x2) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-0">
+                
+                <!-- Left Column: Full House Layout (Big Image, now smaller) -->
+                <!-- Added 'max-w-md mx-auto' to reduce size by roughly 1/3 effectively while keeping centered in column -->
+                <div class="polaroid rotate-[-1deg] hover:rotate-0 hover:z-10 relative h-full flex flex-col max-w-lg mx-auto w-2/3 lg:w-3/4">
+                    <div class="washi-tape" style="top: -12px; left: 50%; transform: translateX(-50%) rotate(-2deg); background-color: rgba(199, 206, 234, 0.8); width: 120px;"></div>
+                    <div class="overflow-hidden rounded mb-3 border border-gray-100 flex-grow">
+                        <img src="Lynn/Weixin Image_20260311152829_243_183.png" alt="房屋全景布局" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <!-- Empty P tag was here with title, removed? Wait, user asked to rename items ON THE RIGHT. Left item title is not mentioned to change but let's keep it consistent. -->
+                    <p class="font-hand text-center text-ink text-xl">房屋全景布局</p>
+                </div>
+
+                <!-- Right Column: 2x2 Grid -->
+                <div class="grid grid-cols-2 gap-6 content-between">
+                    
+                    <!-- Top Left: Dialogue -> 封面 -->
+                    <div class="polaroid rotate-[1deg] hover:rotate-0 hover:z-10 relative">
+                        <div class="washi-tape" style="top: -12px; left: 40px; transform: rotate(-3deg); background-color: rgba(255, 218, 193, 0.8); width: 90px;"></div>
+                        <div class="overflow-hidden rounded mb-3 border border-gray-100">
+                            <img src="Lynn/游戏截图3.png" alt="封面" class="w-full hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <p class="font-hand text-center text-ink text-xl">封面</p>
+                    </div>
+
+                    <!-- Top Right: Moments -> 加载中 -->
+                    <div class="polaroid rotate-[-2deg] hover:rotate-0 hover:z-10 relative">
+                        <div class="washi-tape" style="top: -12px; right: 20px; transform: rotate(4deg); background-color: rgba(255, 235, 133, 0.8); width: 80px;"></div>
+                        <div class="overflow-hidden rounded mb-3 border border-gray-100">
+                            <img src="Lynn/游戏截图4.png" alt="加载中" class="w-full hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <p class="font-hand text-center text-ink text-xl">加载中</p>
+                    </div>
+
+                    <!-- Bottom Left: The Room -> 客厅 -->
+                    <div class="polaroid rotate-[-1deg] hover:rotate-0 hover:z-10 relative">
+                        <div class="washi-tape" style="top: -12px; left: 30px; transform: rotate(-5deg); background-color: rgba(181, 234, 215, 0.8); width: 100px;"></div>
+                        <div class="overflow-hidden rounded mb-3 border border-gray-100">
+                            <img src="Lynn/游戏截图.png" alt="客厅" class="w-full hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <p class="font-hand text-center text-ink text-xl">客厅</p>
+                    </div>
+
+                    <!-- Bottom Right: Interaction -> 阳台 -->
+                    <div class="polaroid rotate-[2deg] hover:rotate-0 hover:z-10 relative">
+                        <div class="washi-tape" style="top: -12px; right: 30px; transform: rotate(3deg); background-color: rgba(255, 183, 178, 0.8); width: 90px;"></div>
+                        <div class="overflow-hidden rounded mb-3 border border-gray-100">
+                            <img src="Lynn/游戏截图1.png" alt="阳台" class="w-full hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <p class="font-hand text-center text-ink text-xl">阳台</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflection -->
+        <section id="reflection" class="mb-12">
+            <div class="notebook-card p-8 border-t-4 border-joyYellow bg-white relative">
+                <div class="absolute -top-3 left-8 w-4 h-16 bg-gray-100 rounded-sm shadow-inner flex flex-col justify-between py-2 border border-gray-200"></div> <!-- Paper clip mimic -->
+                
+                <h2 class="text-3xl font-cute text-ink mb-6 mt-2">设计者反思 <span class="text-base font-hand text-ink/50 ml-2">Designer Reflection</span></h2>
+                
+                <div class="prose prose-stone prose-lg max-w-none font-sans text-ink/80 leading-loose">
+                    <p class="mb-4">
+                        本项目让我探索了如何将情感叙事转化为玩法系统。一个关键的挑战在于<span class="handwritten-highlight highlight-blue">平衡叙事的亲密感与系统的清晰度</span>。
+                    </p>
+                    <p class="mb-4">
+                        经过迭代，这套四参数系统成为了连接玩家行为与情感结果的核心框架。如果项目进一步扩展，我会探索参数之间更动态的交互关系。
+                    </p>
+                    <p>
+                        总体而言，该项目展示了我对叙事驱动型体验系统设计的兴趣——尤其是那些关注微妙情感递进而非戏剧性冲突的游戏。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-joyBlue/20 bg-white/60 backdrop-blur py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="font-hand text-lg text-ink/60 mb-2">© 2026 林的养成日志 / Lynn's Daily Recovery Log</p>
+            <p class="text-xs text-ink/40 uppercase tracking-widest font-sans">设计与文档：张小寒</p>
+            <div class="flex justify-center gap-2 mt-4 text-2xl opacity-50">
+                <span>🌱</span><span>☀️</span><span>📖</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

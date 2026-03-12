@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Inch Away - A Tale of Two Magnets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FDFCF5;
+            --card-bg: #FFFFFF;
+            --text-main: #5D6D7E;
+            --text-light: #8496A6;
+            --accent-blue: #A9DEF9;
+            --accent-pink: #FFC4D6;
+            --accent-yellow: #FDFD96;
+            --accent-green: #C9E4DE;
+            --accent-purple: #E4C1F9;
+            --heading-color: #4A90E2;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(169, 222, 249, 0.4) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 196, 214, 0.4) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(253, 253, 150, 0.3) 0%, transparent 30%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: inline; }
+
+        /* Float Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            position: fixed;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1200px, calc(100% - 24px));
+            z-index: 30;
+            background: rgba(255, 255, 255, 0.82);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            border-radius: 999px;
+            box-shadow: 0 8px 24px rgba(93, 109, 126, 0.16);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .top-banner .back-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 700;
+            background: #fff;
+            border-radius: 999px;
+            padding: 6px 12px;
+            border: 1px solid rgba(169, 222, 249, 0.8);
+            white-space: nowrap;
+        }
+        .top-banner .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .top-banner .nav-links a,
+        .top-banner .lang-btn {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .top-banner .nav-links a:hover,
+        .top-banner .lang-btn:hover {
+            border-color: var(--accent-pink);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 80px 0 60px;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 5rem;
+            color: #5DADE2;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 0px var(--accent-pink);
+            position: relative;
+            display: inline-block;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 2rem;
+            color: #888;
+            margin-top: 10px;
+            background: var(--accent-yellow);
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 50px;
+            transform: rotate(-2deg);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Decorative blobs - behind content as background */
+        .blob {
+            position: fixed;
+            filter: blur(40px);
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .blob-1 { top: -50px; left: -50px; width: 300px; height: 300px; background: var(--accent-blue); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: float 6s ease-in-out infinite; }
+        .blob-2 { bottom: -50px; right: -50px; width: 400px; height: 400px; background: var(--accent-pink); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation: float 8s ease-in-out infinite reverse; }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(169, 222, 249, 0.2);
+            border: 2px solid white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 196, 214, 0.3);
+        }
+
+        h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            color: #5DADE2;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            color: #7FB3D5;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        /* Specific Card Styles */
+
+        /* Project Info Bar */
+        .info-bar {
+            grid-column: span 12;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background: white;
+            padding: 20px;
+            border-radius: 100px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            gap: 20px;
+        }
+
+        .info-tag {
+            text-align: center;
+        }
+        .info-tag label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .info-tag span {
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        /* Overview - Big Card */
+        .card.overview {
+            grid-column: span 7;
+            background: linear-gradient(135deg, #fff 50%, #f0faff 100%);
+        }
+
+        /* Narrative - Styled differently */
+        .card.narrative {
+            grid-column: span 5;
+            background-color: #FFF0F5; /* Lavender Blush */
+            border: 2px dashed var(--accent-pink);
+            position: relative;
+        }
+        .narrative-quote {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4rem;
+            color: #E57373;
+            text-align: center;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Core Gameplay */
+        .card.gameplay {
+            grid-column: span 12;
+            background: #F0F9FF;
+        }
+        .gameplay-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .gameplay-item {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 20px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        /* Media Showcase */
+        .card.media-showcase {
+            grid-column: span 12;
+            background: linear-gradient(135deg, #fff 0%, #f7fbff 55%, #fff3f8 100%);
+        }
+        .media-video-wrap {
+            background: rgba(255,255,255,0.86);
+            border-radius: 20px;
+            padding: 14px;
+            box-shadow: 0 8px 24px rgba(93, 109, 126, 0.12);
+            border: 1px solid rgba(255,255,255,0.9);
+            margin-bottom: 22px;
+        }
+        .media-video-wrap video {
+            width: 100%;
+            border-radius: 14px;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+        }
+        .media-video-embed {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+            background: #0b1220;
+        }
+        .media-video-embed::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%; /* 16:9 */
+        }
+        .media-video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .media-caption {
+            margin-top: 10px;
+            text-align: center;
+            color: #6c7a89;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .level-card {
+            background: rgba(255,255,255,0.88);
+            border-radius: 18px;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.95);
+            box-shadow: 0 6px 18px rgba(93, 109, 126, 0.12);
+        }
+        .level-card img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+        .level-card .level-title {
+            margin-top: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #5d6d7e;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+        .level-card.level-wide {
+            grid-column: span 2;
+        }
+
+        /* Mechanics - 3 Cards */
+        .card.mechanic {
+            grid-column: span 4;
+        }
+        .card.mechanic:nth-child(odd) { background-color: #FAFAFA; }
+        .card.mechanic:nth-child(even) { background-color: #FFFAFA; }
+
+        /* Loop */
+        .card.loop {
+            grid-column: span 8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .loop-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 50px;
+        }
+        .loop-node {
+            background: var(--accent-green);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #555;
+        }
+        .loop-arrow {
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+        }
+
+        /* Controls */
+        .card.controls {
+            grid-column: span 4;
+            background: var(--accent-purple); /* Light purple */
+            color: #555;
+            background-image: linear-gradient(45deg, var(--accent-purple) 0%, #F3E5F5 100%);
+        }
+        .key-group {
+            background: rgba(255,255,255,0.6);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        .key {
+            display: inline-block;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            box-shadow: 0 3px 0 #ddd;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 2px;
+            color: #333;
+        }
+
+        /* Design Focus & Reflection */
+        .card.reflection {
+            grid-column: span 6;
+            background: #FFFDE7; /* Light Yellow */
+        }
+        .card.contributions {
+            grid-column: span 6;
+            background: #E8F5E9; /* Light Green */
+        }
+        .card.credits {
+            grid-column: span 12;
+            background: #FFF5F7; /* Soft pink-white */
+        }
+
+        ul.soft-list {
+            list-style: none;
+            padding: 0;
+        }
+        ul.soft-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        ul.soft-list li::before {
+            content: '✿';
+            color: var(--heading-color);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--text-light);
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .grid-container { display: flex; flex-direction: column; }
+            h1 { font-size: 3.5rem; }
+            .loop-visual { flex-direction: column;gap: 10px; border-radius: 20px; }
+            .loop-arrow { transform: rotate(90deg); }
+            .top-banner {
+                border-radius: 24px;
+                align-items: flex-start;
+            }
+            .top-banner .nav-links {
+                gap: 8px;
+            }
+            .level-grid {
+                grid-template-columns: 1fr;
+            }
+            .level-card.level-wide {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <nav class="top-banner">
+        <a href="projects.html" class="back-link">
+            <span class="lang-en">← Back to Project</span>
+            <span class="lang-zh">← 返回项目页</span>
+        </a>
+        <div class="nav-links">
+            <a href="#overview">
+                <span class="lang-en">Project Overview</span>
+                <span class="lang-zh">项目概览</span>
+            </a>
+            <a href="#gameplay">
+                <span class="lang-en">Core Gameplay</span>
+                <span class="lang-zh">核心玩法</span>
+            </a>
+            <a href="#loop">
+                <span class="lang-en">Gameplay Loop</span>
+                <span class="lang-zh">玩法循环</span>
+            </a>
+            <a href="#design-focus">
+                <span class="lang-en">Design Focus</span>
+                <span class="lang-zh">设计重点</span>
+            </a>
+            <a href="#media">
+                <span class="lang-en">Gameplay Media</span>
+                <span class="lang-zh">实机媒体</span>
+            </a>
+            <button class="lang-btn" onclick="toggleLang()">
+                <span class="lang-en">中文</span>
+                <span class="lang-zh">EN</span>
+            </button>
+        </div>
+    </nav>
+
+    <header>
+        <h1>
+            <span class="lang-en">One Inch Away</span>
+            <span class="lang-zh">一寸之遥</span>
+        </h1>
+        <br>
+        <span class="subtitle">
+            <span class="lang-en">A Cooperative Physics Platformer</span>
+            <span class="lang-zh">双人合作物理平台游戏</span>
+        </span>
+    </header>
+
+    <div class="container">
+        
+        <div class="grid-container">
+            
+            <!-- Info Bar -->
+            <div class="info-bar">
+                <div class="info-tag"><label><span class="lang-en">Role</span><span class="lang-zh">职责</span></label><span><span class="lang-en">Associate Director & Gameplay Dev</span><span class="lang-zh">副导演与玩法开发</span></span></div>
+                <div class="info-tag"><label><span class="lang-en">Team Size</span><span class="lang-zh">团队规模</span></label><span><span class="lang-en">7 Members</span><span class="lang-zh">7 人</span></span></div>
+                <div class="info-tag"><label><span class="lang-en">Time</span><span class="lang-zh">时长</span></label><span><span class="lang-en">42 Hours</span><span class="lang-zh">42 小时</span></span></div>
+                <div class="info-tag"><label><span class="lang-en">Event</span><span class="lang-zh">活动</span></label><span>ArtCenter Game Jam 2025</span></div>
+                <div class="info-tag"><label><span class="lang-en">Theme</span><span class="lang-zh">主题</span></label><span><span class="lang-en">Unlikely Allies</span><span class="lang-zh">非典型盟友</span></span></div>
+            </div>
+
+            <!-- Overview -->
+            <div class="card overview" id="overview">
+                <h2><span class="lang-en">☁ Project Overview</span><span class="lang-zh">☁ 项目概览</span></h2>
+                <p><span class="lang-en">One Inch Away is a cooperative 2D platformer where two players control magnets with the same polarity, meaning they constantly repel each other.</span><span class="lang-zh">《One Inch Away》是一款双人合作 2D 平台游戏，玩家分别操控同极磁铁角色，彼此会持续排斥。</span></p>
+                <p><span class="lang-en">Because they can never get close, the players must use their repulsive force to navigate platforms, manipulate the environment, and solve cooperative puzzles.</span><span class="lang-zh">由于两者无法靠近，玩家必须把排斥力当作移动与解谜工具，完成平台跳跃与环境交互。</span></p>
+                <p><span class="lang-en">The game explores a paradoxical relationship: two characters who cannot touch, yet must rely on each other to move forward.</span><span class="lang-zh">游戏呈现一种悖论关系：两位角色不能相拥，却必须彼此依赖才能前进。</span></p>
+            </div>
+
+            <!-- Narrative -->
+            <div class="card narrative">
+                <h2><span class="lang-en">♥ Narrative Premise</span><span class="lang-zh">♥ 叙事前提</span></h2>
+                <p><span class="lang-en">Two magnets dream of holding each other. But because their magnetic poles are the same, they are permanently pushed apart.</span><span class="lang-zh">两块磁铁渴望相拥，但因为极性相同，永远会被彼此推开。</span></p>
+                <p><span class="lang-en">A legend tells of a powerful magnet hidden beyond mountains and rivers that can reverse their polarity. Together, the two set out on a journey to find it.</span><span class="lang-zh">传说在群山彼岸有一块强磁体，能够逆转极性，于是他们踏上共同寻找它的旅程。</span></p>
+                <span class="narrative-quote"><span class="lang-en">“We may not be able to hold each other, but we will always be together.”</span><span class="lang-zh">“我们也许无法拥抱彼此，但我们会一直并肩前行。”</span></span>
+            </div>
+
+            <!-- Core Gameplay -->
+            <div class="card gameplay" id="gameplay">
+                <h2><span class="lang-en">★ Core Gameplay</span><span class="lang-zh">★ 核心玩法</span></h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto;"><span class="lang-en">The central mechanic is magnetic repulsion between the two players. Because the force is always active, movement becomes a constant negotiation.</span><span class="lang-zh">核心机制是双角色间的磁力排斥。排斥力持续存在，因此每一步移动都需要协商与配合。</span></p>
+                <div class="gameplay-list">
+                    <div class="gameplay-item"><span class="lang-en">Push each other across gaps</span><span class="lang-zh">借排斥力跨越间隙</span></div>
+                    <div class="gameplay-item"><span class="lang-en">Launch to higher platforms</span><span class="lang-zh">弹射到更高平台</span></div>
+                    <div class="gameplay-item"><span class="lang-en">Adjust movement via repulsion</span><span class="lang-zh">用排斥力微调位移</span></div>
+                </div>
+            </div>
+
+            <!-- Mechanics 1 -->
+            <div class="card mechanic">
+                <h3><span class="lang-en">Magnetic Repulsion</span><span class="lang-zh">磁力排斥</span></h3>
+                <p><span class="lang-en">The two characters continuously push each other away. Players must position themselves carefully to use the repulsion as a movement tool.</span><span class="lang-zh">两名角色会持续相互排斥。玩家需要精确站位，把排斥力转化为有效位移工具。</span></p>
+            </div>
+
+            <!-- Mechanics 2 -->
+            <div class="card mechanic">
+                <h3><span class="lang-en">Platform Navigation</span><span class="lang-zh">平台导航</span></h3>
+                <p><span class="lang-en">Levels contain obstacles that require coordination: large gaps, moving platforms, and vertical climbing sections.</span><span class="lang-zh">关卡包含需要协作处理的障碍：大跨度缺口、移动平台与垂直攀爬段落。</span></p>
+            </div>
+
+            <!-- Mechanics 3 -->
+            <div class="card mechanic">
+                <h3><span class="lang-en">Key & Portal</span><span class="lang-zh">钥匙与传送门</span></h3>
+                <p><span class="lang-en">Collect the Key to activate the exit portal. Once obtained, players can reach the portal to progress together.</span><span class="lang-zh">收集钥匙以激活出口传送门。取得钥匙后，玩家需共同抵达传送门继续前进。</span></p>
+            </div>
+
+            <!-- Loop -->
+            <div class="card loop" id="loop">
+                <h2><span class="lang-en">↻ Gameplay Loop</span><span class="lang-zh">↻ 玩法循环</span></h2>
+                <div class="loop-visual">
+                    <span class="loop-node"><span class="lang-en">Explore</span><span class="lang-zh">探索</span></span>
+                    <span class="loop-arrow">➜</span>
+                    <span class="loop-node"><span class="lang-en">Coordinate</span><span class="lang-zh">协作</span></span>
+                    <span class="loop-arrow">➜</span>
+                    <span class="loop-node"><span class="lang-en">Repel / Move</span><span class="lang-zh">排斥 / 位移</span></span>
+                    <span class="loop-arrow">➜</span>
+                    <span class="loop-node"><span class="lang-en">Collect Key</span><span class="lang-zh">收集钥匙</span></span>
+                    <span class="loop-arrow">➜</span>
+                    <span class="loop-node"><span class="lang-en">Exit Together</span><span class="lang-zh">共同抵达终点</span></span>
+                </div>
+                <p style="text-align: center; margin-top: 15px; color: #888; font-size: 0.9rem;"><span class="lang-en">Requires constant communication!</span><span class="lang-zh">全程都需要持续沟通！</span></p>
+            </div>
+
+            <!-- Controls -->
+            <div class="card controls">
+                <h2><span class="lang-en">🎮 Controls</span><span class="lang-zh">🎮 操作说明</span></h2>
+                <div class="key-group">
+                    <p><strong><span class="lang-en">Player 1</span><span class="lang-zh">玩家 1</span></strong></p>
+                    <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span>
+                </div>
+                <div class="key-group">
+                    <p><strong><span class="lang-en">Player 2</span><span class="lang-zh">玩家 2</span></strong></p>
+                    <span class="key">↑</span><span class="key">←</span><span class="key">↓</span><span class="key">→</span>
+                    <br><br>
+                    <span class="key" style="width: auto;">Space</span> <span class="lang-en">Interact</span><span class="lang-zh">交互</span>
+                </div>
+            </div>
+
+            <!-- Design Focus -->
+            <div class="card reflection" id="design-focus">
+                <h2><span class="lang-en">✎ Design Focus & Reflection</span><span class="lang-zh">✎ 设计重点与复盘</span></h2>
+                <p><strong><span class="lang-en">Focus:</span><span class="lang-zh">重点：</span></strong><span class="lang-en"> Unlike traditional co-op games, players directly affect each other's movement through physics. This creates challenge and humor.</span><span class="lang-zh"> 不同于常规合作游戏，玩家会通过物理机制直接影响彼此位移，从而同时产生挑战与趣味。</span></p>
+                <p><strong><span class="lang-en">Reflection:</span><span class="lang-zh">复盘：</span></strong><span class="lang-en"> Developing a physics mechanic in 42 hours meant focusing on a single strong idea. Simple mechanics with emergent interactions can create deep gameplay.</span><span class="lang-zh"> 在 42 小时内做物理玩法，关键是聚焦一个核心创意。简单机制叠加涌现互动，也能形成有深度的体验。</span></p>
+            </div>
+
+            <!-- Contributions -->
+            <div class="card contributions">
+                <h2><span class="lang-en">🛠 My Contributions</span><span class="lang-zh">🛠 我的贡献</span></h2>
+                <ul class="soft-list">
+                    <li><span class="lang-en">Gameplay programming for movement</span><span class="lang-zh">角色位移相关玩法程序</span></li>
+                    <li><span class="lang-en">Implementation of magnetic physics</span><span class="lang-zh">磁力物理机制实现</span></li>
+                    <li><span class="lang-en">Level interaction systems</span><span class="lang-zh">关卡交互系统搭建</span></li>
+                    <li><span class="lang-en">Gameplay tuning and debugging</span><span class="lang-zh">玩法调参与调试</span></li>
+                    <li><span class="lang-en">Collaboration on game direction</span><span class="lang-zh">参与整体方向协作与决策</span></li>
+                </ul>
+            </div>
+
+            <!-- Credits -->
+            <div class="card credits">
+                <h2><span class="lang-en">Developer Team / Credits</span><span class="lang-zh">开发团队 / 致谢</span></h2>
+                <ul class="soft-list">
+                    <li><span class="lang-en">Faith Hwang - Director, Sound Director</span><span class="lang-zh">Faith Hwang - 导演、音效导演</span></li>
+                    <li><span class="lang-en">Susan Zhang - Associate Director, Programmer</span><span class="lang-zh">Susan Zhang - 副导演、程序</span></li>
+                    <li><span class="lang-en">Josheph Duan - Associate Director, Lead Programmer</span><span class="lang-zh">Josheph Duan - 副导演、主程</span></li>
+                    <li><span class="lang-en">Amy Wu - Level Designer</span><span class="lang-zh">Amy Wu - 关卡设计</span></li>
+                </ul>
+            </div>
+
+            <!-- Video + Level Gallery -->
+            <div class="card media-showcase" id="media">
+                <h2><span class="lang-en">🎬 Gameplay Media</span><span class="lang-zh">🎬 实机视频与关卡画廊</span></h2>
+                <div class="media-video-wrap">
+                    <div class="media-video-embed">
+                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116215037035690&bvid=BV1hxc6zDE5R&cid=36643276788&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    </div>
+                    <div class="media-caption">
+                        <span class="lang-en">Playable Build Capture</span>
+                        <span class="lang-zh">实机演示视频</span>
+                    </div>
+                </div>
+
+                <div class="level-grid">
+                    <div class="level-card">
+                        <img src="OneInchesAway/Screenshot (94).png" alt="Level 1">
+                        <div class="level-title"><span class="lang-en">Level 1</span><span class="lang-zh">第 1 关</span></div>
+                    </div>
+                    <div class="level-card">
+                        <img src="OneInchesAway/Screenshot (95).png" alt="Level 2">
+                        <div class="level-title"><span class="lang-en">Level 2</span><span class="lang-zh">第 2 关</span></div>
+                    </div>
+                    <div class="level-card">
+                        <img src="OneInchesAway/Screenshot (96).png" alt="Level 3">
+                        <div class="level-title"><span class="lang-en">Level 3</span><span class="lang-zh">第 3 关</span></div>
+                    </div>
+                    <div class="level-card">
+                        <img src="OneInchesAway/Screenshot (97).png" alt="Level 4">
+                        <div class="level-title"><span class="lang-en">Level 4</span><span class="lang-zh">第 4 关</span></div>
+                    </div>
+                    <div class="level-card level-wide">
+                        <img src="OneInchesAway/Screenshot (98).png" alt="Level 5">
+                        <div class="level-title"><span class="lang-en">Level 5</span><span class="lang-zh">第 5 关</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End Grid -->
+    </div>
+
+    <footer>
+        <p><span class="lang-en">Created for ArtCenter Game Jam 2025 • Unlikely Allies Theme</span><span class="lang-zh">创作于 ArtCenter Game Jam 2025 • 主题：Unlikely Allies（非典型盟友）</span></p>
+    </footer>
+
+    <script>
+        function applySavedLang() {
+            const isZh = localStorage.getItem('siteLang') === 'zh';
+            document.body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh-CN' : 'en';
+            document.title = isZh ? '一寸之遥 - 双人合作物理平台游戏' : 'One Inch Away - A Cooperative Physics Platformer';
+        }
+
+        function toggleLang() {
+            const isZh = !document.body.classList.contains('zh-mode');
+            document.body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh-CN' : 'en';
+            localStorage.setItem('siteLang', isZh ? 'zh' : 'en');
+            document.title = isZh ? '一寸之遥 - 双人合作物理平台游戏' : 'One Inch Away - A Cooperative Physics Platformer';
+        }
+
+        applySavedLang();
+    </script>
+
+</body>
+</html>

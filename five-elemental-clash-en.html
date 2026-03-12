@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <script>
+        (function() {
+            var lang = localStorage.getItem('siteLang');
+            if (lang === 'zh') {
+                window.location.replace('five-elemental-clash.html');
+            } else if (!lang) {
+                localStorage.setItem('siteLang', 'en');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Five Elemental Clash - Project Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Cinzel:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        night: "#f6f0e6",
+                        ember: "#9f3e2f",
+                        jade: "#4f645d",
+                        mist: "#3f3128",
+                        stone: "#fffaf2"
+                    },
+                    fontFamily: {
+                        body: ["Noto Serif SC", "serif"],
+                        display: ["Cinzel", "serif"],
+                        mono: ["Fira Code", "monospace"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background:
+                radial-gradient(circle at 12% 10%, rgba(159, 62, 47, 0.12), transparent 36%),
+                radial-gradient(circle at 84% 16%, rgba(79, 100, 93, 0.09), transparent 38%),
+                linear-gradient(145deg, #fbf5ea 0%, #f5eee3 45%, #efe6da 100%);
+            color: #3f3128;
+            font-family: "Noto Serif SC", serif;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.25;
+            z-index: 0;
+            background-image: linear-gradient(rgba(159, 62, 47, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(79, 100, 93, 0.05) 1px, transparent 1px);
+            background-size: 46px 46px;
+        }
+        nav, main { position: relative; z-index: 1; }
+        .panel {
+            border: 1px solid rgba(159, 62, 47, 0.16);
+            background: linear-gradient(180deg, rgba(255, 251, 243, 0.96), rgba(252, 246, 237, 0.98));
+            box-shadow: 0 8px 24px rgba(79, 100, 93, 0.09), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+            border-radius: 14px;
+            position: relative;
+        }
+        .panel::before {
+            content: "";
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            top: 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(159, 62, 47, 0.25), rgba(79, 100, 93, 0.22), rgba(159, 62, 47, 0.25));
+            border-radius: 999px;
+        }
+        .section-title {
+            border-left: 3px solid rgba(159, 62, 47, 0.85);
+            padding-left: 0.9rem;
+            letter-spacing: 0.04em;
+        }
+        .table-wrap {
+            overflow-x: visible;
+            border: 1px solid rgba(79, 100, 93, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 250, 242, 0.86);
+        }
+        table { width: 100%; border-collapse: collapse; min-width: 0; table-layout: fixed; }
+        th, td {
+            border-bottom: 1px solid rgba(79, 100, 93, 0.16);
+            padding: 0.62rem 0.72rem;
+            vertical-align: top;
+            text-align: left;
+            line-height: 1.55;
+            white-space: normal;
+            word-break: break-word;
+            font-size: 0.92rem;
+        }
+        th { color: #3f3128; background: rgba(159, 62, 47, 0.12); }
+        .lang-switch {
+            border: 1px solid rgba(159, 62, 47, 0.4);
+            color: #3f3128;
+            padding: 0.45rem 0.7rem;
+            font-family: "Fira Code", monospace;
+            font-size: 0.8rem;
+            background: rgba(255, 248, 238, 0.9);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 0.04em;
+            border-radius: 8px;
+        }
+        .lang-switch:hover {
+            background: rgba(159, 62, 47, 0.12);
+            border-color: rgba(159, 62, 47, 0.68);
+        }
+        #setup .components-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        #setup .components-grid > div {
+            margin-top: 0 !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 250, 253, 0.96));
+            border: 1px solid rgba(53, 94, 114, 0.16);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 14px rgba(53, 94, 114, 0.08);
+        }
+        #setup .comp-map { grid-column: span 3; order: 1; }
+        #setup .comp-terrain { grid-column: span 3; order: 2; }
+        #setup .comp-character { grid-column: span 3; order: 3; }
+        #setup .comp-boss { grid-column: span 3; order: 4; display: flex; flex-direction: column; gap: 1rem; }
+        #setup .comp-boss .boss-table { width: 100%; }
+        #setup .comp-boss .boss-dice-token { display: flex; flex-direction: column; gap: 0.75rem; }
+        #setup .comp-boss .boss-dice-token img { width: 100%; max-width: 58%; height: auto; object-fit: contain; }
+        #setup .comp-ap { grid-column: span 2; order: 5; }
+        #setup .comp-fate { grid-column: span 2; order: 6; }
+        #setup .comp-item { grid-column: span 2; order: 7; }
+        #setup .comp-map img {
+            width: 54%;
+            max-width: 520px;
+            margin: 0.2rem 0 0;
+            display: block;
+        }
+        #setup img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        @media (max-width: 900px) {
+            #setup .components-grid {
+                grid-template-columns: 1fr;
+            }
+            #setup .components-grid > div {
+                grid-column: span 1 !important;
+                order: initial !important;
+            }
+            #setup .comp-boss { flex-direction: column; }
+            #setup .comp-boss .boss-dice-token img { max-width: 58%; }
+            #setup .comp-map img {
+                width: 82%;
+                margin: 0.2rem auto 0;
+            }
+            th, td {
+                font-size: 0.84rem;
+                padding: 0.52rem 0.55rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased font-body">
+    <nav class="fixed top-0 w-full bg-[#fff8ed]/88 backdrop-blur border-b border-ember/16 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="projects.html" class="text-ember hover:text-mist text-sm uppercase tracking-widest font-mono">Back To Projects</a>
+            <div class="hidden md:flex gap-8 text-sm text-mist/85 items-center">
+                <a href="#overview" class="hover:text-ember">Overview</a>
+                <a href="#setup" class="hover:text-ember">Setup</a>
+                <a href="#rules" class="hover:text-ember">Rules</a>
+                <a href="#systems" class="hover:text-ember">Systems</a>
+                <a href="#design-reflection" class="hover:text-ember">Design Reflection</a>
+                <button onclick="window.location.href='five-elemental-clash.html'" class="lang-switch">中文</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16">
+        <section id="overview" class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+            <div class="panel p-6 md:p-8">
+                <div class="text-xs font-mono tracking-[0.3em] text-ember uppercase mb-3">Game Design Document</div>
+                <h1 class="font-display text-4xl md:text-6xl text-mist mb-3">Five Elemental Clash</h1>
+                <p class="text-mist/85 mb-4">Title: Five Elemental Clash | Author: Susan Zhang</p>
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="panel p-4"><strong>Player Format</strong><br>2-4 Players (PvPvPvP)</div>
+                    <div class="panel p-4"><strong>Estimated Play Time</strong><br>60-90 minutes</div>
+                    <div class="panel p-4"><strong>Genre</strong><br>Multiplayer tactical competitive board game</div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h2 class="section-title text-xl mb-3">Overview</h2>
+                <p class="text-mist/90 leading-relaxed mb-3">Five Elemental Clash is a tactical tabletop game inspired by the Chinese Five Elements (Metal, Wood, Water, Fire, Earth) philosophy.</p>
+                <p class="text-mist/90 leading-relaxed mb-3">Players explore a modular hex map, battle bosses, gather resources, and compete to defeat other elemental avatars.</p>
+                <p class="text-mist/90 leading-relaxed">The game combines dice-based uncertainty with strategic resource management, creating a balance between luck and tactical planning.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <div class="panel p-6">
+                    <h2 class="section-title text-2xl mb-4">Setting / Goal / Hook</h2>
+                    <ul class="space-y-3 leading-relaxed text-mist/90">
+                        <li><strong>Setting:</strong> A mythical world based on the Chinese Five Elements (Metal, Wood, Water, Fire, Earth). Players become elemental avatars exploring dangerous magical lands, battling bosses, gathering resources, and competing for supremacy.</li>
+                        <li><strong>Goal:</strong> Defeat the opposing avatar(s). When either Willpower or HP reaches zero, the avatar dies.</li>
+                        <li><strong>Play Value:</strong> Tactical depth through resource management, elemental interactions, and high-pressure boss decisions.</li>
+                        <li><strong>Hook:</strong> Five-element synergy/countering + randomized maps + AP economy and dice checks make every match different.</li>
+                    </ul>
+                </div>
+                <div class="panel p-6">
+                    <h2 class="section-title text-2xl mb-4">Target Player / Pillars</h2>
+                    <ul class="space-y-3 leading-relaxed text-mist/90">
+                        <li>Board game players who prefer strategic depth and tactical decisions.</li>
+                        <li>Players who enjoy mythic themes, elemental fantasy, and role-playing flavor.</li>
+                        <li>Players who accept randomness (dice) plus planning (resources/routes).</li>
+                        <li>Players who enjoy high-risk, high-reward boss decision tension.</li>
+                    </ul>
+                    <h3 class="text-ember font-medium mt-5 mb-2">Core Design Pillars</h3>
+                    <ul class="space-y-2 text-mist/90 text-sm leading-relaxed">
+                        <li><strong>Elemental Strategy:</strong> Players must manage elemental attributes that influence combat effectiveness and terrain movement.</li>
+                        <li><strong>Risk vs Reward:</strong> Boss battles and hazardous terrain create constant strategic decisions.</li>
+                        <li><strong>Procedural Map:</strong> Terrain tiles are randomly generated each game, ensuring high replayability.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h2 class="section-title text-2xl mb-4">Key Systems</h2>
+                <div class="grid md:grid-cols-3 gap-4 text-mist/90">
+                    <div class="panel p-4">
+                        <h3 class="text-ember mb-2">Action Point System</h3>
+                        <p class="text-sm leading-relaxed">Players use Action Points derived from Willpower to perform actions such as movement, attacks, or skill usage.</p>
+                    </div>
+                    <div class="panel p-4">
+                        <h3 class="text-ember mb-2">Elemental Interaction</h3>
+                        <p class="text-sm leading-relaxed">The Five Elements create a synergy and counter system that modifies combat damage and movement efficiency.</p>
+                    </div>
+                    <div class="panel p-4">
+                        <h3 class="text-ember mb-2">Dice-based Resolution</h3>
+                        <p class="text-sm leading-relaxed">Combat, terrain challenges, and random events are resolved through multiple dice systems (D6, D10, D20, D100).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h2 class="section-title text-2xl mb-4">Design Challenge</h2>
+                <p class="text-mist/90 leading-relaxed mb-2">Balancing randomness and strategy was a key challenge.</p>
+                <p class="text-mist/90 leading-relaxed">The system was designed so that dice influence outcomes, but player decisions—such as resource management and elemental specialization—remain the primary factor in success.</p>
+            </div>
+
+            <div class="panel p-6">
+                <h2 class="section-title text-2xl mb-4">Revision History (First Iteration)</h2>
+                <ul class="list-disc pl-5 space-y-2 text-mist/90">
+                    <li>Initial implementation of movement, combat, AP, and the Five Elements system.</li>
+                    <li>Developed Boss Cards with unique mechanics and meaningful risk decisions.</li>
+                    <li>Added Fate Dice (Lucky/Unlucky) and dice-driven map generation.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="setup" class="max-w-7xl mx-auto px-4 py-6 space-y-8">
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">Components</h2>
+                <div class="components-grid text-mist/90">
+                    <div class="comp-map">
+                        <h3 class="text-ember text-xl mb-3">Game Map</h3>
+                        <img src="images/FiveElementalClah/fig1-gameboard.png" alt="Five Elemental Clash Game Map" class="w-full max-w-4xl border border-ember/30 bg-white/5">
+                    </div>
+
+                    <div class="comp-terrain">
+                        <h3 class="text-ember text-xl mb-3">Terrain Cards</h3>
+                        <div class="grid md:grid-cols-3 gap-4 max-w-4xl">
+                            <img src="images/FiveElementalClah/fig2-terrain.png" alt="Terrain Card 2" class="w-full border border-ember/30 bg-white/5">
+                            <img src="images/FiveElementalClah/fig3-terrain.png" alt="Terrain Card 3" class="w-full border border-ember/30 bg-white/5">
+                            <img src="images/FiveElementalClah/fig4-terrain.png" alt="Terrain Card 4" class="w-full border border-ember/30 bg-white/5">
+                        </div>
+                    </div>
+
+                    <div class="comp-character">
+                        <h3 class="text-ember text-xl mb-3">Character Cards（Blank Character Card Example）</h3>
+                        <div class="table-wrap mb-4">
+                            <table>
+                                <thead>
+                                    <tr><th colspan="2">Character Basic Info</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Character Name</td><td></td></tr>
+                                    <tr><td>Gender</td><td></td></tr>
+                                    <tr><td>Age</td><td></td></tr>
+                                    <tr><td>Player Name</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-wrap mb-4">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Attribute</th>
+                                        <th>Value</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Strength</td><td></td><td></td></tr>
+                                    <tr><td>Agility</td><td></td><td></td></tr>
+                                    <tr><td>Constitution</td><td></td><td></td></tr>
+                                    <tr><td>Willpower</td><td></td><td></td></tr>
+                                    <tr><td>Appearance</td><td></td><td></td></tr>
+                                    <tr><td>Luck</td><td></td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-wrap mb-4">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Stat</th>
+                                        <th>Base Value</th>
+                                        <th>Current Value</th>
+                                        <th>Calculation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>AP</td><td></td><td></td><td>AP = Willpower / 10</td></tr>
+                                    <tr><td>HP</td><td></td><td></td><td>HP = Constitution</td></tr>
+                                    <tr><td>Defense (Strength)</td><td></td><td></td><td>Defense Value = Strength / 2</td></tr>
+                                    <tr><td>Dodge (Agility)</td><td></td><td></td><td>Dodge Value = Agility / 2</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Element Value</th><th>Value (Change each turn)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Metal</td><td></td></tr>
+                                    <tr><td>Wood</td><td></td></tr>
+                                    <tr><td>Water</td><td></td></tr>
+                                    <tr><td>Fire</td><td></td></tr>
+                                    <tr><td>Earth</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="comp-boss">
+                        <h3 class="text-ember text-xl mb-3 w-full">Boss Cards</h3>
+                        <div class="boss-table table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th colspan="2">Shadow Sorcerer</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Attribute</td><td>Details</td></tr>
+                                    <tr><td>Skill 1</td><td>Mind Control</td></tr>
+                                    <tr>
+                                        <td>Effect</td>
+                                        <td>When the Shadow Sorcerer's HP drops below 50%, it attempts mind control. Players must pass a Willpower check. Failure results in forced actions, attacking teammates in the next turn.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description</td>
+                                        <td>The Shadow Sorcerer manipulates the minds of enemies, turning them into its puppets.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Temptation</td>
+                                        <td>Defeating the Shadow Sorcerer rewards a Thunder Ore, increasing ranged attack damage by +5. Players must decide if they have enough Willpower to resist mind control or track its movements.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="boss-dice-token">
+                            <div>
+                                <h4 class="text-ember text-sm font-medium mb-1">1. Dice</h4>
+                                <img src="images/FiveElementalClah/fig6-dice.png" alt="Dice Set" class="border border-ember/30 bg-white/5 rounded-lg">
+                            </div>
+                            <div>
+                                <h4 class="text-ember text-sm font-medium mb-1">2. Tokens/Markers</h4>
+                                <img src="images/FiveElementalClah/fig8-tokens.png" alt="Tokens and Markers" class="border border-ember/30 bg-white/5 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comp-ap">
+                        <h3 class="text-ember text-xl mb-3">Action Point (AP) Trackers</h3>
+                        <div class="table-wrap max-w-2xl">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Attribute</th>
+                                        <th>Value</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Strength</td><td></td><td></td></tr>
+                                    <tr><td>Agility</td><td></td><td></td></tr>
+                                    <tr><td>Constitution</td><td></td><td></td></tr>
+                                    <tr><td>Willpower</td><td></td><td></td></tr>
+                                    <tr><td>Appearance</td><td></td><td></td></tr>
+                                    <tr><td>Luck</td><td></td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="comp-fate">
+                        <h3 class="text-ember text-xl mb-3">Fate Deck</h3>
+                        <p class="mb-3">Players draw from the Lucky/Unlucky Card Deck depending on their Fate Dice rolls at the start of each round.</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Card Name</th>
+                                        <th>Effect</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Twist of Fate</td>
+                                        <td>The player skips their current turn and draws 1 Unlucky card and 1 Lucky card, both effects apply.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Endless Possibilities</td>
+                                        <td>The player draws 1 additional Lucky card from the pile and uses it for free.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wheel of Destiny</td>
+                                        <td>The player rerolls their Fate dice, changing the outcome for this turn (can switch between Lucky and Unlucky cards).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="comp-item">
+                        <h3 class="text-ember text-xl mb-3">Item Cards</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Good Item Cards</th>
+                                        <th>Bad Item Cards</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Attack Enhancement Gem</td>
+                                        <td>Cursed Potion</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AP Cost: 2 AP</td>
+                                        <td>AP Cost: 1 AP</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Effect: Increases attack power by 3 points for the next 2 turns.</td>
+                                        <td>Effect: Increases Strength by 2 points but reduces HP by 4 points next turn.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">Game Setup</h2>
+                <h3 class="text-ember text-xl mb-3">1) Board Creation</h3>
+                <p class="text-mist/90 mb-3">Players take turns rolling D20 to place terrain; outcomes are as follows:</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>D20 Result</th>
+                                <th>Terrain</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1-4</td><td>Plain</td><td>Basic terrain with no extra obstacles or bonuses. Each move costs 1 AP.</td></tr>
+                            <tr><td>5-8</td><td>Forest (Wood)</td><td>High Wood attribute moves more easily; low Wood may be blocked.</td></tr>
+                            <tr><td>9-12</td><td>Mountain (Earth)</td><td>High Earth climbs more easily; low Earth may require extra AP or fail checks.</td></tr>
+                            <tr><td>13-15</td><td>Lava Zone (Fire)</td><td>Low Fire moves slower and takes fire damage.</td></tr>
+                            <tr><td>16-18</td><td>Water Body (Water)</td><td>High Water crosses faster; low Water may be blocked or penalized.</td></tr>
+                            <tr><td>19-20</td><td>Metallic Mines (Metal)</td><td>High Metal mines more effectively; low Metal risks cave-ins.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="list-disc pl-5 mt-4 text-mist/90 space-y-1">
+                    <li>Strategic locations (rare resources, boss spawns) are assigned by an additional D20 roll after terrain placement.</li>
+                    <li>After map generation, players choose starting hexes from the map edge.</li>
+                </ul>
+
+                <h3 class="text-ember text-xl mt-6 mb-3">2) Character Creation</h3>
+                <div class="space-y-3 text-mist/90 leading-relaxed">
+                    <p><strong>Fate Mode:</strong> Roll 1D100 or 1D20×5 to determine five basic attributes (STR/AGI/CON/APP/WIL) and five elemental attributes (Metal/Wood/Water/Fire/Earth). Values are percentages with no individual upper cap.</p>
+                    <p><strong>Point-Buy Mode:</strong> Allocate 250 points across basic attributes and 180 points across elements; maximum 80 in any single attribute/element.</p>
+                    <p><strong>Luck:</strong> Roll 3D16 during character creation to determine Luck, which influences Fate Dice outcomes each round.</p>
+                    <p><strong>Starting Items:</strong> Draw 3 random cards from the good item deck as starting equipment.</p>
+                    <p><strong>AP/HP Formula:</strong> AP = Willpower / 10; HP is based on Constitution (every 10 CON corresponds to 10 HP).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="rules" class="max-w-7xl mx-auto px-4 py-6 space-y-8">
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">Progression Procedures</h2>
+                <h3 class="text-ember text-xl mb-3">Turn Sequence</h3>
+                <ul class="list-disc pl-5 space-y-2 text-mist/90">
+                    <li><strong>Move:</strong> Spend AP; movement cost depends on terrain.</li>
+                    <li><strong>Attack / Defend:</strong> Engage bosses or other players in combat.</li>
+                    <li><strong>Skill / Item Use:</strong> Use abilities or items (usually with AP cost).</li>
+                </ul>
+                <h3 class="text-ember text-xl mt-5 mb-3">Rolling for Actions</h3>
+                <ul class="list-disc pl-5 space-y-2 text-mist/90">
+                    <li>Combat, difficult-terrain movement, and boss encounters all require dice checks.</li>
+                    <li>D10/D20 are mainly used for Attack, Dodge, and Escape rolls.</li>
+                </ul>
+                <h3 class="text-ember text-xl mt-5 mb-3">Challenges and Hazards</h3>
+                <ul class="list-disc pl-5 space-y-2 text-mist/90">
+                    <li><strong>Earth &lt; 30:</strong> Climbing requires Strength or Agility checks; failure causes AP penalties.</li>
+                    <li><strong>Water &lt; 30:</strong> Crossing requires an Agility check, or the player is swept away and takes 5 damage.</li>
+                    <li><strong>Fire &lt; 40:</strong> Take 10 damage per turn unless passing a Constitution check.</li>
+                </ul>
+            </div>
+
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">Special Procedures (Fate Dice)</h2>
+                <ul class="list-disc pl-5 space-y-2 text-mist/90">
+                    <li>At the start of each round, roll D100 (or D20×5) as Fate Dice.</li>
+                    <li>If result ≤ Luck: draw a Lucky Card (positive effect).</li>
+                    <li>If result &gt; Luck: draw an Unlucky Card (negative effect).</li>
+                    <li><strong>Critical Success (1-3):</strong> AP doubles this round and the player automatically draws a Lucky Card.</li>
+                    <li><strong>Critical Failure (98-100):</strong> AP halves this round and the player automatically draws an Unlucky Card, possibly with extra penalties.</li>
+                </ul>
+            </div>
+
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">Endgame Procedures</h2>
+                <p class="text-mist/90">The game ends when a victory condition is met: <strong>Combat Victory</strong> (one player eliminates all opponents through combat).</p>
+            </div>
+        </section>
+
+        <section id="systems" class="max-w-7xl mx-auto px-4 py-6 space-y-8">
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">System 1: Movement System</h2>
+                <p class="text-mist/90 mb-4">The movement system centers on terrain-element compatibility and AP management. High elemental values reduce penalties, while low values require checks.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Terrain</th>
+                                <th>Attribute Threshold</th>
+                                <th>AP Cost</th>
+                                <th>Additional Rules</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Plains</td><td>None</td><td>1</td><td>Free movement, no extra checks.</td></tr>
+                            <tr><td>Forest (Wood)</td><td>&gt;60</td><td>1</td><td>Free movement through forest.</td></tr>
+                            <tr><td>Forest (Wood)</td><td>30-60</td><td>2</td><td>Roll D100; movement succeeds if result ≤ Agility.</td></tr>
+                            <tr><td>Forest (Wood)</td><td>&lt;30</td><td>3</td><td>Roll D20 for Wood Spirit attitude; failure halts movement, critical failure causes -5 Willpower.</td></tr>
+
+                            <tr><td>Mountain (Earth)</td><td>&gt;60</td><td>2</td><td>Free climbing movement.</td></tr>
+                            <tr><td>Mountain (Earth)</td><td>30-60</td><td>3</td><td>Roll D100; movement succeeds if result ≤ Agility.</td></tr>
+                            <tr><td>Mountain (Earth)</td><td>&lt;30</td><td>4</td><td>Roll D20 for Earth Spirit attitude; critical success doubles AP, failure causes -2 HP.</td></tr>
+
+                            <tr><td>Water Bodies (Water)</td><td>&gt;60</td><td>2</td><td>Free movement through water.</td></tr>
+                            <tr><td>Water Bodies (Water)</td><td>30-60</td><td>3</td><td>Roll D100; crossing succeeds if result ≤ Agility.</td></tr>
+                            <tr><td>Water Bodies (Water)</td><td>&lt;30</td><td>4</td><td>Roll D20 for Water Spirit attitude; success restores 2 HP, failure causes -3 HP drowning damage.</td></tr>
+
+                            <tr><td>Lava Zones (Fire)</td><td>&gt;60</td><td>2</td><td>Free movement and no damage.</td></tr>
+                            <tr><td>Lava Zones (Fire)</td><td>30-60</td><td>3</td><td>Roll D100; failure takes 3 fire damage.</td></tr>
+                            <tr><td>Lava Zones (Fire)</td><td>&lt;30</td><td>4</td><td>Roll D20 for Fire Spirit attitude; critical success gives +5 attack, failure causes 5 fire damage.</td></tr>
+
+                            <tr><td>Metallic Mines (Metal)</td><td>&gt;60</td><td>1</td><td>Free mining access.</td></tr>
+                            <tr><td>Metallic Mines (Metal)</td><td>30-60</td><td>2</td><td>Roll D100 to mine; failure adds +1 AP to the next action.</td></tr>
+                            <tr><td>Metallic Mines (Metal)</td><td>&lt;30</td><td>3</td><td>Roll D20 for Metal Spirit attitude; critical success gains rare ore, failure causes cave-in (4 damage and action halt).</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="list-disc pl-5 mt-4 text-mist/90 space-y-1">
+                    <li>Successful movement enables exploration, gathering, or escape; failure may increase AP cost, reduce HP, or halt movement.</li>
+                    <li>High attributes (&gt;60) usually lower costs; low attributes (&lt;30) usually require D20 checks with penalty risk.</li>
+                </ul>
+            </div>
+
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">System 2: Combat System</h2>
+                <ul class="list-disc pl-5 space-y-2 text-mist/90">
+                    <li>Players can perform basic attacks (melee/ranged) or elemental-infused attacks.</li>
+                    <li><strong>Basic Attack:</strong> 2 AP (Strength for melee, Agility for ranged).</li>
+                    <li><strong>Elemental Attack:</strong> 5 AP with an additional elemental attribute check.</li>
+                    <li>Hit Check: roll D20×5 and compare against Strength / Agility.</li>
+                    <li>Damage: melee = Strength/10, ranged = Agility/10, elemental bonus = Element/10.</li>
+                    <li>Element interaction: synergy +2 damage; countered attacks -2 damage.</li>
+                </ul>
+            </div>
+
+            <div class="panel p-6 md:p-8">
+                <h2 class="section-title text-3xl mb-5">System 3: Elemental Interaction System</h2>
+                <p class="text-mist/90 mb-4">The Five Elements system affects both combat and movement: synergy/countering in combat and terrain cost/penalty reduction in movement.</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="panel p-4">
+                        <h3 class="text-ember mb-2">Elemental Synergy (+2)</h3>
+                        <ul class="space-y-1 text-mist/90">
+                            <li>Metal &gt;80, perform Water attack: +2</li>
+                            <li>Water &gt;80, perform Wood attack: +2</li>
+                            <li>Wood &gt;80, perform Fire attack: +2</li>
+                            <li>Fire &gt;80, perform Earth attack: +2</li>
+                            <li>Earth &gt;80, perform Metal attack: +2</li>
+                        </ul>
+                    </div>
+                    <div class="panel p-4">
+                        <h3 class="text-ember mb-2">Elemental Countering (-2)</h3>
+                        <ul class="space-y-1 text-mist/90">
+                            <li>Metal &gt;80, reduces incoming Wood damage: -2</li>
+                            <li>Wood &gt;80, reduces incoming Earth damage: -2</li>
+                            <li>Earth &gt;80, reduces incoming Water damage: -2</li>
+                            <li>Water &gt;80, reduces incoming Fire damage: -2</li>
+                            <li>Fire &gt;80, reduces incoming Metal damage: -2</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <section id="design-reflection" class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+                <h2 class="section-title text-2xl mb-6">Design Analysis &amp; Reflection</h2>
+
+                <div class="panel p-6">
+                    <h3 class="text-ember text-xl mb-3">Design Inspiration – Why the Five Elements?</h3>
+                    <p class="text-mist/90 leading-relaxed mb-4">The core inspiration for this project came from the traditional Chinese philosophy of the Five Elements (Metal, Wood, Water, Fire, Earth).</p>
+                    <p class="text-mist/90 leading-relaxed mb-4">Unlike many fantasy elemental systems that rely on simple oppositions (e.g., fire vs water), the Five Elements form a cyclical system of generation and countering. This structure provides a more complex and interesting strategic framework for gameplay.</p>
+                    <p class="text-mist/90 mb-2">In this design, the elemental system serves two main purposes:</p>
+                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                        <div class="panel p-4 bg-stone/50">
+                            <h4 class="text-ember font-medium mb-2">Combat Strategy</h4>
+                            <p class="text-mist/90 text-sm leading-relaxed">Elemental attributes can enhance or counter attacks, encouraging players to consider their opponent’s elemental specialization before engaging in combat.</p>
+                        </div>
+                        <div class="panel p-4 bg-stone/50">
+                            <h4 class="text-ember font-medium mb-2">Environmental Interaction</h4>
+                            <p class="text-mist/90 text-sm leading-relaxed">Terrain types correspond to different elements. Players with higher elemental affinity can traverse related terrain more efficiently.</p>
+                        </div>
+                    </div>
+                    <p class="text-mist/90 leading-relaxed mt-4">This allows the Five Element system to influence both combat and exploration, making it a central mechanic rather than a purely thematic layer.</p>
+                </div>
+
+                <div class="panel p-6">
+                    <h3 class="text-ember text-xl mb-3">Balancing Challenge – Randomness vs Strategy</h3>
+                    <p class="text-mist/90 leading-relaxed mb-4">A key design challenge in this project was balancing dice-based randomness with meaningful player decision-making.</p>
+                    <p class="text-mist/90 leading-relaxed mb-4">Because the game includes multiple dice systems (D6, D10, D20, D100), there was a risk that outcomes could feel overly random. To mitigate this, the design introduces several stabilizing factors:</p>
+                    <ul class="space-y-2 text-mist/90 list-disc pl-5">
+                        <li>Attribute thresholds that reduce randomness for specialized players</li>
+                        <li>Action Point management, which limits the number of actions per turn and forces strategic prioritization</li>
+                        <li>Elemental advantages, which provide predictable bonuses when players plan effectively</li>
+                    </ul>
+                    <p class="text-mist/90 leading-relaxed mt-4">The goal was to ensure that dice introduce tension and unpredictability, while long-term success still depends on strategic decisions.</p>
+                </div>
+
+                <div class="panel p-6">
+                    <h3 class="text-ember text-xl mb-4">Playtesting Insights</h3>
+                    <p class="text-mist/90 leading-relaxed mb-4">Early playtests revealed several issues with pacing and player decision pressure.</p>
+                    <div class="space-y-5">
+                        <div class="panel p-4 border-l-4 border-ember/40">
+                            <h4 class="text-ember font-medium mb-1">Issue 1 – Movement felt too slow</h4>
+                            <p class="text-mist/90 text-sm mb-2">In the initial design, difficult terrain required frequent dice checks and high AP costs. Players reported that this made exploration feel slow and sometimes frustrating.</p>
+                            <p class="text-mist/80 text-sm"><strong>Adjustment:</strong> Movement penalties were reduced for players with higher elemental attributes, allowing specialized characters to move more freely in certain terrains.</p>
+                        </div>
+                        <div class="panel p-4 border-l-4 border-ember/40">
+                            <h4 class="text-ember font-medium mb-1">Issue 2 – Boss encounters were too risky</h4>
+                            <p class="text-mist/90 text-sm mb-2">During early tests, players often avoided boss encounters entirely because the potential penalties outweighed the rewards.</p>
+                            <p class="text-mist/80 text-sm"><strong>Adjustment:</strong> Boss encounters were redesigned to include more attractive rewards (such as rare resources and equipment upgrades), creating a clearer risk–reward tradeoff.</p>
+                        </div>
+                        <div class="panel p-4 border-l-4 border-ember/40">
+                            <h4 class="text-ember font-medium mb-1">Issue 3 – Attribute distribution imbalance</h4>
+                            <p class="text-mist/90 text-sm mb-2">Random character generation sometimes produced extremely unbalanced characters. Some players began the game with very high combat stats, while others were significantly weaker.</p>
+                            <p class="text-mist/80 text-sm"><strong>Adjustment:</strong> A Point-Buy Mode was introduced as an alternative to random character generation, allowing players to build more balanced characters.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel p-6">
+                    <h3 class="text-ember text-xl mb-3">Iteration &amp; Improvements</h3>
+                    <p class="text-mist/90 leading-relaxed mb-4">Based on playtesting feedback, several iterations were implemented to improve game flow and strategic depth.</p>
+                    <p class="text-mist/90 font-medium mb-2">Key improvements included:</p>
+                    <ul class="grid md:grid-cols-2 gap-2 text-mist/90 list-disc pl-5">
+                        <li>Adding multiple character creation modes (Random vs Point-Buy)</li>
+                        <li>Adjusting terrain AP costs to reduce pacing issues</li>
+                        <li>Improving boss rewards to encourage player engagement</li>
+                        <li>Refining the elemental interaction system to make advantages more meaningful</li>
+                    </ul>
+                    <p class="text-mist/90 leading-relaxed mt-4">These changes helped create a more balanced experience where players could experiment with different elemental strategies while maintaining meaningful decision-making throughout the game.</p>
+                </div>
+            </section>
+        </section>
+
+    </main>
+    <script>
+        const zhMap = {
+            "Back To Projects": "返回项目页",
+            "Overview": "概览",
+            "Setup": "搭建",
+            "Rules": "规则",
+            "Systems": "系统",
+            "Game Design Document": "游戏设计文档",
+            "题目：Five Elemental Clash ｜ 作者：Susan Zhang": "Title: Five Elemental Clash | Author: Susan Zhang",
+            "玩家形式": "Player Format",
+            "预计时长": "Estimated Play Time",
+            "类型": "Genre",
+            "多人策略对抗桌游": "Multiplayer tactical competitive board game",
+            "Setting / Goal / Hook": "世界观 / 目标 / 核心卖点",
+            "Setting：": "设定：",
+            "Goal：": "目标：",
+            "Play Value：": "可玩价值：",
+            "Hook：": "核心吸引力：",
+            "Target Player / Pillars": "目标玩家 / 设计支柱",
+            "偏好策略深度与战术博弈的桌游玩家": "Board game players who prefer strategic depth and tactical decisions.",
+            "喜欢神话、元素主题和角色扮演味道的玩家": "Players who enjoy mythic themes, elemental fantasy, and role-playing flavor.",
+            "接受随机性（骰子）+ 规划性（资源/路线）并存的玩家": "Players who accept randomness (dice) plus planning (resources/routes).",
+            "喜欢高风险高回报 Boss 决策张力的玩家": "Players who enjoy high-risk, high-reward boss decision tension.",
+            "元素联动": "Elemental Synergy",
+            "随机地图与遭遇": "Randomized Gameplay",
+            "风险收益抉择": "Risk and Reward",
+            "Revision History（First Iteration）": "修订历史（第一轮）",
+            "完成核心系统初版：移动、战斗、AP、五行机制。": "Initial implementation of key systems: movement, combat, AP, and Five Elements.",
+            "制作 Boss Card（独立机制与决策压力）。": "Built Boss Cards with unique mechanics and decision pressure.",
+            "加入 Fate Dice（Lucky/Unlucky）与掷骰生成地图流程。": "Added Fate Dice (Lucky/Unlucky) and dice-driven map generation.",
+            "Components（组件）": "组件（Components）",
+            "Game Map": "游戏地图",
+            "Terrain Cards（图2-4）": "地形卡（图2-4）",
+            "Character Cards（Blank Character Card Example）": "角色卡（空白示例）",
+            "Character Basic Info": "角色基础信息",
+            "Character Name": "角色名",
+            "Gender": "性别",
+            "Age": "年龄",
+            "Player Name": "玩家名",
+            "Attribute": "属性",
+            "Value": "数值",
+            "Notes": "备注",
+            "Strength": "力量",
+            "Agility": "敏捷",
+            "Constitution": "体质",
+            "Willpower": "意志",
+            "Appearance": "外貌",
+            "Luck": "幸运",
+            "Stat": "状态项",
+            "Base Value": "基础值",
+            "Current Value": "当前值",
+            "Calculation": "计算公式",
+            "Defense (Strength)": "防御（力量）",
+            "Defense Value = Strength / 2": "防御值 = 力量 / 2",
+            "Dodge (Agility)": "闪避（敏捷）",
+            "Dodge Value = Agility / 2": "闪避值 = 敏捷 / 2",
+            "Element Value": "元素值",
+            "Value (Change each turn)": "数值（每回合变化）",
+            "Metal": "金",
+            "Wood": "木",
+            "Water": "水",
+            "Fire": "火",
+            "Earth": "土",
+            "Boss Cards": "Boss 卡",
+            "Details": "详情",
+            "Skill 1": "技能 1",
+            "Mind Control": "精神控制",
+            "Effect": "效果",
+            "Description": "描述",
+            "Temptation": "诱因奖励",
+            "Dice": "骰子",
+            "Action Point (AP) Trackers": "行动点（AP）追踪表",
+            "Fate Deck": "命运牌组",
+            "Players draw from the Lucky/Unlucky Card Deck depending on their Fate Dice rolls at the start of each round.": "玩家在每回合开始时根据 Fate Dice 的结果，从幸运/厄运牌组中抽牌。",
+            "Card Name": "卡牌名称",
+            "Twist of Fate": "命运扭转",
+            "The player skips their current turn and draws 1 Unlucky card and 1 Lucky card, both effects apply.": "玩家跳过本回合，并抽取 1 张厄运牌与 1 张幸运牌，两者效果同时生效。",
+            "Endless Possibilities": "无尽可能",
+            "The player draws 1 additional Lucky card from the pile and uses it for free.": "玩家额外抽取 1 张幸运牌并免费使用。",
+            "Wheel of Destiny": "命运之轮",
+            "The player rerolls their Fate dice, changing the outcome for this turn (can switch between Lucky and Unlucky cards).": "玩家可重掷 Fate 骰，改变本回合结果（可在幸运/厄运之间切换）。",
+            "Tokens/Markers": "标记物 / 指示物",
+            "Item Cards": "道具卡",
+            "Good Item Cards": "正向道具卡",
+            "Bad Item Cards": "负向道具卡",
+            "Attack Enhancement Gem": "攻击强化宝石",
+            "Cursed Potion": "诅咒药剂",
+            "AP Cost: 2 AP": "AP 消耗：2 AP",
+            "AP Cost: 1 AP": "AP 消耗：1 AP",
+            "Effect: Increases attack power by 3 points for the next 2 turns.": "效果：接下来 2 回合攻击力 +3。",
+            "Effect: Increases Strength by 2 points but reduces HP by 4 points next turn.": "效果：力量 +2，但下一回合 HP -4。",
+            "Game Setup": "游戏搭建",
+            "1) Board Creation": "1）地图生成",
+            "玩家轮流掷 D20 放置地形，结果对应如下：": "Players take turns rolling D20 to place terrain; outcomes are as follows:",
+            "D20 结果": "D20 Result",
+            "地形": "Terrain",
+            "描述": "Description",
+            "基础地形，无额外障碍或增益，每步 1 AP。": "Basic terrain with no extra obstacle or bonus; each move costs 1 AP.",
+            "木属性高者更易通行，低者易受阻。": "High Wood players pass more easily; low Wood players are more likely to be blocked.",
+            "土属性高者易攀爬，低者需额外 AP 或检定失败。": "High Earth players climb more easily; low Earth players need extra AP or may fail checks.",
+            "火属性低者行动慢并承受火伤。": "Low Fire players move slower and take fire damage.",
+            "水属性高者通过更快，低者可能受阻或受罚。": "High Water players traverse faster; low Water players may be blocked or penalized.",
+            "金属性高者更易采矿，低者可能塌方受伤。": "High Metal players mine more easily; low Metal players may trigger cave-ins.",
+            "战略点（稀有资源、Boss 点）在初次铺图后再掷 D20 分配。": "Strategic locations (rare resources, boss spawns) are assigned with an additional D20 roll after terrain placement.",
+            "地图生成后，玩家从边缘 Hex 选择起始位。": "After map generation, players choose starting hexes from the edge.",
+            "2) Character Creation": "2）角色创建",
+            "Fate Mode：": "命运模式：",
+            "Point-Buy Mode：": "点数分配模式：",
+            "Luck：": "幸运值：",
+            "Starting Items：": "初始道具：",
+            "AP/HP 公式：": "AP/HP 公式：",
+            "Progression Procedures（流程）": "推进流程",
+            "Turn Sequence": "回合流程",
+            "Move：": "移动：",
+            "Attack / Defend：": "攻击 / 防御：",
+            "Skill / Item Use：": "技能 / 道具使用：",
+            "Rolling for Actions": "行动判定掷骰",
+            "战斗、困难地形移动、Boss 遭遇都需要骰子判定。": "Combat, difficult-terrain movement, and boss encounters all require dice rolls.",
+            "D10/D20 主要用于：Attack Roll、Dodge Roll、Escape Roll。": "D10/D20 are mainly used for attack, dodge, and escape checks.",
+            "Challenges and Hazards": "挑战与危险",
+            "Earth < 30：": "土属性 < 30：",
+            "Water < 30：": "水属性 < 30：",
+            "Fire < 40：": "火属性 < 40：",
+            "Special Procedures（Fate Dice）": "特殊流程（Fate 骰）",
+            "每回合开始掷 D100（或 D20×5）作为 Fate Dice。": "At the start of each round, roll D100 (or D20×5) as Fate Dice.",
+            "若结果 ≤ Luck：抽 Lucky Card（正面效果）。": "If result ≤ Luck: draw a Lucky Card (positive effect).",
+            "若结果 > Luck：抽 Unlucky Card（负面效果）。": "If result > Luck: draw an Unlucky Card (negative effect).",
+            "Critical Success（1-3）：": "大成功（1-3）：",
+            "本回合 AP 翻倍并自动抽 Lucky Card。": "AP doubles this round and you automatically draw a Lucky Card.",
+            "Critical Failure（98-100）：": "大失败（98-100）：",
+            "本回合 AP 减半并自动抽 Unlucky Card，可能附加负面状态。": "AP halves this round and you automatically draw an Unlucky Card, possibly with extra penalties.",
+            "Endgame Procedures": "终局规则",
+            "当满足胜利条件时游戏结束：": "The game ends when a victory condition is met:",
+            "（一名玩家通过战斗淘汰其余全部玩家）。": "(one player defeats all opponents through combat).",
+            "System 1: Movement System": "系统 1：移动系统",
+            "移动系统围绕“地形元素适配 + AP 管理”展开。高元素值玩家可减少惩罚，低元素值玩家需要通过检定才能通行。": "The movement system is built around elemental terrain matching plus AP management. High elemental values reduce penalties, while low values require checks to pass.",
+            "属性阈值": "Attribute Level",
+            "AP Cost": "AP Cost",
+            "Additional Rules": "Additional Rules",
+            "无": "None",
+            "自由移动，无额外检定。": "Free movement, no extra checks.",
+            "自由通过森林。": "Free movement through forests.",
+            "掷 D100，结果 ≤ Agility 才能移动。": "Roll D100; move only if result ≤ Agility.",
+            "掷 D20 判木灵态度；失败停滞，大失败额外 -5 Willpower。": "Roll D20 for Wood Spirit attitude; failure halts movement, critical failure adds -5 Willpower.",
+            "自由攀爬通过。": "Free climbing movement.",
+            "掷 D20 判土灵态度；大成功 AP 翻倍，失败 -2 HP。": "Roll D20 for Earth Spirit attitude; critical success doubles AP, failure deals -2 HP.",
+            "自由通过水域。": "Free movement through water.",
+            "掷 D20 判水灵态度；成功回 2 HP，失败溺水 -3 HP。": "Roll D20 for Water Spirit attitude; success restores 2 HP, failure causes -3 HP drowning damage.",
+            "自由通过且免伤。": "Free movement with no damage.",
+            "掷 D100，失败承受 3 点火伤。": "Roll D100; failure takes 3 fire damage.",
+            "掷 D20 判火灵态度；大成功 +5 攻击，失败受 5 点火伤。": "Roll D20 for Fire Spirit attitude; critical success grants +5 attack, failure deals 5 fire damage.",
+            "可自由采矿。": "Free mining access.",
+            "掷 D100 采矿；失败使下次行动 +1 AP。": "Roll D100 to mine; failure adds +1 AP to next action.",
+            "掷 D20 判金灵态度；大成功得稀矿，失败塌方受 4 伤并中断行动。": "Roll D20 for Metal Spirit attitude; critical success grants rare ore, failure causes cave-in (4 damage and action halt).",
+            "移动成功可继续探索、采集、脱战；失败会造成 AP 增加、HP 损失或本回合无法继续移动。": "Successful movement enables exploration, gathering, or escape; failure may increase AP cost, reduce HP, or stop movement.",
+            "高属性（>60）通常降低成本，低属性（<30）常需 D20 检定并承担惩罚风险。": "High attributes (>60) usually reduce cost; low attributes (<30) often require D20 checks with penalty risks.",
+            "System 2: Combat System": "系统 2：战斗系统",
+            "玩家可执行基础攻击（近战/远程）或元素附魔攻击。": "Players can perform basic attacks (melee/ranged) or elemental-infused attacks.",
+            "基础攻击：": "Basic Attack:",
+            "元素攻击：": "Elemental Attack:",
+            "命中判定：掷 D20×5，与 Strength / Agility 对照。": "Hit Check: roll D20×5 and compare against Strength / Agility.",
+            "伤害计算：近战 = Strength/10；远程 = Agility/10；元素附伤 = Element/10。": "Damage: melee = Strength/10, ranged = Agility/10, elemental bonus = Element/10.",
+            "元素联动：相生 +2 伤害；被克则 -2 伤害。": "Element interaction: synergy +2 damage; countered attacks -2 damage.",
+            "System 3: Elemental Interaction System": "系统 3：元素交互系统",
+            "五行系统同时作用于战斗与移动：战斗中体现为相生增伤/相克减伤，移动中体现为地形通过成本与惩罚减免。": "The Five Elements system affects both combat and movement: synergy/countering in combat and terrain cost/penalty reduction in movement.",
+            "Elemental Synergy（相生 +2）": "元素相生（+2）",
+            "Elemental Countering（相克 -2）": "元素相克（-2）",
+            "进行 Water 攻击：+2": "for Water attack: +2",
+            "进行 Wood 攻击：+2": "for Wood attack: +2",
+            "进行 Fire 攻击：+2": "for Fire attack: +2",
+            "进行 Earth 攻击：+2": "for Earth attack: +2",
+            "进行 Metal 攻击：+2": "for Metal attack: +2",
+            "减免 Wood 来伤：-2": "reduces incoming Wood damage: -2",
+            "减免 Earth 来伤：-2": "reduces incoming Earth damage: -2",
+            "减免 Water 来伤：-2": "reduces incoming Water damage: -2",
+            "减免 Fire 来伤：-2": "reduces incoming Fire damage: -2",
+            "减免 Metal 来伤：-2": "reduces incoming Metal damage: -2"
+        };
+
+        function hasCJK(text) {
+            return /[\u4e00-\u9fff]/.test(text);
+        }
+
+        const zhToEn = {};
+        Object.entries(zhMap).forEach(([key, value]) => {
+            const keyHasCJK = hasCJK(key);
+            const valHasCJK = hasCJK(value);
+            if (keyHasCJK && !valHasCJK) {
+                zhToEn[key] = value;
+            } else if (!keyHasCJK && valHasCJK) {
+                zhToEn[value] = key;
+            }
+        });
+
+        // Manual fallback for mixed or previously unmatched phrases
+        Object.assign(zhToEn, {
+            "分钟": "minutes",
+            "（": "(",
+            "）": ")",
+            "：": ": ",
+            "题目：Five Elemental Clash ｜ 作者：Susan Zhang": "Title: Five Elemental Clash | Author: Susan Zhang",
+            "玩家形式": "Player Format",
+            "预计时长": "Estimated Play Time",
+            "类型": "Genre",
+            "多人策略对抗桌游": "Multiplayer tactical competitive board game",
+            "Setting：基于中国五行（金木水火土）的神话世界，玩家扮演元素化身，在危险且充满魔法的地图中探索、战斗、争夺资源。": "Setting: A mythical world based on the Chinese Five Elements (Metal, Wood, Water, Fire, Earth). Players become elemental avatars exploring dangerous magical lands, fighting, and competing for resources.",
+            "Goal：击败其他玩家化身；当意志值（Willpower）或生命值（HP）归零，角色死亡。": "Goal: Defeat the opposing avatar(s). When either Willpower or HP reaches zero, the avatar dies.",
+            "Play Value：资源管理、元素联动、Boss 决策共同构成高策略密度体验。": "Play Value: High strategic density through resource management, elemental interactions, and boss decisions.",
+            "Hook：五行相生相克 + 随机地图 + 行动点（AP）和骰子判定，让每一局都不同。": "Hook: Five-element synergy/countering, randomized maps, AP management, and dice checks make every match different.",
+            "Pillar 1: Elemental Synergy（元素联动）": "Pillar 1: Elemental Synergy",
+            "Pillar 2: Randomized Gameplay（随机地图与遭遇）": "Pillar 2: Randomized Gameplay",
+            "Pillar 3: Risk and Reward（风险收益抉择）": "Pillar 3: Risk and Reward",
+            "Components（组件）": "Components",
+            "Terrain Cards（图2-4）": "Terrain Cards (Fig. 2-4)",
+            "玩家轮流掷 D20 放置地形，结果对应如下：": "Players take turns rolling D20 to place terrain; outcomes are shown below:",
+            "D20 结果": "D20 Result",
+            "地形": "Terrain",
+            "描述": "Description",
+            "基础地形，无额外障碍或增益，每步 1 AP。": "Basic terrain with no extra obstacles or bonuses. Each move costs 1 AP.",
+            "木属性高者更易通行，低者易受阻。": "High Wood attribute improves movement; low Wood may be obstructed.",
+            "土属性高者易攀爬，低者需额外 AP 或检定失败。": "High Earth climbs more easily; low Earth may require extra AP or fail checks.",
+            "火属性低者行动慢并承受火伤。": "Low Fire moves slower and takes fire damage.",
+            "水属性高者通过更快，低者可能受阻或受罚。": "High Water crosses faster; low Water may be blocked or penalized.",
+            "金属性高者更易采矿，低者可能塌方受伤。": "High Metal mines more effectively; low Metal may trigger cave-ins.",
+            "战略点（稀有资源、Boss 点）在初次铺图后再掷 D20 分配。": "Strategic locations (rare resources, boss spawns) are assigned with an additional D20 roll after terrain setup.",
+            "地图生成后，玩家从边缘 Hex 选择起始位。": "After setup, players choose starting hexes from the map edge.",
+            "Fate Mode：掷 1D100 或 1D20×5，决定五项基础属性（STR/AGI/CON/APP/WIL）与五项元素属性（金木水火土），结果为百分比，无单项上限。": "Fate Mode: Roll 1D100 or 1D20×5 to determine five basic attributes (STR/AGI/CON/APP/WIL) and five elemental attributes (Metal/Wood/Water/Fire/Earth). Values are percentages with no individual upper cap.",
+            "Point-Buy Mode：基础属性总计 250 点，元素总计 180 点；任一单项上限 80。": "Point-Buy Mode: Allocate 250 points to basic attributes and 180 points to elemental attributes, with a maximum of 80 in any single attribute/element.",
+            "Luck：角色创建时掷 3D16 决定 Luck，影响每回合 Fate Dice 结果。": "Luck: Roll 3D16 during character creation to determine Luck, which affects Fate Dice outcomes each round.",
+            "Starting Items：从正向道具堆随机抽 3 张作为初始装备。": "Starting Items: Draw 3 cards randomly from the good item deck as starting equipment.",
+            "AP/HP 公式：AP = Willpower / 10；HP = Constitution（每 10 CON 对应 10 HP）。": "AP/HP Formula: AP = Willpower / 10; HP is based on Constitution (every 10 CON corresponds to 10 HP).",
+            "Progression Procedures（流程）": "Progression Procedures",
+            "Move：消耗 AP，成本依地形而变。": "Move: Costs AP, and the cost depends on terrain type.",
+            "Attack / Defend：与 Boss 或其他玩家交战。": "Attack / Defend: Engage bosses or other players in combat.",
+            "Skill / Item Use：使用技能或道具（通常有 AP 成本）。": "Skill / Item Use: Use abilities or items (usually with AP cost).",
+            "战斗、困难地形移动、Boss 遭遇都需要骰子判定。": "Combat, difficult-terrain movement, and boss encounters require dice checks.",
+            "D10/D20 主要用于：Attack Roll、Dodge Roll、Escape Roll。": "D10/D20 are mainly used for Attack, Dodge, and Escape rolls.",
+            "Earth < 30：登山需力量或敏捷检定，失败有 AP 惩罚。": "Earth < 30: Climbing requires Strength or Agility checks; failure causes AP penalties.",
+            "Water < 30：过河需敏捷检定，否则被冲走并受 5 点伤害。": "Water < 30: Crossing requires an Agility check; failure causes sweep-away and 5 HP damage.",
+            "Fire < 40：每回合受 10 点伤害，除非通过体质检定。": "Fire < 40: Take 10 HP damage per turn unless passing a Constitution check.",
+            "每回合开始掷 D100（或 D20×5）作为 Fate Dice。": "At the start of each round, roll D100 (or D20×5) as Fate Dice.",
+            "若结果 ≤ Luck：抽 Lucky Card（正面效果）。": "If result ≤ Luck: draw a Lucky Card (positive effect).",
+            "若结果 > Luck：抽 Unlucky Card（负面效果）。": "If result > Luck: draw an Unlucky Card (negative effect).",
+            "Critical Success（1-3）：本回合 AP 翻倍并自动抽 Lucky Card。": "Critical Success (1-3): AP doubles this round and you automatically draw a Lucky Card.",
+            "Critical Failure（98-100）：本回合 AP 减半并自动抽 Unlucky Card，可能附加负面状态。": "Critical Failure (98-100): AP halves this round and you automatically draw an Unlucky Card, possibly with extra penalties.",
+            "当满足胜利条件时游戏结束：": "The game ends when a victory condition is met:",
+            "（一名玩家通过战斗淘汰其余全部玩家）。": "(one player eliminates all opponents through combat).",
+            "移动系统围绕“地形元素适配 + AP 管理”展开。高元素值玩家可减少惩罚，低元素值玩家需要通过检定才能通行。": "The movement system centers on terrain-element fit plus AP management. High elemental values reduce penalties, while low values require checks.",
+            "属性阈值": "Attribute Threshold",
+            "无": "None",
+            "自由移动，无额外检定。": "Free movement, no extra checks.",
+            "自由通过森林。": "Free movement through forests.",
+            "掷 D100，结果 ≤ Agility 才能移动。": "Roll D100; move only if result ≤ Agility.",
+            "掷 D20 判木灵态度；失败停滞，大失败额外 -5 Willpower。": "Roll D20 for Wood Spirit attitude; failure halts movement, critical failure gives -5 Willpower.",
+            "自由攀爬通过。": "Free climbing movement.",
+            "掷 D20 判土灵态度；大成功 AP 翻倍，失败 -2 HP。": "Roll D20 for Earth Spirit attitude; critical success doubles AP, failure deals -2 HP.",
+            "自由通过水域。": "Free movement through water.",
+            "掷 D20 判水灵态度；成功回 2 HP，失败溺水 -3 HP。": "Roll D20 for Water Spirit attitude; success restores 2 HP, failure causes -3 HP drowning damage.",
+            "自由通过且免伤。": "Free movement and no damage.",
+            "掷 D100，失败承受 3 点火伤。": "Roll D100; failure takes 3 fire damage.",
+            "掷 D20 判火灵态度；大成功 +5 攻击，失败受 5 点火伤。": "Roll D20 for Fire Spirit attitude; critical success grants +5 attack, failure deals 5 fire damage.",
+            "可自由采矿。": "Free mining.",
+            "掷 D100 采矿；失败使下次行动 +1 AP。": "Roll D100 to mine; failure adds +1 AP to the next action.",
+            "掷 D20 判金灵态度；大成功得稀矿，失败塌方受 4 伤并中断行动。": "Roll D20 for Metal Spirit attitude; critical success gains rare ore, failure causes cave-in (4 damage and action stop).",
+            "移动成功可继续探索、采集、脱战；失败会造成 AP 增加、HP 损失或本回合无法继续移动。": "Successful movement enables exploration, gathering, or escape; failure may increase AP cost, reduce HP, or stop movement.",
+            "高属性（>60）通常降低成本，低属性（<30）常需 D20 检定并承担惩罚风险。": "High attributes (>60) usually reduce cost; low attributes (<30) often require D20 checks with penalty risk.",
+            "玩家可执行基础攻击（近战/远程）或元素附魔攻击。": "Players can perform basic attacks (melee/ranged) or elemental-infused attacks.",
+            "基础攻击：2 AP（近战看 Strength，远程看 Agility）。": "Basic Attack: 2 AP (Strength for melee, Agility for ranged).",
+            "元素攻击：5 AP，额外进行元素属性判定。": "Elemental Attack: 5 AP with an additional elemental attribute check.",
+            "命中判定：掷 D20×5，与 Strength / Agility 对照。": "Hit Check: roll D20×5 and compare with Strength / Agility.",
+            "伤害计算：近战 = Strength/10；远程 = Agility/10；元素附伤 = Element/10。": "Damage: melee = Strength/10, ranged = Agility/10, elemental bonus = Element/10.",
+            "元素联动：相生 +2 伤害；被克则 -2 伤害。": "Element interaction: synergy +2 damage; countered attacks -2 damage.",
+            "五行系统同时作用于战斗与移动：战斗中体现为相生增伤/相克减伤，移动中体现为地形通过成本与惩罚减免。": "The Five Elements system affects both combat and movement: synergy/countering in combat and terrain cost/penalty reduction in movement.",
+            "Elemental Synergy（相生 +2）": "Elemental Synergy (+2)",
+            "Metal >80，进行 Water 攻击：+2": "Metal >80, perform Water attack: +2",
+            "Water >80，进行 Wood 攻击：+2": "Water >80, perform Wood attack: +2",
+            "Wood >80，进行 Fire 攻击：+2": "Wood >80, perform Fire attack: +2",
+            "Fire >80，进行 Earth 攻击：+2": "Fire >80, perform Earth attack: +2",
+            "Earth >80，进行 Metal 攻击：+2": "Earth >80, perform Metal attack: +2",
+            "Elemental Countering（相克 -2）": "Elemental Countering (-2)",
+            "Metal >80，减免 Wood 来伤：-2": "Metal >80, reduces incoming Wood damage: -2",
+            "Wood >80，减免 Earth 来伤：-2": "Wood >80, reduces incoming Earth damage: -2",
+            "Earth >80，减免 Water 来伤：-2": "Earth >80, reduces incoming Water damage: -2",
+            "Water >80，减免 Fire 来伤：-2": "Water >80, reduces incoming Fire damage: -2",
+            "Fire >80，减免 Metal 来伤：-2": "Fire >80, reduces incoming Metal damage: -2"
+        });
+
+        function normalizeText(text) {
+            return text.replace(/\s+/g, " ").trim();
+        }
+
+        function replaceTextNodes(root, dictionary) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    if (!node.parentElement) return NodeFilter.FILTER_REJECT;
+                    if (node.parentElement.closest("script, style, .lang-switch")) return NodeFilter.FILTER_REJECT;
+                    if (!normalizeText(node.nodeValue || "")) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            const entries = Object.entries(dictionary)
+                .filter(([k, v]) => k && v)
+                .sort((a, b) => b[0].length - a[0].length);
+
+            textNodes.forEach((node) => {
+                const raw = node.nodeValue || "";
+                const leading = (raw.match(/^\s*/) || [""])[0];
+                const trailing = (raw.match(/\s*$/) || [""])[0];
+                let core = raw.slice(leading.length, raw.length - trailing.length);
+
+                // exact replacement first
+                const key = normalizeText(core);
+                if (dictionary[key]) {
+                    core = dictionary[key];
+                } else {
+                    // fallback: replace matched phrases inside mixed-language lines
+                    entries.forEach(([from, to]) => {
+                        if (core.includes(from)) core = core.split(from).join(to);
+                    });
+                }
+
+                node.nodeValue = leading + core + trailing;
+            });
+        }
+
+        function applyEnPage() {
+            document.documentElement.lang = "en";
+            document.title = "Five Elemental Clash - Project Detail";
+            replaceTextNodes(document.body, zhToEn);
+            if (localStorage.getItem("siteLang") !== "en") localStorage.setItem("siteLang", "en");
+        }
+
+        applyEnPage();
+    </script>
+</body>
+</html>
