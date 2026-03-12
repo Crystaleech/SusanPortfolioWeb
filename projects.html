@@ -96,6 +96,13 @@
             background: linear-gradient(to left, rgba(5, 11, 20, 0.95) 0%, rgba(5, 11, 20, 0.8) 40%, rgba(5, 11, 20, 0) 100%);
         }
 
+        @media (max-width: 768px) {
+            .banner-bg {
+                height: 140px;
+                background: linear-gradient(to bottom, rgba(5, 11, 20, 0.95) 0%, rgba(5, 11, 20, 0.8) 60%, rgba(5, 11, 20, 0) 100%);
+            }
+        }
+
         /* Navigation (Same as About Me) */
         .nav-box {
             display: flex;
@@ -683,21 +690,21 @@
     <div class="banner-bg"></div>
 
     <!-- Header Content with Adjusted Button Position (Same as About Me) -->
-    <div class="fixed top-0 left-0 w-full p-8 z-50 flex justify-between items-start pointer-events-none">
+    <div class="fixed top-0 left-0 w-full p-4 md:p-8 z-50 flex flex-col md:flex-row justify-between items-center md:items-start pointer-events-none gap-4">
         <!-- Left: Project Title with Glitch Effect -->
         <div class="pointer-events-auto z-50">
-            <h1 class="neon-title font-cyber font-black text-5xl md:text-7xl leading-tight tracking-tighter mb-2 pl-4">
+            <h1 class="neon-title font-cyber font-black text-4xl md:text-7xl leading-tight tracking-tighter pl-0 md:pl-4 text-center md:text-left">
                 PROJECT
             </h1>
         </div>
 
         <!-- Right: Navigation - Positioned like index.html -->
-        <div class="flex gap-4 pointer-events-auto items-center z-50" style="position: absolute; top: 2rem; right: 2rem;">
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 pointer-events-auto items-center z-50 nav-container">
             <a href="index.html" class="nav-box"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
             <a href="projects.html" class="nav-box active"><span class="lang-en">Project</span><span class="lang-zh">项目</span></a>
             <a href="contact.html" class="nav-box"><span class="lang-en">About me</span><span class="lang-zh">关于我</span></a>
 
-            <button onclick="toggleLang()" class="lang-switch ml-4">
+            <button onclick="toggleLang()" class="lang-switch ml-0 md:ml-4">
                 <span class="lang-en">中文</span><span class="lang-zh">EN</span>
             </button>
         </div>

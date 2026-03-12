@@ -157,6 +157,32 @@
             border-color: white;
         }
 
+        @media (max-width: 768px) {
+            .nav-transparent-box {
+                top: 1rem;
+                right: 1rem;
+                left: 1rem;
+                justify-content: center;
+                padding: 0.5rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                background: rgba(5, 11, 20, 0.85);
+                border-radius: 8px;
+            }
+            .nav-box {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+            .lang-switch {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            /* Adjust top padding for main content so it doesn't overlap with the new nav bar */
+            .relative.w-full.md\:w-5\/12 {
+                padding-top: 6rem;
+            }
+        }
+
         .lang-zh { display: none; }
         body.zh-mode .lang-en { display: none; }
         body.zh-mode .lang-zh { display: block; }

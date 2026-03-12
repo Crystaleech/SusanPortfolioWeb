@@ -223,19 +223,21 @@
 
     <!-- Nav -->
     <nav class="sticky top-4 z-50 px-4 mb-8">
-        <div class="max-w-7xl mx-auto bg-white/90 backdrop-blur-sm rounded-full shadow-floating border-2 border-dashed border-joyBlue/50 px-6 py-3 flex items-center justify-between">
-            <a href="projects.html" class="flex items-center gap-2 text-ink hover:text-accent transition-colors font-cute text-lg">
+        <div class="max-w-7xl mx-auto bg-white/90 backdrop-blur-sm rounded-full shadow-floating border-2 border-dashed border-joyBlue/50 px-4 py-2 sm:px-6 sm:py-3 flex items-center justify-between">
+            <a href="projects.html" class="flex items-center gap-2 text-ink hover:text-accent transition-colors font-cute text-base sm:text-lg">
                 <span class="bg-joyPink text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">←</span>
                 <span>Back</span>
             </a>
-            <div class="hidden sm:flex items-center gap-6 text-inkLight">
-                <a href="#overview" class="nav-link hover:text-accent">Overview</a>
-                <a href="#systems" class="nav-link hover:text-accent">Systems</a>
-                <a href="#interaction" class="nav-link hover:text-accent">Interaction</a>
-                <a href="#structure" class="nav-link hover:text-accent">Structure</a>
-                <a href="#gallery" class="nav-link hover:text-accent">Gallery</a>
-                <a href="#reflection" class="nav-link hover:text-accent">Reflection</a>
-                <a href="lynn.html" class="nav-link hover:text-accent font-bold ml-4" onclick="localStorage.setItem('siteLang', 'zh')">中文</a>
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-6 text-inkLight">
+                    <a href="#overview" class="nav-link hover:text-accent">Overview</a>
+                    <a href="#systems" class="nav-link hover:text-accent">Systems</a>
+                    <a href="#interaction" class="nav-link hover:text-accent">Interaction</a>
+                    <a href="#structure" class="nav-link hover:text-accent">Structure</a>
+                    <a href="#gallery" class="nav-link hover:text-accent">Gallery</a>
+                    <a href="#reflection" class="nav-link hover:text-accent">Reflection</a>
+                </div>
+                <a href="lynn.html" class="nav-link hover:text-accent font-bold text-inkLight" onclick="localStorage.setItem('siteLang', 'zh')">中文</a>
             </div>
         </div>
     </nav>

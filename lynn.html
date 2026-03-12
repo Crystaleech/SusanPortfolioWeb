@@ -228,19 +228,21 @@
 
     <!-- Nav -->
     <nav class="sticky top-4 z-50 px-4 mb-8">
-        <div class="max-w-7xl mx-auto bg-white/90 backdrop-blur-sm rounded-full shadow-floating border-2 border-dashed border-joyBlue/50 px-6 py-3 flex items-center justify-between">
-            <a href="projects.html" class="flex items-center gap-2 text-ink hover:text-accent transition-colors font-cute text-lg">
+        <div class="max-w-7xl mx-auto bg-white/90 backdrop-blur-sm rounded-full shadow-floating border-2 border-dashed border-joyBlue/50 px-4 py-2 sm:px-6 sm:py-3 flex items-center justify-between">
+            <a href="projects.html" class="flex items-center gap-2 text-ink hover:text-accent transition-colors font-cute text-base sm:text-lg">
                 <span class="bg-joyPink text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">←</span>
                 <span>返回</span>
             </a>
-            <div class="hidden sm:flex items-center gap-6 text-inkLight">
-                <a href="#overview" class="nav-link hover:text-accent">项目概览</a>
-                <a href="#systems" class="nav-link hover:text-accent">核心系统</a>
-                <a href="#interaction" class="nav-link hover:text-accent">交互设计</a>
-                <a href="#structure" class="nav-link hover:text-accent">时间架构</a>
-                <a href="#gallery" class="nav-link hover:text-accent">画廊</a>
-                <a href="#reflection" class="nav-link hover:text-accent">思考与总结</a>
-                <a href="lynn-en.html" class="nav-link hover:text-accent font-bold ml-4" onclick="localStorage.setItem('siteLang', 'en')">EN</a>
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-6 text-inkLight">
+                    <a href="#overview" class="nav-link hover:text-accent">项目概览</a>
+                    <a href="#systems" class="nav-link hover:text-accent">核心系统</a>
+                    <a href="#interaction" class="nav-link hover:text-accent">交互设计</a>
+                    <a href="#structure" class="nav-link hover:text-accent">时间架构</a>
+                    <a href="#gallery" class="nav-link hover:text-accent">画廊</a>
+                    <a href="#reflection" class="nav-link hover:text-accent">思考与总结</a>
+                </div>
+                <a href="lynn-en.html" class="nav-link hover:text-accent font-bold text-inkLight" onclick="localStorage.setItem('siteLang', 'en')">EN</a>
             </div>
         </div>
     </nav>

@@ -120,17 +120,17 @@
 </head>
 <body class="antialiased">
     <nav class="minimal-nav fixed top-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="projects.html" class="nav-link flex items-center gap-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[4rem] py-2 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
+            <a href="projects.html" class="nav-link flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
                 <span class="text-willow">←</span>
                 <span>Back</span>
             </a>
-            <div class="flex gap-6 items-center">
-                <a href="#overview" class="nav-link">Overview</a>
-                <a href="#design" class="nav-link">Design</a>
-                <a href="#story" class="nav-link">Story</a>
-                <a href="#video" class="nav-link">Video</a>
-                <button onclick="localStorage.setItem('siteLang','zh'); window.location.href='zhuguang.html';" class="nav-link border border-willow/30 rounded-lg px-3 py-1">中文</button>
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-6 items-center">
+                <a href="#overview" class="nav-link text-sm sm:text-base">Overview</a>
+                <a href="#design" class="nav-link text-sm sm:text-base">Design</a>
+                <a href="#story" class="nav-link text-sm sm:text-base">Story</a>
+                <a href="#video" class="nav-link text-sm sm:text-base">Video</a>
+                <button onclick="localStorage.setItem('siteLang','zh'); window.location.href='zhuguang.html';" class="nav-link border border-willow/30 rounded-lg px-2 py-1 text-xs sm:text-sm">中文</button>
             </div>
         </div>
     </nav>
