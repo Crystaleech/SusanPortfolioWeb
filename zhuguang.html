@@ -294,6 +294,27 @@
             border-radius: 8px;
         }
 
+        .media-video-embed {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+            background: #0b1220;
+        }
+        .media-video-embed::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%; /* 16:9 */
+        }
+        .media-video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         /* 装饰元素 */
         .decoration-dot {
             width: 4px;
@@ -722,7 +743,7 @@
                         </div>
                     </div>
 
-                    <div class="clean-video max-w-4xl mx-auto">
+                    <div class="clean-video w-full mx-auto">
                         <div class="media-video-embed">
                             <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116215104143749&bvid=BV11dczz3Ef1&cid=36643602438&p=1"
                                     scrolling="no"
