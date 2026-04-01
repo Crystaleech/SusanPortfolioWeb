@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyrant's Court - PLO5 Case Study</title>
+    <script>
+        if (localStorage.getItem('siteLang') === 'zh') {
+            window.location.replace('tyrants-court-zh.html');
+        } else {
+            localStorage.setItem('siteLang', 'en');
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0812;
+            --bg-dark: #120b1a;
+            --bg-card: rgba(26, 18, 40, 0.75);
+            --bg-card-light: rgba(34, 23, 51, 0.7);
+            
+            --gold: #d4a853;
+            --gold-light: #e8c878;
+            --gold-dark: #a67c3d;
+            --gold-glow: rgba(212, 168, 83, 0.3);
+            
+            --purple: #8b5cf6;
+            --purple-light: #a78bfa;
+            --purple-dark: #6d28d9;
+            --purple-glow: rgba(139, 92, 246, 0.25);
+            
+            --text: #f5f0e8;
+            --text-muted: #c4b998;
+            --text-dim: #8a7f6a;
+            
+            --border-gold: rgba(212, 168, 83, 0.4);
+            --border-purple: rgba(139, 92, 246, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Crimson Text", Georgia, serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+            font-size: 17.5px;
+        }
+
+        /* Background diamond pattern */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpolygon points='48,2 94,48 48,94 2,48' fill='none' stroke='%23d6b978' stroke-opacity='0.28' stroke-width='1.2'/%3E%3Cpolygon points='48,14 82,48 48,82 14,48' fill='none' stroke='%23d6b978' stroke-opacity='0.22' stroke-width='1'/%3E%3Cpolygon points='48,25 71,48 48,71 25,48' fill='none' stroke='%23d6b978' stroke-opacity='0.18' stroke-width='0.9'/%3E%3Cpolygon points='48,34 62,48 48,62 34,48' fill='%23d6b978' fill-opacity='0.24'/%3E%3C/svg%3E");
+            background-size: 86px 86px;
+            background-repeat: repeat;
+            opacity: 0.36;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(212, 168, 83, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse 50% 30% at 20% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== TOP FIXED NAV BAR ===== */
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 8, 18, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .top-nav-bar-inner {
+            width: min(1200px, 95vw);
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .top-nav-bar .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: "Cinzel", serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav-bar .back-link:hover {
+            color: var(--gold-light);
+        }
+
+        .top-nav-bar .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .top-nav-bar .quick-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .top-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .lang-switch {
+            border: 1px solid var(--border-gold);
+            color: var(--gold-light);
+            background: rgba(212, 168, 83, 0.08);
+            padding: 0.32rem 0.62rem;
+            font-family: "Cinzel", serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lang-switch:hover {
+            background: rgba(212, 168, 83, 0.18);
+            color: #fff3d6;
+        }
+
+        .top-nav-bar .quick-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: "Cinzel", serif;
+            font-size: 0.86rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .top-nav-bar .quick-nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .top-nav-bar .quick-nav a:hover {
+            color: var(--gold-light);
+        }
+
+        .top-nav-bar .quick-nav a:hover::after {
+            width: 100%;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            width: min(1100px, 94vw);
+            margin: 0 auto;
+            padding: 100px 0 80px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+            padding: 50px;
+            margin-bottom: 45px;
+            background: 
+                linear-gradient(135deg, var(--bg-card) 0%, rgba(18, 11, 26, 0.85) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .hero-content .subtitle {
+            font-family: "Cinzel", serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .hero-content h1 {
+            margin: 0 0 18px;
+            font-family: "Cinzel", serif;
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            text-shadow: 0 0 30px var(--gold-glow);
+            line-height: 1.1;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            padding-left: 12px;
+            border-left: 2px solid var(--gold);
+        }
+
+        .hero-content .description {
+            font-size: 1.14rem;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, rgba(34, 23, 51, 0.8), rgba(26, 18, 40, 0.9));
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image .image-placeholder {
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        .hero-image .image-placeholder svg {
+            width: 55px;
+            height: 55px;
+            stroke: var(--gold);
+            opacity: 0.4;
+            margin-bottom: 10px;
+        }
+
+        .hero-image .image-placeholder span {
+            display: block;
+            font-family: "Cinzel", serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.6;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== VIDEO SECTION ===== */
+        .video-section {
+            margin-bottom: 40px;
+            padding: 35px 40px;
+            background: 
+                linear-gradient(135deg, var(--bg-card) 0%, rgba(18, 11, 26, 0.82) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+        }
+
+        .section-title {
+            font-family: "Cinzel", serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin: 0 0 25px;
+            padding-left: 12px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .video-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(30, 22, 45, 0.9), rgba(20, 14, 32, 0.95));
+            border: 1px solid var(--border-purple);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 25px var(--purple-glow);
+        }
+
+        .video-card .video-media-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        .video-card .video-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .video-card .video-media {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #000;
+            z-index: 1;
+        }
+
+        .video-card .play-icon {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--purple-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .video-card:hover .play-icon {
+            opacity: 1;
+            box-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        .video-card .play-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--purple-light);
+            margin-left: 3px;
+        }
+
+        .video-card .mode-label {
+            font-family: "Cinzel", serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--purple-light);
+        }
+
+        .video-card .video-info {
+            position: static;
+            padding: 14px 16px;
+            background: linear-gradient(180deg, rgba(8, 5, 14, 0.95), rgba(8, 5, 14, 0.88));
+            border-top: 1px solid rgba(126, 34, 206, 0.28);
+        }
+
+        .video-card .video-info h3 {
+            margin: 0 0 3px;
+            font-family: "Cinzel", serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .video-card .video-info p {
+            margin: 0;
+            font-size: 0.96rem;
+            color: var(--text-dim);
+        }
+
+        /* ===== SECTION ===== */
+        .section {
+            position: relative;
+            margin-bottom: 35px;
+            padding: 38px 42px;
+            background: 
+                linear-gradient(135deg, var(--bg-card) 0%, rgba(18, 11, 26, 0.8) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+        }
+
+        .section h2 {
+            position: relative;
+            display: inline-block;
+            margin: 0 0 25px;
+            font-family: "Cinzel", serif;
+            font-size: 1.45rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+
+        .section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .section p {
+            margin: 0 0 18px;
+            font-size: 1.14rem;
+            color: var(--text);
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .muted {
+            color: var(--text-muted);
+        }
+
+        /* ===== CARD GRID ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .step-card {
+            position: relative;
+            padding: 24px 20px 20px;
+            background: 
+                linear-gradient(135deg, var(--bg-card-light) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--border-purple);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        .step-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 35px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), transparent);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .step-card h3 {
+            margin: 0 0 12px;
+            font-family: "Cinzel", serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--purple-light);
+        }
+
+        .step-card p {
+            margin: 0;
+            font-size: 1.06rem;
+            line-height: 1.75;
+            color: var(--text);
+        }
+
+        .step-card p + p {
+            margin-top: 12px;
+        }
+
+        /* ===== TIMELINE NOTE ===== */
+        .timeline-note {
+            position: relative;
+            margin-top: 24px;
+            padding: 16px 22px;
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.1), rgba(212, 168, 83, 0.03));
+            border: 1px solid var(--border-gold);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-size: 1.02rem;
+            font-style: italic;
+        }
+
+        .timeline-note::before {
+            content: "◆";
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 0.6rem;
+        }
+
+        /* ===== STATUS GRID ===== */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .status-card {
+            position: relative;
+            padding: 26px 22px;
+            background: 
+                linear-gradient(135deg, var(--bg-card-light) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+        }
+
+        .status-card.improved {
+            border-color: rgba(110, 195, 165, 0.4);
+            background: linear-gradient(135deg, rgba(110, 195, 165, 0.08), var(--bg-card));
+        }
+
+        .status-card.improved::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6ec3a5, transparent);
+            border-radius: 6px 6px 0 0;
+        }
+
+        .status-card.unresolved {
+            border-color: rgba(226, 179, 122, 0.4);
+            background: linear-gradient(135deg, rgba(226, 179, 122, 0.08), var(--bg-card));
+        }
+
+        .status-card.unresolved::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e2b27a, transparent);
+            border-radius: 6px 6px 0 0;
+        }
+
+        .status-card h3 {
+            margin: 0 0 12px;
+            font-family: "Cinzel", serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .status-card.improved h3 {
+            color: #6ec3a5;
+        }
+
+        .status-card.unresolved h3 {
+            color: #e2b27a;
+        }
+
+        .status-card p {
+            margin: 0;
+            font-size: 1.06rem;
+            line-height: 1.75;
+        }
+
+        /* ===== INSIGHT BLOCK ===== */
+        .insight-block {
+            position: relative;
+            margin-top: 28px;
+            padding: 28px 26px;
+            background: 
+                linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--purple);
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+        }
+
+        .insight-block .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-family: "Cinzel", serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--purple-light);
+        }
+
+        .insight-block .label svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--purple-light);
+        }
+
+        .insight-block p {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #e8e0f5;
+        }
+
+        .minimal-footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 26px;
+            padding: 1.35rem 0 2rem;
+            border-top: 1px solid rgba(212, 168, 83, 0.24);
+            background: linear-gradient(180deg, rgba(18, 11, 26, 0.45), rgba(10, 8, 18, 0.75));
+            text-align: center;
+        }
+
+        .minimal-footer .footer-line-main {
+            margin: 0;
+            font-family: "Cinzel", serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .minimal-footer .footer-line-sub {
+            margin: 0.5rem 0 0;
+            font-size: 0.86rem;
+            color: var(--text-dim);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 30px;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-grid,
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 30px 24px;
+            }
+
+            .section h2 {
+                font-size: 1.25rem;
+            }
+
+            .top-nav-bar .quick-nav {
+                display: none;
+            }
+
+            .video-section {
+                padding: 30px 24px;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--purple-dark), var(--gold-dark));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--purple), var(--gold));
+        }
+
+        /* ===== SELECTION ===== */
+        ::selection {
+            background: var(--purple);
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Top Navigation Bar -->
+    <nav class="top-nav-bar">
+        <div class="top-nav-bar-inner">
+            <a href="projects.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back To Projects
+            </a>
+            <div class="top-nav-actions">
+                <div class="quick-nav">
+                    <a href="#overview">Overview</a>
+                    <a href="#gameplay">Gameplay</a>
+                    <a href="#initial">Initial Design</a>
+                    <a href="#iteration1">Iteration 1</a>
+                    <a href="#iteration2">Iteration 2</a>
+                    <a href="#reflection">Reflection</a>
+                </div>
+                <button class="lang-switch" onclick="toggleLang()">中文</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="subtitle">Project Detail / PLO5</div>
+                <h1>Tyrant's Court</h1>
+                <p class="tagline">Player Centered Design Iteration</p>
+                <p class="description">A multiplayer card game about player interaction, hidden roles, and strategic decision making. Players observe, manage risk, and react to changing situations through cards, abilities, and shared systems.</p>
+            </div>
+            <div class="hero-image">
+                <img src="king_cover_v3.png" alt="Tyrant's Court key visual">
+            </div>
+        </header>
+
+        <!-- Video Section -->
+        <section id="gameplay" class="video-section">
+            <h2 class="section-title">Gameplay Modes</h2>
+            <div class="video-grid">
+                <article class="video-card">
+                    <div class="video-media-wrap">
+                        <video class="video-media" controls muted playsinline preload="metadata">
+                            <source src="InitialMode.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Initial Mode</h3>
+                        <p>Original gameplay iteration</p>
+                    </div>
+                </article>
+                <article class="video-card">
+                    <div class="video-media-wrap">
+                        <video class="video-media" controls muted playsinline preload="metadata">
+                            <source src="TyrantRefined.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Refined Mode</h3>
+                        <p>Player-centered redesign</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="overview" class="section">
+            <h2>Game Overview</h2>
+            <p>Tyrant's Court is a multiplayer card game about player interaction, hidden roles, and strategic decision making.</p>
+            <p>Players interact through cards, abilities, and shared systems. The gameplay focuses on player to player tension, uncertainty of information, and timing based decisions. Players observe others, manage risk, and react to changing situations during the game.</p>
+            <p>The game is built around conflict between players, indirect interaction, and trade offs between gaining power and taking on risk.</p>
+        </section>
+
+        <section id="initial" class="section">
+            <h2>Initial Design</h2>
+            <p>The initial design combines several systems into one experience. The game includes hidden roles with different victory conditions, a card system used during gameplay, and a resource system based on Evidence and Suspicion.</p>
+            <p>A key mechanic appears before the game starts. During the setup phase, all players except the Lord select abilities from a shared ability pool. Each player can choose several abilities that provide strong advantages during the game.</p>
+            <p>Each selected ability also gives a benefit to the Lord. These benefits can include drawing additional cards or gaining extra effects. This creates a shared cost system where players gain power while also strengthening a common threat.</p>
+            <p>This setup phase creates an early decision. Players must consider how much power they want to take and how much advantage they are giving to the Lord before the game begins.</p>
+            <p>After the setup phase, the game continues with card-based interactions. Players draw cards, use abilities, and target each other during their turns.</p>
+            <p>Some cards generate Evidence, either for the player themselves or for a targeted player. Evidence is not aligned to teams. It is a flexible resource that can be used in multiple ways. A player can spend Evidence to blackmail another player and swap HP, or use it as a defensive card to cancel an incoming attack.</p>
+            <p>To prevent Evidence from becoming too strong, the system introduces Suspicion. Suspicion is a card that only the Lord can use. When played, it affects all players on the field. Each player loses HP equal to the number of Evidence cards in their hand. This creates a risk where holding more Evidence increases both power and vulnerability.</p>
+            <p>All players start with a base amount of HP and can be eliminated through attacks or system effects. When a player’s HP reaches zero, they leave the game. However, elimination does not immediately mean losing. The final outcome depends on whether the remaining players fulfill their role-based victory conditions.</p>
+        </section>
+
+        <section id="iteration1" class="section">
+            <h2>Iteration One</h2>
+            <div class="card-grid">
+                <article class="step-card">
+                    <h3>Playtest One Player Experience</h3>
+                    <p>During the first round of playtesting, a consistent issue appeared across different players. The problem was understandability.</p>
+                    <p>Players struggled to identify their goals and did not understand how abilities, cards, and resources were connected. Most of their time was spent reading card text instead of making decisions. Strategic thinking did not emerge during early gameplay.</p>
+                    <p>Players described the experience as confusing and overwhelming. The game felt like it required prior knowledge. Instead of feeling tension, players felt uncertain about what to do.</p>
+                </article>
+                <article class="step-card">
+                    <h3>Problem Analysis</h3>
+                    <p>The issue came from how the systems were introduced.</p>
+                    <p>Players needed to process hidden roles, ability effects, card interactions, and resource systems at the same time. This created a high cognitive load.</p>
+                    <p>Because players could not identify what was important, they could not form meaningful decisions. The intended experience of strategy and tension was replaced by confusion.</p>
+                </article>
+                <article class="step-card">
+                    <h3>Design Change</h3>
+                    <p>The design direction shifted toward simplification and clarity.</p>
+                    <p>The system was restructured to focus on one core mechanic, which is the relationship between Evidence and Suspicion. Other systems were reduced or delayed so that players could first understand one central idea.</p>
+                    <p>This change was made to reduce confusion and help players engage with the system earlier.</p>
+                </article>
+                <article class="step-card">
+                    <h3>Implementation</h3>
+                    <p>The structure of the game was simplified by reducing the number of active mechanics in early gameplay. The card pool was also reduced to focus on the core interaction.</p>
+                    <p>A structured learning process was introduced through multiple gameplay setups.</p>
+                    <p>In the first setup, players interact with Evidence without punishment and learn how it functions as hidden power.</p>
+                    <p>In the second setup, Suspicion is introduced and creates risk for holding Evidence.</p>
+                    <p>In the third setup, both systems interact under higher pressure and require players to think about timing and decision making.</p>
+                    <p>This approach allows players to learn through gameplay instead of relying on explanation.</p>
+                </article>
+            </div>
+            <div class="timeline-note">Progression: initial design → player confusion → cause analysis → simplification toward a teachable core loop.</div>
+        </section>
+
+        <section id="iteration2" class="section">
+            <h2>Iteration Two</h2>
+            <div class="card-grid">
+                <article class="step-card">
+                    <h3>Playtest Two Player Experience</h3>
+                    <p>After these changes, a second round of playtesting was conducted.</p>
+                    <p>Players understood the system more quickly and started making decisions earlier in the game. The relationship between mechanics became clearer and players were more engaged.</p>
+                    <p>However, new issues appeared. Some players felt that the game lacked a clear identity. Some turns felt passive and did not create strong interaction between players.</p>
+                </article>
+                <article class="step-card">
+                    <h3>Problem Analysis</h3>
+                    <p>The second problem was related to engagement and identity.</p>
+                    <p>Although players understood the system, the experience still felt similar to other card games. The core mechanic was not strong enough to define the game.</p>
+                    <p>The design included multiple systems, including the ability system, the card system, and the Evidence and Suspicion system. Each system was interesting on its own, but they did not combine into a single focused gameplay experience.</p>
+                    <p>As a result, the experience felt scattered. Players could not clearly explain what the game was about, and there was no single core mechanic that guided how the game should be played.</p>
+                    <p>This lack of focus also affected player engagement. Many actions felt reactive rather than intentional, and players did not feel enough control over their decisions.</p>
+                    <p>For a short-session card game, this made the experience less distinct and harder to stay engaged with.</p>
+                </article>
+                <article class="step-card">
+                    <h3>Implementation</h3>
+                    <p>The new version removes direct attacks between players. All interactions are handled through the Evidence and Suspicion system.</p>
+                    <p>Players influence the game by generating, exposing, and managing Evidence. At the end of each round, the system evaluates Evidence and applies punishment based on player exposure.</p>
+                    <p>Core Gameplay:<br>Players gain power by accumulating Evidence, but become more vulnerable to punishment. Every decision increases both advantage and risk.</p>
+                    <p>This creates a gameplay structure centered on information, timing, and risk control, where players compete by managing exposure instead of dealing direct damage.</p>
+                </article>
+                <article class="step-card">
+                    <h3>Implementation</h3>
+                    <p>The new version removes direct attacks between players. All interactions are handled through the Evidence and Suspicion system.</p>
+                    <p>Players influence the game by generating, exposing, and managing Evidence. At the end of each round, the system evaluates Evidence and applies punishment based on player exposure.</p>
+                    <p>Core Gameplay:<br>Players gain power by accumulating Evidence, but become more vulnerable to punishment. Every decision increases both advantage and risk.</p>
+                    <p>This creates a gameplay structure centered on information, timing, and risk control, where players compete by managing exposure instead of dealing direct damage.</p>
+                </article>
+            </div>
+            <div class="timeline-note">Progression: clearer understanding → identity gap detected → core mechanic reinforced → interaction model redesigned.</div>
+        </section>
+
+        <section id="result" class="section">
+            <h2>Result</h2>
+            <div class="status-grid">
+                <article class="status-card improved">
+                    <h3>What Improved</h3>
+                    <p>After this iteration, the game developed a clearer identity. Players described the system as more focused and easier to understand. The core mechanic became more visible in gameplay.</p>
+                </article>
+                <article class="status-card unresolved">
+                    <h3>What Remains Unresolved</h3>
+                    <p>Some limitations remain. The card pool is still limited and reduces strategic depth. Some turns do not create strong interaction. Random card draw makes long term planning difficult.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="reflection" class="section">
+            <h2>Reflection</h2>
+            <p>This project shows how player feedback can guide design decisions.</p>
+            <p>The first iteration improved clarity by reducing complexity. The second iteration improved engagement by focusing on the core mechanic.</p>
+            <p>Both changes were based on player experience and addressed specific issues in understanding and interaction.</p>
+            <p>In future projects, systems will be introduced more gradually and tested in isolation before being combined.</p>
+            <p>Player feedback will be used not only to fix problems but to guide the direction of the design.</p>
+        </section>
+    </main>
+    <footer class="minimal-footer">
+        <p class="footer-line-main">© 2026 Tyrant's Court Demo</p>
+        <p class="footer-line-sub">Design &amp; Documentation: Xiaohan Zhang</p>
+    </footer>
+    <script>
+        function toggleLang() {
+            localStorage.setItem('siteLang', 'zh');
+            window.location.href = 'tyrants-court-zh.html';
+        }
+    </script>
+</body>
+</html>

@@ -281,6 +281,29 @@
             margin-bottom: 0.65rem;
         }
 
+        .vere-footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 10px;
+            padding: 1.35rem 0 2rem;
+            border-top: 1px solid rgba(216, 180, 254, 0.22);
+            background: linear-gradient(180deg, rgba(13, 8, 24, 0.5), rgba(5, 3, 10, 0.82));
+            text-align: center;
+        }
+        .vere-footer .line-main {
+            margin: 0;
+            font-family: "Chakra Petch", sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+        }
+        .vere-footer .line-sub {
+            margin: 0.5rem 0 0;
+            font-size: 0.86rem;
+            color: #94a3b8;
+        }
+
     </style>
 </head>
 <body class="antialiased font-sans min-h-screen flex flex-col">
@@ -303,20 +326,20 @@
                         <a href="#overview" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
                             <span class="lang-en">Overview</span><span class="lang-zh">概览</span>
                         </a>
-                         <a href="#role" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
-                            <span class="lang-en">My Role</span><span class="lang-zh">我的职责</span>
+                        <a href="#concept" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Concept</span><span class="lang-zh">概念</span>
                         </a>
-                        <a href="#pillars" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
-                            <span class="lang-en">Design Pillars</span><span class="lang-zh">设计支柱</span>
+                        <a href="#world" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">World</span><span class="lang-zh">世界</span>
                         </a>
-                        <a href="#story" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
-                            <span class="lang-en">Story</span><span class="lang-zh">故事</span>
+                        <a href="#role" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Role</span><span class="lang-zh">职责</span>
+                        </a>
+                        <a href="#team" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
+                            <span class="lang-en">Collaboration</span><span class="lang-zh">协作</span>
                         </a>
                         <a href="#controls" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
                             <span class="lang-en">Controls</span><span class="lang-zh">操作</span>
-                        </a>
-                        <a href="#team" class="text-white hover:text-neon-purple font-display italic font-bold px-2 py-1 transition-colors uppercase tracking-wider text-sm">
-                            <span class="lang-en">Team</span><span class="lang-zh">团队</span>
                         </a>
 
                         <!-- Lang Toggle -->
@@ -339,9 +362,10 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-navy px-2 pt-2 pb-3 space-y-1 sm:px-3 border-b border-purple">
             <a href="#overview" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Overview</a>
-            <a href="#role" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">My Role</a>
-            <a href="#pillars" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Design Pillars</a>
-            <a href="#story" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Story</a>
+            <a href="#concept" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Concept</a>
+            <a href="#world" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">World</a>
+            <a href="#role" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Role</a>
+            <a href="#team" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Collaboration</a>
             <a href="#controls" class="text-white hover:text-neon-purple block px-3 py-4 text-base font-medium font-display border-l-4 border-transparent hover:border-purple transition-all">Controls</a>
             <button onclick="toggleLang()" class="w-full text-left text-white hover:text-neon-purple block px-3 py-4 text-base font-medium flex items-center gap-2 border-l-4 border-transparent hover:border-purple transition-all">
                 <i data-lucide="globe"class="w-4 h-4"></i>
@@ -375,8 +399,8 @@
                     
                     <div class="border-l-4 border-neon-purple pl-6 py-4 bg-purple/5 backdrop-blur-sm">
                         <p class="text-xl md:text-2xl text-white italic font-serif leading-relaxed opacity-90">
-                            <span class="lang-en">“Something is terribly wrong with Vere’s world. Hallucinatory rifts tear through the sky, and strange objects fall……or float where they should not exist. She is pulled, again and again, into the glitches of fractured realities… Will she ever find her way home?”</span>
-                            <span class="lang-zh">“Vere的世界出了大问题。幻觉般的裂缝撕裂了天空，奇怪的物体坠落……或漂浮在它们本不该存在的地方。她一次又一次地被卷入破碎现实的故障中……她还能找到回家的路吗？”</span>
+                            <span class="lang-en">“Vere lives inside an Old Side-Scrolling RPG stored on a Forgotten Floppy Disk. As the disk decays, the boundary between the game world and the player interface starts to break. UI elements begin falling into the world, Glitch Holes open across the sky, and Vere is pulled deeper and deeper into a Broken World she does not understand.”</span>
+                            <span class="lang-zh">“Vere 生活在一款被遗忘软盘中的老式横版 RPG 里。随着软盘逐渐损坏，游戏世界与玩家界面的边界开始破裂。UI 元素不断坠入世界，天空出现故障黑洞，Vere 被一次次拉进她无法理解的破碎关卡。”</span>
                         </p>
                     </div>
 
@@ -431,15 +455,6 @@
                     </div>
                 </div>
 
-                <!-- Project Overview -->
-                <div class="lg:col-span-2 overview-panel p-5 md:p-7 clip-sharp">
-                    <h2 class="text-neon-purple font-display font-bold italic text-xl tracking-wider mb-4 uppercase">
-                        <span class="lang-en">Project Overview</span>
-                        <span class="lang-zh">项目概览</span>
-                    </h2>
-                    <p class="font-sans font-normal overview-dropcap lang-en">Vere is a narrative-driven experimental platformer created during a 42-hour game jam under the theme "Merge." The game takes place inside a corrupted video game stored on a forgotten floppy disk. As the digital world decays, fragments of the game's interface, unused assets, and broken systems begin to merge into the environment. Players navigate a collapsing digital landscape where the boundaries between game interface and world space no longer exist. UI elements become platforms, dialogue windows appear as physical obstacles, and fragments of the game's systems drift through space as environmental hazards.</p>
-                    <p class="font-sans font-normal overview-dropcap lang-zh">Vere 是一款在 42 小时 Game Jam 中、以「Merge」为主题创作的叙事向实验平台游戏。故事发生在一张被遗忘软盘中存储的、已损坏的游戏内部；随着数字世界腐朽，游戏界面碎片、未使用的资源与崩坏的系统开始与环境融合。玩家穿行于正在崩塌的数字景观中，游戏界面与世界空间的边界已不复存在。UI 元素变成平台，对话窗口成为实体障碍，游戏系统的碎片在空间中飘荡，化作环境危险。</p>
-                </div>
             </div>
             
             <!-- Decor Text -->
@@ -448,93 +463,155 @@
             </div>
         </section>
 
-        <!-- Design Pillars -->
-        <section id="pillars" class="py-24 bg-[#0a0510] border-t border-purple/10">
+        <!-- Concept Development -->
+        <section id="concept" class="py-24 bg-[#0a0510] border-t border-purple/10">
             <div class="max-w-7xl mx-auto px-4">
                 <h2 class="text-4xl font-display font-bold italic text-white mb-16 text-center tracking-[0.2em]">
-                    <span class="lang-en">Design Pillars</span>
-                    <span class="lang-zh">设计支柱</span>
+                    <span class="lang-en">Concept Development</span>
+                    <span class="lang-zh">概念发展</span>
                 </h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="content-panel p-6 pillar-card">
-                        <div class="pillar-badge">1</div>
-                        <h3 class="text-neon-purple font-display font-bold italic text-xl mb-4"><span class="lang-en">Interface Becomes Environment</span><span class="lang-zh">界面即环境</span></h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4"><span class="lang-en">The central design idea is that elements normally outside the game world become part of the physical space. UI components such as health bars, dialogue boxes, and interface frames transform into: moving platforms, environmental hazards, navigational structures.</span><span class="lang-zh">核心设计理念是：通常位于游戏世界之外的元素成为物理空间的一部分。血条、对话框、界面框等 UI 组件转化为：移动平台、环境危险、导航结构。</span></p>
-                        <p class="text-slate-300 text-sm leading-relaxed"><span class="lang-en">This mechanic creates a meta-game experience, where players explore the internal structure of the game itself.</span><span class="lang-zh">这一机制创造出元游戏体验，玩家探索的是游戏自身的内部结构。</span></p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">Game Jam Constraint</span><span class="lang-zh">Game Jam 约束</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">This project was developed during a 42-hour game jam.</span><span class="lang-zh">这个项目在 42 小时 Game Jam 中完成。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The theme was Merge.</span><span class="lang-zh">主题是 Merge。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">At the start, the team focused on what “merge” could mean beyond a simple mechanic.</span><span class="lang-zh">开始时我并没有先做完整剧情，而是先聚焦约束本身。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">We explored how it could affect both gameplay and the world itself, instead of staying as a puzzle action or a visual trick.</span><span class="lang-zh">我希望主题同时影响机制与世界，不让 merge 只停留在简单解谜或视觉技巧上。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The goal was to let the theme shape how players understand and read the game space.</span><span class="lang-zh">这成为项目的核心概念。</span></p>
                     </div>
-                    <div class="content-panel p-6 pillar-card">
-                        <div class="pillar-badge">2</div>
-                        <h3 class="text-neon-purple font-display font-bold italic text-xl mb-4"><span class="lang-en">Glitch as Level Design</span><span class="lang-zh">故障即关卡设计</span></h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4"><span class="lang-en">Instead of traditional obstacles, the game world is built from digital corruption and merging systems. Broken UI fragments, drifting objects, and impossible geometry communicate that the game world is no longer stable.</span><span class="lang-zh">游戏世界由数字崩坏与融合系统构成，而非传统障碍。破碎的 UI 碎片、漂浮的物体与不可能几何传达出游戏世界已不再稳定。</span></p>
-                        <p class="text-slate-300 text-sm leading-relaxed"><span class="lang-en">This supports both the visual identity and the narrative theme of a collapsing digital space.</span><span class="lang-zh">这同时支撑了视觉身份与崩塌数字空间的叙事主题。</span></p>
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">Design Thinking</span><span class="lang-zh">设计思路</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">The discussion began with game perspective rather than specific mechanics.</span><span class="lang-zh">第一个清晰的想法不是机制，而是视角转换。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">Instead of asking what objects should merge, we asked what kinds of boundaries could disappear.</span><span class="lang-zh">我没有问“什么物体要融合”，而是问“什么边界可以被打破”。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">During this process, I proposed using UI as the starting point.</span><span class="lang-zh">这个问题把我带到 UI。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">UI normally exists outside the game world and belongs to the player’s screen.</span><span class="lang-zh">UI 通常在世界之外，属于玩家屏幕。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">I suggested merging the interface into the game environment itself.</span><span class="lang-zh">于是我决定把玩家界面和游戏空间直接融合。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The idea was quickly accepted and became the foundation for the project direction.</span><span class="lang-zh">这成为项目的核心概念。</span></p>
                     </div>
-                    <div class="content-panel p-6 pillar-card">
-                        <div class="pillar-badge">3</div>
-                        <h3 class="text-neon-purple font-display font-bold italic text-xl mb-4"><span class="lang-en">Narrative Through Environment</span><span class="lang-zh">通过环境叙事</span></h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4"><span class="lang-en">Rather than relying heavily on exposition, the story is conveyed through environmental design. The merging of UI elements and world objects reflects the game's narrative premise: the boundaries between system, interface, and world are dissolving.</span><span class="lang-zh">故事通过环境设计传达，而非依赖大量说明。UI 元素与世界物体的融合呼应叙事前提：系统、界面与世界的边界正在消解。</span></p>
-                        <p class="text-slate-300 text-sm leading-relaxed"><span class="lang-en">The player gradually realizes that Vere may not be escaping the world—but instead merging into a new reality beyond it.</span><span class="lang-zh">玩家逐渐意识到，Vere 或许不是在逃离世界，而是在融入其之外的新现实。</span></p>
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">Core Concept</span><span class="lang-zh">核心概念</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">From this point, the project was defined around a clear concept: UI becomes part of the environment.</span><span class="lang-zh">Vere 的核心概念是 UI as Environment。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">Instead of staying on the screen, buttons, bars, and interface fragments appear inside the world as physical objects.</span><span class="lang-zh">按钮、条形元素、界面碎片和系统残片不再停留在屏幕上，而是作为实体进入世界。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">This concept guided multiple parts of the project at the same time.</span><span class="lang-zh">这个想法从三个方向塑造了项目。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">It defined how the game looks, how the space feels, and how the story is communicated through the environment.</span><span class="lang-zh">它塑造了视觉识别。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">As a result, the world is no longer stable.</span><span class="lang-zh">它塑造了关卡氛围。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The boundary between system and environment is no longer clear.</span><span class="lang-zh">它塑造了环境叙事。</span></p>
+                    </div>
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">Design Direction</span><span class="lang-zh">设计方向</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">With the core concept established, the team expanded the direction together.</span><span class="lang-zh">核心概念明确后，我围绕它扩展整体方向。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">If UI can enter the world, then the world itself should feel unstable and unreliable.</span><span class="lang-zh">如果 UI 可以进入世界，整个世界就应表现出不稳定。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">Several directions were defined:</span><span class="lang-zh">环境应随着进度变得更难读懂。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The environment becomes harder to read over time.</span><span class="lang-zh">Glitch Holes 应把 Vere 拉向更深层的破碎空间。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">Glitch holes pull Vere into deeper broken spaces, functioning as transitions between levels.</span><span class="lang-zh">视觉清晰度应逐步让位于失真。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">Visual clarity gradually gives way to distortion.</span><span class="lang-zh">这为故事、氛围和视觉方向提供了稳定主线。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">These decisions shaped both the narrative tone and the visual direction of the project.</span><span class="lang-zh">这为故事、氛围和视觉方向提供了稳定主线。</span></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Core Mechanic & Level Design & Player Goals & Challenges & Reflection -->
-        <section class="py-24 bg-navy relative overflow-hidden">
+        <!-- World Setup -->
+        <section id="world" class="py-24 bg-navy relative overflow-hidden border-t border-purple/10">
             <div class="absolute inset-0 pointer-events-none opacity-5" style="background-image: linear-gradient(#7e22ce 1px, transparent 1px), linear-gradient(90deg, #7e22ce 1px, transparent 1px); background-size: 60px 60px;"></div>
-            <div class="max-w-7xl mx-auto px-4 relative z-10 space-y-16">
-                <div class="content-panel p-8">
-                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Core Mechanic: UI Environmentalization</span><span class="lang-zh">核心机制：UI 环境化</span></h2>
-                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">The core mechanic transforms traditional UI elements into gameplay structures. Examples include: Health bars functioning as moving platforms; Dialogue windows acting as navigation gates; Interface frames forming environmental boundaries.</span><span class="lang-zh">核心机制将传统 UI 元素转化为玩法结构。例如：血条充当移动平台；对话窗口充当导航门；界面框构成环境边界。</span></p>
-                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">This mechanic reinforces the theme "Merge" by blending two normally separate layers: interface layer and world layer. Players are forced to interact with elements that normally exist outside the playable space.</span><span class="lang-zh">该机制通过融合两个通常分离的层面——界面层与世界层——强化「Merge」主题。玩家不得不与通常存在于可玩空间之外的元素互动。</span></p>
-                </div>
-                <div class="content-panel p-8">
-                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Level Design Approach</span><span class="lang-zh">关卡设计思路</span></h2>
-                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">Because the project was created within a 42-hour development window, the level design focused on modular interactions. Instead of building entirely new mechanics for each stage, we reused the core UI-environment mechanic in different contexts.</span><span class="lang-zh">项目在 42 小时开发窗口内完成，关卡设计聚焦模块化互动。我们在不同情境下复用核心 UI-环境机制，而非为每一阶段构建全新机制。</span></p>
-                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">Examples: platforming sequences using floating UI panels; navigation puzzles using interface frames; environmental hazards made from corrupted UI fragments. This approach allowed us to maintain design coherence while working under tight time constraints.</span><span class="lang-zh">例如：用悬浮 UI 面板做平台序列；用界面框做导航谜题；用损坏的 UI 碎片做环境危险。这一思路使我们在时间紧张下仍保持设计一致性。</span></p>
-                </div>
-                <div class="content-panel p-8">
-                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Player Experience Goals</span><span class="lang-zh">玩家体验目标</span></h2>
-                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">The intended player experience focuses on three elements: <strong>Disorientation</strong>—players should feel that the world itself is unstable and unfamiliar. <strong>Discovery</strong>—by interacting with UI structures in unexpected ways, players gradually understand the logic of the merged world. <strong>Narrative Curiosity</strong>—environmental storytelling encourages players to question what the world actually is.</span><span class="lang-zh">预期体验聚焦三点：<strong>迷失感</strong>——世界本身应显得不稳定、陌生。<strong>发现</strong>——通过非常规方式与 UI 结构互动，玩家逐渐理解融合世界的逻辑。<strong>叙事好奇</strong>——环境叙事促使玩家追问：这个世界究竟是什么。</span></p>
-                    <p class="text-neon-purple font-display italic text-lg"><span class="lang-en">Is Vere escaping a broken game… or entering a new reality created from its fragments?</span><span class="lang-zh">Vere 是在逃离一个崩坏的游戏……还是进入由其碎片构成的新现实？</span></p>
-                </div>
-                <div class="content-panel p-8">
-                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Design Challenges</span><span class="lang-zh">设计挑战</span></h2>
-                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">The primary challenge was balancing ambitious ideas with limited development time. The UI-environment concept had many possible variations, but implementing too many would have exceeded the scope of a 42-hour jam.</span><span class="lang-zh">主要挑战是在有限开发时间内平衡宏大想法。UI-环境概念有多种可能变体，但实现过多会超出 42 小时 Jam 的范围。</span></p>
-                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">To address this, the team focused on: one strong core mechanic; reusable interaction systems; visually distinctive environments. This allowed the game to deliver a clear concept without overextending development resources.</span><span class="lang-zh">为此团队聚焦：一个强有力的核心机制；可复用的交互系统；视觉上鲜明的环境。使游戏在不过度消耗资源的前提下传达清晰概念。</span></p>
-                </div>
-                <div class="content-panel p-8">
-                    <h2 class="text-2xl font-display font-bold italic text-neon-purple mb-4"><span class="lang-en">Reflection</span><span class="lang-zh">反思</span></h2>
-                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">This project demonstrated the importance of strong central mechanics in rapid development environments. A clearly defined design concept helped the team align quickly despite the limited time frame.</span><span class="lang-zh">本项目体现了在快速开发环境中强有力核心机制的重要性。清晰的设计概念帮助团队在有限时间内快速对齐。</span></p>
-                    <p class="text-slate-300 mb-2 leading-relaxed"><span class="lang-en">Key lessons: Game jam projects benefit from a single strong mechanic rather than many small systems; Environmental storytelling can reinforce mechanical ideas; Mechanic reuse across levels helps maintain scope control.</span><span class="lang-zh">主要收获：Game Jam 项目更适合一个强核心机制而非多个小系统；环境叙事能强化机制理念；机制在关卡间复用有助于控制范围。</span></p>
-                    <p class="text-slate-300 mb-4 leading-relaxed"><span class="lang-en">If given more development time, I would expand the system further by introducing: interactive menu systems as puzzle mechanics; corrupted save-file environments; dynamic UI-based hazards that respond to player actions. These additions could deepen the idea of exploring the internal structure of a game world.</span><span class="lang-zh">若有更多开发时间，我会进一步拓展系统：将交互菜单系统作为谜题机制；损坏的存档文件环境；根据玩家行动变化的动态 UI 危险。这些扩展能深化「探索游戏世界内部结构」这一理念。</span></p>
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <h2 class="text-4xl font-display font-bold italic text-white mb-16 text-center tracking-[0.16em]">
+                    <span class="lang-en">World Setup</span>
+                    <span class="lang-zh">世界设定</span>
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">World Setup</span><span class="lang-zh">世界设定</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">Vere lives inside an Old Side-Scrolling RPG stored on a Forgotten Floppy Disk.</span><span class="lang-zh">Vere 生活在一款存放于遗忘软盘中的老式横版 RPG 里。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The game once had a stable world, readable space, and a simple daily rhythm.</span><span class="lang-zh">这个游戏原本拥有稳定世界、可读空间和简单日常节奏。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">That stability matters because the rest of the project breaks away from it.</span><span class="lang-zh">这份稳定很关键，因为后续内容正是从这里开始偏离。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">As the Forgotten Floppy Disk decays, the world starts to fail. Its space becomes unstable. Its sound becomes damaged. Its visual logic begins to collapse.</span><span class="lang-zh">随着遗忘软盘损坏，世界开始失效：空间不稳、声音受损、视觉逻辑坍塌。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">Vere does not understand what is happening. She only sees that the world is changing and that familiar things no longer behave correctly.</span><span class="lang-zh">Vere 不理解正在发生什么。她只看到世界在变化，熟悉事物也不再按原本方式运作。</span></p>
+                    </div>
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">Environmental Storytelling</span><span class="lang-zh">环境叙事</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">The story is not told mainly through dialogue.</span><span class="lang-zh">这个故事并不主要依靠对白讲述。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">It is told through the environment.</span><span class="lang-zh">它通过环境来讲述。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">Falling UI fragments, broken music, duplicated visuals, Glitch Holes, and empty spaces all show the state of the world.</span><span class="lang-zh">坠落的 UI 碎片、损坏音乐、重复画面、Glitch Holes 与空白空间共同展示世界状态。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">This approach fit the game jam scope. It also supported the main concept more directly.</span><span class="lang-zh">这种方式符合 game jam 范围，也更直接支撑核心概念。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The world itself explains what is happening.</span><span class="lang-zh">世界本身就在解释发生了什么。</span></p>
+                    </div>
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">Visual Direction</span><span class="lang-zh">视觉方向</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">After the world setup was clear, I helped define the Visual Direction.</span><span class="lang-zh">世界设定清晰后，我参与明确了视觉方向。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The world needed to feel like an old game that was slowly losing structure.</span><span class="lang-zh">世界需要呈现“老游戏正在逐步失去结构”的状态。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">This led to several visual decisions.</span><span class="lang-zh">这带来了几项具体视觉决策。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">UI fragments appear as physical level elements. Glitch Holes act as transitions and visual warnings. The environment becomes more blurred and unstable over time. Later spaces feel more distant, damaged, and emotionally cold than the early ones.</span><span class="lang-zh">UI 碎片成为关卡实体元素；Glitch Holes 作为过渡与视觉预警；环境随时间更模糊更不稳定；后期空间比前期更疏离、更破损、情绪更冷。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">These choices supported both the story and the level atmosphere.</span><span class="lang-zh">这些选择同时服务了叙事与关卡氛围。</span></p>
+                    </div>
+                    <div class="content-panel p-8">
+                        <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4"><span class="lang-en">Environmental UI Ideas</span><span class="lang-zh">环境化 UI 想法</span></h3>
+                        <p class="text-slate-300 leading-relaxed"><span class="lang-en">Based on this direction, our team developed several ideas for what UI could do inside the level.</span><span class="lang-zh">基于这个方向，我进一步设计了 UI 在关卡内的功能想法。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">A pause button could become a physical object that stops environmental motion. A health bar could become part of gameplay space. Interface fragments could become platforms, obstacles, or visual markers. Broken UI pieces could guide the player or mislead the player.</span><span class="lang-zh">暂停按钮可成为可交互实体并停止环境运动；血条可进入玩法空间；界面碎片可作为平台、障碍或标记；损坏 UI 可引导也可误导玩家。</span></p>
+                        <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">These ideas allowed Environmental Storytelling and gameplay function to support each other.</span><span class="lang-zh">这些想法让环境叙事与玩法功能形成互相支撑。</span></p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Story Section -->
-        <section id="story" class="py-32 bg-[#0a0510] relative border-t border-purple/10">
-            <div class="max-w-5xl mx-auto px-4 text-center">
-<h2 class="text-4xl md:text-6xl font-display font-bold italic text-white mb-16 uppercase tracking-widest text-shadow-purple">
-                    <span class="lang-en">The Glitch Reality</span>
-<span class="lang-zh">故障现实</span>
+        <!-- Player Experience Goal -->
+        <section class="py-20 bg-[#0a0510] border-t border-purple/10">
+            <div class="max-w-5xl mx-auto px-4">
+                <h2 class="text-4xl font-display font-bold italic text-white mb-10 text-center tracking-[0.14em]">
+                    <span class="lang-en">Player Experience Goal</span>
+                    <span class="lang-zh">玩家体验目标</span>
                 </h2>
-                <div class="space-y-12 text-xl md:text-2xl text-slate-300 leading-relaxed font-light">
-                    <p>
-                        <span class="lang-en">Inside, the game world is falling apart. Fragments of flat UI and all the things that were never meant to exist and hurt anyone within the world merged and drift aimlessly through space.</span>
-                        <span class="lang-zh">在内部，游戏世界正在分崩离析。扁平UI的碎片以及所有本不该存在且会伤害世界内任何事物的物体融合在一起，在空间中漫无目的地漂浮。</span>
+                <div class="content-panel p-8 md:p-10">
+                    <p class="text-slate-300 leading-relaxed"><span class="lang-en">The player should begin with curiosity.</span><span class="lang-zh">玩家体验应从好奇开始。</span></p>
+                    <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">At first, the world still feels readable. The player sees strange changes, but the space is still understandable.</span><span class="lang-zh">前期世界仍然可读。玩家能看到异常变化，但空间依然可理解。</span></p>
+                    <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">As the game continues, the player should feel less certain. The world becomes more damaged. The level becomes harder to read. The same systems feel less trustworthy.</span><span class="lang-zh">随着流程推进，玩家应逐步失去确定感：世界更破损、关卡更难读、原有系统更不可信。</span></p>
+                    <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">By the end, the player should feel distance, instability, and quiet loss.</span><span class="lang-zh">到结尾时，玩家应感到距离感、不稳定与安静的失落。</span></p>
+                    <p class="text-slate-300 leading-relaxed mt-3"><span class="lang-en">The goal is not loud fear. The goal is a slow emotional drift from familiarity to disorientation.</span><span class="lang-zh">目标不是强烈惊吓，而是从熟悉到失向的缓慢情绪漂移。</span></p>
+                </div>
+                <div class="content-panel p-8 md:p-10 mt-8">
+                    <h3 class="text-neon-purple font-display font-bold italic text-2xl mb-4">
+                        <span class="lang-en">Narrative and Gameplay Integration</span>
+                        <span class="lang-zh">叙事与玩法整合</span>
+                    </h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        <span class="lang-en">UI elements exist directly inside the level as physical objects.</span>
+                        <span class="lang-zh">UI 元素以实体物体形式直接存在于关卡中。</span>
                     </p>
-                    <p>
-                        <span class="lang-en">Vere must cross countless obstacles and get through relentless trials to find her way home… or so she believes. But beyond the flickering chaos of flying glitches everywhere lies something far greater than she ever imagined. The truth.</span>
-                        <span class="lang-zh">Vere必须跨越无数障碍，通过无情的试炼才能找到回家的路……至少她是这么认为的。但在到处闪烁的故障混乱之外，存在着比她想象中更伟大的东西。真相。</span>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">Buttons, bars, and interface fragments appear inside the space. Players can stand on them, trigger them, and use them to move forward. Interaction becomes slightly unfamiliar from the start, which creates a sense of uncertainty.</span>
+                        <span class="lang-zh">按钮、条形组件和界面碎片会出现在空间中。玩家可以站上去、触发它们，并利用它们前进。交互从一开始就带有陌生感，从而制造不确定性。</span>
                     </p>
-                    
-                    <div class="py-12 flex justify-center">
-                        <div class="w-px h-24 bg-gradient-to-b from-transparent via-neon-purple to-transparent"></div>
-                    </div>
-                    
-                    <p class="text-3xl font-display italic text-neon-purple tracking-widest uppercase">
-                        <span class="lang-en">Vere… welcome merging into a new world.</span>
-                        <span class="lang-zh">Vere……欢迎融入新世界。</span>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">The opening uses a controlled camera to introduce the space as already unstable. Movement feels normal at first, but small inconsistencies begin to appear in layout and interaction.</span>
+                        <span class="lang-zh">开场通过受控镜头语言展示“空间已不稳定”。起初移动看似正常，但布局与交互中的细微不一致会逐步出现。</span>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">As players progress, the environment becomes harder to read. Shapes lose clarity. Platforms feel less reliable. The space starts to look distorted, and depth becomes harder to judge.</span>
+                        <span class="lang-zh">随着推进，环境会越来越难读。形状变得模糊，平台可信度下降。空间开始扭曲，景深也更难判断。</span>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">Visual glitches increase over time. UI fragments flicker, stretch, and break apart. These effects appear before the player fully understands the system, creating tension and unease.</span>
+                        <span class="lang-zh">视觉故障会逐步增强。UI 碎片闪烁、拉伸、破裂。这些变化会在玩家尚未完全理解系统前出现，制造紧张与不安。</span>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">Sound follows the same progression. Clear feedback slowly turns into noise. Music becomes less stable and more fragmented. Audio no longer fully matches what the player sees, which increases the feeling that the system is failing.</span>
+                        <span class="lang-zh">声音也遵循同样的递进。清晰反馈逐步变成噪声，音乐变得不稳定且碎片化。音画逐渐失配，强化“系统正在失效”的感受。</span>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">Vere shows small reactions during this process. These moments suggest awareness and reinforce that something is changing, not only in the world but in the character’s state.</span>
+                        <span class="lang-zh">在这一过程中，Vere 会出现细微反应。这些时刻暗示其自我意识，并强化“变化不仅发生在世界，也发生在角色状态中”。</span>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">Because the environment does not follow clear rules, players stop relying on familiar platforming logic. They begin to observe, test, and question each step. Movement becomes cautious. Curiosity replaces certainty.</span>
+                        <span class="lang-zh">由于环境不再遵循清晰规则，玩家会逐步放弃熟悉的平台跳跃逻辑，转而观察、测试并质疑每一步。移动更谨慎，好奇取代确定。</span>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">At the final moment, the player realizes that the space is no longer just a game world. The character appears on the player’s own desktop environment. The boundary between game and reality collapses.</span>
+                        <span class="lang-zh">在最终时刻，玩家会意识到这不再只是游戏空间。角色出现在玩家自己的桌面环境中，游戏与现实的边界被打破。</span>
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mt-3">
+                        <span class="lang-en">This shift creates a strong emotional impact. The player is no longer exploring a broken world. They are inside it.</span>
+                        <span class="lang-zh">这一转折会产生强烈情绪冲击。玩家不再只是探索一个破碎世界，而是置身其中。</span>
                     </p>
                 </div>
             </div>
@@ -546,9 +623,17 @@
                 <div class="grid md:grid-cols-2 gap-16 items-center">
                     <div>
                         <h2 class="text-4xl font-display font-bold italic text-white mb-12 border-l-8 border-neon-purple pl-6">
-                            <span class="lang-en">CONTROLS</span>
+                            <span class="lang-en">CONTROLS / IMPLEMENTED FEATURES</span>
                             <span class="lang-zh">操作指南</span>
                         </h2>
+                        <p class="text-slate-300 leading-relaxed mb-8">
+                            <span class="lang-en">The control scheme was kept simple so the player could focus on movement, timing, and reading the environment.</span>
+                            <span class="lang-zh">操作方案保持简洁，让玩家把注意力放在移动、时机与环境阅读上。</span>
+                        </p>
+                        <p class="text-slate-300 leading-relaxed mb-8">
+                            <span class="lang-en">This supported the game jam scope and kept attention on the world, not on complicated inputs.</span>
+                            <span class="lang-zh">这符合 game jam 的范围控制，也让注意力集中在世界体验而非复杂输入上。</span>
+                        </p>
                         <ul class="space-y-6 font-mono text-sm md:text-base">
                             <li class="flex items-center justify-between border-b border-purple/30 pb-4 group hover:pl-4 transition-all">
                                 <span class="text-slate-400 group-hover:text-white uppercase tracking-widest"><span class="lang-en">Movement</span><span class="lang-zh">移动</span></span>
@@ -568,8 +653,7 @@
                             </li>
                         </ul>
                     </div>
-                    
-                    <!-- Visual Element -->
+
                     <div class="relative group">
                         <div class="absolute inset-0 bg-neon-purple blur-[50px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
                         <div class="bg-navy/80 p-8 border border-purple/50 clip-sharp flex flex-col items-center justify-center min-h-[300px] backdrop-blur-sm relative z-10">
@@ -588,7 +672,7 @@
             </div>
         </section>
 
-        <!-- Role + Credits (Side-by-side) -->
+        <!-- Role + Collaboration (Side-by-side) -->
         <section id="role" class="py-24 bg-navy border-t border-purple/10 relative overflow-hidden">
             <!-- Background Grid -->
             <div class="absolute inset-0 pointer-events-none opacity-5"
@@ -601,77 +685,63 @@
                     <div class="content-panel p-8 md:p-12 h-full">
                         <h2 class="text-4xl font-display font-bold italic text-white mb-8 flex items-center gap-4">
                             <span class="w-12 h-1 bg-neon-green"></span>
-                            <span class="lang-en">MY ROLE</span>
+                            <span class="lang-en">My Role</span>
                             <span class="lang-zh">我的职责</span>
                         </h2>
-                        <div class="flex flex-wrap gap-4 mb-8">
-                            <span class="px-4 py-2 bg-purple/20 border border-neon-purple/50 text-neon-purple font-display font-bold italic uppercase tracking-wider clip-sharp">
-                                <span class="lang-en">Associate Director</span>
-                                <span class="lang-zh">副导演</span>
-                            </span>
-                            <span class="px-4 py-2 bg-purple/20 border border-neon-purple/50 text-neon-purple font-display font-bold italic uppercase tracking-wider clip-sharp">
-                                <span class="lang-en">Programmer</span>
-                                <span class="lang-zh">程序</span>
-                            </span>
-                            <span class="px-4 py-2 bg-purple/20 border border-neon-purple/50 text-neon-purple font-display font-bold italic uppercase tracking-wider clip-sharp">
-                                <span class="lang-en">Narrative Designer</span>
-                                <span class="lang-zh">叙事设计</span>
-                            </span>
+                        <div class="space-y-4 text-slate-300 leading-relaxed">
+                            <p><span class="lang-en">My role focused on defining the project’s core direction and design foundation.</span><span class="lang-zh">我的职责聚焦于定义项目的核心方向与设计基础。</span></p>
+                            <p><span class="lang-en">I introduced the concept of UI as Environment and used it to guide the overall vision of the project.</span><span class="lang-zh">我提出 UI as Environment 概念，并用它指导项目整体愿景。</span></p>
+                            <p><span class="lang-en">Based on this concept, I helped establish:</span><span class="lang-zh">基于该概念，我参与建立了：</span></p>
+                            <ul class="mt-1 ml-5 list-disc space-y-1">
+                                <li><span class="lang-en">the world setup</span><span class="lang-zh">世界设定</span></li>
+                                <li><span class="lang-en">the emotional progression of the game</span><span class="lang-zh">游戏情绪递进</span></li>
+                                <li><span class="lang-en">the visual direction of the broken environment</span><span class="lang-zh">破碎环境的视觉方向</span></li>
+                            </ul>
+                            <p><span class="lang-en">I also developed the approach to environmental storytelling, defining how UI fragments, glitch holes, and spatial distortion communicate narrative change.</span><span class="lang-zh">我也完善了环境叙事方法，明确 UI 碎片、故障洞和空间扭曲如何传达叙事变化。</span></p>
+                            <p><span class="lang-en">On the gameplay side, I defined how the transformation between forms creates different player behaviors and decision-making.</span><span class="lang-zh">在玩法层面，我定义了形态切换如何产生不同的玩家行为与决策。</span></p>
+                            <p><span class="lang-en">In addition to design direction, I implemented several key features, including the opening camera sequence and selected gameplay interactions.</span><span class="lang-zh">除设计方向外，我还实现了若干关键功能，包括开场镜头序列与部分玩法交互。</span></p>
+                            <p><span class="lang-en">My role connected concept development, narrative direction, gameplay design, and partial implementation.</span><span class="lang-zh">我的职责连接了概念开发、叙事方向、玩法设计与部分实现。</span></p>
                         </div>
-                        <h3 class="text-neon-green font-display font-bold italic text-lg mb-4">
-                            <span class="lang-en">Key Contributions</span>
-                            <span class="lang-zh">主要贡献</span>
-                        </h3>
-                        <ul class="space-y-3 text-slate-300 leading-relaxed list-disc pl-6">
-                            <li><span class="lang-en">Designed the core gameplay mechanic: UI Environmentalization</span><span class="lang-zh">设计了核心玩法机制：UI 环境化</span></li>
-                            <li><span class="lang-en">Implemented interactive logic for multiple level mechanics</span><span class="lang-zh">实现了多关卡机制的交互逻辑</span></li>
-                            <li><span class="lang-en">Designed the narrative world concept and wrote dialogue sequences</span><span class="lang-zh">设计了叙事世界观并撰写对话段落</span></li>
-                            <li><span class="lang-en">Implemented cinematic camera effects to enhance storytelling</span><span class="lang-zh">实现了电影化镜头效果以强化叙事</span></li>
-                        </ul>
                     </div>
 
-                    <!-- Credits -->
+                    <!-- Collaboration -->
                     <div id="team" class="content-panel p-8 md:p-12 h-full">
                         <h2 class="text-4xl font-display font-bold italic text-white mb-8 flex items-center gap-4">
                             <span class="w-12 h-1 bg-neon-purple"></span>
-                            <span class="lang-en">CREDITS</span>
-                            <span class="lang-zh">制作团队</span>
+                            <span class="lang-en">Collaboration</span>
+                            <span class="lang-zh">协作</span>
                         </h2>
-
-                        <div class="space-y-7">
+                        <div class="space-y-6 text-slate-300 leading-relaxed">
                             <div>
-                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Director / Programmer / Technical Artist</div>
-                                <div class="text-white font-display font-bold">Bedi Ruan</div>
+                                <h3 class="text-neon-purple font-display font-bold italic text-lg mb-3"><span class="lang-en">Team Structure</span><span class="lang-zh">团队结构</span></h3>
+                                <p><span class="lang-en">The team followed a support-based workflow to allow all members to contribute within a short development time.</span><span class="lang-zh">团队采用支持型工作流，让所有成员在短开发周期内都能参与贡献。</span></p>
+                                <p class="mt-2"><span class="lang-en">Core systems were built in advance and shared as reusable prefabs, so level design could proceed without technical blocking.</span><span class="lang-zh">核心系统先行开发并以可复用预制体共享，使关卡设计不被技术阻塞。</span></p>
                             </div>
                             <div>
-                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Associate Director / Programmer</div>
-                                <div class="space-y-1">
-                                    <div class="text-white font-display font-bold">Susan Zhang</div>
-                                    <div class="text-white font-display font-bold">Jiu Duan</div>
-                                </div>
+                                <h3 class="text-neon-purple font-display font-bold italic text-lg mb-3"><span class="lang-en">Production Workflow</span><span class="lang-zh">制作流程</span></h3>
+                                <p><span class="lang-en">Reusable gameplay systems were developed and packaged as prefabs.</span><span class="lang-zh">可复用玩法系统被开发并封装为预制体。</span></p>
+                                <p class="mt-2"><span class="lang-en">These included:</span><span class="lang-zh">包括：</span></p>
+                                <ul class="mt-2 ml-5 list-disc space-y-1">
+                                    <li><span class="lang-en">interaction-based pause system</span><span class="lang-zh">基于交互的暂停系统</span></li>
+                                    <li><span class="lang-en">hazard systems such as spikes</span><span class="lang-zh">如尖刺等危险系统</span></li>
+                                    <li><span class="lang-en">health system linked to UI and in-world feedback</span><span class="lang-zh">关联 UI 与场景反馈的生命系统</span></li>
+                                </ul>
+                                <p class="mt-2"><span class="lang-en">These prefabs were shared with the team so they could directly build levels using them.</span><span class="lang-zh">这些预制体会共享给团队，成员可直接用于关卡搭建。</span></p>
+                                <p class="mt-2"><span class="lang-en">When new design needs appeared, systems were evaluated and extended to support those ideas.</span><span class="lang-zh">当出现新设计需求时，系统会被评估并扩展以支持实现。</span></p>
                             </div>
                             <div>
-                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Level Designers</div>
-                                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
-                                    <div class="text-slate-200">Kasper Chang</div>
-                                    <div class="text-slate-200">Forest Wu</div>
-                                </div>
+                                <h3 class="text-neon-purple font-display font-bold italic text-lg mb-3"><span class="lang-en">Division of Work</span><span class="lang-zh">分工方式</span></h3>
+                                <p><span class="lang-en">Work was divided between system support, level design, and visual implementation.</span><span class="lang-zh">工作分为系统支持、关卡设计和视觉实现三个方向。</span></p>
+                                <p class="mt-2"><span class="lang-en">Core system development and technical setup were handled by experienced members.</span><span class="lang-zh">核心系统开发与技术搭建由经验成员负责。</span></p>
+                                <p class="mt-2"><span class="lang-en">Other team members focused on building level layouts and gameplay using the provided tools.</span><span class="lang-zh">其他成员使用已提供工具完成关卡布局与玩法搭建。</span></p>
+                                <p class="mt-2"><span class="lang-en">Visual effects and environmental polish were developed alongside the narrative direction.</span><span class="lang-zh">视觉特效与环境打磨同步配合叙事方向推进。</span></p>
+                                <p class="mt-2"><span class="lang-en">Final stages included asset integration, level polish, and bug fixing.</span><span class="lang-zh">最后阶段包含资源整合、关卡打磨与问题修复。</span></p>
                             </div>
                             <div>
-                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Artists</div>
-                                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
-                                    <div class="text-slate-200">Amy Wu</div>
-                                    <div class="text-slate-200">Huang Yuan</div>
-                                    <div class="text-slate-200">Raymond Zhang</div>
-                                    <div class="text-slate-200">Raina Wang</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-purple font-mono text-xs uppercase tracking-[0.26em] mb-3">Music</div>
-                                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
-                                    <div class="text-slate-200">Coco Luo</div>
-                                    <div class="text-slate-200">Oscar Yip</div>
-                                </div>
+                                <h3 class="text-neon-purple font-display font-bold italic text-lg mb-3"><span class="lang-en">Scope Challenge</span><span class="lang-zh">范围挑战</span></h3>
+                                <p><span class="lang-en">The main challenge was limited development time.</span><span class="lang-zh">主要挑战是开发时间有限。</span></p>
+                                <p class="mt-2"><span class="lang-en">The solution was to centralize system creation and distribute reusable tools.</span><span class="lang-zh">解决方案是集中系统开发并分发可复用工具。</span></p>
+                                <p class="mt-2"><span class="lang-en">This allowed faster iteration and kept the project consistent across design, visuals, and gameplay.</span><span class="lang-zh">这让迭代更快，并保持设计、视觉与玩法的一致性。</span></p>
                             </div>
                         </div>
                     </div>
@@ -680,6 +750,11 @@
         </section>
 
     </main>
+
+    <footer class="vere-footer">
+        <p class="line-main">© 2026 Vere Demo</p>
+        <p class="line-sub">Design &amp; Documentation: Xiaohan Zhang</p>
+    </footer>
 
     <!-- Script -->
     <script>

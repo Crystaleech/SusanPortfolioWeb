@@ -172,26 +172,28 @@
             width: 100%;
             height: calc(100vh - 110px);
             margin-top: 110px;
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
-        /* 4x2 Grid */
+        /* 4x3 Grid */
         .projects-slider {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            grid-template-rows: repeat(2, minmax(0, 1fr));
-            height: 100%;
+            grid-template-rows: repeat(3, auto);
+            height: auto;
             width: 100%;
             padding: 1.25rem 2rem 1.5rem;
             gap: 1.25rem;
             align-items: stretch;
             justify-items: stretch;
+            align-content: start;
         }
 
         /* Square Project Card */
         .project-card {
             width: 100%;
-            height: 100%;
+            height: auto;
             aspect-ratio: 1 / 1;
             position: relative;
             transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), filter 0.35s ease;
@@ -406,6 +408,48 @@
             box-shadow: 0 0 30px rgba(195, 175, 136, 0.95), inset 0 0 20px rgba(195, 175, 136, 0.85) !important;
         }
 
+        /* Tyrant's Court card: gold frame accent */
+        .project-card[href*="tyrants-court"] .card-image {
+            filter: none;
+        }
+        .project-card[href*="tyrants-court"]:hover .card-image {
+            filter: none;
+            transform: scale(1.05);
+        }
+        .project-card[href*="tyrants-court"] .tech-frame {
+            color: #b89453;
+        }
+        .project-card[href*="tyrants-court"]:hover .tech-frame {
+            color: #c8a86a;
+        }
+        .project-card[href*="tyrants-court"] .tech-frame::after {
+            box-shadow: 0 0 18px rgba(184, 148, 83, 0.78), inset 0 0 12px rgba(184, 148, 83, 0.62) !important;
+        }
+        .project-card[href*="tyrants-court"]:hover .tech-frame::after {
+            box-shadow: 0 0 28px rgba(200, 168, 106, 0.88), inset 0 0 16px rgba(200, 168, 106, 0.72) !important;
+        }
+
+        /* Milk Man Crushing card: blue frame accent */
+        .project-card[href*="MilkManCrushing"] .card-image {
+            filter: none;
+        }
+        .project-card[href*="MilkManCrushing"]:hover .card-image {
+            filter: none;
+            transform: scale(1.05);
+        }
+        .project-card[href*="MilkManCrushing"] .tech-frame {
+            color: #4a9dff;
+        }
+        .project-card[href*="MilkManCrushing"]:hover .tech-frame {
+            color: #66adff;
+        }
+        .project-card[href*="MilkManCrushing"] .tech-frame::after {
+            box-shadow: 0 0 18px rgba(74, 157, 255, 0.8), inset 0 0 12px rgba(74, 157, 255, 0.65) !important;
+        }
+        .project-card[href*="MilkManCrushing"]:hover .tech-frame::after {
+            box-shadow: 0 0 28px rgba(102, 173, 255, 0.88), inset 0 0 16px rgba(102, 173, 255, 0.72) !important;
+        }
+
         /* For placeholder cards without images */
         .placeholder-bg {
             width: 100%;
@@ -580,6 +624,8 @@
         .frame-default { color: var(--neon-blue); }
         .frame-cyber { color: var(--neon-green); }
         .frame-starlight { color: var(--neon-pink); }
+        .frame-tyrant { color: #b89453; }
+        .frame-milk { color: #4a9dff; }
 
         /* Hide slider controls in grid mode */
         .slider-nav {
@@ -618,7 +664,7 @@
             }
             .projects-slider {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                grid-template-rows: repeat(4, minmax(0, 1fr));
+                grid-template-rows: repeat(5, auto);
                 padding: 0.9rem 1rem 1rem;
                 gap: 0.9rem;
             }
@@ -703,6 +749,7 @@
             <a href="index.html" class="nav-box"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
             <a href="projects.html" class="nav-box active"><span class="lang-en">Project</span><span class="lang-zh">项目</span></a>
             <a href="contact.html" class="nav-box"><span class="lang-en">About me</span><span class="lang-zh">关于我</span></a>
+            <a href="goals.html" class="nav-box"><span class="lang-en">Goals</span><span class="lang-zh">目标</span></a>
 
             <button onclick="toggleLang()" class="lang-switch ml-0 md:ml-4">
                 <span class="lang-en">中文</span><span class="lang-zh">EN</span>
@@ -714,91 +761,7 @@
     <div class="projects-container">
         <!-- Projects Slider -->
         <div class="projects-slider" id="projectsSlider">
-            <!-- 1. Moderator -->
-            <a href="moderator.html" class="project-card">
-                <div class="corner-badge">Demo</div>
-                <div class="corner-badge role-badge">SOLO</div>
-                <div class="game-name">
-                    <span class="lang-en">MODERATOR</span>
-                    <span class="lang-zh">审核员模拟器</span>
-                </div>
-                <div class="tech-frame frame-default"></div>
-                <div class="card-image-container">
-                    <img src="Moderator/Screenshot (90).png" alt="Moderator" class="card-image">
-                </div>
-            </a>
-
-            <!-- 2. Five Elemental Clash -->
-            <a href="five-elemental-clash.html" class="project-card">
-                <div class="corner-badge">GDD</div>
-                <div class="corner-badge role-badge">SOLO</div>
-                <div class="game-name long-title">
-                    <span class="lang-en">FIVE ELEMENTAL<br>CLASH</span>
-                    <span class="lang-zh">五行之争</span>
-                </div>
-                <div class="tech-frame frame-default"></div>
-                <div class="card-image-container">
-                    <img src="FiveElementalClah/五行.png" alt="Five Elemental Clash" class="card-image">
-                </div>
-            </a>
-
-            <!-- 3. Zhuguang -->
-            <a href="zhuguang.html" class="project-card">
-                <div class="corner-badge">Demo</div>
-                <div class="corner-badge role-badge">SOLO</div>
-                <div class="game-name">
-                    <span class="lang-en">ZHU GUANG</span>
-                    <span class="lang-zh">逐光</span>
-                </div>
-                <div class="tech-frame frame-default"></div>
-                <div class="card-image-container">
-                    <img src="images/逐.png" alt="Zhuguang" class="card-image">
-                </div>
-            </a>
-
-            <!-- 4. One Inch Away -->
-            <a href="one-inches-away.html" class="project-card">
-                <div class="corner-badge">Demo</div>
-                <div class="corner-badge role-badge">TEAM</div>
-                <div class="game-name long-title">
-                    <span class="lang-en">ONE INCH<br>AWAY</span>
-                    <span class="lang-zh">一步之遥</span>
-                </div>
-                <div class="tech-frame frame-default"></div>
-                <div class="card-image-container">
-                    <img src="OneInchesAway/Screenshot (99).png" alt="One Inch Away" class="card-image">
-                </div>
-            </a>
-
-            <!-- 5. Vere -->
-            <a href="vere.html" class="project-card">
-                <div class="corner-badge">Demo</div>
-                <div class="corner-badge role-badge">TEAM</div>
-                <div class="game-name">
-                    <span class="lang-en">VERE</span>
-                    <span class="lang-zh">维尔</span>
-                </div>
-                <div class="tech-frame frame-vere"></div>
-                <div class="card-image-container">
-                    <img src="images/vere-screen-1.png" alt="Vere" class="card-image">
-                </div>
-            </a>
-
-            <!-- 6. Lynn -->
-            <a href="lynn.html" class="project-card">
-                <div class="corner-badge">Demo</div>
-                <div class="corner-badge role-badge">SOLO</div>
-                <div class="game-name">
-                    <span class="lang-en">LYNN'S LOG</span>
-                    <span class="lang-zh">林的养成日志</span>
-                </div>
-                <div class="tech-frame frame-default"></div>
-                <div class="card-image-container">
-                    <img src="Lynn/游戏截图111.png" alt="Lynn's Log" class="card-image">
-                </div>
-            </a>
-
-            <!-- 7. Wonder Tales -->
+            <!-- 1. Wonder Tales -->
             <a href="wonder-tales.html" class="project-card">
                 <div class="corner-badge">GDD</div>
                 <div class="corner-badge role-badge">TEAM</div>
@@ -812,7 +775,119 @@
                 </div>
             </a>
 
-            <!-- 8. Sushi -->
+            <!-- 2. Milk Man Crushing -->
+            <a href="MilkManCrushing.html" class="project-card">
+                <div class="corner-badge">GDD</div>
+                <div class="corner-badge role-badge">SOLO</div>
+                <div class="game-name long-title">
+                    <span class="lang-en">MILK MAN CRUSHING</span>
+                    <span class="lang-zh">牛奶人乱斗</span>
+                </div>
+                <div class="tech-frame frame-milk"></div>
+                <div class="card-image-container">
+                    <img src="milkman_cover_v5.png" alt="Milk Man Crushing" class="card-image">
+                </div>
+            </a>
+
+            <!-- 3. Vere -->
+            <a href="vere.html" class="project-card">
+                <div class="corner-badge">Demo</div>
+                <div class="corner-badge role-badge">TEAM</div>
+                <div class="game-name">
+                    <span class="lang-en">VERE</span>
+                    <span class="lang-zh">维尔</span>
+                </div>
+                <div class="tech-frame frame-vere"></div>
+                <div class="card-image-container">
+                    <img src="images/vere-screen-1.png" alt="Vere" class="card-image">
+                </div>
+            </a>
+
+            <!-- 4. Tyrant's Court -->
+            <a href="tyrants-court.html" class="project-card">
+                <div class="corner-badge">GDD</div>
+                <div class="corner-badge role-badge">SOLO</div>
+                <div class="game-name long-title">
+                    <span class="lang-en">TYRANT'S COURT</span>
+                    <span class="lang-zh">朝堂之上</span>
+                </div>
+                <div class="tech-frame frame-tyrant"></div>
+                <div class="card-image-container">
+                    <img src="king_cover_v3.png" alt="Tyrant's Court" class="card-image">
+                </div>
+            </a>
+
+            <!-- 5. Zhuguang -->
+            <a href="zhuguang.html" class="project-card">
+                <div class="corner-badge">Demo</div>
+                <div class="corner-badge role-badge">SOLO</div>
+                <div class="game-name">
+                    <span class="lang-en">ZHU GUANG</span>
+                    <span class="lang-zh">逐光</span>
+                </div>
+                <div class="tech-frame frame-default"></div>
+                <div class="card-image-container">
+                    <img src="images/逐.png" alt="Zhuguang" class="card-image">
+                </div>
+            </a>
+
+            <!-- 6. Moderator -->
+            <a href="moderator.html" class="project-card">
+                <div class="corner-badge">Demo</div>
+                <div class="corner-badge role-badge">SOLO</div>
+                <div class="game-name">
+                    <span class="lang-en">MODERATOR</span>
+                    <span class="lang-zh">审核员模拟器</span>
+                </div>
+                <div class="tech-frame frame-default"></div>
+                <div class="card-image-container">
+                    <img src="Moderator/Screenshot (90).png" alt="Moderator" class="card-image">
+                </div>
+            </a>
+
+            <!-- 7. Five Elemental Clash -->
+            <a href="five-elemental-clash.html" class="project-card">
+                <div class="corner-badge">GDD</div>
+                <div class="corner-badge role-badge">SOLO</div>
+                <div class="game-name long-title">
+                    <span class="lang-en">FIVE ELEMENTAL<br>CLASH</span>
+                    <span class="lang-zh">五行之争</span>
+                </div>
+                <div class="tech-frame frame-default"></div>
+                <div class="card-image-container">
+                    <img src="FiveElementalClah/五行.png" alt="Five Elemental Clash" class="card-image">
+                </div>
+            </a>
+
+            <!-- 8. One Inch Away -->
+            <a href="one-inches-away.html" class="project-card">
+                <div class="corner-badge">Demo</div>
+                <div class="corner-badge role-badge">TEAM</div>
+                <div class="game-name long-title">
+                    <span class="lang-en">ONE INCH<br>AWAY</span>
+                    <span class="lang-zh">一步之遥</span>
+                </div>
+                <div class="tech-frame frame-default"></div>
+                <div class="card-image-container">
+                    <img src="OneInchesAway/Screenshot (99).png" alt="One Inch Away" class="card-image">
+                </div>
+            </a>
+
+            <!-- 9. Lynn -->
+            <a href="lynn.html" class="project-card">
+                <div class="corner-badge">Demo</div>
+                <div class="corner-badge role-badge">SOLO</div>
+                <div class="game-name">
+                    <span class="lang-en">LYNN'S LOG</span>
+                    <span class="lang-zh">林的养成日志</span>
+                </div>
+                <div class="tech-frame frame-default"></div>
+                <div class="card-image-container">
+                    <img src="Lynn/游戏截图111.png" alt="Lynn's Log" class="card-image">
+                </div>
+            </a>
+
+            <!-- 10. Sushi -->
             <a href="SushiGo.html" class="project-card">
                 <div class="corner-badge">Demo</div>
                 <div class="corner-badge role-badge">TEAM</div>
@@ -839,13 +914,16 @@
             // Route to correct language version for pages with two HTML files
             const fec = document.querySelector('a.project-card[href="five-elemental-clash.html"]');
             if (fec) fec.href = isZh ? 'five-elemental-clash.html' : 'five-elemental-clash-en.html';
+            const tyrant = document.querySelector('a.project-card[href*="tyrants-court"]');
+            if (tyrant) tyrant.href = isZh ? 'tyrants-court-zh.html' : 'tyrants-court.html';
+            const milk = document.querySelector('a.project-card[href*="MilkManCrushing"]');
+            if (milk) milk.href = isZh ? 'MilkManCrushing-zh.html' : 'MilkManCrushing.html';
         }
 
         function toggleLang() {
             const isZh = !document.body.classList.contains('zh-mode');
-            document.body.classList.toggle('zh-mode', isZh);
-            document.documentElement.lang = isZh ? 'zh' : 'en';
             localStorage.setItem('siteLang', isZh ? 'zh' : 'en');
+            applySavedLang();
         }
 
         applySavedLang();

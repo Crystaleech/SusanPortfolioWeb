@@ -1,0 +1,238 @@
+Create a clean, professional case study webpage for a game design portfolio project titled Tyrant’s Court.
+
+MAIN GOAL
+
+This page is for PLO5 Player-Centered Design Thinking.
+It must clearly show how player feedback shaped the design over multiple iterations.
+The page should read like a guided explanation that can be followed from top to bottom without extra verbal clarification.
+
+This is not a general project showcase page.
+This is a design process page focused on player experience, iteration, and reflection.
+
+The final reading experience should make these points clear:
+playtest evidence related to player experience
+design changes that improved clarity, engagement, or accessibility
+explanation of how those changes addressed player needs
+reflection on how feedback will shape future design work
+
+STYLE
+
+Use a dark background in deep blue, charcoal, or black.
+Keep the interface minimal and professional.
+Prioritize clarity first, then visual polish.
+Use strong section spacing and card-based content blocks for readability.
+Highlight key sentences or key insights visually, but keep the page clean.
+Avoid clutter, decorative excess, or game-like gimmicks.
+
+VISUAL DIRECTION
+
+The page should feel polished but serious.
+Use a structured portfolio style rather than a playful game promo style.
+Cards should be clearly separated from the background.
+Typography should be easy to read.
+Section titles should be visually distinct.
+Important insights can be emphasized with larger text blocks, quote blocks, or highlighted cards.
+
+PAGE STRUCTURE
+
+Build the page in this exact order:
+
+1. Title
+Project title
+Subtitle
+
+2. Game Overview
+A short explanation of what the game is
+
+3. Initial Design
+What the original version of the game was
+What systems were included
+What players were expected to understand at the start
+
+4. Iteration One
+Playtest One Player Experience
+Problem Analysis
+Design Change
+Implementation
+
+5. Iteration Two
+Playtest Two Player Experience
+Problem Analysis
+Design Change
+Implementation
+
+6. Result
+What improved after the second round of changes
+What still remains unresolved
+
+7. Reflection
+What this process taught about player-centered design
+How this feedback process will affect future projects
+
+TONE
+
+Natural and readable
+Slightly analytical
+Clear and human
+No first-person language
+No overly academic or robotic phrasing
+No marketing tone
+
+WRITING PRIORITY
+
+Each section should lead naturally to the next.
+The viewer should be able to follow this progression clearly:
+
+initial design
+player confusion
+analysis of the cause
+design shift
+implementation
+new player response
+reflection
+
+The page should feel like a clear explanation, not a documentation dump.
+
+CONTENT TO PLACE INTO THE PAGE
+
+TITLE
+
+Tyrant’s Court
+Player Centered Design Iteration
+
+GAME OVERVIEW
+
+Tyrant’s Court is a multiplayer card game about player interaction, hidden roles, and strategic decision making.
+
+Players interact through cards, abilities, and shared systems. The gameplay focuses on player to player tension, uncertainty of information, and timing based decisions. Players observe others, manage risk, and react to changing situations during the game.
+
+The game is built around conflict between players, indirect interaction, and trade offs between gaining power and taking on risk.
+
+INITIAL DESIGN
+
+The initial design combined several systems into one experience. The game included hidden roles with different victory conditions, a card system used during gameplay, and a resource system based on Evidence and Suspicion.
+
+A key mechanic appears before the game starts. During the setup phase, all players except the central authority role select abilities from a shared ability pool. Each player can choose several abilities that provide strong advantages during the game.
+
+Each selected ability also gives a benefit to the central authority role. These benefits can include drawing more cards or gaining additional effects. This creates a shared cost system where players gain power but also strengthen a common threat.
+
+This setup phase creates an early decision. Players decide how much power to take and how much advantage they are giving to the central system before the game begins.
+
+After the setup phase, the game continues with card based interactions. Players draw cards, use abilities, and interact with each other. Evidence works as a hidden resource that can be used for strong effects. Suspicion works as a system that punishes players who hold too much power.
+
+All systems are introduced at the beginning of the game without a clear learning order. Players are expected to understand abilities, roles, cards, and resources at the same time.
+
+ITERATION ONE
+
+Playtest One Player Experience
+
+During the first round of playtesting, a consistent issue appeared across different players. The problem was not difficulty, but understanding.
+
+Players struggled to identify their goals and did not understand how abilities, cards, and resources were connected. Most of their time was spent reading card text instead of making decisions. Strategic thinking did not emerge during early gameplay.
+
+Players described the experience as confusing and overwhelming. The game felt like it required prior knowledge. Instead of feeling tension, players felt uncertain about what to do.
+
+Problem Analysis
+
+The issue came from how the systems were introduced.
+
+Players needed to process hidden roles, ability effects, card interactions, and resource systems at the same time. This created a high cognitive load.
+
+Because players could not identify what was important, they could not form meaningful decisions. The intended experience of strategy and tension was replaced by confusion.
+
+Design Change
+
+The design direction shifted toward simplification and clarity.
+
+The system was restructured to focus on one core mechanic, which is the relationship between Evidence and Suspicion. Other systems were reduced or delayed so that players could first understand one central idea.
+
+This change was made to reduce confusion and help players engage with the system earlier.
+
+Implementation
+
+The structure of the game was simplified by reducing the number of active mechanics in early gameplay. The card pool was also reduced to focus on the core interaction.
+
+A structured learning process was introduced through multiple gameplay setups.
+
+In the first setup, players interact with Evidence without punishment and learn how it functions as hidden power.
+
+In the second setup, Suspicion is introduced and creates risk for holding Evidence.
+
+In the third setup, both systems interact under higher pressure and require players to think about timing and decision making.
+
+This approach allows players to learn through gameplay instead of relying on explanation.
+
+ITERATION TWO
+
+Playtest Two Player Experience
+
+After these changes, a second round of playtesting was conducted.
+
+Players understood the system more quickly and started making decisions earlier in the game. The relationship between mechanics became clearer and players were more engaged.
+
+However, new issues appeared. Some players felt that the game lacked a clear identity. Some turns felt passive and did not create strong interaction between players.
+
+Problem Analysis
+
+The second problem was related to engagement and identity.
+
+Although players understood the system, the experience still felt similar to other card games. The core mechanic was not strong enough to define the game.
+
+Players also lacked enough control over their actions, which made the gameplay feel reactive instead of intentional.
+
+Design Change
+
+The design direction shifted again to strengthen the core system.
+
+The game was rebuilt around Evidence as the central mechanic. Direct damage between players was removed. All consequences are handled through a shared system.
+
+This change moves the focus from direct combat to information based interaction.
+
+Implementation
+
+A new version of the game was created where players cannot directly attack each other. Players influence the game by exposing each other’s Evidence.
+
+At the end of each round, the system evaluates exposed Evidence and applies punishment.
+
+This creates a structure where players compete through information, timing, and decision making instead of direct attacks.
+
+RESULT
+
+After this iteration, the game developed a clearer identity. Players described the system as more focused and easier to understand. The core mechanic became more visible in gameplay.
+
+Some limitations remain. The card pool is still limited and reduces strategic depth. Some turns do not create strong interaction. Random card draw makes long term planning difficult.
+
+REFLECTION
+
+This project shows how player feedback can guide design decisions.
+
+The first iteration improved clarity by reducing complexity. The second iteration improved engagement by focusing on the core mechanic.
+
+Both changes were based on player experience and addressed specific issues in understanding and interaction.
+
+In future projects, systems will be introduced more gradually and tested in isolation before being combined.
+
+Player feedback will be used not only to fix problems but to guide the direction of the design.
+
+LAYOUT GUIDANCE
+
+Use one main vertical flow.
+Each major section should feel like one step in the design process.
+Use sub-cards inside Iteration One and Iteration Two for:
+Playtest
+Problem Analysis
+Design Change
+Implementation
+
+Use visual contrast so the two iterations are easy to compare.
+Use a highlighted insight block in the Reflection section.
+
+DO NOT
+
+Do not turn this into a game promotion page.
+Do not use heavy fantasy decoration.
+Do not compress the text too much.
+Do not present this as random notes.
+Do not use first-person narration.
+Do not make it feel like a slide deck.
+It should feel like a polished portfolio case study page that can stand on its own.

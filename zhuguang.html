@@ -20,14 +20,14 @@
             theme: {
                 extend: {
                     colors: {
-                        'porcelain': '#fafafa', /* 更淡的白瓷色 */
-                        'mist': '#e8f1f0', /* 薄雾色 */
-                        'willow': '#a8c3b0', /* 柳色 */
-                        'ink': '#2c3e50', /* 深墨色 */
-                        'shadow': '#d1d9e6', /* 淡阴影 */
-                        'paper': '#f5f2e9', /* 宣纸色 */
-                        'bamboo': '#8a9a5b', /* 竹青色 */
-                        'lotus': '#e6a8a8', /* 莲花色 */
+                        'porcelain': '#fafafa',
+                        'mist': '#e8f1f0',
+                        'willow': '#a8c3b0',
+                        'ink': '#2c3e50',
+                        'shadow': '#d1d9e6',
+                        'paper': '#f5f2e9',
+                        'bamboo': '#8a9a5b',
+                        'lotus': '#e6a8a8',
                     },
                     fontFamily: {
                         serif: ["Noto Serif SC", "serif"],
@@ -35,14 +35,9 @@
                         light: ["ZCOOL QingKe HuangYou", "sans-serif"],
                         elegant: ["ZCOOL XiaoWei", "serif"]
                     },
-                    spacing: {
-                        '128': '32rem',
-                        '144': '36rem',
-                    },
                     animation: {
                         'fade-in': 'fadeIn 0.8s ease-out',
                         'slide-up': 'slideUp 0.6s ease-out',
-                        'float': 'float 6s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeIn: {
@@ -52,10 +47,6 @@
                         slideUp: {
                             '0%': { transform: 'translateY(20px)', opacity: '0' },
                             '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' }
                         }
                     }
                 }
@@ -76,8 +67,6 @@
             overflow-x: hidden;
             min-height: 100vh;
         }
-
-        /* 添加微妙的纹理效果 */
         body::before {
             content: '';
             position: fixed;
@@ -94,15 +83,12 @@
             z-index: -1;
             opacity: 0.6;
         }
-
-        /* 极简导航 */
         .minimal-nav {
             backdrop-filter: blur(15px);
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.92) 100%);
             border-bottom: 1px solid rgba(168, 195, 176, 0.15);
             box-shadow: 0 1px 20px rgba(168, 195, 176, 0.05);
         }
-
         .nav-link {
             position: relative;
             padding: 0.5rem 1rem;
@@ -111,7 +97,6 @@
             font-family: "ZCOOL XiaoWei", serif;
             font-size: 0.9rem;
         }
-
         .nav-link::after {
             content: '';
             position: absolute;
@@ -123,12 +108,60 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-
         .nav-link:hover::after {
             width: 80%;
         }
-
-        /* 清雅小面板 */
+        .clean-video {
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 195, 176, 0.25);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                0 4px 16px rgba(168, 195, 176, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .clean-video::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(168, 195, 176, 0.3), transparent);
+            z-index: 1;
+        }
+        .clean-video:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.12),
+                0 6px 20px rgba(168, 195, 176, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            border-color: rgba(168, 195, 176, 0.4);
+        }
+        .media-video-embed {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+            background: #0b1220;
+        }
+        .media-video-embed::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%;
+        }
+        .media-video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
         .elegant-panel {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
             backdrop-filter: blur(10px);
@@ -145,7 +178,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .elegant-panel::before {
             content: '';
             position: absolute;
@@ -155,18 +187,6 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(168, 195, 176, 0.3), transparent);
         }
-
-        .elegant-panel:hover {
-            transform: translateY(-2px);
-            box-shadow:
-                0 8px 30px rgba(0, 0, 0, 0.08),
-                0 2px 6px rgba(168, 195, 176, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            border-color: rgba(168, 195, 176, 0.4);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
-        }
-
-        /* 标题样式 */
         .section-title {
             font-family: "ZCOOL XiaoWei", serif;
             font-size: 1.5rem;
@@ -176,7 +196,6 @@
             position: relative;
             font-weight: 500;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -186,145 +205,20 @@
             height: 2px;
             background: linear-gradient(90deg, #a8c3b0, transparent);
         }
-
-        /* 小标签 */
         .mini-tag {
             display: inline-block;
             padding: 0.25rem 0.75rem;
             background: linear-gradient(135deg, rgba(168, 195, 176, 0.15) 0%, rgba(168, 195, 176, 0.1) 100%);
             backdrop-filter: blur(5px);
-            color: #2c3e50;
             border-radius: 16px;
             font-size: 0.75rem;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
             border: 1px solid rgba(168, 195, 176, 0.25);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(168, 195, 176, 0.1);
         }
-
-        .mini-tag:hover {
-            background: linear-gradient(135deg, rgba(168, 195, 176, 0.25) 0%, rgba(168, 195, 176, 0.2) 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(168, 195, 176, 0.15);
-            border-color: rgba(168, 195, 176, 0.4);
-        }
-
-        /* 引用样式 */
-        .elegant-quote {
-            font-family: "ZCOOL QingKe HuangYou", sans-serif;
-            font-size: 1rem;
-            color: #4a5568;
-            padding: 1rem;
-            background: linear-gradient(135deg, rgba(168, 195, 176, 0.08), rgba(255, 255, 255, 0.4));
-            backdrop-filter: blur(5px);
-            border-left: 3px solid #a8c3b0;
-            border-radius: 0 8px 8px 0;
-            margin: 1rem 0;
-            line-height: 1.6;
-            border: 1px solid rgba(168, 195, 176, 0.1);
-            box-shadow: 0 2px 8px rgba(168, 195, 176, 0.05);
-        }
-
-        /* 分隔线 */
-        .light-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(168, 195, 176, 0.3), transparent);
-            margin: 1.5rem 0;
-        }
-
-        /* 列表样式 */
-        .clean-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .clean-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            line-height: 1.5;
-        }
-
-        .clean-list li::before {
-            content: '·';
-            position: absolute;
-            left: 0;
-            color: #a8c3b0;
-            font-size: 1.2rem;
-        }
-
-        /* 视频容器 */
-        .clean-video {
-            border-radius: 12px;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(168, 195, 176, 0.25);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.08),
-                0 4px 16px rgba(168, 195, 176, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .clean-video::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(168, 195, 176, 0.3), transparent);
-            z-index: 1;
-        }
-
-        .clean-video:hover {
-            transform: translateY(-2px);
-            box-shadow:
-                0 12px 40px rgba(0, 0, 0, 0.12),
-                0 6px 20px rgba(168, 195, 176, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            border-color: rgba(168, 195, 176, 0.4);
-        }
-
-        .clean-video video {
-            display: block;
-            border-radius: 8px;
-        }
-
-        .media-video-embed {
-            position: relative;
-            width: 100%;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.14);
-            background: #0b1220;
-        }
-        .media-video-embed::before {
-            content: "";
-            display: block;
-            padding-top: 56.25%; /* 16:9 */
-        }
-        .media-video-embed iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* 装饰元素 */
-        .decoration-dot {
-            width: 4px;
-            height: 4px;
-            background: #a8c3b0;
-            border-radius: 50%;
-            opacity: 0.3;
-        }
-
-        /* 主标题区域 */
+        .clean-list { list-style: none; padding-left: 0; }
+        .clean-list li { margin-bottom: 0.75rem; padding-left: 1.2rem; position: relative; line-height: 1.5; }
+        .clean-list li::before { content: "·"; position: absolute; left: 0; color: #a8c3b0; font-size: 1.2rem; }
         .hero-section {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
             backdrop-filter: blur(10px);
@@ -332,82 +226,38 @@
             padding: 2rem;
             margin-bottom: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.06),
-                0 2px 8px rgba(168, 195, 176, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            position: relative;
-            overflow: hidden;
         }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 0%, rgba(168, 195, 176, 0.03) 100%);
-            pointer-events: none;
-        }
-
         .game-title {
             font-family: "Ma Shan Zheng", cursive;
             font-size: 3.5rem;
-            color: #2c3e50;
             line-height: 1;
-            margin-bottom: 1rem;
         }
-
-        /* 网格布局 */
-        .grid-small {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .game-title {
-                font-size: 2.5rem;
-            }
-
-            .elegant-panel {
-                padding: 1.25rem;
-            }
-
-            .grid-small {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .game-title {
-                font-size: 2rem;
-            }
-
-            .elegant-panel {
-                padding: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.25rem;
-            }
-        }
-
-        /* 页脚 */
+        .grid-small { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         .minimal-footer {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(168, 195, 176, 0.15);
             padding: 2rem 0;
             margin-top: 4rem;
-            box-shadow: 0 -1px 20px rgba(168, 195, 176, 0.05);
+        }
+        .light-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(168, 195, 176, 0.3), transparent);
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) {
+            .game-title { font-size: 2.5rem; }
+            .elegant-panel { padding: 1.25rem; }
+            .grid-small { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .game-title { font-size: 2rem; }
+            .elegant-panel { padding: 1rem; }
+            .section-title { font-size: 1.25rem; }
         }
     </style>
 </head>
 <body class="antialiased">
-    <!-- 极简导航 -->
     <nav class="minimal-nav fixed top-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[4rem] py-2 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
             <a href="projects.html" class="nav-link flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
@@ -416,9 +266,9 @@
             </a>
             <div class="flex flex-wrap justify-center gap-3 sm:gap-6 items-center">
                 <a href="#overview" class="nav-link text-sm sm:text-base">概览</a>
-                <a href="#design" class="nav-link text-sm sm:text-base">设计</a>
-                <a href="#story" class="nav-link text-sm sm:text-base">故事</a>
-                <a href="#video" class="nav-link text-sm sm:text-base">视频</a>
+                <a href="#design" class="nav-link text-sm sm:text-base">系统</a>
+                <a href="#story" class="nav-link text-sm sm:text-base">挑战</a>
+                <a href="#video" class="nav-link text-sm sm:text-base">演示</a>
                 <button onclick="localStorage.setItem('siteLang','en'); window.location.href='zhuguang-en.html';" class="nav-link border border-willow/30 rounded-lg px-2 py-1 text-xs sm:text-sm">EN</button>
             </div>
         </div>
@@ -426,323 +276,168 @@
 
     <main class="pt-20 pb-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- 主标题区域 -->
             <section id="overview" class="hero-section animate-fade-in">
                 <div class="text-center mb-6">
-                    <div class="text-xs text-willow uppercase tracking-widest mb-2 font-elegant">Third-Person Action Stealth Level Demo</div>
-                    <div class="text-xs text-willow uppercase tracking-widest mb-4 font-elegant">12-Day Prototype Project · Theme: Scale (Enlarge / Shrink) + Museum</div>
+                    <div class="text-xs text-willow uppercase tracking-widest mb-2 font-elegant">第三人称动作潜行原型</div>
+                    <div class="text-xs text-willow uppercase tracking-widest mb-4 font-elegant">12 天原型冲刺</div>
                     <h1 class="game-title mb-4">逐光</h1>
                     <div class="flex flex-wrap justify-center gap-2 mb-6">
-                        <span class="mini-tag">放大缩小</span>
+                        <span class="mini-tag">尺度切换</span>
                         <span class="mini-tag">博物馆潜入</span>
                         <span class="mini-tag">精神攻击</span>
-                        <span class="mini-tag">钥匙与门禁卡</span>
+                        <span class="mini-tag">钥匙卡推进</span>
                         <span class="mini-tag">激光跳跃</span>
                     </div>
                 </div>
+            </section>
 
+            <section class="mt-6">
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="elegant-panel">
-                        <h2 class="section-title">核心体验</h2>
-                        <p class="text-ink/80 leading-relaxed mb-4">
-                            单人第三人称动作潜入关卡 Demo。核心是"放大/缩小"带来的双重生存逻辑：茶壶形态负责潜入观察，人形态负责高风险突破。
-                        </p>
-                        <div class="elegant-quote">
-                            同一空间，两套逻辑。小而静，大而险。
-                        </div>
-                        <div class="light-divider"></div>
-                        <p class="text-ink/60 text-sm leading-relaxed">
-                            该 Demo 在 12 天内完成原型设计与实现，重点验证核心机制与关卡体验：同一空间中切换两套规则、抓窗口推进、在灯光与阴影之间寻找安全路径。
-                        </p>
+                        <h2 class="section-title">设计约束</h2>
+                        <p class="text-ink/80 leading-relaxed">本项目在受限条件下开发，形式接近 game jam 或课程考核。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">初始关键词为：<br>博物馆<br>尺度切换</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">两个关键词共同定义了环境与核心机制方向。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">所有设计决策都围绕这两个条件展开。</p>
                     </div>
-
                     <div class="elegant-panel">
-                        <h2 class="section-title">文档说明</h2>
-                        <p class="text-ink/80 leading-relaxed mb-3">
-                            作者：张笑菡
-                        </p>
-                        <p class="text-ink/80 leading-relaxed mb-3">
-                            本页面整理 Demo 的完整设计脉络，包括：
-                        </p>
-                        <ul class="clean-list">
-                            <li>核心机制</li>
-                            <li>关卡结构</li>
-                            <li>规则系统</li>
-                            <li>设计思路</li>
-                            <li>剧情与攻略</li>
-                            <li>未实现设计</li>
-                            <li>下一阶段拓展方向</li>
+                        <h2 class="section-title">设计思考</h2>
+                        <p class="text-ink/80 leading-relaxed">最初我想到的是潜行玩法。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">博物馆天然支持潜行：保安、巡逻路线、受控空间都很明确。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">但这也是常见方向，所以我改的是玩家身份而不是玩法类型。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">关键问题变成：玩家不是进入博物馆的人，而是本来就在博物馆里的器物，会怎样？</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">这个问题确立了后续方向。</p>
+                    </div>
+                    <div class="elegant-panel">
+                        <h2 class="section-title">核心概念</h2>
+                        <p class="text-ink/80 leading-relaxed">玩家是可在两种形态间切换的馆藏器物。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">茶壶形态体型小且安全，用于潜行与移动。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">人形形态体型更大且更暴露，用于交互与攻击。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">两种形态遵循不同规则。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">玩家必须在两者间切换才能推进，从而形成同关卡内的双系统结构。</p>
+                    </div>
+                    <div class="elegant-panel">
+                        <h2 class="section-title">世界设定</h2>
+                        <p class="text-ink/80 leading-relaxed">故事发生在器物获得意识的博物馆。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">意识来源于人类的关注：被看见越多，器物越强。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">器物可以投射人形，人眼可见但监控无法识别。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">它们只在夜晚活动。玩家是一只曾经被展出的茶壶，后被遗忘并移入杂物间。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">随着关注衰退，玩家意识逐渐变弱，几乎无法以人形离开本体。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">另一只仍在展出的茶壶提出交易：留下一段投影伪装，玩家在四小时内逃离杂物间、穿越馆内、躲避保安、拿钥匙开门并抵达展厅。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">目标是回到灯光下，恢复存在。</p>
+                    </div>
+                    <div class="elegant-panel md:col-span-2">
+                        <h2 class="section-title">制作范围</h2>
+                        <h3 class="text-ink font-elegant text-lg mb-2">开发时长</h3>
+                        <ul class="clean-list text-ink/80 leading-relaxed mb-4"><li>12 天</li></ul>
+                        <h3 class="text-ink font-elegant text-lg mb-2">开发工具</h3>
+                        <ul class="clean-list text-ink/80 leading-relaxed mb-4">
+                            <li>Unity</li>
+                            <li>Cinemachine</li>
+                            <li>基础敌人 AI 脚本</li>
+                            <li>UI 与触发器系统</li>
+                        </ul>
+                        <h3 class="text-ink font-elegant text-lg mb-2">原型内容</h3>
+                        <ul class="clean-list text-ink/80 leading-relaxed">
+                            <li>一个完整可玩的关卡</li>
+                            <li>一个可运行的形态切换系统</li>
+                            <li>一个敌人响应系统</li>
+                            <li>一条从杂物间到终点平台的完整推进路径</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- 设计部分 - 拆分成小面板 -->
             <section id="design" class="mt-12">
-                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">设计思路</h2>
-
+                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">系统设计</h2>
+                <p class="text-ink/80 leading-relaxed mb-6 text-center">原型围绕少量核心系统构建，每个系统都服务于形态切换与潜行玩法。</p>
                 <div class="grid-small">
-                    <!-- 关卡类型 -->
                     <div class="elegant-panel">
-                        <h3 class="section-title">关卡类型</h3>
-                        <p class="text-ink/80 leading-relaxed">
-                            线性流程关卡。玩家从杂物间出发，按"钥匙与 ID 卡"顺序推进，最终进入展台区域。
-                        </p>
-                        <div class="light-divider"></div>
-                        <p class="text-ink/60 text-sm">
-                            路线清晰，但在杂物间走廊和安保区中，玩家仍能通过绕行、等待、切换形态与攻击时机，做出局部策略变化。
-                        </p>
+                        <h3 class="section-title">关卡结构</h3>
+                        <p class="text-ink/80 leading-relaxed">关卡采用线性推进。玩家从杂物间出发，按固定顺序获取关键道具。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">该结构用于控制节奏、教学顺序与玩家注意力，保证短 Demo 内跑完整循环。</p>
                     </div>
-
-                    <!-- 推进条件 -->
                     <div class="elegant-panel">
-                        <h3 class="section-title">推进条件</h3>
-                        <p class="text-ink/80 leading-relaxed">
-                            必须按顺序拿到三类关键道具：
-                        </p>
-                        <ul class="clean-list mt-3">
+                        <h3 class="section-title">推进系统</h3>
+                        <p class="text-ink/80 leading-relaxed">推进由三件关键道具驱动：</p>
+                        <ul class="clean-list text-ink/80 leading-relaxed mt-3">
                             <li>杂物间钥匙</li>
-                            <li>展厅走廊钥匙</li>
-                            <li>展厅大门 ID 卡</li>
+                            <li>走廊钥匙</li>
+                            <li>展厅门禁卡</li>
                         </ul>
+                        <p class="text-ink/80 leading-relaxed mt-3">玩家不可跳步，核心问题是“如何在压力下安全拿到道具”。</p>
                     </div>
-
-                    <!-- 形态切换 -->
                     <div class="elegant-panel">
-                        <h3 class="section-title">形态切换</h3>
-                        <p class="text-ink/80 leading-relaxed mb-3">
-                            切换按键：<span class="font-medium text-ink">Tab</span>（茶壶 / 人形）
-                        </p>
-                        <div class="bg-gradient-to-r from-mist/30 to-white/50 p-3 rounded-lg backdrop-blur-sm border border-mist/30">
-                            <p class="text-ink/70 text-sm mb-2">🍵 <strong>茶壶形态</strong>：体型小、机动性高、不易被命中（子弹无效），无攻击能力；适合潜行观察与绕行抓时机。</p>
-                            <p class="text-ink/70 text-sm">👤 <strong>人形形态</strong>：体型明显、移动较慢，但可通过 <strong>长按左键</strong> 进行精神攻击；适合高风险突破、控制敌人、完成关键互动。</p>
-                        </div>
+                        <h3 class="section-title">形态切换系统</h3>
+                        <p class="text-ink/80 leading-relaxed">茶壶形态：体型小、无法攻击、不会被子弹命中，用于观察与移动。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">人形态：体型更大、可精神攻击、会暴露在火力下，用于解题和拿关键物品。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">该系统强制玩家在“安全”与“行动”之间做选择。</p>
                     </div>
-
-                    <!-- 精神攻击 -->
                     <div class="elegant-panel">
-                        <h3 class="section-title">精神攻击</h3>
-                        <p class="text-ink/80 leading-relaxed">
-                            敌人精神值归零后进入 <span class="text-willow font-medium">30 秒僵直</span>，停止巡逻与攻击。
-                        </p>
-                        <div class="light-divider"></div>
-                        <p class="text-ink/60 text-sm">
-                            玩家可在窗口期贴近取走钥匙或 ID 卡。这 30 秒既是奖励，也是倒计时压力。
-                        </p>
+                        <h3 class="section-title">敌人响应系统</h3>
+                        <p class="text-ink/80 leading-relaxed">敌人不会死亡，只会被失能。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">精神攻击将敌方稳定值降至 0 后，触发 30 秒眩晕窗口：停止移动、停止攻击，玩家可贴近拿道具。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">首次攻击后第二名保安加入巡逻，提升压力并改变安全路径。</p>
                     </div>
-
-                    <!-- 血量系统 -->
                     <div class="elegant-panel">
-                        <h3 class="section-title">血量系统</h3>
-                        <p class="text-ink/80 leading-relaxed mb-3">
-                            茶壶与人形血量不共享：
-                        </p>
-                        <ul class="clean-list">
-                            <li>人形血量归零 → 强制变回茶壶，永久失去人形</li>
-                            <li>茶壶血量再归零 → 直接失败（碎瓷结局）</li>
+                        <h3 class="section-title">生命与失败规则</h3>
+                        <p class="text-ink/80 leading-relaxed">茶壶形态与人形态生命值分离。</p>
+                        <ul class="clean-list text-ink/80 leading-relaxed mt-3">
+                            <li>人形生命归零：强制变回茶壶，且永久失去人形</li>
+                            <li>茶壶生命归零：游戏结束</li>
                         </ul>
+                        <p class="text-ink/80 leading-relaxed mt-3">人形是高风险高价值手段，推进必需但不能滥用。</p>
                     </div>
-
-                    <!-- 敌人行为 -->
                     <div class="elegant-panel">
-                        <h3 class="section-title">敌人行为</h3>
-                        <p class="text-ink/80 leading-relaxed">
-                            两名保安：一名初始巡逻，一名初始待机。
-                        </p>
-                        <div class="light-divider"></div>
-                        <p class="text-ink/60 text-sm">
-                            只有当第一名保安首次被精神攻击后，第二名才会加入巡逻。鼓励玩家先观察再动手。
-                        </p>
+                        <h3 class="section-title">潜行压力设计</h3>
+                        <p class="text-ink/80 leading-relaxed">压力来源包括敌人巡逻、时机窗口与后段激光穿越。</p>
+                        <ul class="clean-list text-ink/80 leading-relaxed mt-3">
+                            <li>行动前先观察</li>
+                            <li>选择攻击时机</li>
+                            <li>触发高难度前先规划下一步</li>
+                        </ul>
+                        <p class="text-ink/80 leading-relaxed mt-3">目标是在不剥夺控制权的情况下制造张力。</p>
                     </div>
                 </div>
 
-                <!-- 设计理念 -->
                 <div class="elegant-panel mt-6">
-                    <h3 class="section-title">设计理念</h3>
-                    <div class="space-y-4 text-ink/80 leading-relaxed">
-                        <p>
-                            起点不是"体型变化"本身，而是"同一空间里的两套生存逻辑"。放大缩小直接改变玩家做决定的方式。
-                        </p>
-                        <p>
-                            茶壶形态：隐蔽、观察、绕行、抓时机，跳跃灵活<br>
-                            人形形态：正面突破、执行攻击和互动，移动慢、风险高
-                        </p>
-                        <div class="elegant-quote">
-                            两者不是替代关系，而是互补关系。核心乐趣在于"取舍"。
-                        </div>
-                        <p>
-                            博物馆主题天然放大这层对比：由尺度、灯光与秩序构成的空间。小而静的存在更容易融入环境，大而明显的存在更容易被发现。
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Gameplay Loop Diagram -->
-                <div class="elegant-panel mt-6">
-                    <h3 class="section-title">玩法循环</h3>
-                    <p class="text-ink/70 text-sm leading-relaxed mb-4">
-                        说明玩家在关卡中不断重复的决策与行动循环。
-                    </p>
-                    <div class="bg-gradient-to-r from-mist/30 to-white/60 p-4 rounded-lg backdrop-blur-sm border border-mist/40 overflow-x-auto">
-                        <pre class="font-mono text-sm leading-relaxed text-ink/80 whitespace-pre">观察环境
+                    <h3 class="section-title">循环</h3>
+                    <div class="bg-white/60 p-4 rounded-lg backdrop-blur-sm border border-mist/40 overflow-x-auto">
+                        <pre class="font-mono text-sm leading-relaxed text-ink/80 whitespace-pre">观察空间
         ↓
-切换形态（Tab）
+切换形态
         ↓
-规划时机
+制造机会
         ↓
-精神攻击（人形）
+获取推进道具
         ↓
-敌人僵直（30 秒窗口）
-        ↓
-获取钥匙 / ID 卡
-        ↓
-回到潜行（茶壶）
+回到潜行
         ↓
 推进到下一区域</pre>
                     </div>
-                    <div class="light-divider"></div>
-                    <p class="text-ink/80 leading-relaxed">
-                        核心循环可以概括为：<span class="font-medium">观察 → 规划 → 行动 → 脱离</span>
-                    </p>
+                    <p class="text-ink/80 leading-relaxed mt-4">目标是让每一步都清晰且可重复，循环聚焦时机、站位和风险控制。</p>
                 </div>
             </section>
 
-            <!-- 故事与攻略 -->
             <section id="story" class="mt-12">
-                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">故事与攻略</h2>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- 故事背景 -->
-                    <div class="elegant-panel">
-                        <h3 class="section-title">故事背景</h3>
-                        <div class="space-y-3 text-ink/80 leading-relaxed">
-                            <p>玩家是一只曾经被频繁展出的茶壶，因长期被喜爱而生出灵气，并拥有人身。</p>
-                            <p>夜晚的博物馆里，许多器物灵会在无人时短暂活动。</p>
-                            <p>后来主角被撤展并丢入杂物间，灯光不再照向它，存在感不断衰弱。</p>
-                            <p>随着被遗忘加深，它的人身能力也越来越弱，最终几乎无法离开本体。</p>
-                            <div class="elegant-quote">
-                                某夜，展台上的"茶壶兄弟"提出交换计划...
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 攻略流程 -->
-                    <div class="elegant-panel">
-                        <h3 class="section-title">攻略流程</h3>
-                        <ul class="clean-list">
-                            <li><strong>离开杂物间</strong>：理解基础推进逻辑，搜索可互动角落，拿到纯白钥匙</li>
-                            <li><strong>观察与试探</strong>：学习形态切换和攻击，用茶壶形态观察巡逻路线与盲区</li>
-                            <li><strong>安保区决策</strong>：确认关键门与走廊，在人形窗口内打出精神攻击并取物</li>
-                            <li><strong>激光段</strong>：压力来自激光跳跃和节奏控制，不再是纯枪线压制</li>
-                            <li><strong>结局</strong>：刷卡抵达展台即"逐光"；茶壶血量耗尽则"碎瓷"</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Level Flow Diagram -->
-                <div class="elegant-panel mt-6">
-                    <h3 class="section-title">关卡流程</h3>
-                    <p class="text-ink/70 text-sm leading-relaxed mb-4">展示玩家如何推进关卡。</p>
-                    <div class="bg-gradient-to-r from-mist/30 to-white/60 p-4 rounded-lg backdrop-blur-sm border border-mist/40 overflow-x-auto">
-                        <pre class="font-mono text-sm leading-relaxed text-ink/80 whitespace-pre">【杂物间】
-     │
-     │  （找到纯白钥匙）
-     ▼
-【杂物间走廊】
-     │
-     │  （观察巡逻路线）
-     ▼
-【安保区】
-     │
-     │  （精神攻击保安）
-     │
-     │  （获得走廊钥匙）
-     ▼
-【激光走廊】
-     │
-     │  （穿越激光跳跃）
-     ▼
-【主展厅】
-     │
-     │  （使用 ID 卡）
-     ▼
-【展台】
-     │
-     ▼
-【结局：逐光】</pre>
-                    </div>
-                    <div class="light-divider"></div>
-                    <p class="text-ink/80 leading-relaxed mb-2"><strong>失败条件：</strong></p>
-                    <div class="bg-gradient-to-r from-mist/20 to-white/40 p-4 rounded-lg backdrop-blur-sm border border-mist/30 overflow-x-auto">
-                        <pre class="font-mono text-sm leading-relaxed text-ink/80 whitespace-pre">茶壶生命值 = 0
-        ↓
-结局：碎瓷</pre>
-                    </div>
-                </div>
-
-                <!-- 未实现内容 -->
-                <div class="elegant-panel mt-6">
-                    <h3 class="section-title">已设计但未完全实现</h3>
-                    <div class="space-y-4 text-ink/80 leading-relaxed">
-                        <p>
-                            <strong>人形右键射击瞬移</strong>：原型阶段已验证可用，玩法潜力明显。但在室内博物馆的小尺度空间里，落点易与墙体和装饰重叠，导致卡模。
-                        </p>
-                        <p>
-                            <strong>完整环境解谜系统</strong>：原设想包含可移动激光、推箱阻光、电箱解谜、监控室拉闸断电等多路径解法。
-                        </p>
-                        <div class="elegant-quote">
-                            这些内容与博物馆主题契合度高，后续扩展空间明确。
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 后续方向 -->
-            <section class="mt-12">
-                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">后续方向</h2>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- 人文设计 -->
-                    <div class="elegant-panel">
-                        <h3 class="section-title">人文设计思路</h3>
-                        <div class="space-y-3 text-ink/80 leading-relaxed">
-                            <p>文化元素不只是"被看见"，而是"可感知、可利用"。</p>
-                            <p>博物馆在白天是秩序空间，夜晚则变成时空边界松动的灵物共存场域。</p>
-                            <p>适合先落地"传统服饰与首饰展区走廊"：巡逻路线围绕主展柜，光照聚焦展品，阴影区提供潜行空间。</p>
-                        </div>
-                    </div>
-
-                    <!-- 下一关构想 -->
-                    <div class="elegant-panel">
-                        <h3 class="section-title">下一关构想</h3>
-                        <div class="space-y-3 text-ink/80 leading-relaxed">
-                            <p>第一关"逐光"追的是展台灯束，第二关会把目标转为"自然光"。</p>
-                            <p>结构上将从封闭走廊转向纵向空间与路径选择。</p>
-                            <p>可引入轻量 AI 灵物 NPC（吸引巡逻、短开通道等一次性辅助）。</p>
-                            <div class="elegant-quote">
-                                最终目标：让玩家在多机关、多选择的压力下完成真正意义上的"离馆"，看见第一束自然光。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 视频部分 -->
-            <section id="video" class="mt-12">
-                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">Demo 视频</h2>
-
+                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">挑战与解决</h2>
                 <div class="elegant-panel">
-                    <div class="mb-6">
-                        <h3 class="section-title mb-4">完整流程演示</h3>
-                        <p class="text-ink/80 leading-relaxed mb-4">
-                            七分钟完整关卡流程，展示从杂物间到展台的全过程，包括形态切换、精神攻击、激光跳跃等核心机制。
-                        </p>
-                        <div class="flex flex-wrap gap-3 mb-4">
-                            <span class="mini-tag">时长：约7分钟</span>
-                            <span class="mini-tag">分辨率：1920×1080</span>
-                            <span class="mini-tag">格式：MP4</span>
-                        </div>
-                    </div>
+                    <p class="text-ink/80 leading-relaxed">主要挑战是让两种形态足够不同，同时仍能在同一关卡中成立。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">差异太小，系统失去意义；差异太大，玩法会断裂。</p>
+                    <div class="light-divider"></div>
+                    <p class="text-ink/80 leading-relaxed">解决方案是明确分工：茶壶形态安全但受限，人形态强力但高风险。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">两者拥有不同规则、交互与生存条件，因此玩家决策空间清晰。</p>
+                    <div class="light-divider"></div>
+                    <p class="text-ink/80 leading-relaxed">另一挑战是制作范围。12 天内无法高质量并行完成大量系统。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">因此聚焦一个核心机制、一个关卡、一个完整循环；其余想法测试后暂时移除以保证稳定与完成度。</p>
+                </div>
+            </section>
 
+            <section id="video" class="mt-12">
+                <h2 class="text-2xl font-elegant text-ink mb-6 text-center">玩法演示</h2>
+                <div class="elegant-panel">
+                    <p class="text-ink/80 leading-relaxed mb-4">该视频展示了完整可玩原型流程。</p>
+                    <p class="text-ink/80 leading-relaxed mb-4">内容覆盖形态切换、敌人交互与关卡推进。</p>
                     <div class="clean-video w-full mx-auto">
                         <div class="media-video-embed">
                             <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116215104143749&bvid=BV11dczz3Ef1&cid=36643602438&p=1"
@@ -753,40 +448,52 @@
                                     allowfullscreen="true"></iframe>
                         </div>
                     </div>
+                </div>
+                <div class="elegant-panel mt-6">
+                    <h2 class="section-title">未实现系统（范围限制）</h2>
+                    <p class="text-ink/80 leading-relaxed">部分系统已设计但未纳入最终构建，主要受时间限制。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">这些系统原本用于扩展玩家反馈与叙事结果。</p>
 
-                    <div class="mt-6 pt-6 border-t border-mist/30">
-                        <h4 class="font-elegant text-ink mb-3">视频内容要点</h4>
-                        <ul class="clean-list">
-                            <li><strong>00:00-01:30</strong> - 杂物间探索与基础操作教学</li>
-                            <li><strong>01:30-03:45</strong> - 形态切换与保安巡逻观察</li>
-                            <li><strong>03:45-05:15</strong> - 精神攻击与关键道具获取</li>
-                            <li><strong>05:15-06:45</strong> - 激光段跳跃与最终冲刺</li>
-                            <li><strong>06:45-07:00</strong> - 展台抵达与结局展示</li>
-                        </ul>
-                    </div>
+                    <div class="light-divider"></div>
+                    <h3 class="section-title">1. 分数系统</h3>
+                    <p class="text-ink/80 leading-relaxed">玩家初始 100 分，拿钥匙扣分，归还钥匙加回分数。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">该系统鼓励谨慎行动与责任感，结局可随分数变化。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">例如：未归还钥匙会触发“钥匙失踪”新闻；表现良好则为“平静无事”新闻。</p>
+
+                    <div class="light-divider"></div>
+                    <h3 class="section-title">2. 监控系统</h3>
+                    <p class="text-ink/80 leading-relaxed">茶壶形态需规避摄像头，被识别会扣分。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">该系统在保安巡逻之外增加潜行压力，要求更细致的站位与路径规划。</p>
+
+                    <div class="light-divider"></div>
+                    <h3 class="section-title">3. 叙事反馈（报纸结局）</h3>
+                    <p class="text-ink/80 leading-relaxed">通关后显示次日报纸，内容依据玩家表现变化。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">可能出现：普通报道、钥匙失窃报道、暗示超自然事件的报道。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">该系统用于把玩家行为与叙事结果直接绑定。</p>
+
+                    <div class="light-divider"></div>
+                    <p class="text-ink/80 leading-relaxed">这些内容为保障 12 天内原型完整稳定而暂未实装。</p>
+                    <p class="text-ink/80 leading-relaxed mt-3">但设计已完成，可在后续迭代接入。目标是让行为影响结果，而非仅有成功/失败二值反馈。</p>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- 页脚 -->
     <footer class="minimal-footer">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <p class="text-ink/50 text-sm font-elegant">© 2026 逐光 Demo</p>
-            <p class="text-ink/30 text-xs mt-2">设计：张笑菡 | 文档整理：张笑菡</p>
+            <p class="text-ink/50 text-sm">© 2026 逐光 Demo</p>
+            <p class="text-ink/30 text-xs mt-2">设计与文档：张笑菡</p>
         </div>
     </footer>
 
     <script>
-        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-
+                if (targetId === '#') return;
                 const targetElement = document.querySelector(targetId);
-                if(targetElement) {
+                if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
@@ -795,7 +502,6 @@
             });
         });
 
-        // 导航栏滚动效果
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 20) {
@@ -805,7 +511,6 @@
             }
         });
 
-        // 面板进入视口时的动画
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -820,7 +525,6 @@
             });
         }, observerOptions);
 
-        // 观察所有面板
         document.querySelectorAll('.elegant-panel').forEach(panel => {
             panel.style.opacity = '0';
             panel.style.transform = 'translateY(20px)';

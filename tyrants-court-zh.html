@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朝堂之上 - PLO5 案例页</title>
+    <script>
+        if (localStorage.getItem('siteLang') === 'en') {
+            window.location.replace('tyrants-court.html');
+        } else {
+            localStorage.setItem('siteLang', 'zh');
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0812;
+            --bg-dark: #120b1a;
+            --bg-card: rgba(26, 18, 40, 0.75);
+            --bg-card-light: rgba(34, 23, 51, 0.7);
+            --gold: #d4a853;
+            --gold-light: #e8c878;
+            --gold-dark: #a67c3d;
+            --gold-glow: rgba(212, 168, 83, 0.3);
+            --purple: #8b5cf6;
+            --purple-light: #a78bfa;
+            --purple-dark: #6d28d9;
+            --purple-glow: rgba(139, 92, 246, 0.25);
+            --text: #f5f0e8;
+            --text-muted: #c4b998;
+            --text-dim: #8a7f6a;
+            --border-gold: rgba(212, 168, 83, 0.4);
+            --border-purple: rgba(139, 92, 246, 0.3);
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Crimson Text", Georgia, serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+            font-size: 17.5px;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpolygon points='48,2 94,48 48,94 2,48' fill='none' stroke='%23d6b978' stroke-opacity='0.28' stroke-width='1.2'/%3E%3Cpolygon points='48,14 82,48 48,82 14,48' fill='none' stroke='%23d6b978' stroke-opacity='0.22' stroke-width='1'/%3E%3Cpolygon points='48,25 71,48 48,71 25,48' fill='none' stroke='%23d6b978' stroke-opacity='0.18' stroke-width='0.9'/%3E%3Cpolygon points='48,34 62,48 48,62 34,48' fill='%23d6b978' fill-opacity='0.24'/%3E%3C/svg%3E");
+            background-size: 86px 86px;
+            background-repeat: repeat;
+            opacity: 0.36;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(212, 168, 83, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse 50% 30% at 20% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 8, 18, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 168, 83, 0.2);
+        }
+        .top-nav-bar-inner {
+            width: min(1200px, 95vw);
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: "Cinzel", serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover { color: var(--gold-light); }
+        .back-link svg { width: 16px; height: 16px; }
+        .top-nav-actions { display: flex; align-items: center; gap: 18px; }
+        .quick-nav { display: flex; align-items: center; gap: 28px; }
+        .quick-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: "Cinzel", serif;
+            font-size: 0.86rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .quick-nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .quick-nav a:hover { color: var(--gold-light); }
+        .quick-nav a:hover::after { width: 100%; }
+        .lang-switch {
+            border: 1px solid var(--border-gold);
+            color: var(--gold-light);
+            background: rgba(212, 168, 83, 0.08);
+            padding: 0.32rem 0.62rem;
+            font-family: "Cinzel", serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .lang-switch:hover { background: rgba(212, 168, 83, 0.18); color: #fff3d6; }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            width: min(1100px, 94vw);
+            margin: 0 auto;
+            padding: 100px 0 80px;
+        }
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+            padding: 50px;
+            margin-bottom: 45px;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(18, 11, 26, 0.85) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .hero-content .subtitle {
+            font-family: "Cinzel", serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        .hero-content h1 {
+            margin: 0 0 18px;
+            font-family: "Cinzel", serif;
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            text-shadow: 0 0 30px var(--gold-glow);
+            line-height: 1.1;
+        }
+        .hero-content .tagline {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            padding-left: 12px;
+            border-left: 2px solid var(--gold);
+        }
+        .hero-content .description {
+            font-size: 1.14rem;
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .hero-image {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, rgba(34, 23, 51, 0.8), rgba(26, 18, 40, 0.9));
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        .video-section {
+            margin-bottom: 40px;
+            padding: 35px 40px;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(18, 11, 26, 0.82) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+        }
+        .section-title {
+            font-family: "Cinzel", serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin: 0 0 25px;
+            padding-left: 12px;
+            border-left: 3px solid var(--gold);
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .video-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(30, 22, 45, 0.9), rgba(20, 14, 32, 0.95));
+            border: 1px solid var(--border-purple);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .video-card:hover { border-color: var(--purple-light); box-shadow: 0 0 25px var(--purple-glow); }
+        .video-media-wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+        .video-media {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #000;
+            z-index: 1;
+        }
+        .video-info {
+            position: static;
+            padding: 14px 16px;
+            background: linear-gradient(180deg, rgba(8, 5, 14, 0.95), rgba(8, 5, 14, 0.88));
+            border-top: 1px solid rgba(126, 34, 206, 0.28);
+        }
+        .video-info h3 {
+            margin: 0 0 3px;
+            font-family: "Cinzel", serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+        .video-info p { margin: 0; font-size: 0.96rem; color: var(--text-dim); }
+
+        .section {
+            position: relative;
+            margin-bottom: 35px;
+            padding: 38px 42px;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(18, 11, 26, 0.8) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+        }
+        .section h2 {
+            position: relative;
+            display: inline-block;
+            margin: 0 0 25px;
+            font-family: "Cinzel", serif;
+            font-size: 1.45rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+        .section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+        .section p { margin: 0 0 18px; font-size: 1.14rem; color: var(--text); }
+        .section p:last-child { margin-bottom: 0; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+        .step-card {
+            position: relative;
+            padding: 24px 20px 20px;
+            background: linear-gradient(135deg, var(--bg-card-light) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--border-purple);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .step-card:hover { border-color: var(--purple-light); box-shadow: 0 0 20px var(--purple-glow); }
+        .step-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 35px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), transparent);
+            border-radius: 0 0 4px 4px;
+        }
+        .step-card h3 {
+            margin: 0 0 12px;
+            font-family: "Cinzel", serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--purple-light);
+        }
+        .step-card p { margin: 0; font-size: 1.06rem; line-height: 1.75; color: var(--text); }
+        .step-card p + p { margin-top: 12px; }
+
+        .timeline-note {
+            position: relative;
+            margin-top: 24px;
+            padding: 16px 22px;
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.1), rgba(212, 168, 83, 0.03));
+            border: 1px solid var(--border-gold);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-size: 1.02rem;
+            font-style: italic;
+        }
+        .timeline-note::before {
+            content: "◆";
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 0.6rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+        .status-card {
+            position: relative;
+            padding: 26px 22px;
+            background: linear-gradient(135deg, var(--bg-card-light) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+        }
+        .status-card.improved { border-color: rgba(110, 195, 165, 0.4); background: linear-gradient(135deg, rgba(110, 195, 165, 0.08), var(--bg-card)); }
+        .status-card.improved::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6ec3a5, transparent);
+            border-radius: 6px 6px 0 0;
+        }
+        .status-card.unresolved { border-color: rgba(226, 179, 122, 0.4); background: linear-gradient(135deg, rgba(226, 179, 122, 0.08), var(--bg-card)); }
+        .status-card.unresolved::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e2b27a, transparent);
+            border-radius: 6px 6px 0 0;
+        }
+        .status-card h3 {
+            margin: 0 0 12px;
+            font-family: "Cinzel", serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .status-card.improved h3 { color: #6ec3a5; }
+        .status-card.unresolved h3 { color: #e2b27a; }
+        .status-card p { margin: 0; font-size: 1.06rem; line-height: 1.75; }
+
+        .insight-block {
+            position: relative;
+            margin-top: 28px;
+            padding: 28px 26px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--purple);
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+        }
+        .insight-block .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-family: "Cinzel", serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--purple-light);
+        }
+        .insight-block .label svg { width: 16px; height: 16px; fill: var(--purple-light); }
+        .insight-block p { margin: 0; font-size: 1.05rem; line-height: 1.8; color: #e8e0f5; }
+
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 30px;
+            }
+            .hero-image { order: -1; }
+            .video-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .card-grid,
+            .status-grid { grid-template-columns: 1fr; }
+            .section { padding: 30px 24px; }
+            .section h2 { font-size: 1.25rem; }
+            .quick-nav { display: none; }
+            .video-section { padding: 30px 24px; }
+        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--purple-dark), var(--gold-dark)); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--purple), var(--gold)); }
+        ::selection { background: var(--purple); color: var(--text); }
+    </style>
+</head>
+<body>
+    <nav class="top-nav-bar">
+        <div class="top-nav-bar-inner">
+            <a href="projects.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                返回项目页
+            </a>
+            <div class="top-nav-actions">
+                <div class="quick-nav">
+                    <a href="#overview">概览</a>
+                    <a href="#gameplay">玩法</a>
+                    <a href="#initial">初版设计</a>
+                    <a href="#iteration1">迭代一</a>
+                    <a href="#iteration2">迭代二</a>
+                    <a href="#reflection">反思</a>
+                </div>
+                <button class="lang-switch" onclick="toggleLang()">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page">
+        <header class="hero">
+            <div class="hero-content">
+                <div class="subtitle">项目详情 / PLO5</div>
+                <h1>朝堂之上</h1>
+                <p class="tagline">以玩家为中心的设计迭代</p>
+                <p class="description">这是一款多人卡牌博弈游戏，核心体验围绕玩家互动、隐藏身份与策略决策展开。玩家通过卡牌、能力和共享系统观察局势、控制风险，并在不断变化的回合中做出应对。</p>
+            </div>
+            <div class="hero-image">
+                <img src="king_cover_v3.png" alt="朝堂之上封面图">
+            </div>
+        </header>
+
+        <section id="gameplay" class="video-section">
+            <h2 class="section-title">玩法演示</h2>
+            <div class="video-grid">
+                <article class="video-card">
+                    <div class="video-media-wrap">
+                        <video class="video-media" controls muted playsinline preload="metadata">
+                            <source src="InitialMode.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>初版模式</h3>
+                        <p>原始玩法迭代版本</p>
+                    </div>
+                </article>
+                <article class="video-card">
+                    <div class="video-media-wrap">
+                        <video class="video-media" controls muted playsinline preload="metadata">
+                            <source src="RefinedMode.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>优化模式</h3>
+                        <p>面向玩家反馈的重构版本</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="overview" class="section">
+            <h2>游戏概述</h2>
+            <p>《朝堂之上》是一款多人卡牌博弈游戏，核心体验围绕玩家互动、隐藏身份与策略决策展开。</p>
+            <p>玩家通过卡牌、能力与共享系统进行博弈。整体玩法强调玩家之间的张力、信息不确定性与时机判断。玩家需要观察他人、管理风险，并根据局势变化持续调整行动。</p>
+            <p>游戏建立在玩家间冲突、间接对抗，以及“获取权力”与“承担风险”之间的取舍之上。</p>
+        </section>
+
+        <section id="initial" class="section">
+            <h2>初版设计</h2>
+            <p>初版将多个系统同时组合进一个体验中，包含隐藏身份与不同胜利条件、回合卡牌系统，以及“证据 / 嫌疑”资源系统。</p>
+            <p>在正式开局前，除中央权力角色外的玩家会从共享能力池中选择能力。每位玩家可选择多个高收益能力。</p>
+            <p>但每个被选能力也会反向加强中央权力角色，例如额外抽牌或获得增益效果。由此形成“玩家变强，但共同威胁也同步增强”的共享代价结构。</p>
+            <p>这一开局阶段构成了早期策略决策：玩家需要判断自己应拿多少强度，以及愿意给中央系统释放多少增益。</p>
+            <p>进入回合后，玩家通过抽牌、释放能力和彼此博弈推进局势。证据是可用于强效果的隐藏资源，嫌疑则惩罚过度积累优势的玩家。</p>
+            <p>问题在于，所有系统在开局同时出现，缺少清晰学习顺序。玩家需要一次性理解身份、能力、卡牌与资源关系，认知负担偏高。</p>
+        </section>
+
+        <section id="iteration1" class="section">
+            <h2>迭代一</h2>
+            <div class="card-grid">
+                <article class="step-card">
+                    <h3>玩家体验（测试一）</h3>
+                    <p>第一轮测试中，不同玩家反复出现同一问题：难点不在数值强度，而在理解成本。</p>
+                    <p>多数玩家难以判断当前目标，也无法快速建立能力、卡牌和资源之间的关系。早期大量时间消耗在读牌文本而非做决策上，策略行为未能及时出现。</p>
+                    <p>整体感受被描述为“混乱且压迫”。玩家更像在补规则，而不是进入博弈张力。</p>
+                </article>
+                <article class="step-card">
+                    <h3>原因分析</h3>
+                    <p>问题核心来自系统引入方式。</p>
+                    <p>玩家需要同时处理隐藏身份、能力效果、卡牌互动与资源逻辑，导致前期认知负载过高。</p>
+                    <p>当玩家无法判断“当前最重要的信息”，就无法形成有效决策，原本预期的策略与张力被理解成本替代。</p>
+                </article>
+                <article class="step-card">
+                    <h3>设计调整</h3>
+                    <p>方向转向“先清晰，再复杂”。</p>
+                    <p>系统重构为先聚焦核心关系：证据与嫌疑。其他机制被延后或简化，让玩家先建立一个可稳定理解的中心循环。</p>
+                    <p>目标是降低早期混乱，让玩家更早进入有效博弈。</p>
+                </article>
+                <article class="step-card">
+                    <h3>落地实现</h3>
+                    <p>通过减少前期同时激活机制数量，并缩减牌池来突出核心互动。</p>
+                    <p>同时引入分层教学式对局结构：</p>
+                    <p>第一阶段只让玩家体验“证据”作为隐藏权力的作用。</p>
+                    <p>第二阶段再引入“嫌疑”作为风险机制。</p>
+                    <p>第三阶段将两者在更高压力下组合，迫使玩家考虑时机和取舍。</p>
+                    <p>这样玩家通过对局学习，而不是依赖额外说明。</p>
+                </article>
+            </div>
+            <div class="timeline-note">演进路径：初版并行系统 → 玩家困惑 → 识别原因 → 聚焦核心循环。</div>
+        </section>
+
+        <section id="iteration2" class="section">
+            <h2>迭代二</h2>
+            <div class="card-grid">
+                <article class="step-card">
+                    <h3>玩家体验（测试二）</h3>
+                    <p>二轮测试后，系统理解速度明显提升，玩家更早进入决策阶段，机制关系也更清楚。</p>
+                    <p>但新问题出现：部分玩家认为游戏辨识度仍不足；部分回合偏被动，玩家之间的强互动不够稳定。</p>
+                </article>
+                <article class="step-card">
+                    <h3>原因分析</h3>
+                    <p>问题转向“参与感与身份感”。</p>
+                    <p>虽然规则可读性提升，但体验仍接近常见卡牌框架，核心机制对“这是这款游戏”的定义力仍然不够。</p>
+                    <p>同时玩家可主动施加影响的空间偏少，回合更像被动响应而非主动布局。</p>
+                </article>
+                <article class="step-card">
+                    <h3>设计调整</h3>
+                    <p>第二次方向调整为强化核心机制辨识度。</p>
+                    <p>以证据机制作为全局中心，取消玩家间直接伤害，所有后果通过共享系统结算。</p>
+                    <p>互动重心从“直接打击”改为“信息与时机博弈”。</p>
+                </article>
+                <article class="step-card">
+                    <h3>落地实现</h3>
+                    <p>新版本中，玩家不能直接攻击彼此，而是通过揭露他人证据影响局势。</p>
+                    <p>每轮结束后系统统一评估已暴露证据并施加惩罚。</p>
+                    <p>由此形成以信息、时机、推断为核心的竞争结构，而非传统伤害交换。</p>
+                </article>
+            </div>
+            <div class="timeline-note">演进路径：规则更清晰 → 识别辨识度不足 → 强化核心机制 → 交互模型重构。</div>
+        </section>
+
+        <section id="result" class="section">
+            <h2>结果</h2>
+            <div class="status-grid">
+                <article class="status-card improved">
+                    <h3>已改进</h3>
+                    <p>本轮迭代后，游戏辨识度更清晰。玩家普遍反馈系统更聚焦、理解更直接，核心机制在对局中的可见度显著提升。</p>
+                </article>
+                <article class="status-card unresolved">
+                    <h3>仍待解决</h3>
+                    <p>目前仍存在若干限制：牌池深度不足导致长期策略空间偏窄；部分回合互动强度不稳定；随机抽牌仍会影响中长期规划连续性。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="reflection" class="section">
+            <h2>反思</h2>
+            <p>这个项目验证了：玩家反馈不仅用于修补问题，也可以直接指导设计方向。</p>
+            <p>第一轮迭代解决了“可读性不足”，第二轮迭代解决了“参与感与机制辨识度不足”。</p>
+            <p>两次调整都基于真实玩家体验，并且对应了可验证的问题类型。</p>
+            <p>后续项目中，系统会先以更小单位进行分层测试，再进入复杂组合，以减少早期理解负担。</p>
+            <p>同时会持续以“玩家是否自然使用机制”为评估标准，而不是只看规则是否存在。</p>
+            <div class="insight-block">
+                <span class="label">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    关键洞察
+                </span>
+                <p>当反馈被当作“方向证据”而非“错误清单”时，以玩家为中心的设计效率会更高。可读性与参与感的提升，必须建立在可观察行为与机制响应之间的直接映射上。</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleLang() {
+            localStorage.setItem('siteLang', 'en');
+            window.location.href = 'tyrants-court.html';
+        }
+    </script>
+</body>
+</html>

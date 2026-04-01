@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milk Man Crushing - PLO 2 Case Study</title>
+    <script>
+        if (localStorage.getItem('siteLang') === 'zh') {
+            window.location.replace('MilkManCrushing-zh.html');
+        } else {
+            localStorage.setItem('siteLang', 'en');
+        }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --sky: #3f86ba;
+            --sky-deep: #7fb8e2;
+            --sky-glow: #62a9d8;
+            --sky-soft: rgba(63, 134, 186, 0.2);
+            --white: #dbe7ff;
+            --cream: #0c1320;
+            --gray-100: #111b2d;
+            --gray-200: #1e2b40;
+            --gray-300: #2f3f5b;
+            --gray-400: #8ea4c5;
+            --gray-500: #a9bdd8;
+            --gray-600: #c3d2e8;
+            --gray-700: #d7e3f4;
+            --gray-800: #e8f1ff;
+            --ink: #f4f8ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Fira Code", monospace;
+            color: var(--gray-600);
+            background: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--sky);
+            border-radius: 4px;
+        }
+
+        ::selection {
+            background: var(--sky-soft);
+            color: var(--sky-deep);
+        }
+
+        /* Clip Sharp - diagonal cut corners */
+        .clip-sharp {
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% calc(100% - 12px),
+                calc(100% - 12px) 100%,
+                0 100%
+            );
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(12, 19, 32, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--sky);
+            box-shadow: 0 4px 20px var(--sky-soft);
+        }
+
+        nav::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--sky), transparent);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-back {
+            font-family: "Chakra Petch", sans-serif;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--sky);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .nav-back:hover {
+            color: var(--sky-deep);
+            text-shadow: 0 0 20px var(--sky-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lang-switch {
+            border: 1px solid var(--sky);
+            color: var(--sky-deep);
+            background: rgba(91, 177, 232, 0.08);
+            font-family: "Fira Code", monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.72rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-switch:hover {
+            color: var(--white);
+            background: var(--sky);
+        }
+
+        .nav-link {
+            font-family: "Chakra Petch", sans-serif;
+            font-weight: 600;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--sky);
+            border-color: var(--sky);
+            background: var(--sky-soft);
+        }
+
+        .nav-link.active {
+            color: var(--white);
+            background: var(--sky);
+            border-color: var(--sky);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 30% 20%, var(--sky-soft) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 60%, rgba(63, 134, 186, 0.08) 0%, transparent 40%),
+                var(--cream);
+        }
+
+        /* HUD Lines */
+        .hud-line-h {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sky), transparent);
+            opacity: 0.3;
+        }
+
+        .hud-line-v {
+            position: absolute;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--sky), transparent);
+            opacity: 0.3;
+        }
+
+        .hud-1 { top: 25%; }
+        .hud-2 { top: 75%; }
+        .hud-3 { left: 15%; }
+        .hud-4 { right: 15%; }
+
+        .hero-content {
+max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-label {
+            font-family: "Chakra Petch", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--sky);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--sky);
+        }
+
+        .hero-title {
+            font-family: "Chakra Petch", sans-serif;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin: 0 0 1.5rem;
+            position: relative;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--sky), var(--sky-glow));
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Meta Chips */
+        .meta-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .meta-chip {
+            font-family: "Fira Code", monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--sky);
+            background: rgba(91, 177, 232, 0.08);
+            color: var(--sky-deep);
+        }
+
+        .meta-chip:first-child {
+            background: var(--sky);
+            color: var(--white);
+        }
+
+        /* Hero Quote Box */
+        .hero-quote {
+            border-left: 4px solid var(--sky);
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.72);
+            margin-top: 1rem;
+            box-shadow: 0 4px 20px var(--sky-soft);
+        }
+
+        .hero-quote p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--gray-600);
+        }
+
+        /* Hero Decoration - Milk Bottle SVG */
+        .hero-deco {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        .milk-bottle {
+            width: 280px;
+            height: 350px;
+            filter: drop-shadow(0 0 30px var(--sky-soft));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Content Panels */
+        .content-panel {
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid var(--sky);
+            backdrop-filter: blur(8px);
+            position: relative;
+            padding: 2rem 2.5rem;
+        }
+
+        .content-panel::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 25px; height: 25px;
+            border-top: 3px solid var(--sky);
+            border-left: 3px solid var(--sky);
+        }
+
+        .content-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 25px; height: 25px;
+            border-bottom: 3px solid var(--sky);
+            border-right: 3px solid var(--sky);
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 2rem 6rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: "Chakra Petch", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 4px solid var(--sky);
+            padding-left: 1rem;
+        }
+
+        .section-badge {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sky), var(--sky-glow));
+            color: var(--white);
+            font-family: "Chakra Petch", sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px var(--sky-soft);
+            flex-shrink: 0;
+        }
+
+        p {
+            margin: 0 0 1rem;
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: var(--gray-600);
+        }
+
+        /* Grid Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid var(--gray-200);
+            padding: 1.75rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--sky);
+            transition: height 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--sky);
+            box-shadow: 0 8px 30px var(--sky-soft);
+        }
+
+        .card:hover::before {
+            height: 100%;
+        }
+
+        .card h3 {
+            font-family: "Chakra Petch", sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0 0 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--sky);
+            border-radius: 50%;
+        }
+
+        .card p {
+            font-size: 0.88rem;
+            margin: 0;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            margin-top: 2rem;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, var(--sky-soft), rgba(15, 23, 42, 0.5));
+            border-left: 4px solid var(--sky);
+            position: relative;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .highlight-box::after {
+            content: '// KEY';
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            font-family: "Fira Code", monospace;
+            font-size: 0.65rem;
+            color: var(--sky);
+            background: var(--cream);
+            padding: 0.2rem 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(15, 23, 42, 0.72);
+            border: 2px dashed var(--gray-300);
+            text-align: center;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: "Chakra Petch", sans-serif;
+            font-size: 4rem;
+            color: var(--sky);
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .quote-box p {
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--gray-200);
+            text-align: center;
+            background: rgba(12, 19, 32, 0.9);
+        }
+
+        footer .logo {
+            font-family: "Chakra Petch", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            margin: 0.25rem 0;
+            color: var(--gray-400);
+            font-size: 0.85rem;
+        }
+
+        /* Background Grid Pattern */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--sky) 1px, transparent 1px),
+                linear-gradient(90deg, var(--sky) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-deco {
+order: -1;
+            }
+
+            .milk-bottle {
+                width: 180px;
+                height: 220px;
+            }
+
+            .hero-label {
+                justify-content: center;
+            }
+
+            .hero-label::before {
+                display: none;
+            }
+
+            .meta-chips {
+                justify-content: center;
+            }
+
+            .hero-quote {
+                text-align: left;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hud-line-h, .hud-line-v {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="projects.html" class="nav-back">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Projects
+            </a>
+            <div class="nav-actions">
+                <div class="nav-links">
+                    <a href="#overview" class="nav-link active">Overview</a>
+                    <a href="#prototype" class="nav-link">Prototype</a>
+                    <a href="#iteration-1" class="nav-link">Iteration 1</a>
+                    <a href="#iteration-2" class="nav-link">Iteration 2</a>
+                    <a href="#iteration-3" class="nav-link">Iteration 3</a>
+                    <a href="#result" class="nav-link">Result</a>
+                </div>
+                <button class="lang-switch" onclick="toggleLang()">中文</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hud-line-h hud-1"></div>
+        <div class="hud-line-h hud-2"></div>
+        <div class="hud-line-v hud-3"></div>
+        <div class="hud-line-v hud-4"></div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-label">Game Design Case Study</div>
+                <h1 class="hero-title">Milk Man<br>Crushing</h1>
+                <p class="hero-subtitle">Problem Solving and Innovation</p>
+
+                <div class="meta-chips">
+                    <span class="meta-chip">Party Game</span>
+                    <span class="meta-chip">Top Down Arena</span>
+                    <span class="meta-chip">Chaotic Multiplayer</span>
+                    <span class="meta-chip">Slippery Movement</span>
+                    <span class="meta-chip">Cow Chase</span>
+                    <span class="meta-chip">PLO 2</span>
+                </div>
+
+                <div class="hero-quote">
+                    <p>Milk Man Crushing is a multiplayer party game built around chaotic movement, shared objectives, and player disruption. The project evolved through several rounds of testing, with each iteration focused on solving a different player experience problem.</p>
+                </div>
+            </div>
+
+            <div class="hero-deco">
+                <svg class="milk-bottle" viewBox="0 0 120 160" fill="none">
+                    <!-- Bottle Cap -->
+                    <rect x="40" y="5" width="40" height="15" rx="3" fill="#5BB1E8"/>
+                    <rect x="42" y="8" width="36" height="3" fill="#7ecfff"/>
+                    
+                    <!-- Bottle Neck -->
+                    <path d="M45 20 L45 35 L35 50 L35 140 C35 150 45 155 60 155 C75 155 85 150 85 140 L85 50 L75 35 L75 20 Z" fill="white" stroke="#5BB1E8" stroke-width="2"/>
+                    
+                    <!-- Milk Inside -->
+                    <path d="M38 55 L38 138 C38 146 47 150 60 150 C73 150 82 146 82 138 L82 55 Z" fill="#E8F4FC"/>
+                    
+                    <!-- Milk Wave -->
+                    <path d="M38 70 Q50 65 60 70 Q70 75 82 70" stroke="#5BB1E8" stroke-width="1.5" fill="none" opacity="0.5"/>
+                    <path d="M38 85 Q50 80 60 85 Q70 90 82 85" stroke="#5BB1E8" stroke-width="1.5" fill="none" opacity="0.4"/>
+                    
+                    <!-- Label Area -->
+                    <rect x="40" y="95" width="40" height="35" rx="3" fill="#5BB1E8" opacity="0.1"/>
+                    <text x="60" y="112" text-anchor="middle" font-family="Chakra Petch" font-size="8" font-weight="600" fill="#5BB1E8">MILK</text>
+                    <text x="60" y="123" text-anchor="middle" font-family="Chakra Petch" font-size="6" fill="#5BB1E8" opacity="0.7">100%</text>
+                    
+                    <!-- Shine -->
+                    <ellipse cx="48" cy="70" rx="5" ry="15" fill="white" opacity="0.4"/>
+                    
+                    <!-- Decorative bubbles -->
+                    <circle cx="72" cy="75" r="3" fill="#7ecfff" opacity="0.3"/>
+                    <circle cx="68" cy="90" r="2" fill="#7ecfff" opacity="0.2"/>
+                    <circle cx="75" cy="100" r="2.5" fill="#7ecfff" opacity="0.25"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="prototype" class="section">
+            <h2 class="section-title">
+                <span class="section-badge">1</span>
+                Initial Prototype
+            </h2>
+            <div class="content-panel p-6">
+                <p>The first playable version simplified the original concept into a functional prototype.</p>
+                <p>Players collected milk as a progress value. The win condition was reaching one hundred percent milk. Shooting was separated into another system with its own cooldown. Players used one trigger to collect milk and another trigger to shoot.</p>
+                <p>The game was presented as a top down 2D arena. Players were represented as simple colored shapes moving on a very slippery surface. Movement was intentionally unstable to create chaotic control and unpredictable interactions.</p>
+                <p>The cow moved autonomously and could push players away. There was no health system, no elimination, and no ghost mechanic. The game focused entirely on reaching the milk goal before others.</p>
+            </div>
+        </section>
+
+        <section id="iteration-1" class="section">
+            <h2 class="section-title">
+                <span class="section-badge">2</span>
+                Iteration One
+            </h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Problem Discovery</h3>
+                    <p>During the first round of playtesting, players consistently avoided using the shooting mechanic. Players focused only on collecting milk and ignored shooting even when it was available.</p>
+                </article>
+                <article class="card">
+                    <h3>Cause Analysis</h3>
+                    <p>The shooting system did not provide enough value compared to its cost. Players needed to manage cooldowns and use an additional button, but the impact was not strong enough to justify the effort.</p>
+                </article>
+                <article class="card">
+                    <h3>Design Decision</h3>
+                    <p>The design direction shifted toward increasing interaction and reducing friction. The shooting mechanic was redesigned to become a core interaction instead of an optional tool.</p>
+                </article>
+                <article class="card">
+                    <h3>Implementation</h3>
+                    <p>A stun system was introduced. Players now accumulate stun when hit, and reaching a threshold temporarily disables movement. The shooting mechanic was changed to unlimited use.</p>
+                </article>
+            </div>
+            <div class="highlight-box">
+                <p>Key outcome: players started using the interaction system instead of ignoring it.</p>
+            </div>
+        </section>
+
+        <section id="iteration-2" class="section">
+            <h2 class="section-title">
+                <span class="section-badge">3</span>
+                Iteration Two
+            </h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Problem Discovery</h3>
+                    <p>Some players found the movement system too difficult to control. The slippery movement created a skill gap between players, which reduced accessibility for casual players.</p>
+                </article>
+                <article class="card">
+                    <h3>Cause Analysis</h3>
+                    <p>The game provided only one difficulty level and one dominant play pattern. Players with less control struggled to participate effectively.</p>
+                </article>
+                <article class="card">
+                    <h3>Design Decision</h3>
+                    <p>The design direction shifted toward flexibility and player choice. The system needed to support different skill levels.</p>
+                </article>
+                <article class="card">
+                    <h3>Implementation</h3>
+                    <p>A mode selection system was introduced. Three difficulty modes: Easy (reduced speed), Normal (original), Hard (click-to-collect, milk as ammo). Supports 2-6 players.</p>
+                </article>
+            </div>
+            <div class="highlight-box">
+                <p>Key outcome: the project moved from one fixed play pattern to multiple player friendly modes.</p>
+            </div>
+        </section>
+
+        <section id="iteration-3" class="section">
+            <h2 class="section-title">
+                <span class="section-badge">4</span>
+                Iteration Three
+            </h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Problem Discovery</h3>
+                    <p>Players experienced long periods without control due to repeated stun effects. The game became less playable in larger groups.</p>
+                </article>
+                <article class="card">
+                    <h3>Cause Analysis</h3>
+                    <p>The stun system did not limit stacking effects and was not balanced for higher player counts.</p>
+                </article>
+                <article class="card">
+                    <h3>Design Decision</h3>
+                    <p>The system needed to maintain chaos while preserving player control.</p>
+                </article>
+                <article class="card">
+                    <h3>Implementation</h3>
+                    <p>Stun accumulation was disabled during stun states. Stun duration reduced from five seconds to one second. Audio and music feedback were added.</p>
+                </article>
+            </div>
+            <div class="highlight-box">
+                <p>Key outcome: the game kept its chaotic energy without locking players out of play.</p>
+            </div>
+        </section>
+
+        <section id="result" class="section">
+            <h2 class="section-title">
+                <span class="section-badge">5</span>
+                Final Validation
+            </h2>
+            <div class="content-panel p-6">
+                <p>After these adjustments, playtesting showed no major negative feedback.</p>
+                <p>Players remained active for most of the game. Interaction stayed frequent, but control was preserved. The game achieved a better balance between chaos and playability.</p>
+            </div>
+            <div class="quote-box">
+                <p>The final version preserved the party game energy while making the system clearer, fairer, and more responsive across different player counts.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-badge">6</span>
+                Reflection
+            </h2>
+            <div class="content-panel p-6">
+                <p>This project demonstrates how player behavior reveals problems that are not visible in design intentions.</p>
+                <p>The first iteration showed that unused mechanics indicate a mismatch between effort and reward. The second iteration showed that accessibility and depth must be balanced to support different players. The third iteration showed that systems must scale with player count.</p>
+                <p>Each design change was guided by direct observation of player experience rather than assumptions.</p>
+                <p>In future projects, systems will be tested earlier with a focus on player behavior, and mechanics will be evaluated based on how often and how naturally players choose to use them.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="logo">Milk Man Crushing</div>
+        <p>Game Design Case Study</p>
+        <p>Xiaohan Zhang</p>
+    </footer>
+
+    <script>
+        function toggleLang() {
+            localStorage.setItem('siteLang', 'zh');
+            window.location.href = 'MilkManCrushing-zh.html';
+        }
+
+        // Nav scroll effect
+        const links = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+    </script>
+</body>
+</html>

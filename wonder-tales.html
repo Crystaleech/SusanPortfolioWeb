@@ -51,7 +51,7 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpolygon points='48,2 94,48 48,94 2,48' fill='none' stroke='%23d6b978' stroke-opacity='0.28' stroke-width='1.2'/%3E%3Cpolygon points='48,14 82,48 48,82 14,48' fill='none' stroke='%23d6b978' stroke-opacity='0.22' stroke-width='1'/%3E%3Cpolygon points='48,25 71,48 48,71 25,48' fill='none' stroke='%23d6b978' stroke-opacity='0.18' stroke-width='0.9'/%3E%3Cpolygon points='48,34 62,48 48,62 34,48' fill='%23d6b978' fill-opacity='0.24'/%3E%3C/svg%3E");
             background-size: 86px 86px;
             background-repeat: repeat;
-            opacity: 0.36;
+            opacity: 0.26;
         }
 
         nav,
@@ -704,6 +704,207 @@
             flex: 1;
         }
 
+        /* Embedded GDD Reader */
+        .wt-gdd-wrap {
+            width: min(88%, 1160px);
+            margin: 0 auto;
+        }
+        .wt-gdd-window {
+            height: 730px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 1px solid rgba(212, 106, 87, 0.42);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28), inset 0 0 0 1px rgba(244, 236, 225, 0.06);
+            background: linear-gradient(180deg, rgba(236, 226, 214, 0.09), rgba(225, 212, 196, 0.05));
+            padding: 1.3rem 1.4rem 1.8rem;
+            border-radius: 10px;
+        }
+        .wt-gdd-window::-webkit-scrollbar {
+            width: 7px;
+        }
+        .wt-gdd-window::-webkit-scrollbar-track {
+            background: rgba(14, 8, 14, 0.28);
+            border-radius: 999px;
+        }
+        .wt-gdd-window::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(212, 106, 87, 0.78), rgba(151, 72, 62, 0.82));
+            border-radius: 999px;
+        }
+        .wt-gdd-doc-title {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.9rem;
+            color: #f0dfcc;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+        }
+        .wt-gdd-subtitle {
+            font-family: 'Fira Code', monospace;
+            color: #d2beab;
+            font-size: 1.08rem;
+            margin-bottom: 1.2rem;
+        }
+        .wt-gdd-block {
+            border: 1px solid rgba(212, 106, 87, 0.26);
+            background: rgba(18, 11, 22, 0.34);
+            padding: 1rem 1rem 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .wt-gdd-block h3 {
+            margin: 0 0 0.75rem;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.34rem;
+            color: #f2dfcb;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .wt-gdd-block p {
+            margin: 0 0 0.65rem;
+            color: #d5c7b8;
+            font-size: 1.2rem;
+            line-height: 1.72;
+        }
+        .wt-gdd-mini-title {
+            margin: 0.9rem 0 0.45rem;
+            font-family: 'Fira Code', monospace;
+            color: #e8d7c5;
+            font-size: 1.08rem;
+            letter-spacing: 0.02em;
+        }
+        .wt-gdd-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            align-items: center;
+            margin: 0.55rem 0 0.35rem;
+        }
+        .wt-gdd-node {
+            border: 1px solid rgba(212, 106, 87, 0.36);
+            background: rgba(212, 106, 87, 0.08);
+            padding: 0.36rem 0.6rem;
+            font-size: 0.98rem;
+            color: #f0e0cf;
+            white-space: nowrap;
+        }
+        .wt-gdd-arrow {
+            color: #cc917f;
+            font-size: 0.98rem;
+            user-select: none;
+        }
+        .wt-gdd-subnote {
+            color: #c8b39f;
+            font-size: 0.98rem;
+            margin-top: 0.25rem;
+        }
+        .wt-gdd-steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.55rem;
+            margin-top: 0.55rem;
+        }
+        .wt-gdd-step {
+            border: 1px solid rgba(212, 106, 87, 0.27);
+            background: rgba(20, 12, 26, 0.4);
+            padding: 0.5rem;
+            font-size: 0.96rem;
+            color: #dccab7;
+            text-align: center;
+        }
+        .wt-gdd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.55rem;
+            font-size: 1.02rem;
+            color: #ddcbb8;
+        }
+        .wt-gdd-table th,
+        .wt-gdd-table td {
+            border: 1px solid rgba(212, 106, 87, 0.3);
+            padding: 0.48rem 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .wt-gdd-table th {
+            background: rgba(212, 106, 87, 0.16);
+            color: #f0dfcd;
+            font-weight: 600;
+        }
+        .wt-gdd-two-col {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.7rem;
+            margin-top: 0.55rem;
+        }
+        .wt-gdd-box {
+            border: 1px solid rgba(212, 106, 87, 0.32);
+            background: rgba(212, 106, 87, 0.08);
+            padding: 0.68rem;
+        }
+        .wt-gdd-box h4 {
+            margin: 0 0 0.35rem;
+            font-size: 1.08rem;
+            font-family: 'Chakra Petch', sans-serif;
+            color: #f2dfcc;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .wt-gdd-box p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #d8c6b2;
+        }
+        .wt-gdd-strip {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+        .wt-gdd-chip {
+            text-align: center;
+            border: 1px solid rgba(212, 106, 87, 0.35);
+            background: rgba(212, 106, 87, 0.1);
+            padding: 0.42rem 0.35rem;
+            font-size: 0.94rem;
+            color: #eddcc9;
+        }
+        .wt-gdd-result-note {
+            margin-top: 0.55rem;
+            border-left: 3px solid rgba(212, 106, 87, 0.8);
+            background: rgba(212, 106, 87, 0.1);
+            padding: 0.55rem 0.7rem;
+            color: #e5d2bf;
+            font-size: 1rem;
+        }
+        .wt-footer {
+            margin-top: 2.2rem;
+            padding: 0.2rem 0 0;
+            text-align: center;
+            background: transparent;
+        }
+        .wt-footer-panel {
+            background: linear-gradient(180deg, rgba(18, 12, 24, 0.92), rgba(18, 12, 24, 0.92));
+            border: 1px solid rgba(212, 106, 87, 0.26);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+            width: 100%;
+            border-left: none;
+            border-right: none;
+        }
+        .wt-footer .line-main {
+            margin: 0;
+            color: #cdbba8;
+            font-size: 0.86rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-family: 'Chakra Petch', sans-serif;
+        }
+        .wt-footer .line-sub {
+            margin: 0.45rem 0 0;
+            color: #ad9886;
+            font-size: 0.78rem;
+            font-family: 'Fira Code', monospace;
+        }
+
         @media (min-width: 768px) {
             .stagger-panels > *:nth-child(2n) {
                 margin-top: 0.4rem;
@@ -736,6 +937,22 @@
                 flex: 1 1 140px;
                 max-width: 180px;
                 height: 300px;
+            }
+            .wt-gdd-wrap {
+                width: 100%;
+            }
+            .wt-gdd-window {
+                height: 680px;
+                padding: 1rem;
+            }
+            .wt-gdd-steps {
+                grid-template-columns: 1fr;
+            }
+            .wt-gdd-two-col {
+                grid-template-columns: 1fr;
+            }
+            .wt-gdd-strip {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
     </style>
@@ -781,9 +998,6 @@
                         <span class="ornament"><i></i></span>
                         <span class="end-diamond right"></span>
                     </div>
-                    <h2 class="section-head text-3xl md:text-4xl text-parchment mt-20 translate-y-6 md:translate-y-8">
-                        <span class="title-text">Game Summary</span>
-                    </h2>
                 </div>
 
                 <div class="hero-portrait-wrap">
@@ -799,179 +1013,29 @@
         <section id="summary" class="pt-8 pb-24">
             <div class="max-w-7xl mx-auto px-4 space-y-10">
                 <div class="-mt-8 md:-mt-10">
-                    <p class="lead-copy mb-6">
-                        Wonder Tales is a 2D narrative-driven card horror game concept that combines Chinese folklore traditions with Western cosmic horror. Players move through story scenes by making choices, unlocking narrative cards, and reshaping relationships while gradually uncovering a hidden layer of supernatural and cosmic threat.
-                    </p>
-                    <p class="text-fog text-xl leading-relaxed mb-6">
-                        The project began as a paper prototype influenced by TRPG and Call of Cthulhu-style live narration. In its first form, players built their own characters, responded to narrated scenarios, and advanced through the story using cards and choices in a group roleplay format.
-                    </p>
-                    <p class="text-fog text-xl leading-relaxed mb-6">
-                        Playtesting revealed a central design challenge: the setting generated strong curiosity, but many players needed too much explanation to stay oriented. The project then shifted toward a clearer narrative framework that could preserve atmosphere, cultural specificity, and player agency without depending so heavily on live facilitation.
-                    </p>
-                </div>
-                <div class="mt-8">
-                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Core Statement</span></h2>
-                    <p class="lead-copy">
-                        This project explores how a narrative card game can support culturally specific horror while remaining readable to players unfamiliar with its source traditions. The design centers on a structured investigation loop in which players interpret events, unlock narrative cards, and build understanding through play, allowing clarity, immersion, and escalating dread to develop together.
-                    </p>
-                    <div class="grid md:grid-cols-2 gap-6 mt-7 mini-panel-grid">
-                        <div class="mini-panel paper-lite">
-                            <h4>Player Experience Goal</h4>
-                            Create a horror experience that begins with curiosity, develops into uncertainty, and gradually escalates into dread as players uncover the logic behind an unfamiliar cultural and supernatural system.
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Target Audience</h4>
-                            Players who enjoy narrative-driven games, horror storytelling, and mystery investigation, including players with little prior knowledge of Chinese folklore.
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Core Gameplay</h4>
-                            A 2D narrative-driven card game where players move through branching story scenes by making choices, using narrative cards, and uncovering folklore and cosmic mysteries through a defined investigator role.
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Narrative Loop</h4>
-                            Choice → Relationship Shift → Narrative Card Unlock → New Story Scene → Journal Update → Branching Investigation Path
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Narrative System Structure</h4>
-                            The system connects choices, relationship shifts, card unlocks, and journal updates so that each decision produces both immediate emotional feedback and longer-term narrative consequences.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="snapshot" class="-mt-8 pt-2 pb-16">
-            <div class="max-w-7xl mx-auto px-4 space-y-10">
-                <div class="section-frame p-8">
-                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Development Snapshot</span></h2>
-                    <div class="grid md:grid-cols-2 gap-4 text-fog text-xl mini-panel-grid">
-                        <div class="mini-panel paper-lite">
-                            <h4>Development Stage</h4>
-                            Pre-production / paper prototype stage. Completed so far: concept framing, worldbuilding research, first-round TRPG-style paper playtests, system restructuring, and revised narrative direction.
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Prototype Focus</h4>
-                            The prototype tested four things: narrative clarity, player role understanding, emotional immersion, and whether cultural information could be delivered without breaking pacing.
-                        </div>
-                    </div>
-                    <div class="rhythm-divider"></div>
-                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7 mt-10"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">My Role</span></h2>
-                    <div class="grid md:grid-cols-2 gap-4 text-fog text-xl mini-panel-grid">
-                        <div class="mini-panel paper-lite">
-                            <h4>Titles</h4>
-                            Game Designer · Narrative Designer · System Designer
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Responsibilities</h4>
-                            Designed the narrative structure, branching routes, card-based progression, player role framing, and relationship logic; ran paper prototype playtests; analyzed player confusion and engagement; and restructured the concept based on feedback.
-                        </div>
-                    </div>
-                    <div class="rhythm-divider"></div>
-                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7 mt-10"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Player Experience Goals</span></h2>
-                    <div class="grid md:grid-cols-3 gap-4 text-fog text-xl mini-panel-grid">
-                        <div class="mini-panel paper-lite">
-                            <h4>Cultural Discovery</h4>
-                            Introduce unfamiliar folklore through the player’s journey so that learning feels integrated into exploration rather than delivered as outside explanation.
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Immersive Unease</h4>
-                            Create a slow escalation from curiosity to discomfort to supernatural dread through narration, atmosphere, and controlled information release.
-                        </div>
-                        <div class="mini-panel paper-lite">
-                            <h4>Readable Agency</h4>
-                            Give players meaningful narrative choices while making their role, tools, and possible actions easy to understand.
-                        </div>
-                    </div>
-                    <div class="mt-6 mini-panel paper-lite text-fog text-xl">
-                        <h4>Actual Playtest Experience</h4>
-                        The first paper playtest produced a mixed but valuable response. Players reacted strongly to the atmosphere, music, and live narration, but their overall experience was uneven. Some felt immersed and excited by the setting, while others were confused by unfamiliar folklore terms, uncertain about their role, or only followed the story passively.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="pillars" class="-mt-8 pt-2 pb-10">
-            <div class="max-w-7xl mx-auto px-4">
-                <h2 class="section-head text-3xl md:text-4xl text-parchment mb-10"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Game Pillars</span></h2>
-                <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 pillars-grid">
-                    <article class="section-frame p-6">
-                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Discovery Over Explanation</h3>
-                        <ul class="space-y-2 text-fog">
-                            <li>Players should learn the world through interaction and progression, not through direct exposition.</li>
-                            <li>If information must be explained outside gameplay, the design has failed.</li>
-                        </ul>
-                    </article>
-                    <article class="section-frame p-6">
-                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Horror Through Interpretation</h3>
-                        <ul class="space-y-2 text-fog">
-                            <li>Fear should emerge from the player’s understanding of events, not just from visual or scripted shocks.</li>
-                            <li>The more the player understands, the more threatening the world becomes.</li>
-                        </ul>
-                    </article>
-                    <article class="section-frame p-6">
-                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Clarity Enables Immersion</h3>
-                        <ul class="space-y-2 text-fog">
-                            <li>Players must always understand their role, available actions, and immediate goals.</li>
-                            <li>Confusion should come from the mystery, not from unclear systems or identity.</li>
-                        </ul>
-                    </article>
-                    <article class="section-frame p-6">
-                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Structure Supports Freedom</h3>
-                        <ul class="space-y-2 text-fog">
-                            <li>Narrative freedom is meaningful only when supported by a clear underlying system.</li>
-                            <li>Choices, cards, and progression must form a readable loop that players can rely on.</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="design" class="pt-0 pb-24">
-            <div class="max-w-7xl mx-auto px-4 space-y-10">
-                <div class="section-frame p-8">
-                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Experience Design Priorities</span></h2>
-                    <div class="grid md:grid-cols-2 gap-5 text-fog mini-panel-grid stagger-panels">
-                        <div class="mini-panel paper-lite"><h4>Accessible Cultural Discovery</h4>Players should learn unfamiliar folklore through interaction, perspective, and progression rather than through external explanation.</div>
-                        <div class="mini-panel paper-lite"><h4>Controlled Horror Escalation</h4>The experience should move from curiosity to tension to psychological and cosmic dread in a clear and deliberate progression.</div>
-                        <div class="mini-panel paper-lite"><h4>Clear Investigative Role</h4>Players should understand who they are, what they know, and what kinds of actions the game expects from them at any moment.</div>
-                        <div class="mini-panel paper-lite"><h4>Meaningful Narrative Consequences</h4>Choices should reshape relationships, information access, and narrative direction in ways that feel visible and impactful.</div>
-                    </div>
-                    <div class="rhythm-divider"></div>
-                </div>
-
-                <div class="section-frame p-8">
                     <h3 class="section-head text-3xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Early Design Question</span></h3>
-                    <p class="lead-copy mb-6">The project began with a design question rather than a fixed story pitch: can a card-based narrative structure support a horror experience that feels both culturally specific and mechanically readable?</p>
+                    <p class="lead-copy mb-6">This project started with a simple design question: can a card-based narrative structure support a horror experience that feels tense, readable, and emotionally engaging?</p>
                     <p class="text-fog text-xl leading-relaxed mb-6">
-                        Card systems are strong at organizing information, gating progression, and making narrative choices feel tangible. Horror, by contrast, depends heavily on pacing, uncertainty, and emotional control. The first design challenge was to determine whether these two qualities could reinforce each other instead of competing with one another.
+                        At the beginning, I was not starting from a full world setting yet. I was more interested in the relationship between cards, narrative, and horror. I wanted to know whether cards could do more than carry items or choices. I wanted them to help organize story information, control pacing, and make each decision feel heavier.
                     </p>
                     <p class="text-fog text-xl leading-relaxed mb-6">
-                        This led to the initial concept of a narrative card horror game in which players would move through story events by making choices, interpreting danger, and using cards as both narrative carriers and gameplay tools.
+                        This led to the first direction of the project: a narrative horror game where players move through story events with choices and cards, while gradually uncovering danger through play.
                     </p>
-                    <div class="grid md:grid-cols-2 gap-4 text-fog mini-panel-grid stagger-panels">
-                        <div class="mini-panel paper-lite"><h4>Choice as Tension</h4>Narrative choice was treated as a source of tension, not just branching content. Decisions needed to feel risky, readable, and emotionally loaded.</div>
-                        <div class="mini-panel paper-lite"><h4>Cards as Readable Information</h4>Cards were selected as a structural tool because they can carry items, knowledge, relationships, and story fragments in a format players can quickly understand.</div>
-                        <div class="mini-panel paper-lite"><h4>Narrative as Progression</h4>Narrative functions as the main progression system through which new information and new actions become available.</div>
-                        <div class="mini-panel paper-lite"><h4>Cultural Specificity as Strength</h4>Chinese folklore serves as the core material through which mystery, fear, ritual, and interpretation emerge.</div>
-                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="design" class="-mt-6 pt-0 pb-20">
+            <div class="max-w-7xl mx-auto px-4 space-y-10">
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Core Statement</span></h2>
+                    <p class="lead-copy mb-6">To answer the design question, the core statement of the project became clear:</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">Wonder Tales explores how a narrative card game can present culturally specific horror in a way that stays readable to players, even if they are unfamiliar with the source culture.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">To follow the core statement, the design then decided to focus on a structured investigation loop. Players do not learn the world through long explanation. Instead, they learn by making choices, unlocking narrative cards, updating relationships, and slowly understanding the logic behind the horror.</p>
+                    <p class="text-fog text-xl leading-relaxed">The goal is to let clarity, immersion, and dread grow together through play.</p>
                     <div class="rhythm-divider"></div>
                 </div>
 
-                <div class="section-frame p-8">
-                    <h3 class="section-head text-3xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Theme and World Direction</span></h3>
-                    <p class="lead-copy mb-6">
-                        The thematic direction focused on Chinese folk horror because it offers strong ritual logic, symbolic objects, and socially embedded supernatural beliefs. These elements support a form of horror built on interpretation, taboo, and shifting understanding rather than simple surprise.
-                    </p>
-                    <p class="text-fog text-xl leading-relaxed mb-6">
-                        The world design also needed to remain legible to players who were not already familiar with these traditions. This made theme selection part of the onboarding problem: the setting had to preserve cultural specificity while still giving players enough structure to read events as they unfolded.
-                    </p>
-                    <div class="grid md:grid-cols-2 gap-6 text-fog mini-panel-grid stagger-panels">
-                        <div class="mini-panel"><h4>Why Folk Horror</h4>Folk horror supports fear through belief systems, ritual behavior, taboo, and interpretation. This makes it suitable for a game where knowledge itself changes how events are understood.</div>
-                        <div class="mini-panel"><h4>Why Chinese Folklore</h4>Chinese folklore provides a rich structure of ghosts, funerary customs, ritual objects, and supernatural practices that can shape both narrative events and player expectations.</div>
-                        <div class="mini-panel"><h4>Design Implication</h4>Because these themes are culturally dense, the design needed a framework that could gradually teach players how to read the world without interrupting the experience.</div>
-                    </div>
-                    <div class="rhythm-divider"></div>
-                </div>
             </div>
             <div class="max-w-7xl mx-auto px-4">
                 <div class="divider-ornate divider-ornate--banner" aria-hidden="true">
@@ -985,23 +1049,87 @@
             </div>
         </section>
 
-        <section id="research" class="pt-0 pb-24 bg-transparent">
+        <section id="pillars" class="-mt-8 pt-2 pb-10">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="section-head text-3xl md:text-4xl text-parchment mb-10"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Game Pillars</span></h2>
+                <p class="lead-copy mb-6">Based on the core statement, I built four game pillars to guide the project:</p>
+                <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 pillars-grid">
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Discovery Over Explanation</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Players should learn the world through interaction and progression.</li>
+                            <li>If the setting only works when someone explains it from outside the game, the design is not doing its job.</li>
+                        </ul>
+                    </article>
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Horror Through Interpretation</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Fear should come from understanding, not only from surprise.</li>
+                            <li>The more players learn about the world, the more threatening that world should become.</li>
+                        </ul>
+                    </article>
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Clarity Enables Immersion</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Players should always understand who they are, what they can do, and what their short-term goal is.</li>
+                            <li>Mystery should come from the world itself, not from unclear systems.</li>
+                        </ul>
+                    </article>
+                    <article class="section-frame p-6">
+                        <h3 class="font-display text-2xl text-ember mb-4 uppercase">Structure Supports Freedom</h3>
+                        <ul class="space-y-2 text-fog">
+                            <li>Narrative freedom only works when the player has a clear structure to act within.</li>
+                            <li>Choices, cards, and progression need to form a loop that players can trust and understand.</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="pt-0 pb-16">
             <div class="max-w-7xl mx-auto px-4 space-y-10">
-                <div class="section-frame p-8 panel-shift-up-12">
-                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">First Stage Research: Chinese Folklore</span></h2>
-                    <p class="lead-copy mb-6">The first research phase focused on identifying folklore elements that could function as setting details and as playable sources of mystery, tension, and narrative interpretation.</p>
-                    <div class="grid md:grid-cols-2 gap-6 text-fog mini-panel-grid stagger-panels">
-                        <div class="mini-panel"><h4>Paper Dolls</h4>Used in funerary and ritual contexts, paper dolls suggest the transfer of meaning and spirit into symbolic objects. They are useful for horror because they blur the boundary between representation and life.</div>
-                        <div class="mini-panel"><h4>Ghost Marriage</h4>Ghost marriage introduces themes of obligation, death, social ritual, and unfinished relationships. It provides a strong foundation for emotionally charged horror rooted in custom rather than shock alone.</div>
-                        <div class="mini-panel"><h4>Puppetry</h4>Puppetry introduces control, performance, imitation, and the fear of being manipulated by unseen forces. It is especially useful for a game interested in agency and misdirection.</div>
-                        <div class="mini-panel"><h4>Witchcraft</h4>Witchcraft creates a space where healing, revenge, protection, and danger overlap. It allows ritual behavior to function as both narrative worldbuilding and possible gameplay logic.</div>
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Experience Design Priorities</span></h2>
+                    <p class="lead-copy mb-6">After defining the game pillars, I translated them into concrete experience design priorities. These priorities helped me decide what the player should feel first, what should stay clear, and what should change over time.</p>
+                    <div class="grid md:grid-cols-2 gap-5 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel paper-lite"><h4>Accessible Cultural Discovery</h4>Players should learn unfamiliar folklore through play, perspective, and progression, not through long outside explanation.</div>
+                        <div class="mini-panel paper-lite"><h4>Controlled Horror Escalation</h4>The experience should begin with curiosity, move into tension, and slowly grow into dread.</div>
+                        <div class="mini-panel paper-lite"><h4>Clear Investigative Role</h4>At every stage, players should understand who they are, what they know, and what kind of action the game is asking them to take.</div>
+                        <div class="mini-panel paper-lite"><h4>Meaningful Narrative Consequences</h4>Choices should not only change dialogue. They should also affect relationships, information access, and the direction of the investigation.</div>
                     </div>
                     <div class="rhythm-divider"></div>
                 </div>
 
                 <div class="section-frame p-8">
+                    <h3 class="section-head text-3xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Theme and World Direction</span></h3>
+                    <p class="lead-copy mb-6">After defining the core statement, game pillars, and experience priorities, I began shaping the game’s theme and world direction.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">At this stage, I decided to ground the project in Chinese folk horror. I chose this direction because it offers a strong mix of ritual, taboo, symbolic objects, and socially rooted supernatural belief. These qualities fit the kind of horror I wanted to build: fear that grows through interpretation, uncertainty, and gradual understanding.</p>
+                    <p class="text-fog text-xl leading-relaxed">This choice also created a new design challenge. Because many players may not already know this cultural context, the world needed to stay specific without becoming hard to follow. So the setting direction became clear: build a horror world with strong cultural identity, but present it through a structure that players can enter step by step.</p>
+                    <div class="rhythm-divider"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="pt-0 pb-24 bg-transparent">
+            <div class="max-w-7xl mx-auto px-4 space-y-10">
+                <div class="section-frame p-8 panel-shift-up-12">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">First Stage Research: Chinese Folklore</span></h2>
+                    <p class="lead-copy mb-6">Once the theme direction was clear, I began the first stage of research. The goal of this stage was to find folklore elements that could become playable sources of mystery, tension, and horror.</p>
+                    <div class="grid md:grid-cols-2 gap-6 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel"><h4>Paper Dolls</h4>Paper dolls suggest a blurry line between object and spirit. They are useful for horror because they make symbolic objects feel alive and unsettling.</div>
+                        <div class="mini-panel"><h4>Ghost Marriage</h4>Ghost marriage introduces ritual, obligation, death, and unfinished relationships. It creates emotional horror rooted in custom and social meaning.</div>
+                        <div class="mini-panel"><h4>Puppetry</h4>Puppetry brings ideas of control, imitation, and unseen manipulation. It is especially useful for a game about agency, misdirection, and fear of hidden forces.</div>
+                        <div class="mini-panel"><h4>Witchcraft</h4>Witchcraft creates overlap between healing, revenge, protection, and danger. It allows ritual behavior to become both worldbuilding and gameplay logic.</div>
+                    </div>
+                    <p class="text-fog text-xl leading-relaxed mt-6">This research gave the project a stronger cultural base and helped define what kinds of horror the game could use.</p>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
                     <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Moodboard and Atmosphere</span></h2>
-                    <p class="lead-copy mb-6">Moodboards were used to define the intended emotional tone: eerie, ancient, ritualistic, and quietly oppressive rather than purely violent. The visual goal was to support curiosity first, then unease, and only later open horror.</p>
+                    <p class="lead-copy mb-6">After the first research stage, I used moodboards to define the game’s emotional and visual direction.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">The atmosphere I wanted was something eerie, ancient, ritualistic, and quietly oppressive. The emotional flow needed to start with curiosity, then move into unease, and only later open into deeper horror.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">At this stage, the moodboards helped me make the project more concrete. They turned abstract research into a clearer visual tone that could support future design and prototyping.</p>
                     <div class="aligned-gallery harmony-200">
                         <div class="aligned-item"><img src="images/moodboard-1.png" alt="Moodboard 1"></div>
                         <div class="aligned-item"><img src="images/moodboard-2.png" alt="Moodboard 2"></div>
@@ -1014,27 +1142,26 @@
 
                 <div class="section-frame p-8">
                     <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Initial Design Direction</span></h2>
-                    <div class="space-y-3 text-fog">
-                        <div class="mini-panel"><h4>Player Role Assumption</h4>The first version assumed that players could enter the world through self-created identities and interpret the setting through roleplay freedom.</div>
-                        <div class="mini-panel"><h4>Format Assumption</h4>The first prototype assumed that multiplayer TRPG-style interaction would strengthen immersion by making the experience more social and reactive.</div>
-                        <div class="mini-panel"><h4>Hidden Risk</h4>This version depended heavily on player improvisation, facilitator explanation, and prior cultural understanding, which later became the central design problem.</div>
-                    </div>
+                    <p class="lead-copy mb-6">With the research and moodboards in place, I formed the project’s first clear design direction for paper prototype testing.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">In this version, players entered the world through self-created identities. The game used a multiplayer TRPG-style format, where live narration, group roleplay, and card-supported story events worked together to create immersion.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">At the time, this approach made sense because it seemed flexible and atmospheric. It allowed players to react freely, make narrative choices, and experience the setting in a social way.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">However, this version also carried a hidden risk: it depended heavily on player improvisation, facilitator explanation, and prior understanding of the setting. That risk became much more visible during playtesting.</p>
                     <div class="rhythm-divider"></div>
                 </div>
 
                 <div class="section-frame p-8">
                     <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">First Stage Playtest (TRPG Format)</span></h2>
-                    <p class="text-fog text-xl leading-relaxed mb-6">
-                        This first prototype was a paper playtest presented as a live-narrated TRPG experience. I acted as the facilitator, using music, sound, and written scenes to guide players through a horror story. Players created their own identities, entered the world in a group format, responded to events through roleplay and choices, and used cards as part of moment-to-moment narrative progression.
-                    </p>
-                    <div class="grid md:grid-cols-2 gap-4 text-fog mini-panel-grid stagger-panels">
-                        <div class="mini-panel"><h4>Prototype Format</h4>Multiplayer paper prototype inspired by TRPG and Call of Cthulhu-style play. The experience relied on live narration, player-created identities, group interaction, and card-supported story progression.</div>
-                        <div class="mini-panel"><h4>Intended Experience</h4>The design aimed to give players a sense of narrative freedom, strong immersion, and the thrill of entering a culturally unfamiliar horror world through active roleplay and group decision-making.</div>
-                        <div class="mini-panel"><h4>Actual Experience</h4>The atmosphere worked well, especially with music and performed narration, but the overall experience was inconsistent. Some players were deeply engaged, while others struggled to follow the cultural references or understand what they were supposed to do.</div>
-                        <div class="mini-panel"><h4>Problems Identified</h4>Three issues appeared repeatedly: non-Chinese players needed frequent explanation of folklore terms, multiplayer pacing distributed attention unevenly across the group, and self-created characters often felt disconnected from the story’s internal logic.</div>
-                        <div class="mini-panel"><h4>Design Insight</h4>The main issue was not player interest in the setting. Cross-cultural players were curious about the world, but the experience depended too heavily on prior knowledge, improvisation, and facilitator explanation. That dependency interrupted immersion and made the format difficult to scale into a clearer game structure.</div>
-                        <div class="mini-panel"><h4>Resulting Change</h4>The next iteration moved away from a freeform player-created group structure and toward a more controlled narrative framework with defined outsider protagonists, a clearer investigator identity, stronger in-world explanation tools, and a more structured single-player-compatible story loop.</div>
+                    <p class="text-fog text-xl leading-relaxed mb-6">To test the first design direction, I ran a paper prototype in a live-narrated TRPG format.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">In this playtest, I acted as the facilitator. I used music, sound, and written scenes to guide players through the story. Players created their own identities, entered the setting as a group, responded through roleplay and choices, and used cards as part of narrative progression.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">The results were mixed. The atmosphere worked well, and many players were curious about the setting. The format created strong moments of immersion, especially during live narration.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-4">However, three major problems appeared:</p>
+                    <div class="mini-panel paper-lite text-fog text-xl mb-6">
+                        <p class="mb-3">Non-Chinese players needed frequent explanation to understand folklore references.</p>
+                        <p class="mb-3">Multiplayer pacing made attention uneven across the group.</p>
+                        <p>Self-created characters often felt disconnected from the story’s internal logic.</p>
                     </div>
+                    <p class="text-fog text-xl leading-relaxed mb-6">This led to an important design insight: the problem was not lack of interest. The problem was that the experience depended too much on explanation, improvisation, and facilitation.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">With the playtest results , I decided the next version needed a clearer player role, a more controlled narrative structure, and a format that could work naturally to explain concept inside game role without constant outside guidance.</p>
                     <div class="rhythm-divider"></div>
                 </div>
             </div>
@@ -1044,18 +1171,33 @@
             <div class="max-w-7xl mx-auto px-4 space-y-10">
                 <div class="section-frame p-8 panel-shift-up-36">
                     <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Second Stage Research and Design</span></h2>
+                    <p class="lead-copy mb-6">After the first playtest, I moved into a second stage of research and redesign.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">The goal of this stage was to create a structure that could keep the cultural core of the project, while making the player’s role easier to understand and the story easier to follow for everyone, no matter cultural background.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">With this goal in mind, a new question came up: how can we explain unfamiliar cultural concepts without breaking immersion?</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">In the first version, players often needed direct explanation to understand folklore elements. Every time the game paused to explain a term, the sense of immersion dropped.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">So instead of trying to remove explanation, I started thinking about how to hide it inside the experience.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">Then an idea came up: what if the player is not a local person, but an outsider?</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">This led to introducing Western investigator characters and a Western knowledge framework. Since the protagonists are not familiar with the local culture, it feels natural for them to question what they see, take notes, and try to understand unfamiliar terms.</p>
+                    <div class="mini-panel paper-lite text-fog text-xl mb-6">
+                        <p class="mb-3">As a result:</p>
+                        <p class="mb-3">Self-explanation becomes part of character behavior</p>
+                        <p class="mb-3">Journal updates and notes feel like investigation, not UI</p>
+                        <p>Re-reading information supports discovery instead of repetition</p>
+                    </div>
+                    <p class="text-fog text-xl leading-relaxed mb-6">This way, explanation no longer interrupts the experience. It becomes part of the story, the environment, and the player’s role.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">At the same time, I realized I already had a useful reference from the way I tested the first version.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">The project started as a TRPG-style prototype, and besides Dungeons &amp; Dragons, another well-known TRPG system is Call of Cthulhu (COC, full name: Call of Cthulhu Role-Playing Game).</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">So instead of building everything from scratch, I decided to borrow part of its structure. I set the protagonists as investigators connected to Miskatonic University, which naturally supports note-taking, research, and investigation as core behaviors.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">This choice made the player role much clearer. It also gave a strong narrative reason for why characters would document what they see, question unfamiliar events, and gradually uncover hidden truths.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-4">The main references in this stage were:</p>
                     <div class="space-y-4 text-fog">
-                        <div class="mini-panel"><h4>Adding Western Horror</h4>Western cosmic horror was added to support the revised structure of the game. It provided a more familiar investigative framework for players, while Chinese folklore remained the cultural foundation of the world.</div>
-                        <div class="mini-panel"><h4>Why Cthulhu Mythos</h4>Cthulhu Mythos provided an investigator structure, encounter logic, and gradual revelation model that fit a mystery-driven horror game and helped define what the player can actually do inside the story.</div>
-                        <div class="mini-panel"><h4>H. P. Lovecraft</h4>Lovecraft’s work was relevant here mainly as a model for revealing unknown forces through documents, interpretation, and gradual discovery rather than direct spectacle.</div>
-                        <div class="mini-panel"><h4>COC TRPG Influence</h4>Call of Cthulhu influenced both tone and structure. It clarified the player role as an investigator and gave narrative choices a stronger systemic frame.</div>
-                        <div class="mini-panel"><h4>Miskatonic University</h4>Miskatonic University anchors the protagonists in a recognizable academic and investigative tradition. It explains why these characters travel, what kinds of knowledge they carry, and why they are capable of confronting supernatural events.</div>
+                        <div class="mini-panel"><h4>Cthulhu Mythos</h4>A strong model for mystery, gradual revelation, and hidden forces beyond normal understanding.</div>
+                        <div class="mini-panel"><h4>Call of Cthulhu TRPG</h4>It clarified the structure of investigation and helped define what the player actually does in the story.</div>
+                        <div class="mini-panel"><h4>Miskatonic University</h4>It provided a clear narrative anchor, explaining why the protagonists travel, investigate, and confront supernatural events.</div>
                         <div class="mini-panel paper-lite">
                             <h4>Visual Language Strategy</h4>
-                            <p class="mb-4">Because the game is designed as a 2D narrative experience, it cannot rely on realistic environmental storytelling in the same way as 3D horror games. This constraint led to a visual design decision: using color as a primary storytelling system.</p>
-                            <p class="mb-4">The "outsider world" is presented with richer and more saturated colors, while the local supernatural world is represented through high-contrast black, white, and controlled red accents. This creates an immediate visual distinction between familiarity and cultural unknown.</p>
-                            <p class="mb-4">As the player progresses and becomes more involved with the local world, the color boundary begins to shift. Elements from the supernatural layer gradually appear within the player’s visual space, suggesting deeper immersion and loss of distance.</p>
-                            <p>This system is currently conceptual and has not yet been implemented, but it reflects a direct translation from research constraints into a planned player experience: moving from observation to entanglement through visual transformation.</p>
+                            <p>At the same time, I also started thinking more clearly about visual storytelling.</p>
+                            <p class="mt-4">Since this is a 2D narrative game, I explored using color contrast to separate the outsider world from the local supernatural world. This became a way to show the player’s gradual involvement with the setting, moving from observation to deeper entanglement.</p>
                         </div>
                     </div>
                     <div class="rhythm-divider"></div>
@@ -1065,7 +1207,16 @@
                     <div class="max-w-7xl mx-auto px-4">
                         <h2 class="section-head text-4xl md:text-5xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Character Overview</span></h2>
                         <p class="lead-copy character-overview-copy mb-10">
-                            All four protagonists are foreign students or academic figures connected to Miskatonic University. They enter China from different professional backgrounds, with different areas of expertise, narrative starting points, and investigative strengths. These differences support route variation, selective information access, and distinct emotional readings of the same larger mystery. In design terms, the multiple protagonists help structure replayability and allow the same world to be understood through different interpretive lenses.
+                            As part of the second-stage redesign, I replaced self-created player characters with defined outsider protagonists.
+                        </p>
+                        <p class="text-fog text-xl leading-relaxed mb-6">
+                            All four protagonists are connected to Miskatonic University, but each one enters China from a different background, with different expertise, emotional tone, and investigative strengths. This change gave the story stronger internal logic and made the player role much easier to understand.
+                        </p>
+                        <p class="text-fog text-xl leading-relaxed mb-6">
+                            It also created new design value: clearer onboarding, more controlled narrative framing, route variation, and replayability through different perspectives.
+                        </p>
+                        <p class="text-fog text-xl leading-relaxed mb-10">
+                            In this version of the project, the characters are not just story decoration. They are part of the game structure itself.
                         </p>
                         <div class="character-row">
                             <div class="character-box">
@@ -1097,36 +1248,60 @@
                 </section>
 
                 <div class="section-frame p-8">
-                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Final Game Setting</span></h2>
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Second Stage Playtest repot</span></h2>
+                    <p class="text-fog text-xl leading-relaxed mb-6">The second-stage playtest was used to check whether the revised structure actually solved the main problems from the first version.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">The results were much stronger. Players understood the investigator role earlier, followed the narrative more easily, and needed less outside explanation to stay oriented. The story felt more readable, while the atmosphere and cultural tone were still preserved.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">This confirmed that the redesign was moving in the right direction. The outsider protagonist structure, clearer narrative framing, and more controlled progression all helped the experience become more stable and easier to understand.</p>
+                    <p class="text-fog text-xl leading-relaxed">At the same time, the test also showed that future work is still needed in pacing, replay value, and how information is revealed across routes.</p>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Final Game Setting (For Now）</span></h2>
+                    <p class="lead-copy mb-6">After the second-stage redesign and testing, the project arrived at its current version.</p>
                     <div class="grid md:grid-cols-2 gap-6 text-fog mini-panel-grid stagger-panels">
                         <div class="mini-panel"><h4>Time and Place</h4>The game is set in the late eighteenth century, in a version of China shaped by historical isolation, folklore logic, and fictional supernatural disturbance.</div>
-                        <div class="mini-panel"><h4>Main Characters</h4>The playable protagonists are foreign investigators connected to Miskatonic University. Their backgrounds, expertise, and starting situations shape perspective, interpretation, and route-specific access to information.</div>
-                        <div class="mini-panel"><h4>Story Premise</h4>Each protagonist enters an unfamiliar world that first appears culturally rich and mysterious, but gradually reveals deeper supernatural instability and hidden cosmic pressure.</div>
-                        <div class="mini-panel"><h4>Player Goal</h4>Players investigate events, interpret unfamiliar ritual and social systems, and use narrative choices and cards to survive, understand, and progress through branching storylines.</div>
+                        <div class="mini-panel"><h4>Main Characters</h4>Players take the role of foreign investigators connected to Miskatonic University. Each protagonist brings a different perspective, background, and route into the story.</div>
+                        <div class="mini-panel"><h4>Story Premise</h4>What first appears to be a culturally unfamiliar but fascinating world slowly reveals deeper supernatural instability and hidden cosmic pressure.</div>
+                        <div class="mini-panel"><h4>Player Goal</h4>Players investigate events, interpret rituals and local beliefs, make narrative choices, use cards, and progress through branching storylines in order to survive and understand the truth.</div>
                     </div>
                     <p class="text-fog text-xl leading-relaxed mt-6">
-                        The final direction keeps Chinese folklore as the world foundation, uses the outsider perspective as the narrative bridge, and uses cosmic horror as a pressure system that intensifies interpretation and dread rather than replacing the cultural core.
+                        In this current version, Chinese folklore remains the world foundation, while cosmic horror works as a pressure layer that deepens dread and supports the investigation structure.
                     </p>
                     <div class="rhythm-divider"></div>
                 </div>
 
                 <div class="section-frame p-8">
                     <h2 class="section-head text-4xl text-parchment mb-8"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Iteration Path and Next Problems</span></h2>
-                    <div class="grid md:grid-cols-2 gap-4 text-fog mini-panel-grid stagger-panels">
-                        <div class="mini-panel"><h4>Path in One Line</h4>Version 1: folklore-focused multiplayer paper TRPG with self-created player identities → first playtest feedback → Version 2: defined outsider investigators, East-West horror integration, clearer card-based narrative structure, and a more solo-friendly direction.</div>
-                        <div class="mini-panel"><h4>What Is Clear Now</h4>The revised concept aligns more closely with player onboarding needs, narrative clarity, and production reality. The design is now more readable, more scalable, and more consistent with the intended emotional experience.</div>
-                        <div class="mini-panel"><h4>Open Problem 1</h4>How to deliver cultural information clearly without turning discovery into exposition.</div>
-                        <div class="mini-panel"><h4>Open Problem 2</h4>How to balance relationship progression, card unlock pacing, and mystery escalation so replayability feels meaningful rather than repetitive.</div>
-                        <div class="mini-panel"><h4>Open Problem 3</h4>How to preserve the emotional intensity of performed horror in a future digital version that cannot rely on a live facilitator.</div>
-                        <div class="mini-panel"><h4>Next Step</h4>The next step is to build a focused vertical slice around one chapter and test whether the revised system can preserve immersion, communicate player role clearly, and support branching narrative progression without live explanation.</div>
+                    <p class="text-fog text-xl leading-relaxed mb-6">The overall iteration path of the project is now clear:</p>
+                    <div class="mini-panel paper-lite text-fog text-xl mb-6">
+                        <p class="mb-3">Version 1 was a folklore-focused multiplayer paper TRPG with self-created identities.</p>
+                        <p>Version 2 shifted toward defined outsider investigators, clearer narrative structure, East-West horror integration, and a more solo-friendly direction.</p>
                     </div>
+                    <p class="text-fog text-xl leading-relaxed mb-6">This change made the project more readable, more scalable, and closer to the intended player experience.</p>
+                    <p class="text-fog text-xl leading-relaxed mb-4">However, several design problems still remain:</p>
+                    <div class="grid md:grid-cols-2 gap-4 text-fog mini-panel-grid stagger-panels">
+                        <div class="mini-panel"><h4>Open Problem 1</h4>How can the game deliver cultural information clearly without breaking discovery and immersion?</div>
+                        <div class="mini-panel"><h4>Open Problem 2</h4>How can relationship progression, card unlock pacing, and mystery escalation stay meaningful across multiple playthroughs?</div>
+                        <div class="mini-panel"><h4>Open Problem 3</h4>How can a digital version preserve horror intensity without relying on live narration and facilitator performance?</div>
+                        <div class="mini-panel"><h4>Next Step</h4>The next step is to build a focused vertical slice around one chapter and test whether the revised structure can support clarity, immersion, and branching progression on its own.</div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-3xl md:text-4xl text-parchment mb-7"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">My Role</span></h2>
+                    <p class="lead-copy mb-6">Game Designer · Narrative Designer · System Designer</p>
+                    <p class="text-fog text-xl leading-relaxed mb-6">I designed the core concept, narrative structure, branching routes, player role framing, card-based progression, and relationship logic for the project.</p>
+                    <p class="text-fog text-xl leading-relaxed">I also planned and ran the paper prototype playtests, observed where players became confused or disengaged, and used that feedback to restructure the project from a freeform multiplayer prototype into a clearer and more scalable narrative game direction.</p>
                     <div class="rhythm-divider"></div>
                 </div>
 
                 <div class="section-frame p-8">
                     <div class="preview-gallery-row">
                         <div class="flex flex-col min-h-0">
-                            <h2 class="section-head text-4xl text-parchment mb-6"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">试阅</span></h2>
+                            <h2 class="section-head text-4xl text-parchment mb-6"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Narrative Preview</span></h2>
+                            <p class="text-fog text-xl leading-relaxed mb-6">To support the final direction of the project, I also began exploring the game’s opening narrative voice. The excerpt below is an early sample of how the player’s outsider perspective, historical framing, and slow-building dread might be introduced in the final experience.</p>
                             <div class="letter-paper flex-1 min-h-0">
                         <div class="journal-date">December, 1797</div>
                         <div class="journal-body">
@@ -1168,9 +1343,264 @@
                     </div>
                     <div class="rhythm-divider"></div>
                 </div>
+
+                <div class="section-frame p-8">
+                    <h2 class="section-head text-4xl text-parchment mb-6"><span class="sigil lt"></span><span class="sigil rt"></span><span class="sigil lb"></span><span class="sigil rb"></span><span class="title-text">Game Design Document</span></h2>
+                    <div class="wt-gdd-wrap">
+                        <div class="wt-gdd-window">
+                            <div class="wt-gdd-doc-title">Wonder Tales</div>
+                            <div class="wt-gdd-subtitle">Game Design Document</div>
+
+                            <section class="wt-gdd-block">
+                                <h3>Game Overview</h3>
+                                <p>Wonder Tales is a 2D narrative-driven card horror game that combines Chinese folklore with Western cosmic horror. The player takes the role of an outsider investigator entering an unfamiliar world. Through narrative events, skill-based decisions, card interactions, and journal records, the player uncovers rituals, relationships, and hidden supernatural systems.</p>
+                                <p>The game focuses on gradual understanding. The player is not given full explanations. Instead, knowledge is built through interaction, observation, and repeated engagement with the system.</p>
+                                <p>The core experience moves from curiosity to uncertainty and then to dread. The player slowly realizes the world follows a logic that is different from their own, and that understanding this logic is necessary to survive.</p>
+                                <p>The game is designed as a single-player experience for PC.</p>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Core Fantasy</h3>
+                                <p>The player is an outsider investigator who does not fully understand the world they have entered. They must observe, interpret, and record information in order to make decisions. The player is not powerful. Their strength comes from knowledge, preparation, and interpretation.</p>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Core Loop</h3>
+                                <p>The player enters a story scene and reads the situation. The player selects a skill to respond to the situation. A dice roll determines the outcome based on the selected skill. The result updates multiple systems, including relationships, cards, and journal entries. New information is unlocked, and the next scene becomes available. This loop repeats throughout the chapter.</p>
+                                <p>Each loop reinforces learning. The player understands more about the world through the consequences of their actions.</p>
+                                <div class="wt-gdd-mini-title">Core Loop Flow Diagram</div>
+                                <div class="wt-gdd-flow">
+                                    <span class="wt-gdd-node">Scene Start</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Player Reads Situation</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Choose Skill</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Dice Roll</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Result</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Update Systems</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Unlock Next Node</span>
+                                </div>
+                                <div class="wt-gdd-subnote">Update Systems: Journal / Trust / Cards</div>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Player Role and Perspective</h3>
+                                <p>The player controls a Western investigator connected to Miskatonic University. The character is not familiar with local customs, rituals, or beliefs.</p>
+                                <p>This role is designed to solve the problem of explanation. Since the character is an outsider, asking questions, taking notes, and misunderstanding events are natural behaviors. This allows explanation to exist inside the narrative instead of interrupting it.</p>
+                                <p>The player’s knowledge is limited and grows over time. The player must rely on recorded information, previous events, and interpretation.</p>
+                                <div class="wt-gdd-mini-title">Player Knowledge Model</div>
+                                <div class="wt-gdd-steps">
+                                    <div class="wt-gdd-step">Player Knowledge</div>
+                                    <div class="wt-gdd-step">Character Knowledge</div>
+                                    <div class="wt-gdd-step">World Truth</div>
+                                </div>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Game Structure</h3>
+                                <p>The game is divided into chapters. Each chapter features one main companion character and a contained investigation. A chapter includes multiple narrative nodes, branching paths, key events, and a final deduction phase.</p>
+                                <p>Each chapter takes approximately forty-five to seventy-five minutes to complete. The full game is expected to last four to six hours depending on player choices and replay.</p>
+                                <div class="wt-gdd-mini-title">Chapter Structure Diagram</div>
+                                <div class="wt-gdd-flow">
+                                    <span class="wt-gdd-node">Start</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Branching Nodes</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Key Event</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">More Nodes</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Deduction Phase</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Ending</span>
+                                </div>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Skill System</h3>
+                                <p>The game uses a simplified skill system inspired by Call of Cthulhu. Skills represent different ways the player can interact with the world.</p>
+                                <p>The final skill set includes Observe, Listen, Search, Insight, Occult, History, Medicine, Language, Persuade, Charm, Intimidate, Stealth, Dexterity, and Willpower.</p>
+                                <p>Each narrative node presents a situation. The player selects one skill to respond. The player cannot retry the same node. Failure is permanent and becomes part of the experience.</p>
+                                <p>Skills are not just mechanical tools. They define how the player approaches problems and shape the narrative outcome.</p>
+                                <div class="wt-gdd-mini-title">Skill Categories Table</div>
+                                <table class="wt-gdd-table">
+                                    <tr><th>Category</th><th>Skills</th></tr>
+                                    <tr><td>Investigation</td><td>Observe, Listen, Search, Insight</td></tr>
+                                    <tr><td>Knowledge</td><td>Occult, History, Medicine, Language</td></tr>
+                                    <tr><td>Social</td><td>Persuade, Charm, Intimidate</td></tr>
+                                    <tr><td>Survival</td><td>Stealth, Dexterity, Willpower</td></tr>
+                                </table>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Dice System</h3>
+                                <p>The game uses a dice-based resolution system.</p>
+                                <p>The player rolls a number between one and one hundred. The result is compared to the selected skill value.</p>
+                                <p>If the result is less than or equal to the skill value, the action succeeds. If the result is greater than the skill value, the action fails.</p>
+                                <p>If the result is less than or equal to half of the skill value, the action is a strong success. If the result is very high, it can trigger a critical failure.</p>
+                                <p>This system allows different levels of outcomes and supports varied narrative responses.</p>
+                                <div class="wt-gdd-mini-title">Dice Result Table</div>
+                                <div class="wt-gdd-flow">
+                                    <span class="wt-gdd-node">Select Skill</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Roll Dice</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Compare Value</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Output Result</span>
+                                </div>
+                                <table class="wt-gdd-table">
+                                    <tr><th>Roll Result</th><th>Outcome</th></tr>
+                                    <tr><td>&le; 50% Skill</td><td>Strong Success</td></tr>
+                                    <tr><td>&le; Skill</td><td>Success</td></tr>
+                                    <tr><td>&gt; Skill</td><td>Failure</td></tr>
+                                    <tr><td>&ge; 95</td><td>Critical Failure</td></tr>
+                                </table>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Card System</h3>
+                                <p>The game uses cards to represent characters, items, and knowledge.</p>
+                                <p>Character cards represent key figures in the story. Each chapter includes one main companion character who stays with the player. This character also serves as the center of the relationship system.</p>
+                                <p>Item cards represent physical objects. They can be equipped to provide bonuses or enable specific interactions.</p>
+                                <p>Memory cards represent knowledge, clues, and past experiences. They can also be equipped and often unlock new choices or improve understanding of events.</p>
+                                <p>Cards can modify skill values, provide passive effects, or create conditional bonuses. Players can equip cards to themselves and to the companion character. The card system replaces traditional inventory and knowledge tracking systems.</p>
+                                <div class="wt-gdd-mini-title">Card Types Diagram</div>
+                                <div class="wt-gdd-flow">
+                                    <span class="wt-gdd-node">Cards</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Character Card</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Item Card</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Memory Card</span>
+                                </div>
+                                <div class="wt-gdd-mini-title">Equip System Diagram</div>
+                                <div class="wt-gdd-two-col">
+                                    <div class="wt-gdd-box">
+                                        <h4>Player</h4>
+                                        <p>2 Item Slots</p>
+                                        <p>2 Memory Slots</p>
+                                    </div>
+                                    <div class="wt-gdd-box">
+                                        <h4>Companion</h4>
+                                        <p>1 Support Slot</p>
+                                    </div>
+                                </div>
+                                <div class="wt-gdd-mini-title">Card Effect Types Table</div>
+                                <table class="wt-gdd-table">
+                                    <tr><th>Type</th><th>Example</th></tr>
+                                    <tr><td>Skill Modifier</td><td>+10 Observe</td></tr>
+                                    <tr><td>Passive</td><td>Reduce failure penalty</td></tr>
+                                    <tr><td>Conditional</td><td>Night + Stealth</td></tr>
+                                </table>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Relationship System</h3>
+                                <p>Each companion character has a trust value ranging from zero to one hundred.</p>
+                                <p>Trust directly affects gameplay. High trust makes skill checks easier. Low trust makes them harder.</p>
+                                <p>Trust also affects narrative access. High trust can unlock new dialogue, additional information, and alternative paths. Low trust can limit information and reduce available options.</p>
+                                <p>This system connects narrative decisions to mechanical outcomes.</p>
+                                <div class="wt-gdd-mini-title">Trust Range Table</div>
+                                <table class="wt-gdd-table">
+                                    <tr><th>Trust Range</th><th>Effect</th></tr>
+                                    <tr><td>80-100</td><td>+20 skill</td></tr>
+                                    <tr><td>60-79</td><td>+10</td></tr>
+                                    <tr><td>40-59</td><td>No change</td></tr>
+                                    <tr><td>20-39</td><td>-10</td></tr>
+                                    <tr><td>0-19</td><td>-20</td></tr>
+                                </table>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Journal System</h3>
+                                <p>The journal is an automatic recording system. It stores events, clues, and outcomes.</p>
+                                <p>The journal records information based on what the character experiences, not the objective truth.</p>
+                                <p>If a player fails a skill check, the journal records the failed perception. For example, failing a listening check results in an entry stating that nothing was heard.</p>
+                                <p>The journal can be reviewed at any time. It supports investigation and helps the player track information across the chapter.</p>
+                                <p>Missing key information can lead to incorrect conclusions later in the game.</p>
+                                <div class="wt-gdd-mini-title">Journal Structure Diagram</div>
+                                <div class="wt-gdd-flow">
+                                    <span class="wt-gdd-node">Journal</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Confirmed Info</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Failed Info</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Suspicion</span>
+                                </div>
+                                <div class="wt-gdd-subnote">Confirmed: The ritual needs blood</div>
+                                <div class="wt-gdd-subnote">Failed: I heard nothing</div>
+                                <div class="wt-gdd-subnote">Suspicion: Something feels wrong</div>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Deduction System</h3>
+                                <p>At the end of each chapter, the player enters a deduction phase.</p>
+                                <p>The player reviews journal entries and selects key information to form a conclusion.</p>
+                                <p>If the player has enough correct information, they reach a successful outcome. If important information is missing or misinterpreted, the player reaches a negative outcome.</p>
+                                <p>This system gives weight to earlier decisions and reinforces the importance of careful observation.</p>
+                                <div class="wt-gdd-mini-title">Deduction Flow Diagram</div>
+                                <div class="wt-gdd-flow">
+                                    <span class="wt-gdd-node">Collect Info</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Review Journal</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Select Key Clues</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Form Conclusion</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Check Result</span><span class="wt-gdd-arrow">→</span>
+                                    <span class="wt-gdd-node">Ending</span>
+                                </div>
+                                <div class="wt-gdd-result-note">Enough Key Info leads to a successful outcome. Missing key information leads to a negative outcome.</div>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Narrative Design</h3>
+                                <p>The narrative is built around gradual revelation. Information is not given all at once. The player must connect fragments over time.</p>
+                                <p>Horror is created through interpretation, not sudden shock. The more the player understands, the more threatening the world becomes.</p>
+                                <p>Choices are meaningful. Each decision affects relationships, information access, and progression.</p>
+                                <p>The story is structured to support replay. Different skills, card setups, and relationship levels lead to different outcomes.</p>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Visual Direction</h3>
+                                <p>The game uses color contrast as a storytelling tool.</p>
+                                <p>The outsider world is presented with more natural and stable colors. The supernatural world is represented with high contrast and controlled color accents.</p>
+                                <p>As the player progresses, elements of the supernatural world begin to appear more frequently. This visual shift reflects the player’s deeper involvement with the setting.</p>
+                                <p>The visual design supports the transition from observation to immersion.</p>
+                                <div class="wt-gdd-mini-title">Visual Direction Color Logic</div>
+                                <div class="wt-gdd-two-col">
+                                    <div class="wt-gdd-box">
+                                        <h4>Outsider World</h4>
+                                        <p>Neutral and stable colors</p>
+                                    </div>
+                                    <div class="wt-gdd-box">
+                                        <h4>Supernatural World</h4>
+                                        <p>High contrast and controlled accents</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>Technical Requirements</h3>
+                                <p>The game must support branching narrative structures. Player choices and outcomes must be recorded and affect future events.</p>
+                                <p>The system must track skill values, modifiers, and dice results. Card effects must be applied dynamically.</p>
+                                <p>The journal system must record and display entries based on player actions.</p>
+                                <p>The relationship system must update in real time and influence gameplay outcomes.</p>
+                                <p>The system must support multiple endings based on player performance in the deduction phase.</p>
+                            </section>
+
+                            <section class="wt-gdd-block">
+                                <h3>MVP Scope</h3>
+                                <p>The minimum version of the game includes one complete chapter.</p>
+                                <p>This chapter includes one companion character, a limited set of skills, a functional card system, a working journal system, and a complete deduction phase.</p>
+                                <p>The goal of the MVP is to test whether the core loop, skill system, and narrative structure can work together without external explanation.</p>
+                                <div class="wt-gdd-mini-title">MVP Scope Strip</div>
+                                <div class="wt-gdd-strip">
+                                    <div class="wt-gdd-chip">Core Loop</div>
+                                    <div class="wt-gdd-chip">Skill System</div>
+                                    <div class="wt-gdd-chip">Card System</div>
+                                    <div class="wt-gdd-chip">Journal</div>
+                                    <div class="wt-gdd-chip">One Chapter</div>
+                                    <div class="wt-gdd-chip">Deduction</div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="rhythm-divider"></div>
+                </div>
             </div>
         </section>
     </main>
+    <footer class="wt-footer">
+        <div class="wt-footer-panel section-frame p-6 md:p-7">
+            <p class="line-main">© 2026 Wonder Tales GDD</p>
+            <p class="line-sub">Design &amp; Documentation: Xiaohan Zhang</p>
+        </div>
+    </footer>
     <script>
         const zhMap = {
             "Back To Projects": "返回项目页",
@@ -1254,17 +1684,32 @@
             "Game Summary": "游戏概述",
             "Wonder Tales is a 2D narrative-driven card horror game concept that combines Chinese folklore traditions with Western cosmic horror. Players move through story scenes by making choices, unlocking narrative cards, and reshaping relationships while gradually uncovering a hidden layer of supernatural and cosmic threat.": "《鬼神奇谭》是一款 2D 叙事驱动卡牌恐怖游戏概念，将中国民俗传统与西方宇宙恐怖结合。玩家通过选择推进场景、解锁叙事卡牌并重塑关系，在过程中逐步揭开潜伏的超自然与宇宙威胁。",
             "The project began as a paper prototype influenced by TRPG and Call of Cthulhu-style live narration. In its first form, players built their own characters, responded to narrated scenarios, and advanced through the story using cards and choices in a group roleplay format.": "项目起步于纸面原型，受 TRPG 与《克苏鲁的呼唤》式现场主持叙事影响。在第一版中，玩家自建身份，在群体角色扮演中回应主持场景，并通过卡牌与选择推进故事。",
+            "This first prototype was a paper playtest presented as a live-narrated TRPG experience. I acted as the facilitator, using music, sound, and written scenes to guide players through a horror story.": "第一版原型以现场主持叙事的纸面 TRPG 形式进行。我担任主持人，使用音乐、音效与文字场景引导玩家体验恐怖故事。",
             "Playtesting revealed a central design challenge: the setting generated strong curiosity, but many players needed too much explanation to stay oriented. The project then shifted toward a clearer narrative framework that could preserve atmosphere, cultural specificity, and player agency without depending so heavily on live facilitation.": "试玩暴露出一个核心设计挑战：设定本身能激发强烈好奇，但许多玩家需要额外解释才能保持方向感。项目随后转向更清晰的叙事框架，以在不过度依赖现场主持的前提下保留氛围、文化特异性与玩家能动性。",
             "Development Stage": "开发阶段",
             "Pre-production / paper prototype stage. Completed so far: concept framing, worldbuilding research, first-round TRPG-style paper playtests, system restructuring, and revised narrative direction.": "当前处于预制作 / 纸面原型阶段。已完成：概念框架搭建、世界观研究、第一轮 TRPG 式纸面测试、系统重构与叙事方向修订。",
             "Prototype Focus": "原型测试重点",
             "The prototype tested four things: narrative clarity, player role understanding, emotional immersion, and whether cultural information could be delivered without breaking pacing.": "该原型重点测试四件事：叙事是否清晰、玩家是否理解自身角色、情绪沉浸是否成立，以及文化信息能否在不破坏节奏的情况下被传达。",
             "Development Snapshot": "开发概览",
+            "Design Evolution": "设计演进",
+            "This project went through multiple iterations based on playtesting feedback, shifting from an open-ended narrative format to a structured card-based experience.": "本项目基于试玩反馈经历了多轮迭代，从开放式叙事形态逐步转向结构化的卡牌叙事体验。",
+            "Playtest & Design Iteration": "试玩与设计迭代",
+            "Initial Approach": "初始方案",
+            "Problem": "问题",
+            "Design Change": "设计改动",
+            "Result": "结果",
+            "Playtesting and Iteration": "试玩与迭代",
+            "Initial Prototype": "初始原型",
+            "Playtest Findings": "试玩发现",
+            "Design Response": "设计响应",
+            "Outcome": "结果",
             "Core Statement": "核心陈述",
             "This project explores how a narrative card game can support culturally specific horror while remaining readable to players unfamiliar with its source traditions. The design centers on a structured investigation loop in which players interpret events, unlock narrative cards, and build understanding through play, allowing clarity, immersion, and escalating dread to develop together.": "本项目探索叙事卡牌游戏如何在保留文化特异性恐怖的同时，对不熟悉其文化来源的玩家保持可读性。设计围绕结构化调查循环展开：玩家在游玩中解读事件、解锁叙事卡牌并逐步建立理解，使清晰度、沉浸感与递进式恐惧协同发展。",
             "Narrative System Structure": "叙事系统结构",
             "The system connects choices, relationship shifts, card unlocks, and journal updates so that each decision produces both immediate emotional feedback and longer-term narrative consequences.": "系统将选择、关系变化、卡牌解锁与日志更新连接起来，使每个决策都产生即时情绪反馈与更长期的叙事后果。",
             "Narrative Loop": "叙事循环",
+            "Initial Design": "初始设计",
+            "Initial System Structure": "初始系统结构",
             "Choice → Relationship Shift → Narrative Card Unlock → New Story Scene → Journal Update → Branching Investigation Path": "选择 → 关系变化 → 叙事卡牌解锁 → 新故事场景 → 日志更新 → 分支调查路径",
             "Core Gameplay": "核心玩法",
             "A 2D narrative-driven card game where players move through branching story scenes by making choices, using narrative cards, and uncovering folklore and cosmic mysteries through a defined investigator role.": "这是一款 2D 叙事驱动卡牌游戏。玩家以明确的调查者身份，通过选择与叙事卡牌穿行于分支剧情，逐步揭开民俗与宇宙层面的谜团。",
@@ -1306,6 +1751,9 @@
             "Grow your inventory with meaningful finds": "通过有价值的发现扩充收藏",
             "Unlock new endings through exploration and collection": "通过探索与收集解锁新的结局",
             "Character Overview": "角色概览",
+            "Second Stage Playtest repot": "第二阶段试玩报告",
+            "Report Summary": "报告摘要",
+            "The second-stage testing confirmed that the revised structure improved player orientation and readability. Players understood the investigator role earlier, followed narrative progression with less external explanation, and maintained engagement while the atmosphere and cultural tone were preserved.": "第二阶段测试确认，修订后的结构显著提升了玩家的方向感与可读性。玩家更早理解调查者角色，在更少外部解释下即可跟随叙事推进，并在氛围与文化调性保留的前提下维持投入度。",
             "There are four playable characters, each starting in a different map. While they share similar traits, they exist in what feels like parallel worlds. Choosing a character determines which storyline you follow.": "共有四名可玩角色，每位角色从不同地图开局。虽然他们有相似特质，却仿佛身处平行世界。你所选择的角色将决定后续体验的剧情线。",
             "Design Goals": "设计目标",
             "Solo-friendly Development": "适合单人开发",
@@ -1392,6 +1840,7 @@
             "As the player progresses and becomes more involved with the local world, the color boundary begins to shift. Elements from the supernatural layer gradually appear within the player’s visual space, suggesting deeper immersion and loss of distance.": "随着玩家推进并更深入卷入本地世界，色彩边界会开始发生位移。超自然层的元素将逐步进入玩家的视觉空间，暗示更深的沉浸与距离感的消退。",
             "This system is currently conceptual and has not yet been implemented, but it reflects a direct translation from research constraints into a planned player experience: moving from observation to entanglement through visual transformation.": "该系统目前仍处于概念阶段，尚未落地实现；但它体现了从研究约束到目标体验的直接转译：通过视觉转变，让玩家从“观察者”走向“卷入者”。",
             "Final Game Setting": "最终游戏设定",
+            "Final Game Setting (For Now）": "最终游戏设定（当前版本）",
             "Time and Place": "时间与地点",
             "The game is set in 1797, when China was mostly closed to the outside world, blending history with fictional mysticism.": "游戏设定于 1797 年，中国对外仍相对封闭，整体基调融合历史与虚构神秘主义。",
             "Main Characters": "主要角色",
@@ -1432,7 +1881,281 @@
             "Thus, after forty-one years, the wall which has sealed this land from the outside world has received its first small fracture.": "于是，四十一年后，这道将此地与外界隔绝的高墙终于出现了第一道细小裂缝。",
             "Should this journal ever fall into other hands—whenever or wherever that may be—know that by the time you read these words, you too will stand upon the threshold of the same depths into which I have now ventured.": "倘若此日志终有一日落入他人之手，无论在何时、何地，请知：当你读到这些字句之时，你也将立于同一座门槛之前；门后，是我此刻已踏入的深处。",
             "For that reason, I confess I welcome the thought of company.": "正因如此，我必须承认：我欢迎“有人同行”这一念头。",
-            "Luck.": "愿你好运。"
+            "Luck.": "愿你好运。",
+            "The project began as a paper prototype inspired by TRPG and live horror narration. In its earliest form, players created their own characters and explored the world through group roleplay. That version created strong atmosphere and curiosity, but it also revealed a major problem: the experience relied too much on explanation and live guidance.": "项目起步于受 TRPG 与现场恐怖叙事启发的纸面原型。在最初版本中，玩家自建角色并通过群体角色扮演探索世界。该版本确实营造了强氛围与好奇感，但也暴露出核心问题：体验过度依赖解释与现场引导。",
+            "Because of that, the project gradually shifted toward a clearer narrative structure. The current direction keeps the same cultural and horror core, but gives players a more readable role, stronger story framing, and a more controlled investigation loop.": "因此，项目逐步转向更清晰的叙事结构。当前方向保留原有文化与恐怖核心，同时为玩家提供更可读的角色定位、更清晰的叙事框架与更可控的调查循环。",
+            "This project started with a simple design question: can a card-based narrative structure support a horror experience that feels tense, readable, and emotionally engaging?": "这个项目从一个简单问题出发：卡牌化叙事结构能否支撑一种既紧张、可读、又具情绪投入的恐怖体验？",
+            "At the beginning, I was not starting from a full world setting yet. I was more interested in the relationship between cards, narrative, and horror. I wanted to know whether cards could do more than carry items or choices. I wanted them to help organize story information, control pacing, and make each decision feel heavier.": "在开始阶段，我并未先从完整世界观出发，而是更关注卡牌、叙事与恐怖之间的关系。我希望卡牌不只是承载物品或选项，而是能组织叙事信息、控制节奏，并让每次决策更有分量。",
+            "This led to the first direction of the project: a narrative horror game where players move through story events with choices and cards, while gradually uncovering danger through play.": "这形成了项目的第一版方向：玩家通过“选择 + 卡牌”推进叙事事件，并在游玩过程中逐步揭开危险。",
+            "To answer the design question, the core statement of the project became clear:": "为回答这个设计问题，项目的核心陈述逐渐明确：",
+            "Wonder Tales explores how a narrative card game can present culturally specific horror in a way that stays readable to players, even if they are unfamiliar with the source culture.": "《鬼神奇谭》探索的是：如何让叙事卡牌游戏在呈现文化特异性恐怖时，仍对不熟悉该文化来源的玩家保持可读性。",
+            "To follow the core statement, the design then decided to focus on a structured investigation loop. Players do not learn the world through long explanation. Instead, they learn by making choices, unlocking narrative cards, updating relationships, and slowly understanding the logic behind the horror.": "基于这一核心陈述，设计进一步聚焦于“结构化调查循环”。玩家不通过长篇讲解理解世界，而是通过做选择、解锁叙事卡牌、更新关系，逐步理解恐怖背后的运行逻辑。",
+            "Based on the core statement, I built four game pillars to guide the project:": "基于核心陈述，我建立了四个项目支柱来指导设计：",
+            "Players should learn the world through interaction and progression.": "玩家应通过互动与推进来理解世界。",
+            "If the setting only works when someone explains it from outside the game, the design is not doing its job.": "如果设定必须依赖游戏外解释才能成立，就说明设计本身没有完成任务。",
+            "Fear should come from understanding, not only from surprise.": "恐惧应来自理解，而不只是惊吓。",
+            "The more players learn about the world, the more threatening that world should become.": "玩家对世界理解越深，世界应当越具威胁。",
+            "Players should always understand who they are, what they can do, and what their short-term goal is.": "玩家应始终清楚自己是谁、能做什么、短期目标是什么。",
+            "Mystery should come from the world itself, not from unclear systems.": "谜团应来自世界本身，而不是来自系统不清。",
+            "Narrative freedom only works when the player has a clear structure to act within.": "叙事自由只有在玩家有清晰行动结构时才成立。",
+            "Choices, cards, and progression need to form a loop that players can trust and understand.": "选择、卡牌与推进需要形成一个玩家可理解、可依赖的循环。",
+            "After defining the game pillars, I translated them into concrete experience design priorities. These priorities helped me decide what the player should feel first, what should stay clear, and what should change over time.": "在明确游戏支柱后，我把它们转译为具体的体验设计优先级，以决定玩家先感受到什么、哪些要保持清晰、哪些应随进度变化。",
+            "After defining the core statement, game pillars, and experience priorities, I began shaping the game’s theme and world direction.": "在明确核心陈述、游戏支柱与体验优先级后，我开始塑造游戏的主题与世界方向。",
+            "At this stage, I decided to ground the project in Chinese folk horror. I chose this direction because it offers a strong mix of ritual, taboo, symbolic objects, and socially rooted supernatural belief. These qualities fit the kind of horror I wanted to build: fear that grows through interpretation, uncertainty, and gradual understanding.": "在这一阶段，我决定以中国民俗恐怖作为项目根基。该方向兼具仪式、禁忌、象征物与社会嵌入式超自然信念，契合我想构建的恐怖类型：通过解读、不确定与渐进理解而增长的恐惧。",
+            "This choice also created a new design challenge. Because many players may not already know this cultural context, the world needed to stay specific without becoming hard to follow. So the setting direction became clear: build a horror world with strong cultural identity, but present it through a structure that players can enter step by step.": "这一选择也带来新的设计挑战：许多玩家并不熟悉这套文化语境。世界需要保持文化特异性，同时不能难以跟随。因此方向被明确为：构建具有强文化身份的恐怖世界，并通过可分步进入的结构呈现给玩家。",
+            "To test the first design direction, I ran a paper prototype in a live-narrated TRPG format.": "为验证第一版设计方向，我进行了现场主持叙事的纸面 TRPG 测试。",
+            "In this playtest, I acted as the facilitator. I used music, sound, and written scenes to guide players through the story. Players created their own identities, entered the setting as a group, responded through roleplay and choices, and used cards as part of narrative progression.": "在该测试中我担任主持人，使用音乐、音效与文字场景引导玩家推进故事。玩家自建身份，以群体形式进入设定，通过角色扮演与选择回应事件，并用卡牌参与叙事推进。",
+            "The results were mixed. The atmosphere worked well, and many players were curious about the setting. The format created strong moments of immersion, especially during live narration.": "结果呈现“有效但不稳定”。氛围表现良好，许多玩家对设定充满好奇，尤其在现场主持段落中沉浸感较强。",
+            "However, three major problems appeared:": "但同时出现了三个主要问题：",
+            "Non-Chinese players needed frequent explanation to understand folklore references.": "非中文背景玩家需要频繁解释才能理解民俗指涉。",
+            "Multiplayer pacing made attention uneven across the group.": "多人节奏导致注意力在小组内分配不均。",
+            "Self-created characters often felt disconnected from the story’s internal logic.": "自建角色常与故事内部逻辑脱节。",
+            "This led to an important design insight: the problem was not lack of interest. The problem was that the experience depended too much on explanation, improvisation, and facilitation.": "由此得到关键洞察：问题不在于玩家缺乏兴趣，而在于体验过度依赖解释、即兴与主持引导。",
+            "With the playtest results , I decided the next version needed a clearer player role, a more controlled narrative structure, and a format that could work naturally to explain concept inside game role without constant outside guidance.": "基于测试结果，我决定下一版必须具备更清晰的玩家角色、更可控的叙事结构，以及一种能在“游戏角色内部自然完成解释”、而非持续依赖外部引导的形式。",
+            "At the same time, I realized I already had a useful reference from the way I tested the first version.": "同时我意识到，第一版测试方式本身已经提供了可借鉴的参考。",
+            "The project started as a TRPG-style prototype, and besides Dungeons & Dragons, another well-known TRPG system is Call of Cthulhu (COC, full name: Call of Cthulhu Role-Playing Game).": "项目最初就是 TRPG 形式原型。除《龙与地下城》外，另一套成熟且知名的 TRPG 系统是《克苏鲁的呼唤》（COC，Call of Cthulhu Role-Playing Game）。",
+            "So instead of building everything from scratch, I decided to borrow part of its structure. I set the protagonists as investigators connected to Miskatonic University, which naturally supports note-taking, research, and investigation as core behaviors.": "因此我没有从零重造，而是借用了其部分结构。我将主角设定为与米斯卡托尼克大学相关的调查者，使“记录、研究、调查”自然成为核心行为。",
+            "This choice made the player role much clearer. It also gave a strong narrative reason for why characters would document what they see, question unfamiliar events, and gradually uncover hidden truths.": "这一选择显著提升了玩家角色清晰度，也为角色“记录所见、质疑异象、逐步揭示真相”提供了强叙事动机。",
+            "A strong model for mystery, gradual revelation, and hidden forces beyond normal understanding.": "为谜团、渐进揭示与超越常识的潜在力量提供了强参考模型。",
+            "It clarified the structure of investigation and helped define what the player actually does in the story.": "它明确了调查结构，并帮助定义玩家在故事中“实际要做什么”。",
+            "It provided a clear narrative anchor, explaining why the protagonists travel, investigate, and confront supernatural events.": "它提供了清晰叙事锚点，解释主角为何出行、调查并面对超自然事件。",
+            "At the same time, I also started thinking more clearly about visual storytelling.": "与此同时，我也开始更明确地思考视觉叙事。",
+            "Since this is a 2D narrative game, I explored using color contrast to separate the outsider world from the local supernatural world. This became a way to show the player’s gradual involvement with the setting, moving from observation to deeper entanglement.": "由于本作是 2D 叙事游戏，我尝试用色彩对比区分“外来者世界”与“本地超自然世界”。这成为表现玩家从观察走向卷入的视觉路径。",
+            "As part of the second-stage redesign, I replaced self-created player characters with defined outsider protagonists.": "作为第二阶段重构的一部分，我将玩家自建角色改为“定义明确的外来者主角”。",
+            "All four protagonists are connected to Miskatonic University, but each one enters China from a different background, with different expertise, emotional tone, and investigative strengths. This change gave the story stronger internal logic and made the player role much easier to understand.": "四位主角都与米斯卡托尼克大学相关，但各自以不同背景进入中国，拥有不同专长、情绪色调与调查优势。这一改动强化了故事内部逻辑，也让玩家角色更易理解。",
+            "It also created new design value: clearer onboarding, more controlled narrative framing, route variation, and replayability through different perspectives.": "它还带来了新的设计价值：更清晰的上手路径、更可控的叙事框架、路线差异化，以及由不同视角带来的重玩价值。",
+            "In this version of the project, the characters are not just story decoration. They are part of the game structure itself.": "在当前版本中，角色不再只是叙事装饰，而是游戏结构的一部分。",
+            "The second-stage playtest was used to check whether the revised structure actually solved the main problems from the first version.": "第二阶段测试用于验证：修订后的结构是否真正解决了第一版的核心问题。",
+            "The results were much stronger. Players understood the investigator role earlier, followed the narrative more easily, and needed less outside explanation to stay oriented. The story felt more readable, while the atmosphere and cultural tone were still preserved.": "结果明显更好。玩家更早理解调查者身份，更容易跟上叙事，也更少依赖外部解释即可保持方向感。故事可读性提升，同时氛围与文化调性仍被保留。",
+            "This confirmed that the redesign was moving in the right direction. The outsider protagonist structure, clearer narrative framing, and more controlled progression all helped the experience become more stable and easier to understand.": "这证明重构方向是正确的。外来者主角结构、更清晰的叙事框架与更可控的推进共同让体验更稳定、更易理解。",
+            "At the same time, the test also showed that future work is still needed in pacing, replay value, and how information is revealed across routes.": "同时测试也显示，后续仍需在节奏、重玩价值与跨路线信息揭示方式上继续优化。",
+            "After the second-stage redesign and testing, the project arrived at its current version.": "经过第二阶段重构与测试，项目目前形成了当前版本。",
+            "In this current version, Chinese folklore remains the world foundation, while cosmic horror works as a pressure layer that deepens dread and supports the investigation structure.": "在当前版本中，中国民俗仍是世界基础，宇宙恐怖作为压力层用于加深恐惧并支撑调查结构。",
+            "The overall iteration path of the project is now clear:": "项目整体迭代路径现已清晰：",
+            "Version 1 was a folklore-focused multiplayer paper TRPG with self-created identities.": "版本 1 是以民俗为核心、玩家自建身份的多人纸面 TRPG。",
+            "Version 2 shifted toward defined outsider investigators, clearer narrative structure, East-West horror integration, and a more solo-friendly direction.": "版本 2 转向“定义明确的外来调查者”、更清晰叙事结构、东西方恐怖整合，以及更适配单人推进的方向。",
+            "This change made the project more readable, more scalable, and closer to the intended player experience.": "这一变化让项目更可读、更可扩展，也更贴近目标玩家体验。",
+            "However, several design problems still remain:": "但仍有若干设计问题待解决：",
+            "How can the game deliver cultural information clearly without breaking discovery and immersion?": "如何清晰传递文化信息，同时不破坏探索感与沉浸感？",
+            "How can relationship progression, card unlock pacing, and mystery escalation stay meaningful across multiple playthroughs?": "如何让关系推进、卡牌解锁节奏与谜团升级在多周目中保持真实意义？",
+            "How can a digital version preserve horror intensity without relying on live narration and facilitator performance?": "在不依赖现场主持演绎的前提下，数字版本如何保持恐怖强度？",
+            "The next step is to build a focused vertical slice around one chapter and test whether the revised structure can support clarity, immersion, and branching progression on its own.": "下一步将围绕单章制作聚焦式纵向切片，验证修订结构能否独立支撑清晰度、沉浸感与分支推进。",
+            "To support the final direction of the project, I also began exploring the game’s opening narrative voice. The excerpt below is an early sample of how the player’s outsider perspective, historical framing, and slow-building dread might be introduced in the final experience.": "为支撑项目最终方向，我也开始探索开场叙事语气。下方节选是早期样稿，用于测试如何在最终体验中引入玩家的外来者视角、历史语境与缓慢累积的恐惧。",
+            "© 2026 Wonder Tales GDD": "© 2026 鬼神奇谭 GDD",
+            "Design & Documentation: Xiaohan Zhang": "设计与文档：张笑菡",
+            "The goal is to let clarity, immersion, and dread grow together through play.": "目标是让清晰度、沉浸感与恐惧感在游玩过程中同步增长。",
+            "Players should learn unfamiliar folklore through play, perspective, and progression, not through long outside explanation.": "玩家应通过游玩过程、角色视角与进程推进来理解陌生民俗，而不是依赖外部长篇讲解。",
+            "The experience should begin with curiosity, move into tension, and slowly grow into dread.": "体验应从好奇开始，进入紧张，再缓慢升级为恐惧。",
+            "At every stage, players should understand who they are, what they know, and what kind of action the game is asking them to take.": "在每个阶段，玩家都应清楚自己是谁、知道什么、以及当前应采取什么行动。",
+            "Choices should not only change dialogue. They should also affect relationships, information access, and the direction of the investigation.": "选择不应只改变对白，还应影响关系变化、信息获取与调查方向。",
+            "Once the theme direction was clear, I began the first stage of research. The goal of this stage was to find folklore elements that could become playable sources of mystery, tension, and horror.": "当主题方向明确后，我开始了第一阶段研究。该阶段目标是寻找可转化为玩法的民俗元素，用于构建谜团、张力与恐怖来源。",
+            "Paper dolls suggest a blurry line between object and spirit. They are useful for horror because they make symbolic objects feel alive and unsettling.": "纸人模糊了“器物”与“灵体”的边界。它在恐怖设计中有效，因为能让象征物呈现出“似活非活”的不安感。",
+            "Ghost marriage introduces ritual, obligation, death, and unfinished relationships. It creates emotional horror rooted in custom and social meaning.": "冥婚引入了仪式、义务、死亡与未完成关系，能够构建根植于习俗与社会意义的情绪恐怖。",
+            "Puppetry brings ideas of control, imitation, and unseen manipulation. It is especially useful for a game about agency, misdirection, and fear of hidden forces.": "傀儡戏带来“控制、模仿、不可见操纵”等主题，尤其适合强调能动性、误导与隐藏力量恐惧的游戏。",
+            "Witchcraft creates overlap between healing, revenge, protection, and danger. It allows ritual behavior to become both worldbuilding and gameplay logic.": "巫术让治疗、复仇、保护与危险彼此重叠，使仪式行为既能用于世界观构建，也能成为玩法逻辑。",
+            "This research gave the project a stronger cultural base and helped define what kinds of horror the game could use.": "这轮研究为项目建立了更稳固的文化基础，并帮助明确了游戏可使用的恐怖类型。",
+            "After the first research stage, I used moodboards to define the game’s emotional and visual direction.": "第一阶段研究后，我通过情绪板明确了游戏的情绪与视觉方向。",
+            "The atmosphere I wanted was something eerie, ancient, ritualistic, and quietly oppressive. The emotional flow needed to start with curiosity, then move into unease, and only later open into deeper horror.": "我想要的氛围是诡异、古旧、仪式化且安静压迫。情绪节奏应从好奇开始，进入不安，最后再走向更深层恐怖。",
+            "At this stage, the moodboards helped me make the project more concrete. They turned abstract research into a clearer visual tone that could support future design and prototyping.": "在这一阶段，情绪板帮助我把项目具体化，将抽象研究转化为更清晰的视觉基调，支持后续设计与原型制作。",
+            "With the research and moodboards in place, I formed the project’s first clear design direction for paper prototype testing.": "在研究与情绪板准备完成后，我形成了项目第一版明确的纸面原型设计方向。",
+            "In this version, players entered the world through self-created identities. The game used a multiplayer TRPG-style format, where live narration, group roleplay, and card-supported story events worked together to create immersion.": "该版本中，玩家通过自建身份进入世界。游戏采用多人 TRPG 式结构，现场叙述、群体角色扮演与卡牌事件共同构成沉浸体验。",
+            "At the time, this approach made sense because it seemed flexible and atmospheric. It allowed players to react freely, make narrative choices, and experience the setting in a social way.": "当时这个方法是合理的，因为它兼具灵活性与氛围感。玩家可以自由反应、进行叙事选择，并以社交方式体验设定。",
+            "However, this version also carried a hidden risk: it depended heavily on player improvisation, facilitator explanation, and prior understanding of the setting. That risk became much more visible during playtesting.": "但这一版本也存在隐藏风险：它高度依赖玩家即兴能力、主持解释和对设定的先验理解。该风险在试玩中被明显放大。",
+            "After the first playtest, I moved into a second stage of research and redesign.": "第一轮试玩后，我进入了第二阶段的研究与重构。",
+            "The goal of this stage was to create a structure that could keep the cultural core of the project, while making the player’s role easier to understand and the story easier to follow for everyone, no matter cultural background.": "这一阶段目标是建立一种结构：既保留项目的文化核心，又让不同文化背景玩家都能更容易理解角色定位并跟随剧情。",
+            "With this goal in mind, a new question came up: how can we explain unfamiliar cultural concepts without breaking immersion?": "基于这一目标，一个新问题出现了：如何在不破坏沉浸的前提下解释陌生文化概念？",
+            "In the first version, players often needed direct explanation to understand folklore elements. Every time the game paused to explain a term, the sense of immersion dropped.": "在第一版中，玩家常需要直接解释才能理解民俗元素。每次为了说明术语而暂停，沉浸感都会下降。",
+            "So instead of trying to remove explanation, I started thinking about how to hide it inside the experience.": "因此我不再追求“去掉解释”，而是思考如何把解释隐藏进体验内部。",
+            "Then an idea came up: what if the player is not a local person, but an outsider?": "随后出现了一个想法：如果玩家不是本地人，而是外来者呢？",
+            "This led to introducing Western investigator characters and a Western knowledge framework. Since the protagonists are not familiar with the local culture, it feels natural for them to question what they see, take notes, and try to understand unfamiliar terms.": "这促成了西方调查者角色与西方知识框架的引入。由于主角本就不熟悉当地文化，他们对所见提出疑问、记录笔记、理解陌生术语都会显得自然。",
+            "As a result:": "由此产生了：",
+            "Self-explanation becomes part of character behavior": "角色自我解释成为行为的一部分",
+            "Journal updates and notes feel like investigation, not UI": "日志更新与笔记呈现为调查行为，而非界面提示",
+            "Re-reading information supports discovery instead of repetition": "信息回看不再是重复，而是支持探索推进",
+            "This way, explanation no longer interrupts the experience. It becomes part of the story, the environment, and the player’s role.": "这样一来，解释不再打断体验，而是成为故事、环境与玩家角色的一部分。",
+            "Call of Cthulhu TRPG": "《克苏鲁的呼唤》TRPG",
+            "Players take the role of foreign investigators connected to Miskatonic University. Each protagonist brings a different perspective, background, and route into the story.": "玩家将扮演与米斯卡托尼克大学相关的外国调查者。每位主角都带来不同视角、背景与进入故事的路径。",
+            "What first appears to be a culturally unfamiliar but fascinating world slowly reveals deeper supernatural instability and hidden cosmic pressure.": "最初看似陌生却迷人的文化世界，会逐步显露更深层的超自然失稳与隐藏的宇宙压力。",
+            "Players investigate events, interpret rituals and local beliefs, make narrative choices, use cards, and progress through branching storylines in order to survive and understand the truth.": "玩家通过调查事件、解读仪式与本地信仰，结合叙事选择与卡牌系统推进分支剧情，以求生存并接近真相。",
+            "I designed the core concept, narrative structure, branching routes, player role framing, card-based progression, and relationship logic for the project.": "我负责项目的核心概念、叙事结构、分支路线、玩家角色框架、卡牌推进逻辑与关系系统设计。",
+            "I also planned and ran the paper prototype playtests, observed where players became confused or disengaged, and used that feedback to restructure the project from a freeform multiplayer prototype into a clearer and more scalable narrative game direction.": "我还负责纸面原型试玩的规划与执行，观察玩家困惑与脱离点，并据此将项目从自由式多人原型重构为更清晰、可扩展的叙事游戏方向。",
+            "Narrative Preview": "叙事预览",
+            "Game Design Document": "游戏设计文档",
+            "Game Overview": "游戏概览",
+            "Wonder Tales is a 2D narrative-driven card horror game that combines Chinese folklore with Western cosmic horror. The player takes the role of an outsider investigator entering an unfamiliar world. Through narrative events, skill-based decisions, card interactions, and journal records, the player uncovers rituals, relationships, and hidden supernatural systems.": "《鬼神奇谭》是一款结合中国民俗与西方宇宙恐怖的 2D 叙事驱动卡牌恐怖游戏。玩家扮演外来调查者进入陌生世界，通过叙事事件、技能决策、卡牌交互与日志记录，逐步揭开仪式、关系与隐藏超自然系统。",
+            "The game focuses on gradual understanding. The player is not given full explanations. Instead, knowledge is built through interaction, observation, and repeated engagement with the system.": "游戏强调“渐进理解”。玩家不会被一次性告知全部信息，而是通过互动、观察与反复系统参与逐步建立认知。",
+            "The core experience moves from curiosity to uncertainty and then to dread. The player slowly realizes the world follows a logic that is different from their own, and that understanding this logic is necessary to survive.": "核心体验从好奇推进到不确定，再走向恐惧。玩家会逐渐意识到这个世界遵循异于自身认知的逻辑，而理解这套逻辑是生存前提。",
+            "The game is designed as a single-player experience for PC.": "本作定位为 PC 平台单人体验。",
+            "Core Fantasy": "核心幻想",
+            "The player is an outsider investigator who does not fully understand the world they have entered. They must observe, interpret, and record information in order to make decisions. The player is not powerful. Their strength comes from knowledge, preparation, and interpretation.": "玩家是一个并不完全理解所处世界的外来调查者。为了决策，必须观察、解读并记录信息。玩家并非强力个体，其优势来自知识、准备与解释能力。",
+            "Core Loop": "核心循环",
+            "The player enters a story scene and reads the situation. The player selects a skill to respond to the situation. A dice roll determines the outcome based on the selected skill. The result updates multiple systems, including relationships, cards, and journal entries. New information is unlocked, and the next scene becomes available. This loop repeats throughout the chapter.": "玩家进入叙事场景并读取局势，选择技能进行应对。掷骰将依据所选技能决定结果，结果会更新多个系统（关系、卡牌、日志）。新信息被解锁，下一场景开放。该循环贯穿整章反复进行。",
+            "Each loop reinforces learning. The player understands more about the world through the consequences of their actions.": "每一轮循环都会强化学习。玩家通过行动后果不断加深对世界的理解。",
+            "Core Loop Flow Diagram": "核心循环流程图",
+            "Scene Start": "场景开始",
+            "Player Reads Situation": "玩家读取局势",
+            "Choose Skill": "选择技能",
+            "Dice Roll": "掷骰",
+            "Result": "结果",
+            "Update Systems": "更新系统",
+            "Unlock Next Node": "解锁下一节点",
+            "Update Systems: Journal / Trust / Cards": "更新系统：日志 / 信任 / 卡牌",
+            "Player Role and Perspective": "玩家角色与视角",
+            "The player controls a Western investigator connected to Miskatonic University. The character is not familiar with local customs, rituals, or beliefs.": "玩家控制一名与米斯卡托尼克大学相关的西方调查者，角色并不熟悉本地习俗、仪式或信仰。",
+            "This role is designed to solve the problem of explanation. Since the character is an outsider, asking questions, taking notes, and misunderstanding events are natural behaviors. This allows explanation to exist inside the narrative instead of interrupting it.": "该角色设定用于解决“解释问题”。由于角色是外来者，提问、做笔记、误解事件都合理自然，从而让解释存在于叙事内部而不是打断叙事。",
+            "The player’s knowledge is limited and grows over time. The player must rely on recorded information, previous events, and interpretation.": "玩家初始知识有限，并会随时间增长。必须依赖记录信息、过往事件与自身解读推进。",
+            "Player Knowledge Model": "玩家知识模型",
+            "Player Knowledge": "玩家知识",
+            "Character Knowledge": "角色知识",
+            "World Truth": "世界真相",
+            "Game Structure": "游戏结构",
+            "The game is divided into chapters. Each chapter features one main companion character and a contained investigation. A chapter includes multiple narrative nodes, branching paths, key events, and a final deduction phase.": "游戏按章节划分。每章包含一位主要同伴角色和一次封闭式调查，并由多个叙事节点、分支路径、关键事件与最终推理阶段构成。",
+            "Each chapter takes approximately forty-five to seventy-five minutes to complete. The full game is expected to last four to six hours depending on player choices and replay.": "单章时长约 45–75 分钟。完整游戏预计 4–6 小时，取决于玩家选择与重玩路径。",
+            "Chapter Structure Diagram": "章节结构图",
+            "Start": "开始",
+            "Branching Nodes": "分支节点",
+            "Key Event": "关键事件",
+            "More Nodes": "后续节点",
+            "Deduction Phase": "推理阶段",
+            "Ending": "结局",
+            "Skill System": "技能系统",
+            "The game uses a simplified skill system inspired by Call of Cthulhu. Skills represent different ways the player can interact with the world.": "游戏采用受《克苏鲁的呼唤》启发的简化技能系统。技能代表玩家与世界互动的不同方式。",
+            "The final skill set includes Observe, Listen, Search, Insight, Occult, History, Medicine, Language, Persuade, Charm, Intimidate, Stealth, Dexterity, and Willpower.": "最终技能集合包括：观察、聆听、搜索、洞察、神秘学、历史、医学、语言、说服、魅力、威吓、潜行、敏捷与意志。",
+            "Each narrative node presents a situation. The player selects one skill to respond. The player cannot retry the same node. Failure is permanent and becomes part of the experience.": "每个叙事节点对应一个情境，玩家选择一项技能应对。同一节点不可重试，失败将被保留并成为体验的一部分。",
+            "Skills are not just mechanical tools. They define how the player approaches problems and shape the narrative outcome.": "技能不仅是机制工具，它定义了玩家解决问题的方式并影响叙事结果。",
+            "Skill Categories Table": "技能分类表",
+            "Category": "类别",
+            "Skills": "技能",
+            "Investigation": "调查",
+            "Knowledge": "知识",
+            "Social": "社交",
+            "Survival": "生存",
+            "Observe, Listen, Search, Insight": "观察、聆听、搜索、洞察",
+            "Occult, History, Medicine, Language": "神秘学、历史、医学、语言",
+            "Persuade, Charm, Intimidate": "说服、魅力、威吓",
+            "Stealth, Dexterity, Willpower": "潜行、敏捷、意志",
+            "Dice System": "骰点系统",
+            "The game uses a dice-based resolution system.": "游戏使用基于骰点的结算系统。",
+            "The player rolls a number between one and one hundred. The result is compared to the selected skill value.": "玩家掷出 1 到 100 的数值，并与所选技能值比较。",
+            "If the result is less than or equal to the skill value, the action succeeds. If the result is greater than the skill value, the action fails.": "若结果小于等于技能值则成功；若大于技能值则失败。",
+            "If the result is less than or equal to half of the skill value, the action is a strong success. If the result is very high, it can trigger a critical failure.": "若结果小于等于技能值的一半，为强成功；若结果极高，可能触发大失败。",
+            "This system allows different levels of outcomes and supports varied narrative responses.": "该系统支持不同层级结果，从而形成多样叙事反馈。",
+            "Dice Result Table": "骰点结果表",
+            "Select Skill": "选择技能",
+            "Roll Dice": "掷骰",
+            "Compare Value": "比较数值",
+            "Output Result": "输出结果",
+            "Roll Result": "掷骰结果",
+            "≤ 50% Skill": "≤ 技能值 50%",
+            "Strong Success": "强成功",
+            "≤ Skill": "≤ 技能值",
+            "Success": "成功",
+            "> Skill": "> 技能值",
+            "Failure": "失败",
+            "≥ 95": "≥ 95",
+            "Critical Failure": "大失败",
+            "Card System": "卡牌系统",
+            "The game uses cards to represent characters, items, and knowledge.": "游戏使用卡牌来承载角色、物品与知识信息。",
+            "Character cards represent key figures in the story. Each chapter includes one main companion character who stays with the player. This character also serves as the center of the relationship system.": "角色卡代表故事关键人物。每章包含一位主同伴角色并全程陪伴玩家，同时作为关系系统核心。",
+            "Item cards represent physical objects. They can be equipped to provide bonuses or enable specific interactions.": "物品卡代表实体道具，可装备后提供增益或开启特定交互。",
+            "Memory cards represent knowledge, clues, and past experiences. They can also be equipped and often unlock new choices or improve understanding of events.": "记忆卡代表知识、线索与过往经历，也可装备，并常用于解锁新选择或提升事件理解。",
+            "Cards can modify skill values, provide passive effects, or create conditional bonuses. Players can equip cards to themselves and to the companion character. The card system replaces traditional inventory and knowledge tracking systems.": "卡牌可修改技能值、提供被动效果或触发条件加成。玩家可为自己与同伴装备卡牌，卡牌系统将替代传统背包与知识追踪系统。",
+            "Card Types Diagram": "卡牌类型图",
+            "Cards": "卡牌",
+            "Character Card": "角色卡",
+            "Item Card": "物品卡",
+            "Memory Card": "记忆卡",
+            "Equip System Diagram": "装备系统图",
+            "Player": "玩家",
+            "2 Item Slots": "2 个物品槽",
+            "2 Memory Slots": "2 个记忆槽",
+            "Companion": "同伴",
+            "1 Support Slot": "1 个支援槽",
+            "Card Effect Types Table": "卡牌效果类型表",
+            "Type": "类型",
+            "Example": "示例",
+            "Skill Modifier": "技能修正",
+            "+10 Observe": "观察 +10",
+            "Passive": "被动",
+            "Reduce failure penalty": "降低失败惩罚",
+            "Conditional": "条件",
+            "Night + Stealth": "夜间 + 潜行",
+            "Relationship System": "关系系统",
+            "Each companion character has a trust value ranging from zero to one hundred.": "每位同伴角色拥有 0 到 100 的信任值。",
+            "Trust directly affects gameplay. High trust makes skill checks easier. Low trust makes them harder.": "信任值会直接影响玩法：高信任降低检定难度，低信任提高检定难度。",
+            "Trust also affects narrative access. High trust can unlock new dialogue, additional information, and alternative paths. Low trust can limit information and reduce available options.": "信任值也影响叙事访问权限。高信任可解锁新对话、额外信息和替代路径；低信任会限制信息与可选行动。",
+            "This system connects narrative decisions to mechanical outcomes.": "该系统将叙事决策与机制结果直接连接。",
+            "Trust Range Table": "信任区间表",
+            "Trust Range": "信任区间",
+            "Effect": "效果",
+            "80-100": "80-100",
+            "+20 skill": "技能 +20",
+            "60-79": "60-79",
+            "+10": "+10",
+            "40-59": "40-59",
+            "No change": "无变化",
+            "20-39": "20-39",
+            "-10": "-10",
+            "0-19": "0-19",
+            "-20": "-20",
+            "Journal System": "日志系统",
+            "The journal is an automatic recording system. It stores events, clues, and outcomes.": "日志是自动记录系统，用于存储事件、线索与结果。",
+            "The journal records information based on what the character experiences, not the objective truth.": "日志记录基于“角色所经历的信息”，而非客观真相本身。",
+            "If a player fails a skill check, the journal records the failed perception. For example, failing a listening check results in an entry stating that nothing was heard.": "若玩家检定失败，日志会记录该次错误感知。例如聆听失败会记录“没有听到任何异常”。",
+            "The journal can be reviewed at any time. It supports investigation and helps the player track information across the chapter.": "日志可随时回看，用于支持调查并帮助玩家跨章节追踪信息。",
+            "Missing key information can lead to incorrect conclusions later in the game.": "关键情报缺失将导致后续推理结论错误。",
+            "Journal Structure Diagram": "日志结构图",
+            "Journal": "日志",
+            "Confirmed Info": "已确认信息",
+            "Failed Info": "失败信息",
+            "Suspicion": "疑点",
+            "Confirmed: The ritual needs blood": "确认：该仪式需要血液",
+            "Failed: I heard nothing": "失败记录：我什么也没听见",
+            "Suspicion: Something feels wrong": "疑点：某些地方不对劲",
+            "Deduction System": "推理系统",
+            "At the end of each chapter, the player enters a deduction phase.": "每章末尾，玩家会进入推理阶段。",
+            "The player reviews journal entries and selects key information to form a conclusion.": "玩家回顾日志条目并选取关键情报形成结论。",
+            "If the player has enough correct information, they reach a successful outcome. If important information is missing or misinterpreted, the player reaches a negative outcome.": "若掌握足够正确信息则得到正向结果；若关键情报缺失或误读则进入负向结果。",
+            "This system gives weight to earlier decisions and reinforces the importance of careful observation.": "该系统让早期决策产生权重，并强化“谨慎观察”的重要性。",
+            "Deduction Flow Diagram": "推理流程图",
+            "Collect Info": "收集信息",
+            "Review Journal": "回顾日志",
+            "Select Key Clues": "选择关键线索",
+            "Form Conclusion": "形成结论",
+            "Check Result": "判定结果",
+            "Enough Key Info leads to a successful outcome. Missing key information leads to a negative outcome.": "关键情报充足则达成成功结果；关键情报缺失则导向负向结果。",
+            "Narrative Design": "叙事设计",
+            "The narrative is built around gradual revelation. Information is not given all at once. The player must connect fragments over time.": "叙事围绕“渐进揭示”构建。信息不会一次性给出，玩家需要在推进中连接碎片。",
+            "Horror is created through interpretation, not sudden shock. The more the player understands, the more threatening the world becomes.": "恐惧通过解读生成，而非瞬时惊吓。玩家理解越深，世界越具威胁。",
+            "Choices are meaningful. Each decision affects relationships, information access, and progression.": "选择具有真实意义。每次决策都会影响关系、信息获取与推进路径。",
+            "The story is structured to support replay. Different skills, card setups, and relationship levels lead to different outcomes.": "故事结构支持重玩。不同技能、卡组配置与关系等级将导向不同结果。",
+            "Visual Direction": "视觉方向",
+            "The game uses color contrast as a storytelling tool.": "游戏以色彩对比作为叙事工具。",
+            "The outsider world is presented with more natural and stable colors. The supernatural world is represented with high contrast and controlled color accents.": "外来者世界以更自然稳定的色彩呈现；超自然世界则以高对比与受控强调色表达。",
+            "As the player progresses, elements of the supernatural world begin to appear more frequently. This visual shift reflects the player’s deeper involvement with the setting.": "随着推进，超自然元素出现频率提高。该视觉位移反映了玩家对设定更深层的卷入。",
+            "The visual design supports the transition from observation to immersion.": "视觉设计服务于从“观察”到“沉浸”的过渡。",
+            "Visual Direction Color Logic": "视觉方向色彩逻辑",
+            "Outsider World": "外来者世界",
+            "Neutral and stable colors": "中性且稳定的色彩",
+            "Supernatural World": "超自然世界",
+            "High contrast and controlled accents": "高对比与受控强调色",
+            "Technical Requirements": "技术需求",
+            "The game must support branching narrative structures. Player choices and outcomes must be recorded and affect future events.": "系统必须支持分支叙事结构。玩家选择与结果需被记录，并影响后续事件。",
+            "The system must track skill values, modifiers, and dice results. Card effects must be applied dynamically.": "系统需追踪技能值、修正值与骰点结果，并动态应用卡牌效果。",
+            "The journal system must record and display entries based on player actions.": "日志系统需按玩家行为记录并展示条目。",
+            "The relationship system must update in real time and influence gameplay outcomes.": "关系系统需实时更新并影响玩法结果。",
+            "The system must support multiple endings based on player performance in the deduction phase.": "系统需支持基于推理阶段表现的多结局。",
+            "MVP Scope": "MVP 范围",
+            "The minimum version of the game includes one complete chapter.": "最小可行版本包含一个完整章节。",
+            "This chapter includes one companion character, a limited set of skills, a functional card system, a working journal system, and a complete deduction phase.": "该章节包含一名同伴角色、有限技能集、可运行卡牌系统、可运行日志系统与完整推理阶段。",
+            "The goal of the MVP is to test whether the core loop, skill system, and narrative structure can work together without external explanation.": "MVP 目标是验证：在无外部讲解情况下，核心循环、技能系统与叙事结构能否协同成立。",
+            "MVP Scope Strip": "MVP 范围条",
+            "Core Loop": "核心循环",
+            "Skill System": "技能系统",
+            "Card System": "卡牌系统",
+            "Journal": "日志",
+            "One Chapter": "单章",
+            "Deduction": "推理"
         };
 
         const enMap = Object.fromEntries(Object.entries(zhMap).map(([en, zh]) => [zh, en]));

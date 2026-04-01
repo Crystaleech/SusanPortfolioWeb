@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals - Celine Zhang</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#050b14',
+                        'deep-blue': '#0a192f',
+                        'neon-blue': '#00ffff',
+                        'neon-purple': '#bd00ff',
+                        'neon-green': '#39ff14',
+                        slate: '#8892b0',
+                        white: '#e6f1ff',
+                        glass: 'rgba(10, 25, 47, 0.7)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #050b14;
+            color: #8892b0;
+            background-image:
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-attachment: fixed;
+        }
+        .hud-panel {
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.7) 0%, rgba(5, 11, 20, 0.9) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .hud-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, rgba(0, 255, 255, 0.05), transparent 40%);
+            pointer-events: none;
+        }
+        .cyber-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+        .cyber-header::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #00ffff, transparent);
+            opacity: 0.3;
+        }
+        .lang-zh { display: none; }
+        body.zh-mode .lang-en { display: none; }
+        body.zh-mode .lang-zh { display: block; }
+        body.zh-mode span.lang-zh { display: inline; }
+        body.zh-mode span.lang-en { display: none; }
+        .banner-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            pointer-events: none;
+            z-index: 40;
+            background: linear-gradient(to left, rgba(5, 11, 20, 0.95) 0%, rgba(5, 11, 20, 0.8) 40%, rgba(5, 11, 20, 0) 100%);
+        }
+        .nav-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(5, 11, 20, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.85rem;
+            backdrop-filter: blur(5px);
+        }
+        .nav-box:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .nav-box.active {
+            background: white;
+            color: #050b14;
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+        .lang-switch {
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            padding: 8px 12px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .lang-switch:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+        .neon-title {
+            color: #ffffff;
+            text-shadow:
+                0 0 10px rgba(0, 255, 255, 0.55),
+                0 0 22px rgba(0, 255, 255, 0.28),
+                0 0 38px rgba(189, 0, 255, 0.22);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+    <div class="fixed top-0 left-0 w-[500px] h-[500px] bg-neon-blue/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3 pointer-events-none z-0"></div>
+    <div class="banner-bg"></div>
+
+    <div class="fixed top-0 left-0 w-full p-4 md:p-8 z-50 flex flex-col md:flex-row justify-between items-center md:items-start pointer-events-none gap-4">
+        <div class="pointer-events-auto z-50">
+            <h1 class="neon-title font-cyber font-black text-4xl md:text-7xl leading-tight tracking-tighter pl-0 md:pl-4 text-center md:text-left">GOALS</h1>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 pointer-events-auto items-center z-50 nav-container">
+            <a href="index.html" class="nav-box"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
+            <a href="projects.html" class="nav-box"><span class="lang-en">Project</span><span class="lang-zh">项目</span></a>
+            <a href="contact.html" class="nav-box"><span class="lang-en">About me</span><span class="lang-zh">关于我</span></a>
+            <a href="goals.html" class="nav-box active"><span class="lang-en">Goals</span><span class="lang-zh">目标</span></a>
+            <button onclick="toggleLang()" class="lang-switch ml-0 md:ml-4">
+                <span class="lang-en">中文</span><span class="lang-zh">EN</span>
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-grow pt-32 pb-12 px-4 md:px-8 lg:px-12 relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-4 space-y-6">
+            <div class="hud-panel p-8 rounded-lg lg:sticky lg:top-28">
+                <div class="flex flex-col items-center text-center mb-8">
+                    <div class="w-32 h-32 rounded-full border-2 border-neon-blue/30 p-1 mb-6 relative group">
+                        <div class="w-full h-full rounded-full bg-gradient-to-br from-deep-blue to-black overflow-hidden flex items-center justify-center relative z-10">
+                            <span class="font-cyber text-4xl text-neon-blue/50">SZ</span>
+                        </div>
+                    </div>
+                    <h1 class="font-cyber text-2xl md:text-3xl font-bold text-white mb-2 tracking-wider">CELINE ZHANG</h1>
+                    <p class="text-neon-blue font-mono text-sm tracking-widest uppercase mb-6">Game Designer</p>
+                    <a href="mailto:susa525795546@gmail.com" class="w-full py-3 bg-neon-blue/10 border border-neon-blue/50 text-neon-blue hover:bg-neon-blue hover:text-navy font-display font-bold transition-all uppercase tracking-wider text-sm flex items-center justify-center gap-2 group rounded">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        <span>Contact Me</span>
+                    </a>
+                </div>
+                <div class="space-y-4 border-t border-white/10 pt-6">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-slate mt-1"></i>
+                        <span class="text-sm font-mono text-slate">Pasadena, CA / Shanghai, CN</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="mail" class="w-4 h-4 text-slate mt-1"></i>
+                        <span class="text-sm font-mono text-slate break-all">susa525795546@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-8 space-y-8">
+            <section class="hud-panel p-6 rounded-lg">
+                <div class="cyber-header">
+                    <i data-lucide="sparkles" class="text-neon-blue w-5 h-5"></i>
+                    <h3 class="font-cyber text-lg text-white tracking-wider">Strength</h3>
+                </div>
+                <p class="text-slate leading-relaxed">My strength is connecting narrative, gameplay, and player experience into one clear design direction.</p>
+                <p class="text-slate leading-relaxed mt-3">I focus on how mechanics create emotion, and how systems support the feeling I want players to have.</p>
+            </section>
+
+            <section class="hud-panel p-6 rounded-lg">
+                <div class="cyber-header">
+                    <i data-lucide="wrench" class="text-neon-blue w-5 h-5"></i>
+                    <h3 class="font-cyber text-lg text-white tracking-wider">Developing Skill</h3>
+                </div>
+                <p class="text-slate leading-relaxed">I am currently developing my ability to design more complex and scalable systems.</p>
+                <p class="text-slate leading-relaxed mt-3">I want to improve how I structure mechanics so they remain clear, but can support deeper gameplay and longer player engagement.</p>
+            </section>
+
+            <section class="hud-panel p-6 rounded-lg">
+                <div class="cyber-header">
+                    <i data-lucide="route" class="text-neon-blue w-5 h-5"></i>
+                    <h3 class="font-cyber text-lg text-white tracking-wider">Career Path</h3>
+                </div>
+                <p class="text-slate leading-relaxed">I aim to become a game designer focused on systems and level design.</p>
+                <p class="text-slate leading-relaxed mt-3">I am especially interested in narrative-driven systems and player experience design, particularly in projects with strong emotional or world-building elements.</p>
+            </section>
+
+            <section class="hud-panel p-6 rounded-lg">
+                <div class="cyber-header">
+                    <i data-lucide="calendar-range" class="text-neon-blue w-5 h-5"></i>
+                    <h3 class="font-cyber text-lg text-white tracking-wider">6–12 Month Goal</h3>
+                </div>
+                <p class="text-slate leading-relaxed">In the next 6 to 12 months, I plan to gain practical industry experience through an internship, ideally working alongside experienced designers in a real production environment.</p>
+                <p class="text-slate leading-relaxed mt-3">At the same time, I will continue developing my independent projects, including Wonder Tales and Zhuguang, and refine them into stronger portfolio pieces.</p>
+                <p class="text-slate leading-relaxed mt-3">I also plan to participate in more game jams to improve my speed, collaboration, and iteration skills.</p>
+                <p class="text-slate leading-relaxed mt-3">In parallel, I will continue polishing my portfolio and website to better present my work.</p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        function toggleLang() {
+            const body = document.body;
+            const isZh = !body.classList.contains('zh-mode');
+            body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh' : 'en';
+            localStorage.setItem('siteLang', isZh ? 'zh' : 'en');
+        }
+        (function applySavedLang() {
+            const isZh = localStorage.getItem('siteLang') === 'zh';
+            document.body.classList.toggle('zh-mode', isZh);
+            document.documentElement.lang = isZh ? 'zh' : 'en';
+        })();
+    </script>
+</body>
+</html>
