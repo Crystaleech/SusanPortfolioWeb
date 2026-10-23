@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milk Man Crushing - PLO 2 案例页</title>
+    <title>牛奶人乱斗 | Celine</title>
+    <meta name="author" content="Celine">
     <script>
-        if (localStorage.getItem('siteLang') === 'en') {
-            window.location.replace('MilkManCrushing.html');
-        } else {
-            localStorage.setItem('siteLang', 'zh');
-        }
+        (function () {
+            var enFile = "MilkManCrushing.html";
+            var zhFile = "MilkManCrushing-zh.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || zhFile;
+            }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
+        })();
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -275,7 +294,7 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
-                返回项目
+                返回项目页
             </a>
             <div class="nav-actions">
                 <div class="nav-links">
@@ -291,7 +310,7 @@
         </div>
     </nav>
 
-    <section class="hero">
+    <section id="overview" class="hero">
         <div class="hud-line-h hud-1"></div>
         <div class="hud-line-h hud-2"></div>
         <div class="hud-line-v hud-3"></div>
@@ -300,20 +319,20 @@
         <div class="hero-content">
             <div class="hero-text">
                 <div class="hero-label">游戏设计案例</div>
-                <h1 class="hero-title">Milk Man<br>Crushing</h1>
-                <p class="hero-subtitle">问题解决与创新（PLO 2）</p>
+                <h1 class="hero-title">牛奶人<br>乱斗</h1>
+                <p class="hero-subtitle">问题解决与创新</p>
 
                 <div class="meta-chips">
                     <span class="meta-chip">派对游戏</span>
                     <span class="meta-chip">俯视角竞技场</span>
-                    <span class="meta-chip">混战多人</span>
-                    <span class="meta-chip">打滑移动</span>
+                    <span class="meta-chip">多人混战</span>
+                    <span class="meta-chip">湿滑移动</span>
                     <span class="meta-chip">追牛夺奶</span>
-                    <span class="meta-chip">PLO 2</span>
+                    <span class="meta-chip">设计案例</span>
                 </div>
 
                 <div class="hero-quote">
-                    <p>《Milk Man Crushing》是一款围绕混乱移动、共享目标和玩家干扰展开的多人派对游戏。项目经过多轮测试迭代，每一轮都针对不同的玩家体验问题进行修正。</p>
+                    <p>《牛奶人乱斗》（Milk Man Crushing）是一款围绕混乱移动、共同目标与玩家干扰打造的多人派对游戏。项目经历了多轮测试，每一轮迭代都聚焦解决一个不同的玩家体验问题。</p>
                 </div>
             </div>
 
@@ -341,78 +360,79 @@
         <section id="prototype" class="section">
             <h2 class="section-title"><span class="section-badge">1</span>初始原型</h2>
             <div class="content-panel p-6">
-                <p>第一版可玩原型将最初概念简化为可运行结构。</p>
-                <p>玩家通过挤奶累积进度，达到 100% 奶量即胜利。射击是独立系统，带有单独冷却。玩家需要用一个按键挤奶，另一个按键射击。</p>
-                <p>游戏采用俯视角 2D 竞技场，角色以简化彩色形体呈现，并在高打滑地面移动。移动不稳定是刻意设计，用来制造混乱控制和不可预测互动。</p>
-                <p>奶牛会自主移动并可把玩家撞开。该版本没有血量、没有淘汰、没有幽灵机制，核心就是比谁更快到达挤奶目标。</p>
+                <p>第一个可玩版本把最初的概念简化成了一个能运行的原型。</p>
+                <p>玩家以收集牛奶作为进度，率先集满 100% 牛奶即获胜。射击是另一套独立系统，有单独的冷却时间。玩家用一个扳机键收集牛奶，用另一个扳机键射击。</p>
+                <p>游戏呈现为俯视角 2D 竞技场，玩家是在极其湿滑的地面上移动的简单彩色图形。移动的不稳定是刻意为之，用来制造混乱的操控和难以预料的互动。</p>
+                <p>奶牛会自主移动，并能把玩家撞开。这个版本没有生命值、没有淘汰，也没有幽灵机制，玩法完全集中在抢先达成集奶目标上。</p>
             </div>
         </section>
 
         <section id="iteration-1" class="section">
             <h2 class="section-title"><span class="section-badge">2</span>迭代一</h2>
             <div class="card-grid">
-                <article class="card"><h3>问题发现</h3><p>首轮测试中，玩家普遍回避射击机制，几乎只专注挤奶，即便射击可用也不愿使用。</p></article>
-                <article class="card"><h3>原因分析</h3><p>射击收益不足以覆盖操作成本。玩家要额外管理冷却和按键，但效果不够显著，因此直接放弃。</p></article>
-                <article class="card"><h3>设计决策</h3><p>方向转向“增强互动、降低摩擦”。将射击从可选工具改为核心互动。</p></article>
-                <article class="card"><h3>落地实现</h3><p>加入眩晕系统：被命中会累积眩晕值，达到阈值后短暂失去移动。射击改为可持续使用，不再受冷却限制。</p></article>
+                <article class="card"><h3>问题发现</h3><p>第一轮测试中，玩家普遍回避射击机制：他们只专注于收集牛奶，即使射击可用也置之不理。</p></article>
+                <article class="card"><h3>原因分析</h3><p>射击带来的价值抵不上它的成本。玩家需要管理冷却、多按一个键，但效果不够明显，不值得为此费力。</p></article>
+                <article class="card"><h3>设计决策</h3><p>设计方向转向增强互动、减少操作摩擦。射击机制被重新设计，从可有可无的工具变为核心互动。</p></article>
+                <article class="card"><h3>落地实现</h3><p>引入眩晕系统：玩家被击中会累积眩晕值，达到阈值后会暂时无法移动。射击改为可无限使用。</p></article>
             </div>
-            <div class="highlight-box"><p>关键结果：玩家开始主动使用互动机制，而不是忽略它。</p></div>
+            <div class="highlight-box"><p>关键结果：玩家开始主动使用互动系统，而不再忽视它。</p></div>
         </section>
 
         <section id="iteration-2" class="section">
             <h2 class="section-title"><span class="section-badge">3</span>迭代二</h2>
             <div class="card-grid">
-                <article class="card"><h3>问题发现</h3><p>部分玩家反馈移动过难，打滑机制拉开操作差距，降低了休闲玩家的可参与性。</p></article>
-                <article class="card"><h3>原因分析</h3><p>游戏只有单一难度与单一主导玩法。低熟练玩家难以有效参与。</p></article>
-                <article class="card"><h3>设计决策</h3><p>方向调整为“可选难度 + 玩家选择”，让系统覆盖不同水平。</p></article>
-                <article class="card"><h3>落地实现</h3><p>加入模式选择：支持 2-6 人，提供三档难度。简单模式降低速度与打滑；普通模式维持原体验；困难模式改为点击采集且射击消耗奶量。</p></article>
+                <article class="card"><h3>问题发现</h3><p>一些玩家觉得移动系统太难控制。湿滑的移动拉大了玩家之间的操作差距，降低了休闲玩家的可参与度。</p></article>
+                <article class="card"><h3>原因分析</h3><p>游戏只有一种难度和一种主导玩法，操控能力较弱的玩家很难有效参与。</p></article>
+                <article class="card"><h3>设计决策</h3><p>设计方向转向灵活性与玩家选择，系统需要能适配不同水平的玩家。</p></article>
+                <article class="card"><h3>落地实现</h3><p>引入模式选择系统，提供三种难度：简单（降低速度）、普通（原始体验）、困难（点击收集，牛奶即弹药）。支持 2-6 名玩家。</p></article>
             </div>
-            <div class="highlight-box"><p>关键结果：项目从单一路径，转为多模式可适配体验。</p></div>
+            <div class="highlight-box"><p>关键结果：项目从单一固定的玩法，转向多种对玩家更友好的模式。</p></div>
         </section>
 
         <section id="iteration-3" class="section">
             <h2 class="section-title"><span class="section-badge">4</span>迭代三</h2>
             <div class="card-grid">
-                <article class="card"><h3>问题发现</h3><p>高频叠加眩晕导致玩家长时间失控，大人数局可玩性明显下降。</p></article>
-                <article class="card"><h3>原因分析</h3><p>眩晕系统缺少叠加限制，且没有针对高人数做平衡。</p></article>
-                <article class="card"><h3>设计决策</h3><p>在保留混乱感的同时恢复操作权，让“乱”不等于“失控”。</p></article>
-                <article class="card"><h3>落地实现</h3><p>眩晕期间禁用二次累积；眩晕时长从 5 秒降至 1 秒；补充音效与音乐反馈提升手感和可读性。</p></article>
+                <article class="card"><h3>问题发现</h3><p>反复叠加的眩晕让玩家长时间失去控制，人数较多时游戏的可玩性明显下降。</p></article>
+                <article class="card"><h3>原因分析</h3><p>眩晕系统没有限制效果叠加，也没有针对更多的玩家人数做平衡。</p></article>
+                <article class="card"><h3>设计决策</h3><p>系统需要在保留混乱感的同时，保住玩家的操控权——“乱”不能等于“失控”。</p></article>
+                <article class="card"><h3>落地实现</h3><p>眩晕状态下不再累积眩晕值；眩晕时长从 5 秒缩短为 1 秒；并加入了音效与音乐反馈。</p></article>
             </div>
-            <div class="highlight-box"><p>关键结果：游戏保留了派对混战能量，同时避免玩家被长时间锁出操作。</p></div>
+            <div class="highlight-box"><p>关键结果：游戏保留了混乱的派对能量，同时不会让玩家被长时间挡在游戏之外。</p></div>
         </section>
 
         <section id="result" class="section">
             <h2 class="section-title"><span class="section-badge">5</span>最终验证</h2>
             <div class="content-panel p-6">
-                <p>完成以上调整后，测试中未再出现明显负面核心反馈。</p>
-                <p>玩家在大部分对局时间都保持活跃。互动频率仍高，但控制感被保留，混乱与可玩性之间的平衡明显提升。</p>
+                <p>眩晕修改之后，记录下来的是：玩家在大部分时间里保持活跃，互动仍然频繁，操控感也还在。</p>
+                <p>文字没有列出还剩下的抱怨。仍然值得测试的是：1 秒眩晕和三种难度，在写明的 2–6 人里是否还站得住。</p>
+                <p>本页没有实机截图或视频。牛奶瓶图形只是装饰。</p>
             </div>
             <div class="quote-box">
-                <p>最终版本保留了派对游戏的活力，同时让系统在不同人数下更清晰、更公平、更有响应性。</p>
+                <p>最终版本保留了派对游戏的活力，同时让系统在不同人数下都更清晰、更公平、反馈更及时。</p>
             </div>
         </section>
 
         <section class="section">
             <h2 class="section-title"><span class="section-badge">6</span>反思</h2>
             <div class="content-panel p-6">
-                <p>这个项目说明：玩家行为会暴露“设计意图里看不见的问题”。</p>
-                <p>第一轮说明了“没人用的机制”本质上是投入与收益不匹配；第二轮说明了可达性与深度必须并行；第三轮说明系统必须能随玩家人数稳定扩展。</p>
-                <p>每一次改动都由实际玩家体验驱动，而不是主观假设。</p>
-                <p>未来项目中，我会更早进行行为导向测试，并用“玩家是否自然使用机制”作为评估标准。</p>
+                <p>这个项目说明，玩家行为能揭示出在设计意图中看不到的问题。</p>
+                <p>第一轮迭代说明，被闲置的机制意味着投入与回报不匹配；第二轮说明，必须在易上手与深度之间取得平衡，才能照顾到不同的玩家；第三轮说明，系统必须能随玩家人数扩展。</p>
+                <p>每一次设计调整都基于对玩家体验的直接观察，而非主观假设。</p>
+                <p>在今后的项目中，系统会更早进入测试并聚焦玩家行为；评估一个机制时，会看玩家选择使用它的频率与自然程度。</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="logo">Milk Man Crushing</div>
-        <p>游戏设计案例页</p>
-        <p>Xiaohan Zhang</p>
+        <div class="logo">牛奶人乱斗</div>
+        <p>游戏设计案例</p>
+        <p>Celine</p>
     </footer>
 
     <script>
         function toggleLang() {
-            localStorage.setItem('siteLang', 'en');
-            window.location.href = 'MilkManCrushing.html';
+            try { localStorage.setItem('siteLang', 'en'); } catch (e) {}
+            window.location.href = 'MilkManCrushing.html?lang=en' + (location.hash || '');
         }
 
         const links = document.querySelectorAll('.nav-link');

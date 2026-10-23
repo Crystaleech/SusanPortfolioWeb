@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Log: Sushi Go Go Go</title>
+    <title>Sushi Go Go Go | Celine</title>
+    <meta name="author" content="Celine">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Indie+Flower&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -448,7 +449,7 @@
         <div class="nav-left">
             <a href="projects.html" class="back-link">
                 <span class="back-icon"></span>
-                <span class="lang-en">Back to Project</span>
+                <span class="lang-en">Back to Projects</span>
                 <span class="lang-zh">返回项目页</span>
             </a>
         </div>
@@ -487,16 +488,16 @@
             <div class="card card-full" id="mission-brief">
                 <div class="sticker sticker-1"></div>
                 <h2><span class="square-icon"></span> Mission Brief (Overview)</h2>
-                <p><strong>Sushi Go Go Go</strong> is a fast-paced cooking simulation prototype where players prepare sushi under time pressure. You take the role of a new sushi apprentice on their first day of work.</p>
+                <p><span class="lang-en"><strong>Sushi Go Go Go</strong> is a fast-paced cooking simulation prototype where players prepare sushi under time pressure. You take the role of a new sushi apprentice on their first day of work.</span><span class="lang-zh"><strong>《寿司冲冲冲》</strong>是一款快节奏的烹饪模拟原型，玩家需要在时间压力下制作寿司。你将扮演一名刚入职第一天的寿司学徒。</span></p>
                 
                 <!-- Video Section -->
                 <div class="media-frame" style="transform: rotate(1deg); max-width: 80%;">
                     <div class="tape" style="top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);"></div>
-                    <video controls muted autoplay loop>
+                    <video controls muted playsinline preload="metadata">
                         <source src="Sushigogogo/SushiGoGoGo.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="media-caption">Gameplay Demo: Lunch Rush!</div>
+                    <div class="media-caption"><span class="lang-en">Team build. The stable mouse version is the one to judge. Leap Motion stays experimental.</span><span class="lang-zh">团队版本。应看鼠标稳定版。Leap Motion 仍是实验功能。</span></div>
                 </div>
 
                 <div class="highlight-box">
@@ -533,7 +534,7 @@
                 <p style="text-align: center; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <span class="square-icon" style="background-color: var(--nori);"></span> <strong>Repeat until shift ends</strong> <span class="square-icon" style="background-color: var(--nori);"></span>
                 </p>
-                <p style="text-align: center; font-size: 0.9em;">Balance <strong>Speed</strong> vs <strong>Precision</strong></p>
+                <p style="text-align: center; font-size: 0.9em;"><span class="lang-en">Balance <strong>Speed</strong> vs <strong>Precision</strong></span><span class="lang-zh">在<strong>速度</strong>与<strong>精度</strong>之间取得平衡</span></p>
             </div>
 
             <!-- Row 3: Scoring & Visuals (Split) -->
@@ -566,7 +567,7 @@
                 <div class="media-frame" style="transform: rotate(1deg); margin: 5px auto; width: 90%;">
                     <div class="tape" style="top: -6px; right: 20%; transform: rotate(5deg); width: 60px; height: 20px;"></div>
                     <img src="Sushigogogo/572c23bbb88f533ecd6f02d60f77f06f.png" alt="Final Gameplay">
-                    <div class="media-caption" style="font-size: 0.8rem;">Final Version</div>
+                    <div class="media-caption" style="font-size: 0.8rem;"><span class="lang-en">Later build. Playtest notes said knife placement was confusing; tutorials, cut sounds, and money/time UI were added after that.</span><span class="lang-zh">后期版本。试玩记录说刀的位置一开始让人困惑；之后加了教程、切割音效，以及金钱和时间界面。</span></div>
                 </div>
             </div>
 
@@ -595,6 +596,7 @@
             <!-- Row 5: Logs & Expansion (Split) -->
             <div class="card" id="log">
                 <h2><span class="square-icon"></span> My Shift Log (Contributions)</h2>
+                <p><span class="lang-en">The playable build is a three-person project made in about two weeks. The list below is what I implemented: cutting, assembly, plating, score, timer, and UI. It is not the whole team’s work.</span><span class="lang-zh">可玩版本是大约两周内由三人完成的项目。下面是我实现的部分：切鱼、组装、摆盘、计分、计时和界面。这不是整个团队的工作。</span></p>
                 <ul class="checklist">
                     <li>Unity gameplay programming</li>
                     <li>Core sushi preparation mechanics</li>
@@ -631,103 +633,99 @@
         </footer>
     </div>
 
+    <script src="site-lang.js"></script>
     <script>
         const zhMap = {
             "Work Log: Sushi Go Go Go": "工作日志：寿司冲冲冲",
             "Sushi Go Go Go": "寿司冲冲冲",
             "Cooking Simulation Prototype": "烹饪模拟原型",
-            "Unity Programmer & Gameplay Designer": "Unity 程序员 & 玩法设计",
-            "Team Size: 3": "团队规模：3人",
+            "Unity Programmer & Gameplay Designer": "Unity 程序与玩法设计",
+            "Team Size: 3": "团队规模：3 人",
             "~2 Weeks": "约 2 周",
             "Unity Engine": "Unity 引擎",
-            "Mission Brief (Overview)": "任务简报 (概览)",
-            "Manual (Controls)": "操作手册 (控制)",
-            "Workflow (Gameplay)": "工作流程 (玩法)",
-            "Wage Calculation (Scoring)": "工资计算 (计分)",
+            "Mission Brief (Overview)": "任务简报（概览）",
+            "Manual (Controls)": "员工手册（操作说明）",
+            "Workflow (Gameplay)": "工作流程（玩法）",
+            "Wage Calculation (Scoring)": "工资结算（计分）",
             "Visual Evolution": "视觉演变",
-            "Chef's Notes (Design & Feedback)": "主厨笔记 (设计与反馈)",
-            "My Shift Log (Contributions)": "轮班日志 (贡献)",
-            "Future Menu (Expansion)": "未来菜单 (扩展)",
-            "End of Shift Report (Reflection)": "轮班总结 (反思)",
+            "Chef's Notes (Design & Feedback)": "主厨笔记（设计与反馈）",
+            "My Shift Log (Contributions)": "我的轮班日志（贡献）",
+            "Future Menu (Expansion)": "未来菜单（扩展计划）",
+            "End of Shift Report (Reflection)": "下班报告（复盘）",
             "Gameplay Demo: Lunch Rush!": "玩法演示：午餐高峰！",
             "Early Prototype": "早期原型",
             "Final Version": "最终版本",
-            "Design Philosophy": "设计哲学",
+            "Design Philosophy": "设计理念",
             "Playtest Feedback": "试玩反馈",
-            
+
             // Content Paragraphs
-            "Sushi Go Go Go is a fast-paced cooking simulation prototype where players prepare sushi under time pressure. You take the role of a new sushi apprentice on their first day of work.": "《寿司冲冲冲》是一款快节奏的烹饪模拟原型，玩家需要在时间压力下制作寿司。你将扮演一名刚入职第一天的寿司学徒。",
             "Task:": "任务：",
-            "Cut fish, assemble sushi, and plate dishes as quickly and accurately as possible.": "尽可能快速且准确地切鱼、组装寿司并摆盘。",
+            "Cut fish, assemble sushi, and plate dishes as quickly and accurately as possible.": "尽可能又快又准地切鱼、组装寿司并摆盘。",
             "Focus:": "重点：",
-            "Precision-based cooking interactions, rewarding accurate cuts and efficient workflow.": "基于精度的烹饪交互，奖励精准的切割和高效的工作流程。",
+            "Precision-based cooking interactions, rewarding accurate cuts and efficient workflow.": "以精准为核心的烹饪交互，奖励精准的刀工与高效的操作流程。",
             "Inspiration:": "灵感：",
-            "Cooking Mama (exploring physical interaction systems).": "《料理妈妈》（探索物理交互系统）。",
+            "Cooking Mama (exploring physical interaction systems).": "《料理妈妈》（Cooking Mama），借鉴其物理交互系统。",
             "Primary Playable Version (Mouse-based):": "主要可玩版本（鼠标操作）：",
             "LMB": "左键",
             "Slice Fish": "切鱼",
             "RMB": "右键",
-            "Grab/Place": "抓取/放置",
+            "Grab/Place": "抓取 / 放置",
             "Interactable Items:": "可交互物品：",
             "Knife, Fish, Rice balls, Plates.": "刀、鱼、饭团、盘子。",
             "Experimental Feature:": "实验性功能：",
-            "Leap Motion gesture support was prototyped (Finger slice, Pinch grab) but mouse remains the main stable input.": "曾制作 Leap Motion 手势支持原型（手指切割、捏取），但鼠标仍是主要稳定输入方式。",
+            "Leap Motion gesture support was prototyped (Finger slice, Pinch grab) but mouse remains the main stable input.": "曾为 Leap Motion 手势操作制作原型（手指切割、捏合抓取），但鼠标仍是主要且稳定的输入方式。",
             "1. Cut the fish": "1. 切鱼",
-            "2. Combine fish with rice": "2. 将鱼与米饭结合",
+            "2. Combine fish with rice": "2. 将鱼片与米饭组合",
             "3. Plate the sushi": "3. 寿司摆盘",
-            "Repeat until shift ends": "重复直到轮班结束",
-            "Balance": "平衡",
-            "Speed": "速度",
-            "vs": "vs",
-            "Precision": "精度",
-            "Points represent wages earned during the shift.": "分数代表轮班期间赚取的工资。",
+            "Repeat until shift ends": "重复，直到轮班结束",
+            "Points represent wages earned during the shift.": "分数即本次轮班赚到的工资。",
             "Perfect Cut": "完美切割",
             "Good Cut": "良好切割",
-            "Acceptable Cut": "可接受切割",
+            "Acceptable Cut": "合格切割",
             "Incorrect Cut": "错误切割",
-            "Assembly/Plating": "组装/摆盘",
-            "+5 ea": "+5/个",
-            "Example Perfect Sushi: 25 Points": "示例完美寿司：25分",
-            "Precision-Based:": "基于精度：",
-            "No auto-cooking. Rewards control.": "无自动烹饪。奖励操作控制。",
+            "Assembly/Plating": "组装 / 摆盘",
+            "+5 ea": "每项 +5",
+            "Example Perfect Sushi: 25 Points": "示例：一份完美寿司 = 25 分",
+            "Precision-Based:": "精准至上：",
+            "No auto-cooking. Rewards control.": "没有自动烹饪，奖励精确的操控。",
             "Physical Interaction:": "物理交互：",
-            "Manual actions simulate the real station feel.": "手动操作模拟真实工位感觉。",
-            "Easy to understand, good visuals.": "易于理解，视觉效果好。",
-            "Knife placement initially confusing (Improved in iterations).": "刀具放置最初令人困惑（已在迭代中改进）。",
+            "Manual actions simulate the real station feel.": "手动操作还原真实料理台的手感。",
+            "Easy to understand, good visuals.": "容易理解，画面效果好。",
+            "Knife placement initially confusing (Improved in iterations).": "刀具的摆放位置起初让人困惑（已在后续迭代中改进）。",
             "Iterations:": "迭代：",
-            "Added tutorials, sound feedback for cutting, and UI for money/time to improve readability.": "增加了教程、切割音效反馈以及金钱/时间 UI 以提高可读性。",
+            "Added tutorials, sound feedback for cutting, and UI for money/time to improve readability.": "加入了教程、切割音效反馈以及金钱 / 时间 UI，提升了信息的可读性。",
             "Unity gameplay programming": "Unity 玩法编程",
             "Core sushi preparation mechanics": "核心寿司制作机制",
             "Fish cutting & slicing system": "切鱼与切片系统",
             "Sushi assembly & plating logic": "寿司组装与摆盘逻辑",
             "Score & wage system": "分数与工资系统",
             "Game timer & UI feedback": "游戏计时器与 UI 反馈",
-            "Workstation environment setup": "工作站环境搭建",
-            "Gameplay tuning & testing": "玩法调整与测试",
+            "Workstation environment setup": "料理台环境搭建",
+            "Gameplay tuning & testing": "玩法调优与测试",
             "More Fish:": "更多鱼类：",
             "Salmon, Tuna, Eel, Tamago.": "三文鱼、金枪鱼、鳗鱼、玉子烧。",
             "Orders:": "订单：",
-            "Specific requests (e.g., \"2 Salmon Nigiri\").": "特定要求（如“2个三文鱼手握”）。",
-            "Torch Cooking:": "喷枪烹饪：",
-            "Aburi style (searing).": "炙烤风格。",
+            "Specific requests (e.g., \"2 Salmon Nigiri\").": "特定点单（如“2 份三文鱼握寿司”）。",
+            "Torch Cooking:": "喷枪炙烤：",
+            "Aburi style (searing).": "炙烤寿司（Aburi）风格。",
             "Co-op:": "合作模式：",
-            "Multiplayer kitchen roles (Cutter, Rice Maker, Plater).": "多人厨房角色（切鱼工、捏饭工、摆盘工）。",
-            "Tutorials are key:": "教程是关键：",
-            "Players must understand the task immediately.": "玩家必须立即理解任务。",
+            "Multiplayer kitchen roles (Cutter, Rice Maker, Plater).": "多人厨房分工（切鱼、捏饭、摆盘）。",
+            "Tutorials are key:": "教程至关重要：",
+            "Players must understand the task immediately.": "玩家必须第一时间理解任务。",
             "Scope Management:": "范围管理：",
-            "Starting simple allowed us to polish the core loop within 2 weeks.": "从简单开始使我们能在2周内打磨好核心循环。",
-            "Tech Balance:": "技术平衡：",
-            "Innovative inputs (Leap Motion) are exciting, but stable fallbacks (Mouse) are essential for reliability.": "创新输入（Leap Motion）令人兴奋，但稳定的备选方案（鼠标）对于可靠性至关重要。",
-            "Signed, Apprentice Dev • Sushi Go Go Go Project Log": "签名：学徒开发者 • 寿司冲冲冲项目日志"
+            "Starting simple allowed us to polish the core loop within 2 weeks.": "从简单做起，让我们得以在 2 周内打磨好核心循环。",
+            "Tech Balance:": "技术取舍：",
+            "Innovative inputs (Leap Motion) are exciting, but stable fallbacks (Mouse) are essential for reliability.": "创新的输入方式（Leap Motion）令人兴奋，但稳定的备用方案（鼠标）才是可靠性的保障。",
+            "Signed, Apprentice Dev • Sushi Go Go Go Project Log": "签名：学徒开发者 • 《寿司冲冲冲》项目日志"
         };
 
-        const enMap = Object.fromEntries(Object.entries(zhMap).map(([en, zh]) => [zh, en]));
+        const originalText = new WeakMap();
 
         function normalizeText(text) {
             return text.replace(/\s+/g, " ").trim();
         }
 
-        function replaceTextNodes(root, dictionary) {
+        function replaceTextNodes(root, isZh) {
             const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
                 acceptNode(node) {
                     if (!node.parentElement) return NodeFilter.FILTER_REJECT;
@@ -741,13 +739,17 @@
             while (walker.nextNode()) textNodes.push(walker.currentNode);
 
             textNodes.forEach((node) => {
-                const raw = node.nodeValue || "";
+                if (!originalText.has(node)) originalText.set(node, node.nodeValue || "");
+                const raw = originalText.get(node);
+                if (!isZh) {
+                    node.nodeValue = raw;
+                    return;
+                }
                 const leading = (raw.match(/^\s*/) || [""])[0];
                 const trailing = (raw.match(/\s*$/) || [""])[0];
-                const core = raw.slice(leading.length, raw.length - trailing.length);
-                const key = normalizeText(core);
-                if (dictionary[key]) {
-                    node.nodeValue = leading + dictionary[key] + trailing;
+                const key = normalizeText(raw);
+                if (zhMap[key]) {
+                    node.nodeValue = leading + zhMap[key] + trailing;
                 }
             });
         }
@@ -755,18 +757,18 @@
         function applyLang(isZh) {
             document.body.classList.toggle("zh-mode", isZh);
             document.documentElement.lang = isZh ? "zh" : "en";
-            document.title = isZh ? "工作日志：寿司冲冲冲" : "Work Log: Sushi Go Go Go";
-            replaceTextNodes(document.body, isZh ? zhMap : enMap);
-            localStorage.setItem("siteLang", isZh ? "zh" : "en");
+            document.title = isZh ? "寿司冲冲冲 | Celine" : "Sushi Go Go Go | Celine";
+            replaceTextNodes(document.body, isZh);
         }
 
         function toggleLang() {
-            applyLang(!document.body.classList.contains("zh-mode"));
+            var isZh = !document.body.classList.contains("zh-mode");
+            if (window.SiteLang) SiteLang.persist(isZh ? "zh" : "en");
+            applyLang(isZh);
         }
 
         window.toggleLang = toggleLang;
-        // Check local storage or default to English (false)
-        applyLang(localStorage.getItem("siteLang") === "zh");
+        applyLang((window.SiteLang ? SiteLang.resolve() : "en") === "zh");
     </script>
 
 </body>

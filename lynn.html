@@ -2,15 +2,34 @@
 <html lang="zh-CN" class="scroll-smooth">
 <head>
     <script>
-        if (localStorage.getItem('siteLang') === 'en') {
-            window.location.href = 'lynn-en.html';
-        } else {
-            localStorage.setItem('siteLang', 'zh');
-        }
+        (function () {
+            var enFile = "lynn-en.html";
+            var zhFile = "lynn.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || zhFile;
+            }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
+        })();
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>林的养成日志 - Project Detail</title>
+    <title>林的养成日志 | Celine</title>
+    <meta name="author" content="Celine">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -238,11 +257,11 @@
                     <a href="#overview" class="nav-link hover:text-accent">项目概览</a>
                     <a href="#systems" class="nav-link hover:text-accent">核心系统</a>
                     <a href="#interaction" class="nav-link hover:text-accent">交互设计</a>
-                    <a href="#structure" class="nav-link hover:text-accent">时间架构</a>
+                    <a href="#structure" class="nav-link hover:text-accent">时间结构</a>
                     <a href="#gallery" class="nav-link hover:text-accent">画廊</a>
-                    <a href="#reflection" class="nav-link hover:text-accent">思考与总结</a>
+                    <a href="#reflection" class="nav-link hover:text-accent">设计反思</a>
                 </div>
-                <a href="lynn-en.html" class="nav-link hover:text-accent font-bold text-inkLight" onclick="localStorage.setItem('siteLang', 'en')">EN</a>
+                <a href="lynn-en.html?lang=en" class="nav-link hover:text-accent font-bold text-inkLight" onclick="try{localStorage.setItem('siteLang','en')}catch(e){}">EN</a>
             </div>
         </div>
     </nav>
@@ -264,13 +283,13 @@
                             <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-cute text-ink mb-4 drop-shadow-sm whitespace-nowrap">
                                 林的养成日志
                             </h1>
-                            <p class="font-hand text-xl text-inkLight">林的一日恢复记录</p>
+                            <p class="font-hand text-xl text-inkLight">林的日常恢复记录</p>
                         </div>
                     </div>
                     
                     <div class="max-w-xl mx-auto lg:mx-0 bg-white p-6 rounded-lg shadow-sm border-l-4 border-joyBlue transform -rotate-1">
                         <p class="text-lg text-ink font-hand leading-relaxed">
-                            "并非每个故事都需要反转。有时候，我们只想看到：<span class="handwritten-highlight">当危机结束后，一个人如何重新学会生活。</span>"
+                            “并非每个故事都需要反转。有时候，我们只想看到：<span class="handwritten-highlight">当危机结束后，一个人如何重新学会生活。</span>”
                         </p>
                     </div>
                 </div>
@@ -305,7 +324,7 @@
 
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-joyYellow/30 p-4 rounded-xl text-center">
-                        <span class="block text-xs font-bold text-ink/50 uppercase tracking-wider mb-1">角色</span>
+                        <span class="block text-xs font-bold text-ink/50 uppercase tracking-wider mb-1">职责</span>
                         <span class="font-hand text-lg font-bold">游戏策划</span>
                     </div>
                     <div class="bg-joyBlue/30 p-4 rounded-xl text-center">
@@ -331,7 +350,7 @@
                     <p class="font-hand text-lg leading-relaxed mb-4">
                         比起戏剧性的情节，我更想关注那些细微的<span class="bg-joyGreen/30 px-1">联结瞬间</span>——共同的日常、安静的互动，以及微妙的情感递进。
                     </p>
-                    <div class="text-right font-hand text-sm text-ink/50">~ 小寒</div>
+                    <div class="text-right font-hand text-sm text-ink/50">~ 笑菡</div>
                 </div>
             </div>
         </section>
@@ -366,7 +385,7 @@
         <!-- Core Systems (4 Columns now) -->
         <section id="systems" class="mb-20">
             <div class="text-center mb-10">
-                <span class="inline-block px-4 py-1 rounded-full bg-joyBlue/30 text-ink font-bold tracking-wider text-sm mb-2">GAMEPLAY</span>
+                <span class="inline-block px-4 py-1 rounded-full bg-joyBlue/30 text-ink font-bold tracking-wider text-sm mb-2">玩法</span>
                 <h2 class="text-4xl font-cute text-ink">核心系统</h2>
             </div>
             
@@ -418,7 +437,7 @@
 
             <div class="mt-8 bg-white/50 p-6 rounded-xl border border-white shadow-sm text-center max-w-2xl mx-auto">
                 <p class="text-ink/80 italic font-hand text-lg">
-                    "这些系统构成了一个动态平衡。过度保护林可能会增加信赖度，但会阻碍社交能力的成长。"
+                    “这些系统构成了一个动态平衡。过度保护林可能会增加信赖度，但会阻碍社交能力的成长。”
                 </p>
             </div>
         </section>
@@ -620,7 +639,7 @@
     <footer class="border-t border-joyBlue/20 bg-white/60 backdrop-blur py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <p class="font-hand text-lg text-ink/60 mb-2">© 2026 林的养成日志 / Lynn's Daily Recovery Log</p>
-            <p class="text-xs text-ink/40 uppercase tracking-widest font-sans">设计与文档：张笑菡</p>
+            <p class="text-xs text-ink/40 uppercase tracking-widest font-sans">设计与文档：Celine</p>
         </div>
     </footer>
 </body>

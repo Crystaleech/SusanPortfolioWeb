@@ -3,17 +3,32 @@
 <head>
     <script>
         (function() {
-            var lang = localStorage.getItem('siteLang');
-            if (lang === 'en') {
-                window.location.replace('five-elemental-clash-en.html');
-            } else if (!lang) {
-                localStorage.setItem('siteLang', 'zh');
+            var enFile = "five-elemental-clash-en.html";
+            var zhFile = "five-elemental-clash.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || zhFile;
             }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
         })();
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>五行之争 - 项目详情</title>
+    <title>五行之争 | Celine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Cinzel:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -183,7 +198,7 @@
                     <a href="#systems" class="hover:text-ember">Systems</a>
                     <a href="#design-reflection" class="hover:text-ember">Design Reflection</a>
                 </div>
-                <button onclick="window.location.href='five-elemental-clash-en.html'" class="lang-switch text-mist/85 hover:text-ember text-sm">EN</button>
+                <button onclick="try{localStorage.setItem('siteLang','en')}catch(e){} window.location.href='five-elemental-clash-en.html?lang=en'+(location.hash||'')" class="lang-switch text-mist/85 hover:text-ember text-sm">EN</button>
             </div>
         </div>
     </nav>
@@ -193,7 +208,8 @@
             <div class="panel p-6 md:p-8">
                 <div class="text-xs font-mono tracking-[0.3em] text-ember uppercase mb-3">Game Design Document</div>
                 <h1 class="font-display text-4xl md:text-6xl text-mist mb-3">Five Elemental Clash</h1>
-                <p class="text-mist/85 mb-4">Title: Five Elemental Clash | Author: Susan Zhang</p>
+                <p class="text-mist/85 mb-4">Title: Five Elemental Clash | Author: Celine</p>
+                <p class="text-mist/85 mb-4">Individual tabletop prototype. Role: Solo Designer. Date: 2024.09–2024.12. Rules and design documentation are below.</p>
                 <div class="grid md:grid-cols-3 gap-4 text-sm">
                     <div class="panel p-4"><strong>Player Format</strong><br>2-4 Players (PvPvPvP)</div>
                     <div class="panel p-4"><strong>预计时长</strong><br>60-90 分钟</div>
@@ -206,6 +222,7 @@
                 <p class="text-mist/90 leading-relaxed mb-3">Five Elemental Clash is a tactical tabletop game inspired by the Chinese Five Elements (Metal, Wood, Water, Fire, Earth) philosophy.</p>
                 <p class="text-mist/90 leading-relaxed mb-3">Players explore a modular hex map, battle bosses, gather resources, and compete to defeat other elemental avatars.</p>
                 <p class="text-mist/90 leading-relaxed">The game combines dice-based uncertainty with strategic resource management, creating a balance between luck and tactical planning.</p>
+                <p class="text-mist/90 leading-relaxed mt-4">One movement decision: in a Wood forest, Wood above 60 costs 1 AP and moves freely. Wood from 30 to 60 costs 2 AP and needs a D100 roll at or under Agility. Wood under 30 costs 3 AP, then a D20 check for the Wood spirit; failure stops the move. One combat decision: a basic attack costs 2 AP, while an elemental attack costs 5 AP and adds an element check. Water above 80 attacking with Wood adds 2 damage. Full tables stay in the rules below.</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-6">
@@ -488,9 +505,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1-4</td><td>平原（金无关）</td><td>基础地形，无额外障碍或增益，每步消耗 1 行动点。</td></tr>
+                            <tr><td>1-4</td><td>平原</td><td>基础地形，无额外障碍或增益，每步消耗 1 行动点。</td></tr>
                             <tr><td>5-8</td><td>森林（木）</td><td>木属性高者更易通行，低者易受阻。</td></tr>
-                            <tr><td>9-12</td><td>山地（土）</td><td>土属性高者易攀爬，低者需额外行动点或检定失败。</td></tr>
+                            <tr><td>9-12</td><td>山地（土）</td><td>土属性高者更易攀爬，低者需要额外行动点，或可能检定失败。</td></tr>
                             <tr><td>13-15</td><td>熔岩区（火）</td><td>火属性低者行动慢并承受火伤。</td></tr>
                             <tr><td>16-18</td><td>水域（水）</td><td>水属性高者通过更快，低者可能受阻或受罚。</td></tr>
                             <tr><td>19-20</td><td>金属矿区（金）</td><td>金属性高者更易采矿，低者可能塌方受伤。</td></tr>
@@ -499,7 +516,7 @@
                 </div>
                 <ul class="list-disc pl-5 mt-4 text-mist/90 space-y-1">
                     <li>战略点（稀有资源、Boss 点）在初次铺图后再掷 D20 分配。</li>
-                    <li>地图生成后，玩家从边缘 Hex 选择起始位。</li>
+                    <li>地图生成后，玩家从地图边缘的六边形格中选择起始位置。</li>
                 </ul>
 
                 <h3 class="text-ember text-xl mt-6 mb-3">2) Character Creation</h3>
@@ -710,15 +727,17 @@
         const zhMap = {
             "Back To Projects": "返回项目页",
             "Overview": "概览",
-            "Setup": "搭建",
+            "Setup": "准备",
             "Rules": "规则",
             "Systems": "系统",
             "Game Design Document": "游戏设计文档",
-            "Title: Five Elemental Clash | Author: Susan Zhang": "题目：五行之争 ｜ 作者：张笑菡",
+            "Title: Five Elemental Clash | Author: Celine": "游戏名称：五行之争 ｜ 作者：Celine",
+            "Individual tabletop prototype. Role: Solo Designer. Date: 2024.09–2024.12. Rules and design documentation are below.": "个人桌面原型。职责：独立设计师。时间：2024.09–2024.12。完整规则和设计文档在下方。",
+            "One movement decision: in a Wood forest, Wood above 60 costs 1 AP and moves freely. Wood from 30 to 60 costs 2 AP and needs a D100 roll at or under Agility. Wood under 30 costs 3 AP, then a D20 check for the Wood spirit; failure stops the move. One combat decision: a basic attack costs 2 AP, while an elemental attack costs 5 AP and adds an element check. Water above 80 attacking with Wood adds 2 damage. Full tables stay in the rules below.": "一次移动决定：在木属性森林里，木高于 60 时花费 1 点 AP 即可通行。木在 30 到 60 之间时花费 2 点 AP，并需要 D100 结果不高于敏捷。木低于 30 时花费 3 点 AP，再掷 D20 判定木之灵；失败则停止移动。一次战斗决定：普通攻击花费 2 点 AP，元素攻击花费 5 点 AP 并追加元素检定。水高于 80 时使用木攻击，伤害 +2。完整表格留在下方规则里。",
             "Five Elemental Clash": "五行之争",
             "Player Format": "玩家形式",
-            "2-4 Players (PvPvPvP)": "2-4 玩家 (PvPvPvP)",
-            "题目：Five Elemental Clash ｜ 作者：Susan Zhang": "Title: Five Elemental Clash | Author: Susan Zhang",
+            "2-4 Players (PvPvPvP)": "2-4 名玩家（PvPvPvP）",
+            "题目：Five Elemental Clash ｜ 作者：Celine": "Title: Five Elemental Clash | Author: Celine",
             "玩家形式": "Player Format",
             "预计时长": "Estimated Play Time",
             "类型": "Genre",
@@ -728,20 +747,20 @@
             "A mythical world based on the Chinese Five Elements. Players become elemental avatars exploring dangerous magical lands, battling bosses, gathering resources, and competing for supremacy.": "基于中国五行的神话世界，玩家扮演元素化身，在危险而充满魔法的土地上探索、与 Boss 战斗、收集资源、争夺霸权。",
             "Goal:": "目标：",
             "Defeat the opposing avatar(s). When either Willpower or HP reaches zero, the avatar dies.": "击败对手化身。当意志或生命值归零时，该化身死亡。",
-            "Play Value:": "可玩价值：",
+            "Play Value:": "可玩性：",
             "Tactical depth through resource management, elemental interactions, and high-pressure boss decisions.": "通过资源管理、元素互动与高压力 Boss 决策体现策略深度。",
             "Hook:": "核心卖点：",
             "Five-element synergy/countering + randomized maps + AP economy and dice checks make every match different.": "五行相生相克 + 随机地图 + 行动点经济与骰子判定，让每局都不同。",
             "Target Player / Pillars": "目标玩家 / 设计支柱",
             "Board game players who prefer strategic depth and tactical decisions.": "偏好策略深度与战术博弈的桌游玩家。",
-            "Players who enjoy mythic themes, elemental fantasy, and role-playing flavor.": "喜欢神话、元素主题和角色扮演味道的玩家。",
+            "Players who enjoy mythic themes, elemental fantasy, and role-playing flavor.": "喜欢神话题材、元素奇幻与角色扮演氛围的玩家。",
             "Players who accept randomness (dice) plus planning (resources/routes).": "接受随机性（骰子）与规划性（资源/路线）并存的玩家。",
-            "Players who enjoy high-risk, high-reward boss decision tension.": "喜欢高风险高回报 Boss 决策张力的玩家。",
+            "Players who enjoy high-risk, high-reward boss decision tension.": "享受 Boss 战中高风险、高回报抉择张力的玩家。",
             "元素联动": "Elemental Synergy",
             "随机地图与遭遇": "Randomized Gameplay",
             "风险收益抉择": "Risk and Reward",
             "Overview": "概览",
-            "Five Elemental Clash is a tactical tabletop game inspired by the Chinese Five Elements (Metal, Wood, Water, Fire, Earth) philosophy.": "五行之争是一款受中国五行（金、木、水、火、土）哲学启发的战术桌游。",
+            "Five Elemental Clash is a tactical tabletop game inspired by the Chinese Five Elements (Metal, Wood, Water, Fire, Earth) philosophy.": "《五行之争》是一款受中国五行（金、木、水、火、土）哲学启发的战术桌游。",
             "Players explore a modular hex map, battle bosses, gather resources, and compete to defeat other elemental avatars.": "玩家在模块化六边形地图上探索、与 Boss 战斗、收集资源，并相互竞争以击败其他元素化身。",
             "The game combines dice-based uncertainty with strategic resource management, creating a balance between luck and tactical planning.": "游戏将骰子带来的随机性与策略性资源管理相结合，在运气与战术规划之间取得平衡。",
             "Core Design Pillars": "核心设计支柱",
@@ -755,13 +774,13 @@
             "Action Point System": "行动点系统",
             "Players use Action Points derived from Willpower to perform actions such as movement, attacks, or skill usage.": "玩家使用由意志衍生的行动点执行移动、攻击或使用技能等行动。",
             "Elemental Interaction": "元素互动",
-            "The Five Elements create a synergy and counter system that modifies combat damage and movement efficiency.": "五行形成相生相克，影响战斗伤害与移动效率。",
+            "The Five Elements create a synergy and counter system that modifies combat damage and movement efficiency.": "五行构成一套相生相克的体系，影响战斗伤害与移动效率。",
             "Dice-based Resolution": "骰子判定",
-            "Combat, terrain challenges, and random events are resolved through multiple dice systems (D6, D10, D20, D100).": "战斗、地形挑战与随机事件通过多种骰子系统（D6、D10、D20、D100）解决。",
+            "Combat, terrain challenges, and random events are resolved through multiple dice systems (D6, D10, D20, D100).": "战斗、地形挑战与随机事件通过多种骰子系统（D6、D10、D20、D100）进行判定。",
             "Design Challenge": "设计挑战",
             "Balancing randomness and strategy was a key challenge.": "平衡随机性与策略是核心挑战。",
             "The system was designed so that dice influence outcomes, but player decisions—such as resource management and elemental specialization—remain the primary factor in success.": "设计上让骰子影响结果，但玩家的资源管理与元素专精等决策仍是成败的主要因素。",
-            "Revision History（First Iteration）": "修订历史（第一轮）",
+            "Revision History（First Iteration）": "修订记录（第一轮迭代）",
             "完成核心系统初版：移动、战斗、AP、五行机制。": "Initial implementation of key systems: movement, combat, AP, and Five Elements.",
             "制作 Boss Card（独立机制与决策压力）。": "Built Boss Cards with unique mechanics and decision pressure.",
             "加入 Fate Dice（Lucky/Unlucky）与掷骰生成地图流程。": "Added Fate Dice (Lucky/Unlucky) and dice-driven map generation.",
@@ -783,7 +802,7 @@
             "Willpower": "意志",
             "Appearance": "外貌",
             "Luck": "幸运",
-            "Stat": "状态项",
+            "Stat": "数值项",
             "Base Value": "基础值",
             "Current Value": "当前值",
             "Calculation": "计算公式",
@@ -815,7 +834,7 @@
             "Endless Possibilities": "无尽可能",
             "The player draws 1 additional Lucky card from the pile and uses it for free.": "玩家额外抽取 1 张幸运牌并免费使用。",
             "Wheel of Destiny": "命运之轮",
-            "The player rerolls their Fate dice, changing the outcome for this turn (can switch between Lucky and Unlucky cards).": "玩家可重掷 Fate 骰，改变本回合结果（可在幸运/厄运之间切换）。",
+            "The player rerolls their Fate dice, changing the outcome for this turn (can switch between Lucky and Unlucky cards).": "玩家重掷命运骰，改变本回合的结果（可在幸运牌与厄运牌之间切换）。",
             "Tokens/Markers": "标记物 / 指示物",
             "Item Cards": "道具卡",
             "Good Item Cards": "正向道具卡",
@@ -826,7 +845,7 @@
             "AP Cost: 1 AP": "AP 消耗：1 AP",
             "Effect: Increases attack power by 3 points for the next 2 turns.": "效果：接下来 2 回合攻击力 +3。",
             "Effect: Increases Strength by 2 points but reduces HP by 4 points next turn.": "效果：力量 +2，但下一回合 HP -4。",
-            "Game Setup": "游戏搭建",
+            "Game Setup": "游戏准备",
             "1) Board Creation": "1）地图生成",
             "玩家轮流掷 D20 放置地形，结果对应如下：": "Players take turns rolling D20 to place terrain; outcomes are as follows:",
             "D20 结果": "D20 Result",
@@ -926,7 +945,7 @@
             "Movement penalties were reduced for players with higher elemental attributes, allowing specialized characters to move more freely in certain terrains.": "降低高元素属性玩家的移动惩罚，使专精角色在相应地形中移动更自由。",
             "Issue 2 – Boss encounters were too risky": "问题 2：Boss 遭遇风险过高",
             "During early tests, players often avoided boss encounters entirely because the potential penalties outweighed the rewards.": "在早期测试中，玩家往往完全避开 Boss 遭遇，因为潜在惩罚大于收益。",
-            "Boss encounters were redesigned to include more attractive rewards (such as rare resources and equipment upgrades), creating a clearer risk–reward tradeoff.": "Boss 遭遇被重新设计，加入更具吸引力的奖励（如稀有资源与装备升级），形成更清晰的风险—回报权衡。",
+            "Boss encounters were redesigned to include more attractive rewards (such as rare resources and equipment upgrades), creating a clearer risk–reward tradeoff.": "Boss 遭遇被重新设计，加入了更具吸引力的奖励（如稀有资源与装备升级），让风险与回报的取舍更加清晰。",
             "Issue 3 – Attribute distribution imbalance": "问题 3：属性分配失衡",
             "Random character generation sometimes produced extremely unbalanced characters. Some players began the game with very high combat stats, while others were significantly weaker.": "随机角色生成有时会产生极度不平衡的角色；部分玩家以很高的战斗属性开局，另一些则明显偏弱。",
             "A Point-Buy Mode was introduced as an alternative to random character generation, allowing players to build more balanced characters.": "引入点数分配模式作为随机生成的替代，让玩家可构建更平衡的角色。",
@@ -992,7 +1011,7 @@
 
         function applyZhPage() {
             document.documentElement.lang = "zh-CN";
-            document.title = "五行之争 - 项目详情";
+            document.title = "五行之争 | Celine";
             replaceTextNodes(document.body, enToZh);
             if (localStorage.getItem("siteLang") !== "zh") localStorage.setItem("siteLang", "zh");
         }

@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyrant's Court - PLO5 Case Study</title>
+    <title>Tyrant's Court | Celine</title>
+    <meta name="author" content="Celine">
+    <meta name="description" content="Tyrant's Court is an individual course project by Celine: a playable card prototype about evidence, exposure, and shared risk.">
     <script>
-        if (localStorage.getItem('siteLang') === 'zh') {
-            window.location.replace('tyrants-court-zh.html');
-        } else {
-            localStorage.setItem('siteLang', 'en');
-        }
+        (function () {
+            var enFile = "tyrants-court.html";
+            var zhFile = "tyrants-court-zh.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || enFile;
+            }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +65,27 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 96px;
         }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--gold-light);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+
+        .snapshot-grid, .iter-table { width: 100%; border-collapse: collapse; margin: 1rem 0 0; }
+        .snapshot-grid th, .snapshot-grid td, .iter-table th, .iter-table td {
+            border: 1px solid var(--border-gold);
+            padding: 0.7rem 0.8rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .magnet-note, .shot-note { color: var(--text-muted); font-size: 0.95rem; }
 
         body {
             margin: 0;
@@ -196,6 +236,21 @@
             width: min(1100px, 94vw);
             margin: 0 auto;
             padding: 100px 0 80px;
+        }
+
+        .section img, .video-media { max-width: 100%; height: auto; }
+        .play-frame {
+            width: min(960px, 100%);
+            aspect-ratio: 16 / 10;
+            background: #0a0812;
+            border: 1px solid var(--border-gold);
+            margin-top: 1rem;
+        }
+        .play-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
         }
 
         /* ===== HERO SECTION ===== */
@@ -752,7 +807,9 @@ display: grid;
             </a>
             <div class="top-nav-actions">
                 <div class="quick-nav">
-                    <a href="#overview">Overview</a>
+                    <a href="#snapshot">Snapshot</a>
+                    <a href="#current">Current Rules</a>
+                    <a href="#play">Play</a>
                     <a href="#gameplay">Gameplay</a>
                     <a href="#initial">Initial Design</a>
                     <a href="#iteration1">Iteration 1</a>
@@ -768,17 +825,56 @@ display: grid;
         <!-- Hero Section -->
         <header class="hero">
             <div class="hero-content">
-                <div class="subtitle">Project Detail / PLO5</div>
+                <div class="subtitle">Individual / Course Project</div>
                 <h1>Tyrant's Court</h1>
-                <p class="tagline">Player Centered Design Iteration</p>
-                <p class="description">A multiplayer card game about player interaction, hidden roles, and strategic decision making. Players observe, manage risk, and react to changing situations through cards, abilities, and shared systems.</p>
+                <p class="tagline">Systems Design and Playtest-Driven Iteration</p>
+                <p class="description">A card game prototype about information, exposure, and shared risk. The current version removes direct attacks. Players gain advantage by holding Evidence and become vulnerable when that Evidence is exposed.</p>
             </div>
             <div class="hero-image">
                 <img src="king_cover_v3.png" alt="Tyrant's Court key visual">
             </div>
         </header>
 
-        <!-- Video Section -->
+        <section id="snapshot" class="section">
+            <h2>Project Snapshot</h2>
+            <table class="snapshot-grid">
+                <tr><th>Project Type</th><td>Individual</td></tr>
+                <tr><th>Context</th><td>Course Project</td></tr>
+                <tr><th>Role</th><td>Solo Designer</td></tr>
+                <tr><th>Duration</th><td>2026.02 – 2026.04</td></tr>
+                <tr><th>Tools</th><td>Unity 6</td></tr>
+                <tr><th>Format</th><td>Playable Prototype</td></tr>
+                <tr><th>Current Status</th><td>Two local playable prototypes: initial and refined</td></tr>
+                <tr><th>Deliverables</th><td>The two prototypes shown below, plus this iteration write-up</td></tr>
+            </table>
+            <p>The videos below are local builds. The browser section is a single-player web build of this prototype. It is not online multiplayer.</p>
+        </section>
+
+        <section id="current" class="section">
+            <h2>Current Rules</h2>
+            <p>This is the refined version. The HP swaps, direct attacks, ability draft, and Lord-only Suspicion card below belong to the Initial Version.</p>
+            <ol>
+                <li>Players act by generating, exposing, and managing Evidence. The refined write-up does not list a separate turn menu beyond that.</li>
+                <li>Evidence is the advantage. Holding more of it is also exposure.</li>
+                <li>At the end of each round, Evidence is evaluated and punishment follows exposure. The refined notes still use the Evidence and Suspicion system, and they do not restate the Initial Version’s HP loss or the Lord-only Suspicion card.</li>
+                <li>Direct attacks are gone. Players still affect one another because one player’s Evidence changes the shared round-end punishment.</li>
+                <li>The refined write-up does not restate a win condition. The initial version used role-based victory after HP elimination. That rule is not copied forward here.</li>
+            </ol>
+            <figure>
+                <img src="Tyrant.png" alt="Tyrant's Court title screen with a Start Game button">
+                <figcaption class="shot-note">Title screen of the playable prototype. It shows the entry UI, not an Evidence decision during a round.</figcaption>
+            </figure>
+        </section>
+
+        <section id="play" class="section">
+            <h2>Play the Prototype</h2>
+            <p>This is the web build of Tyrant's Court. Click the game, then use the controls shown on its start screen. It runs in the browser on this site. A downloaded copy of the page opened from a folder cannot start the web build.</p>
+            <div class="play-frame">
+                <iframe src="tyrant-play/index.html" title="Tyrant's Court web build" allow="fullscreen; autoplay" allowfullscreen></iframe>
+            </div>
+            <p class="shot-note"><a href="tyrant-play/index.html" target="_blank" rel="noopener">Open Tyrant's Court in a full page</a></p>
+        </section>
+
         <section id="gameplay" class="video-section">
             <h2 class="section-title">Gameplay Modes</h2>
             <div class="video-grid">
@@ -790,8 +886,8 @@ display: grid;
                         </video>
                     </div>
                     <div class="video-info">
-                        <h3>Initial Mode</h3>
-                        <p>Original gameplay iteration</p>
+                        <h3>Initial Version</h3>
+                        <p>Watch the earlier build: more systems are active at once, including direct interaction. This is not the current ruleset.</p>
                     </div>
                 </article>
                 <article class="video-card">
@@ -802,8 +898,8 @@ display: grid;
                         </video>
                     </div>
                     <div class="video-info">
-                        <h3>Refined Mode</h3>
-                        <p>Player-centered redesign</p>
+                        <h3>Refined Version</h3>
+                        <p>Watch Evidence, exposure, and play without direct attacks. Both videos are local Unity prototypes I made for this solo course project.</p>
                     </div>
                 </article>
             </div>
@@ -811,14 +907,14 @@ display: grid;
 
         <section id="overview" class="section">
             <h2>Game Overview</h2>
-            <p>Tyrant's Court is a multiplayer card game about player interaction, hidden roles, and strategic decision making.</p>
-            <p>Players interact through cards, abilities, and shared systems. The gameplay focuses on player to player tension, uncertainty of information, and timing based decisions. Players observe others, manage risk, and react to changing situations during the game.</p>
-            <p>The game is built around conflict between players, indirect interaction, and trade offs between gaining power and taking on risk.</p>
+            <p>Tyrant's Court is a multiplayer card game about player interaction, hidden roles, and strategic decision-making.</p>
+            <p>Players interact through cards, abilities, and shared systems. The gameplay focuses on player-to-player tension, uncertainty of information, and timing-based decisions. Players observe others, manage risk, and react to changing situations during the game.</p>
+            <p>The game is built around conflict between players, indirect interaction, and trade-offs between gaining power and taking on risk.</p>
         </section>
 
         <section id="initial" class="section">
-            <h2>Initial Design</h2>
-            <p>The initial design combines several systems into one experience. The game includes hidden roles with different victory conditions, a card system used during gameplay, and a resource system based on Evidence and Suspicion.</p>
+            <h2>Initial Version</h2>
+            <p>The notes in this section describe the first version only. The initial design combines several systems into one experience. The game includes hidden roles with different victory conditions, a card system used during gameplay, and a resource system based on Evidence and Suspicion.</p>
             <p>A key mechanic appears before the game starts. During the setup phase, all players except the Lord select abilities from a shared ability pool. Each player can choose several abilities that provide strong advantages during the game.</p>
             <p>Each selected ability also gives a benefit to the Lord. These benefits can include drawing additional cards or gaining extra effects. This creates a shared cost system where players gain power while also strengthening a common threat.</p>
             <p>This setup phase creates an early decision. Players must consider how much power they want to take and how much advantage they are giving to the Lord before the game begins.</p>
@@ -833,7 +929,7 @@ display: grid;
             <div class="card-grid">
                 <article class="step-card">
                     <h3>Playtest One Player Experience</h3>
-                    <p>During the first round of playtesting, a consistent issue appeared across different players. The problem was understandability.</p>
+                    <p>During the first round of playtesting, a consistent issue appeared across different players. The problem was not difficulty, but understandability.</p>
                     <p>Players struggled to identify their goals and did not understand how abilities, cards, and resources were connected. Most of their time was spent reading card text instead of making decisions. Strategic thinking did not emerge during early gameplay.</p>
                     <p>Players described the experience as confusing and overwhelming. The game felt like it required prior knowledge. Instead of feeling tension, players felt uncertain about what to do.</p>
                 </article>
@@ -855,7 +951,7 @@ display: grid;
                     <p>A structured learning process was introduced through multiple gameplay setups.</p>
                     <p>In the first setup, players interact with Evidence without punishment and learn how it functions as hidden power.</p>
                     <p>In the second setup, Suspicion is introduced and creates risk for holding Evidence.</p>
-                    <p>In the third setup, both systems interact under higher pressure and require players to think about timing and decision making.</p>
+                    <p>In the third setup, both systems interact under higher pressure and require players to think about timing and decision-making.</p>
                     <p>This approach allows players to learn through gameplay instead of relying on explanation.</p>
                 </article>
             </div>
@@ -881,11 +977,10 @@ display: grid;
                     <p>For a short-session card game, this made the experience less distinct and harder to stay engaged with.</p>
                 </article>
                 <article class="step-card">
-                    <h3>Implementation</h3>
-                    <p>The new version removes direct attacks between players. All interactions are handled through the Evidence and Suspicion system.</p>
-                    <p>Players influence the game by generating, exposing, and managing Evidence. At the end of each round, the system evaluates Evidence and applies punishment based on player exposure.</p>
-                    <p>Core Gameplay:<br>Players gain power by accumulating Evidence, but become more vulnerable to punishment. Every decision increases both advantage and risk.</p>
-                    <p>This creates a gameplay structure centered on information, timing, and risk control, where players compete by managing exposure instead of dealing direct damage.</p>
+                    <h3>Design Change</h3>
+                    <p>The design direction shifted again to strengthen the core system.</p>
+                    <p>The game was rebuilt around Evidence as the central mechanic. Direct damage between players was removed, and all consequences are handled through a shared system.</p>
+                    <p>This change moves the focus from direct combat to information-based interaction.</p>
                 </article>
                 <article class="step-card">
                     <h3>Implementation</h3>
@@ -898,6 +993,38 @@ display: grid;
             <div class="timeline-note">Progression: clearer understanding → identity gap detected → core mechanic reinforced → interaction model redesigned.</div>
         </section>
 
+        <section id="iterations" class="section">
+            <h2>Iteration Record</h2>
+            <table class="iter-table">
+                <thead>
+                    <tr><th>Stage</th><th>Observed problem</th><th>Decision</th><th>Change</th><th>Result or remaining issue</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Initial Version</td>
+                        <td>Players could not tell how roles, abilities, cards, and Evidence fit together. Time went to reading cards.</td>
+                        <td>Teach one relationship first: Evidence and Suspicion.</td>
+                        <td>Fewer early mechanics, a smaller card pool, and three setups that add the risk in steps.</td>
+                        <td>Players could start making decisions. The game still felt unfocused.</td>
+                    </tr>
+                    <tr>
+                        <td>First Revision</td>
+                        <td>Some turns felt passive, and players could not say what the game was about.</td>
+                        <td>Make Evidence the only center, and stop direct damage.</td>
+                        <td>Direct attacks were removed. Consequences moved to round-end exposure.</td>
+                        <td>The identity was clearer. The card pool, some quiet turns, and random draw were still limits.</td>
+                    </tr>
+                    <tr>
+                        <td>Refined Version</td>
+                        <td>The same limits remained after the second round.</td>
+                        <td>Keep the exposure trade-off as the current design.</td>
+                        <td>The playable refined prototype is the build in the second video.</td>
+                        <td>Players described it as more focused. Depth, quiet turns, and planning against the draw are still open.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
         <section id="result" class="section">
             <h2>Result</h2>
             <div class="status-grid">
@@ -907,7 +1034,7 @@ display: grid;
                 </article>
                 <article class="status-card unresolved">
                     <h3>What Remains Unresolved</h3>
-                    <p>Some limitations remain. The card pool is still limited and reduces strategic depth. Some turns do not create strong interaction. Random card draw makes long term planning difficult.</p>
+                    <p>Some limitations remain. The card pool is still limited and reduces strategic depth. Some turns do not create strong interaction. Random card draw makes long-term planning difficult.</p>
                 </article>
             </div>
         </section>
@@ -919,16 +1046,23 @@ display: grid;
             <p>Both changes were based on player experience and addressed specific issues in understanding and interaction.</p>
             <p>In future projects, systems will be introduced more gradually and tested in isolation before being combined.</p>
             <p>Player feedback will be used not only to fix problems but to guide the direction of the design.</p>
+            <div class="insight-block">
+                <span class="label">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    Key Insight
+                </span>
+                <p>Player-centered design works best when feedback is treated as evidence for direction rather than a list of errors. Improvements in clarity and engagement must be built on a direct link between observable player behavior and how the mechanics respond.</p>
+            </div>
         </section>
     </main>
     <footer class="minimal-footer">
         <p class="footer-line-main">© 2026 Tyrant's Court Demo</p>
-        <p class="footer-line-sub">Design &amp; Documentation: Xiaohan Zhang</p>
+        <p class="footer-line-sub">Design &amp; Documentation: Celine</p>
     </footer>
     <script>
         function toggleLang() {
-            localStorage.setItem('siteLang', 'zh');
-            window.location.href = 'tyrants-court-zh.html';
+            try { localStorage.setItem('siteLang', 'zh'); } catch (e) {}
+            window.location.href = 'tyrants-court-zh.html?lang=zh' + (location.hash || '');
         }
     </script>
 </body>

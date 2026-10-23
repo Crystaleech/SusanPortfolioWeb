@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>逐光 - 清雅中国风</title>
+    <title>逐光 | Celine</title>
     <script>
-        if (localStorage.getItem('siteLang') === 'en') {
-            window.location.replace('zhuguang-en.html');
-        } else {
-            localStorage.setItem('siteLang', 'zh');
-        }
+        (function () {
+            var enFile = "zhuguang-en.html";
+            var zhFile = "zhuguang.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || zhFile;
+            }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -269,7 +287,7 @@
                 <a href="#design" class="nav-link text-sm sm:text-base">系统</a>
                 <a href="#story" class="nav-link text-sm sm:text-base">挑战</a>
                 <a href="#video" class="nav-link text-sm sm:text-base">演示</a>
-                <button onclick="localStorage.setItem('siteLang','en'); window.location.href='zhuguang-en.html';" class="nav-link border border-willow/30 rounded-lg px-2 py-1 text-xs sm:text-sm">EN</button>
+                <button onclick="try{localStorage.setItem('siteLang','en')}catch(e){} window.location.href='zhuguang-en.html?lang=en'+(location.hash||'');" class="nav-link border border-willow/30 rounded-lg px-2 py-1 text-xs sm:text-sm">EN</button>
             </div>
         </div>
     </nav>
@@ -295,18 +313,18 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="elegant-panel">
                         <h2 class="section-title">设计约束</h2>
-                        <p class="text-ink/80 leading-relaxed">本项目在受限条件下开发，形式接近 game jam 或课程考核。</p>
+                        <p class="text-ink/80 leading-relaxed">本项目在受限条件下开发，形式接近 Game Jam 或课程考核。</p>
                         <p class="text-ink/80 leading-relaxed mt-3">初始关键词为：<br>博物馆<br>尺度切换</p>
                         <p class="text-ink/80 leading-relaxed mt-3">两个关键词共同定义了环境与核心机制方向。</p>
                         <p class="text-ink/80 leading-relaxed mt-3">所有设计决策都围绕这两个条件展开。</p>
                     </div>
                     <div class="elegant-panel">
                         <h2 class="section-title">设计思考</h2>
-                        <p class="text-ink/80 leading-relaxed">最初我想到的是潜行玩法。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">博物馆天然支持潜行：保安、巡逻路线、受控空间都很明确。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">但这也是常见方向，所以我改的是玩家身份而不是玩法类型。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">关键问题变成：玩家不是进入博物馆的人，而是本来就在博物馆里的器物，会怎样？</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">这个问题确立了后续方向。</p>
+                        <p class="text-ink/80 leading-relaxed">看到关键词时，我最初想到的是潜行玩法。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">博物馆天然适合潜行：有保安、巡逻路线和受控的空间。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">但潜行是很常见的方向，很多人都会想到同样的点子。为了让项目脱颖而出，我没有改变玩法类型，而是改变了玩家的身份。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">我换了一个问题：如果玩家不是要进入博物馆，而是本来就在博物馆里呢？</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">这个想法让方向变得清晰：玩家成为了博物馆里的一件藏品。</p>
                     </div>
                     <div class="elegant-panel">
                         <h2 class="section-title">核心概念</h2>
@@ -318,13 +336,13 @@
                     </div>
                     <div class="elegant-panel">
                         <h2 class="section-title">世界设定</h2>
-                        <p class="text-ink/80 leading-relaxed">故事发生在器物获得意识的博物馆。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">意识来源于人类的关注：被看见越多，器物越强。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">器物可以投射人形，人眼可见但监控无法识别。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">它们只在夜晚活动。玩家是一只曾经被展出的茶壶，后被遗忘并移入杂物间。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">随着关注衰退，玩家意识逐渐变弱，几乎无法以人形离开本体。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">另一只仍在展出的茶壶提出交易：留下一段投影伪装，玩家在四小时内逃离杂物间、穿越馆内、躲避保安、拿钥匙开门并抵达展厅。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">目标是回到灯光下，恢复存在。</p>
+                        <p class="text-ink/80 leading-relaxed">故事发生在一座藏品拥有了意识的博物馆里。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">这种意识来源于人类的关注：一件藏品被观赏和喜爱得越多，就越强大。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">藏品可以投射出类人的形象——一个模糊的身影，人眼可以看见，监控系统却无法识别。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">它们只在闭馆后的夜晚活动，聚在一起交流、消磨时光。玩家是一只曾在展厅展出的茶壶，因受到参观者喜爱而获得了意识；但随着时间推移，它被遗忘，被移进了杂物间。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">随着关注逐渐消退，它的意识也越来越弱。游戏开始时，玩家已经无法以人形形态离开茶壶本体，几乎就要彻底失去意识。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">有一天，另一只茶壶找到了玩家。它仍在展出，却想逃离博物馆，于是提出了一笔交易：它会在展柜里留下一个投影，维持四个小时以免被发现。在这段时间里，玩家必须逃出杂物间、穿过博物馆、避开保安、找到钥匙打开一道道门，最终抵达展厅。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">目标是回到灯光之下，重新找回自己的存在。</p>
                     </div>
                     <div class="elegant-panel md:col-span-2">
                         <h2 class="section-title">制作范围</h2>
@@ -355,7 +373,7 @@
                     <div class="elegant-panel">
                         <h3 class="section-title">关卡结构</h3>
                         <p class="text-ink/80 leading-relaxed">关卡采用线性推进。玩家从杂物间出发，按固定顺序获取关键道具。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">该结构用于控制节奏、教学顺序与玩家注意力，保证短 Demo 内跑完整循环。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">这种结构用于控制节奏、教学顺序与玩家的注意力，确保玩家能在一个简短的 Demo 中体验完整的循环。</p>
                     </div>
                     <div class="elegant-panel">
                         <h3 class="section-title">推进系统</h3>
@@ -365,12 +383,12 @@
                             <li>走廊钥匙</li>
                             <li>展厅门禁卡</li>
                         </ul>
-                        <p class="text-ink/80 leading-relaxed mt-3">玩家不可跳步，核心问题是“如何在压力下安全拿到道具”。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">每件道具都会解锁下一个区域，玩家无法跳过任何一步。核心问题不是“去哪里”，而是“如何在压力下安全拿到这些道具”。</p>
                     </div>
                     <div class="elegant-panel">
                         <h3 class="section-title">形态切换系统</h3>
                         <p class="text-ink/80 leading-relaxed">茶壶形态：体型小、无法攻击、不会被子弹命中，用于观察与移动。</p>
-                        <p class="text-ink/80 leading-relaxed mt-3">人形态：体型更大、可精神攻击、会暴露在火力下，用于解题和拿关键物品。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">人形形态：体型更大、可发动精神攻击、会暴露在敌人火力下，用于解决问题和拿取关键物品。</p>
                         <p class="text-ink/80 leading-relaxed mt-3">该系统强制玩家在“安全”与“行动”之间做选择。</p>
                     </div>
                     <div class="elegant-panel">
@@ -381,12 +399,12 @@
                     </div>
                     <div class="elegant-panel">
                         <h3 class="section-title">生命与失败规则</h3>
-                        <p class="text-ink/80 leading-relaxed">茶壶形态与人形态生命值分离。</p>
+                        <p class="text-ink/80 leading-relaxed">茶壶形态与人形形态的生命值相互独立。</p>
                         <ul class="clean-list text-ink/80 leading-relaxed mt-3">
-                            <li>人形生命归零：强制变回茶壶，且永久失去人形</li>
-                            <li>茶壶生命归零：游戏结束</li>
+                            <li>人形形态生命归零：强制变回茶壶形态，并永久失去人形形态</li>
+                            <li>茶壶形态生命归零：游戏结束</li>
                         </ul>
-                        <p class="text-ink/80 leading-relaxed mt-3">人形是高风险高价值手段，推进必需但不能滥用。</p>
+                        <p class="text-ink/80 leading-relaxed mt-3">人形形态被设计为高风险、高价值的手段：推进离不开它，但不能随意使用。</p>
                     </div>
                     <div class="elegant-panel">
                         <h3 class="section-title">潜行压力设计</h3>
@@ -425,7 +443,7 @@
                     <p class="text-ink/80 leading-relaxed">主要挑战是让两种形态足够不同，同时仍能在同一关卡中成立。</p>
                     <p class="text-ink/80 leading-relaxed mt-3">差异太小，系统失去意义；差异太大，玩法会断裂。</p>
                     <div class="light-divider"></div>
-                    <p class="text-ink/80 leading-relaxed">解决方案是明确分工：茶壶形态安全但受限，人形态强力但高风险。</p>
+                    <p class="text-ink/80 leading-relaxed">解决方案是明确分工：茶壶形态安全但受限，人形形态强大但有风险。</p>
                     <p class="text-ink/80 leading-relaxed mt-3">两者拥有不同规则、交互与生存条件，因此玩家决策空间清晰。</p>
                     <div class="light-divider"></div>
                     <p class="text-ink/80 leading-relaxed">另一挑战是制作范围。12 天内无法高质量并行完成大量系统。</p>
@@ -456,7 +474,7 @@
 
                     <div class="light-divider"></div>
                     <h3 class="section-title">1. 分数系统</h3>
-                    <p class="text-ink/80 leading-relaxed">玩家初始 100 分，拿钥匙扣分，归还钥匙加回分数。</p>
+                    <p class="text-ink/80 leading-relaxed">玩家初始有 100 分，拿走钥匙会扣分；打开所有必要的门之后，玩家可以把钥匙放回原位，分数随之恢复。</p>
                     <p class="text-ink/80 leading-relaxed mt-3">该系统鼓励谨慎行动与责任感，结局可随分数变化。</p>
                     <p class="text-ink/80 leading-relaxed mt-3">例如：未归还钥匙会触发“钥匙失踪”新闻；表现良好则为“平静无事”新闻。</p>
 
@@ -482,7 +500,7 @@
     <footer class="minimal-footer">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <p class="text-ink/50 text-sm">© 2026 逐光 Demo</p>
-            <p class="text-ink/30 text-xs mt-2">设计与文档：张笑菡</p>
+            <p class="text-ink/30 text-xs mt-2">设计与文档：Celine</p>
         </div>
     </footer>
 

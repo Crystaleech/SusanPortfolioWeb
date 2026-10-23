@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Celine SiuHam Zhang</title>
+    <title>About | Celine</title>
+    <meta name="author" content="Celine">
+    <meta name="description" content="About Celine, a game design student working across systems, narrative design, and playable prototyping.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -248,14 +250,14 @@
         <!-- Left: About Me Title with Glitch Effect -->
         <div class="pointer-events-auto z-50">
             <h1 class="neon-title font-cyber font-black text-4xl md:text-7xl leading-tight tracking-tighter pl-0 md:pl-4 text-center md:text-left">
-                ABOUT ME
+                <span class="lang-en">ABOUT ME</span><span class="lang-zh">关于我</span>
             </h1>
         </div>
 
         <!-- Right: Navigation - Positioned like index.html -->
         <div class="flex flex-wrap justify-center gap-2 md:gap-4 pointer-events-auto items-center z-50 nav-container">
             <a href="index.html" class="nav-box"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
-            <a href="projects.html" class="nav-box"><span class="lang-en">Project</span><span class="lang-zh">项目</span></a>
+            <a href="projects.html" class="nav-box"><span class="lang-en">Projects</span><span class="lang-zh">项目</span></a>
             <a href="contact.html" class="nav-box active"><span class="lang-en">About me</span><span class="lang-zh">关于我</span></a>
             <a href="goals.html" class="nav-box"><span class="lang-en">Goals</span><span class="lang-zh">目标</span></a>
 
@@ -274,28 +276,32 @@
                 <div class="flex flex-col items-center text-center mb-8">
                     <div class="w-32 h-32 rounded-full border-2 border-neon-blue/30 p-1 mb-6 relative group">
                         <div class="w-full h-full rounded-full bg-gradient-to-br from-deep-blue to-black overflow-hidden flex items-center justify-center relative z-10">
-                            <span class="font-cyber text-4xl text-neon-blue/50 group-hover:text-neon-blue transition-colors">SZ</span>
+                            <span class="font-cyber text-4xl text-neon-blue/50 group-hover:text-neon-blue transition-colors">C</span>
                         </div>
                         <div class="absolute inset-0 rounded-full border border-neon-blue/50 animate-pulse-slow"></div>
                         <div class="absolute -inset-4 bg-neon-blue/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
                     
                     <h1 class="font-cyber text-2xl md:text-3xl font-bold text-white mb-2 tracking-wider">
-                        <span class="lang-en">CELINE ZHANG</span>
-                        <span class="lang-zh">张笑菡</span>
+                        <span class="lang-en">CELINE</span>
+                        <span class="lang-zh">Celine</span>
                     </h1>
-                    <p class="text-neon-blue font-mono text-sm tracking-widest uppercase mb-6">Game Designer</p>
+                    <p class="text-neon-blue font-mono text-sm tracking-widest uppercase mb-6"><span class="lang-en">Game Designer</span><span class="lang-zh">游戏设计师</span></p>
                     
                     <a href="mailto:susa525795546@gmail.com" class="w-full py-3 bg-neon-blue/10 border border-neon-blue/50 text-neon-blue hover:bg-neon-blue hover:text-navy font-display font-bold transition-all uppercase tracking-wider text-sm flex items-center justify-center gap-2 group rounded">
                         <i data-lucide="mail" class="w-4 h-4"></i>
-                        <span>Contact Me</span>
+                        <span><span class="lang-en">Contact Me</span><span class="lang-zh">联系我</span></span>
                     </a>
                 </div>
 
                 <div class="space-y-4 border-t border-white/10 pt-6">
                     <div class="flex items-start gap-3">
                         <i data-lucide="map-pin" class="w-4 h-4 text-slate mt-1"></i>
-                        <span class="text-sm font-mono text-slate">Pasadena, CA / Shanghai, CN</span>
+                        <span class="text-sm font-mono text-slate"><span class="lang-en">Pasadena, CA / Hangzhou, CN</span><span class="lang-zh">美国加州帕萨迪纳 / 中国杭州</span></span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="phone" class="w-4 h-4 text-slate mt-1"></i>
+                        <span class="text-sm font-mono text-slate">+86 136 0114 6319</span>
                     </div>
                     <div class="flex items-start gap-3">
                         <i data-lucide="mail" class="w-4 h-4 text-slate mt-1"></i>
@@ -303,59 +309,40 @@
                     </div>
                 </div>
 
-                <!-- Socials -->
-                <div class="flex gap-4 mt-8 justify-center">
-                    <a href="#" class="text-slate hover:text-neon-blue transition-colors hover:scale-110 transform duration-300"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-slate hover:text-neon-blue transition-colors hover:scale-110 transform duration-300"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-slate hover:text-neon-blue transition-colors hover:scale-110 transform duration-300"><i data-lucide="gamepad-2" class="w-5 h-5"></i></a>
-                </div>
             </div>
         </div>
 
         <!-- Right Column: Resume Details -->
         <div class="lg:col-span-8 space-y-8">
             
-            <!-- Target Position (Highlighted) -->
-            <div class="hud-panel highlight-panel p-6 rounded-lg">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h3 class="text-neon-purple font-cyber text-xs uppercase tracking-widest mb-1">Target Protocol</h3>
-                        <h2 class="text-white font-display text-xl font-bold">
-                            <span class="lang-en">Game Designer / Game Operations (Internship)</span>
-                            <span class="lang-zh">游戏策划 / 游戏运营（实习）</span>
-                        </h2>
-                    </div>
-                    <div class="px-3 py-1 bg-neon-purple/10 border border-neon-purple/30 text-neon-purple font-mono text-xs rounded shadow-[0_0_10px_rgba(189,0,255,0.2)]">
-                        <span class="animate-pulse">STATUS: OPEN</span>
-                    </div>
-                </div>
+            <div class="hud-panel p-6 rounded-lg">
+                <p class="text-slate leading-relaxed">
+                    <span class="lang-en">I am a game design student at ArtCenter College of Design, working across systems, narrative design, and playable prototyping. My projects explore how mechanics shape player decisions and emotional experiences, with playtesting guiding each iteration.</span>
+                    <span class="lang-zh">我是艺术中心设计学院的游戏设计学生，工作横跨系统、叙事设计与可玩原型。我的项目关注机制如何影响玩家决策和情绪体验，并用试玩来指导每一轮修改。</span>
+                </p>
             </div>
 
             <!-- Education -->
             <section>
                 <div class="cyber-header">
                     <i data-lucide="graduation-cap" class="text-neon-blue w-5 h-5"></i>
-                    <h3 class="font-cyber text-lg text-white tracking-wider">EDUCATION</h3>
+                    <h3 class="font-cyber text-lg text-white tracking-wider"><span class="lang-en">EDUCATION</span><span class="lang-zh">教育背景</span></h3>
                 </div>
                 
                 <div class="hud-panel p-6 rounded-lg group hover:border-neon-blue/30 transition-colors">
-                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 mb-4">
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-2">
                         <div>
                             <h4 class="text-xl font-bold text-white font-display group-hover:text-neon-blue transition-colors">
                                 <span class="lang-en">ArtCenter College of Design (ACCD)</span>
                                 <span class="lang-zh">美国艺术中心设计学院 ArtCenter College of Design</span>
                             </h4>
                             <p class="text-slate font-mono text-sm mt-1">
-                                <span class="lang-en">Bachelor · Game Design</span>
-                                <span class="lang-zh">本科 · 游戏设计专业</span>
+                                <span class="lang-en">B.S. Entertainment Design, Game Design Track</span>
+                                <span class="lang-zh">娱乐设计理学学士，游戏设计方向</span>
                             </p>
                         </div>
-                        <span class="text-slate text-xs font-mono border border-white/10 px-2 py-1 rounded bg-black/20">2023.09 – Present</span>
+                        <span class="text-slate text-xs font-mono border border-white/10 px-2 py-1 rounded bg-black/20">2023.09 – 2027.04</span>
                     </div>
-                    <p class="text-slate text-sm leading-relaxed border-l-2 border-white/10 pl-4 group-hover:border-neon-blue/50 transition-colors">
-                        <span class="lang-en">Majoring in Game Design Principles, Game Engine Development, Planning and Operations, systematically learning the complete game development process.</span>
-                        <span class="lang-zh">主修游戏设计原理、游戏引擎开发、策划与运营等课程，系统学习完整的游戏开发流程。</span>
-                    </p>
                 </div>
             </section>
 
@@ -363,82 +350,119 @@
             <section>
                 <div class="cyber-header">
                     <i data-lucide="cpu" class="text-neon-blue w-5 h-5"></i>
-                    <h3 class="font-cyber text-lg text-white tracking-wider">EXPERIENCE & PROJECTS</h3>
+                    <h3 class="font-cyber text-lg text-white tracking-wider"><span class="lang-en">EXPERIENCE & PROJECTS</span><span class="lang-zh">经历与项目</span></h3>
                 </div>
                 
                 <div class="space-y-6">
-                    <!-- Item 1 -->
                     <div class="hud-panel p-6 rounded-lg hover:bg-white/5 transition-all">
                         <h4 class="text-neon-green font-display font-bold text-lg mb-2 flex items-center gap-2">
                             <span class="w-2 h-2 bg-neon-green rounded-full shadow-[0_0_8px_#39ff14]"></span>
-                            <span class="lang-en">ACCD GameJam Grand Prize (1st Place)</span>
-                            <span class="lang-zh">ACCD GameJam 大奖（一等奖）</span>
+                            <span class="lang-en">Aurora Studio, Tencent Games</span>
+                            <span class="lang-zh">腾讯游戏 · 北极光工作室</span>
                         </h4>
+                        <p class="text-slate text-xs font-mono mb-3 uppercase opacity-70 pl-4"><span class="lang-en">System Design Intern · Moonlight Blade · Shanghai · 2026.05 – 2026.08</span><span class="lang-zh">系统策划实习 ·《天涯明月刀》· 上海 · 2026.05 – 2026.08</span></p>
                         <div class="space-y-2 pl-4 border-l border-neon-green/20">
                             <p class="text-slate text-sm">
-                                <span class="lang-en">Responsible for core gameplay and mechanism design, completing the game prototype within 48 hours.</span>
-                                <span class="lang-zh">负责核心玩法与机制设计，在48小时内完成游戏原型。</span>
+                                <span class="lang-en">Owned system design for Grandmaster: Solo, the solo-queue expansion of the existing Grandmaster battle royale, and carried it from concept and requirements through cross-team alignment, testing, and the September 4, 2026 launch.</span>
+                                <span class="lang-zh">负责既有大逃杀玩法 Grandmaster 的单排扩展 Grandmaster: Solo 的系统设计，从构思、需求拆解、跨团队对齐、测试一直推进到 2026 年 9 月 4 日正式上线。</span>
                             </p>
                             <p class="text-slate text-sm">
-                                <span class="lang-en">Participated in rapid iteration and team collaboration to ensure creative realization and complete experience.</span>
-                                <span class="lang-zh">参与快速迭代与团队协作，确保创意落地与体验完整。</span>
+                                <span class="lang-en">Wrote the full match flow, including entry rules, matchmaking, triggers, combat states, feedback, and error handling, and configured about 100 nodes in Tencent’s node-based event editor.</span>
+                                <span class="lang-zh">撰写完整对局流程，覆盖进入条件、匹配入口、事件触发、战斗状态、系统反馈与异常处理，并在腾讯的节点式事件编辑器中配置约 100 个节点。</span>
+                            </p>
+                            <p class="text-slate text-sm">
+                                <span class="lang-en">Debugged the feature with client, server, UI, and QA, and helped close 40+ bug tickets before release.</span>
+                                <span class="lang-zh">与客户端、服务器、UI 和 QA 联合调试，上线前协助关闭 40 余个缺陷单。</span>
                             </p>
                         </div>
                     </div>
 
-                    <!-- Item 2 -->
                     <div class="hud-panel p-6 rounded-lg hover:bg-white/5 transition-all">
                         <h4 class="text-white font-display font-bold text-lg mb-2 flex items-center gap-2">
                             <span class="w-2 h-2 bg-neon-blue rounded-full shadow-[0_0_8px_#00ffff]"></span>
-                            <span class="lang-en">Pixel Art Simulation Game "Obsidian Forest"</span>
-                            <span class="lang-zh">像素风养成游戏《黑曜林》</span>
+                            <a href="tyrants-court.html?lang=en" data-en="tyrants-court.html" data-zh="tyrants-court-zh.html" class="hover:text-neon-blue transition-colors"><span class="lang-en">Tyrant's Court</span><span class="lang-zh">朝堂之上</span></a>
                         </h4>
+                        <p class="text-slate text-xs font-mono mb-3 uppercase opacity-70 pl-4"><span class="lang-en">Solo Designer · Course Project · Unity 6 · 2026.02 – 2026.04</span><span class="lang-zh">独立设计 · 课程项目 · Unity 6 · 2026.02 – 2026.04</span></p>
                         <div class="space-y-2 pl-4 border-l border-white/10">
-                            <p class="text-slate text-xs font-mono mb-2 uppercase opacity-70">Independent Planner & Developer</p>
                             <p class="text-slate text-sm">
-                                <span class="lang-en">Based on the "Ash Echoes" community creative background, independently designed the original character "Obsidian Forest" and developed a pixel art simulation game.</span>
-                                <span class="lang-zh">基于《白荆回廊》社区创作背景，自主设计原创角色"黑曜林"，并开发像素风养成游戏。</span>
+                                <span class="lang-en">Designed a multiplayer strategy card game about an imperial court power struggle, built around Evidence and Suspicion, hidden roles, and shared risk.</span>
+                                <span class="lang-zh">设计了一款以朝堂权力博弈为主题的多人策略卡牌游戏，核心机制围绕证据、嫌疑、隐藏身份与共享风险展开。</span>
                             </p>
                             <p class="text-slate text-sm">
-                                <span class="lang-en">Accumulated 10,000+ community interactions/feedback, gaining high recognition among the ACG user group.</span>
-                                <span class="lang-zh">累计获得 10,000+ 社区互动反馈，在二次元用户群体中获得较高认可。</span>\n                            </p>
+                                <span class="lang-en">After two playtest rounds, I cut the card pool, removed direct player attacks, and made evidence exposure the core conflict. Two playable Unity 6 prototypes show the initial and refined versions.</span>
+                                <span class="lang-zh">经过两轮试玩后，我缩减了牌池，取消了玩家之间的直接攻击，并把冲突集中到证据暴露上。两个可玩的 Unity 6 原型分别展示初版和修改版。</span>
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Item 3 -->
                     <div class="hud-panel p-6 rounded-lg hover:bg-white/5 transition-all">
-                        <h4 class="text-white font-display font-bold text-lg mb-2 flex items-center gap-2">
-                            <span class="w-2 h-2 bg-neon-purple rounded-full shadow-[0_0_8px_#bd00ff]"></span>
-                            <span class="lang-en">Fan Creation & User Research</span>
-                            <span class="lang-zh">二次元游戏同人创作 & 用户文化研究</span>
+                        <h4 class="text-neon-green font-display font-bold text-lg mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-neon-green rounded-full shadow-[0_0_8px_#39ff14]"></span>
+                            <a href="one-inches-away.html" class="hover:text-neon-green transition-colors"><span class="lang-en">One Inch Away</span><span class="lang-zh">一寸之遥</span></a>
                         </h4>
-                        <div class="space-y-2 pl-4 border-l border-white/10">
+                        <p class="text-slate text-xs font-mono mb-3 uppercase opacity-70 pl-4"><span class="lang-en">Associate Director & Gameplay Developer · Most On-Theme Award · 2025.10</span><span class="lang-zh">副导演 / 玩法开发 · 最贴题奖 · 2025.10</span></p>
+                        <div class="space-y-2 pl-4 border-l border-neon-green/20">
                             <p class="text-slate text-sm">
-                                <span class="lang-en">Created fan content for popular games such as "Genshin Impact" and "Honkai: Star Rail", publishing 10+ works.</span>
-                                <span class="lang-zh">为《原神》《崩坏：星穹铁道》等热门游戏创作同人内容，累计发布10+篇作品。</span>
+                                <span class="lang-en">Built a 2D co-op physics platformer for a game jam on the theme “Unlikely Allies.” Two like-pole magnets can never touch, so each player’s position pushes the other forward. The project page records 42 hours of development.</span>
+                                <span class="lang-zh">在一场 Game Jam 中，围绕主题 “Unlikely Allies” 制作了一款双人合作物理平台游戏：两块同极磁铁永远无法靠近，彼此的位置会推动对方前进。项目页记录的开发时长是 42 小时。</span>
                             </p>
                             <p class="text-slate text-sm">
-                                <span class="lang-en">Capable of bilingual content creation (Chinese/English), sensitive to internationalization and localization expressions.</span>
-                                <span class="lang-zh">具备中英双语内容创作与输出能力，对国际化与本地化表达较为敏感。</span>
+                                <span class="lang-en">Implemented movement, magnetic repulsion, collision, and level interaction in Unity with C#, tuned the feel from playtests, and shipped a playable demo that won Most On-Theme.</span>
+                                <span class="lang-zh">用 Unity 与 C# 实现移动、持续磁力排斥、碰撞和关卡交互，并根据试玩调整手感。最终交付可玩 Demo，并获得最贴题奖。</span>
                             </p>
                         </div>
                     </div>
-                    
-                    <!-- Item 4 -->
+
+                    <div class="hud-panel p-6 rounded-lg hover:bg-white/5 transition-all">
+                        <h4 class="text-neon-green font-display font-bold text-lg mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-neon-green rounded-full shadow-[0_0_8px_#39ff14]"></span>
+                            <a href="https://papercdisc.itch.io/hexing-hunk" target="_blank" rel="noopener" class="hover:text-neon-green transition-colors"><span class="lang-en">Hexed Hunk</span><span class="lang-zh">Hexed Hunk</span></a>
+                        </h4>
+                        <p class="text-slate text-xs font-mono mb-3 uppercase opacity-70 pl-4"><span class="lang-en">Gameplay & Visual Design · Most On-Theme Award · 2025.03</span><span class="lang-zh">玩法与视觉设计 · 最贴题奖 · 2025.03</span></p>
+                        <div class="space-y-2 pl-4 border-l border-neon-green/20">
+                            <p class="text-slate text-sm">
+                                <span class="lang-en">Contributed gameplay and visual design on a 48-hour side-scrolling survival game about shifting between a weak, fleeing state and a strong counterattack.</span>
+                                <span class="lang-zh">在一款 48 小时横版生存游戏中负责玩法与视觉设计。核心循环是在虚弱逃跑和强力反击两种状态之间切换。</span>
+                            </p>
+                            <p class="text-slate text-sm">
+                                <span class="lang-en">Built parallax forest scenes and state-based visual feedback in Unity, and helped ship a playable build plus an HTML5 version. The project won Most On-Theme.</span>
+                                <span class="lang-zh">在 Unity 中搭建视差森林场景和状态反馈，并参与交付可玩版本与 HTML5 版本。项目获得最贴题奖。</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="hud-panel p-6 rounded-lg hover:bg-white/5 transition-all">
+                        <h4 class="text-white font-display font-bold text-lg mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-neon-purple rounded-full shadow-[0_0_8px_#bd00ff]"></span>
+                            <a href="five-elemental-clash-en.html?lang=en" data-en="five-elemental-clash-en.html" data-zh="five-elemental-clash.html" class="hover:text-neon-purple transition-colors"><span class="lang-en">Five Elemental Clash</span><span class="lang-zh">五行之争</span></a>
+                        </h4>
+                        <p class="text-slate text-xs font-mono mb-3 uppercase opacity-70 pl-4"><span class="lang-en">Solo Designer · 2024.09 – 2024.12</span><span class="lang-zh">独立设计 · 2024.09 – 2024.12</span></p>
+                        <div class="space-y-2 pl-4 border-l border-white/10">
+                            <p class="text-slate text-sm">
+                                <span class="lang-en">Turned the Chinese five-element cycle of generation and restraint into a competitive board game for 2–4 players.</span>
+                                <span class="lang-zh">把中国五行相生相克整理成一套 2–4 人的多人策略桌游框架。</span>
+                            </p>
+                            <p class="text-slate text-sm">
+                                <span class="lang-en">Designed action points, movement, player combat, and boss fights, using D6, D10, D20, and D100, plus procedural maps and a complete written rule set.</span>
+                                <span class="lang-zh">设计了行动点、移动、玩家对战和 Boss 战，并用 D6、D10、D20、D100 对应不同判定，同时完成随机地图与完整规则文档。</span>
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="hud-panel p-6 rounded-lg hover:bg-white/5 transition-all">
                         <h4 class="text-white font-display font-bold text-lg mb-2 flex items-center gap-2">
                             <span class="w-2 h-2 bg-slate rounded-full"></span>
-                            <span class="lang-en">Product Analysis</span>
-                            <span class="lang-zh">长期游戏体验与产品理解</span>
+                            <a href="wonder-tales.html?lang=en" data-en="wonder-tales.html" data-zh="wonder-tales.html" class="hover:text-white transition-colors"><span class="lang-en">Wonder Tales</span><span class="lang-zh">鬼神奇谭</span></a>
                         </h4>
+                        <p class="text-slate text-xs font-mono mb-3 uppercase opacity-70 pl-4"><span class="lang-en">Solo Designer · Paper Prototype · In Development · 2024.02 – 2024.03</span><span class="lang-zh">独立设计 · 纸面原型 · 开发中 · 2024.02 – 2024.03</span></p>
                         <div class="space-y-2 pl-4 border-l border-white/10">
-                            <p class="text-slate text-sm leading-relaxed italic opacity-80">
-                                <span class="lang-en">Analysis of: Genshin Impact, Honkai: Star Rail, Reverse: 1999, Love and Deepspace, Tears of Themis, etc.</span>
-                                <span class="lang-zh">分析对象：《原神》《崩坏：星穹铁道》《重返未来：1999》《恋与深空》《光与夜之恋》《未定事件簿》《第五人格》《一梦江湖》《逆水寒》《燕云十六声》等。</span>
+                            <p class="text-slate text-sm">
+                                <span class="lang-en">I independently designed Wonder Tales and its playable paper prototype. It explores Chinese folk horror through investigation, choices, and cards. A digital version has not been implemented.</span>
+                                <span class="lang-zh">我独立完成了 Wonder Tales 的游戏设计与可玩纸面原型，用调查、选择和卡牌探索中国民俗恐怖。数字版本尚未实现。</span>
                             </p>
                             <p class="text-slate text-sm">
-                                <span class="lang-en">Habitual observation and deconstruction of game core loops, narrative structures, character building, and operation systems.</span>
-                                <span class="lang-zh">对游戏核心循环、剧情结构、角色塑造与运营体系有持续观察与拆解习惯。</span>
+                                <span class="lang-en">The first facilitated paper session showed explanation burden, uneven attention, and characters that did not fit the story. Later design work moved toward a clearer investigator role.</span>
+                                <span class="lang-zh">第一轮由我主持的纸面测试暴露出解释负担、注意力不均，以及角色难以融入故事。之后的设计转向更清晰的调查者身份。</span>
                             </p>
                         </div>
                     </div>
@@ -449,41 +473,43 @@
             <section>
                 <div class="cyber-header">
                     <i data-lucide="database" class="text-neon-blue w-5 h-5"></i>
-                    <h3 class="font-cyber text-lg text-white tracking-wider">SKILLS DATABASE</h3>
+                    <h3 class="font-cyber text-lg text-white tracking-wider"><span class="lang-en">SKILLS DATABASE</span><span class="lang-zh">技能库</span></h3>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="hud-panel p-5 rounded-lg">
-                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2">Game Design</h4>
+                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2"><span class="lang-en">Game Design</span><span class="lang-zh">游戏设计</span></h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-chip">Narrative</span>
-                            <span class="skill-chip">Mechanism</span>
-                            <span class="skill-chip">Levels</span>
-                            <span class="skill-chip">Worldbuilding</span>
+                            <span class="skill-chip"><span class="lang-en">Systems</span><span class="lang-zh">系统设计</span></span>
+                            <span class="skill-chip"><span class="lang-en">Mechanics</span><span class="lang-zh">机制设计</span></span>
+                            <span class="skill-chip"><span class="lang-en">Narrative</span><span class="lang-zh">叙事设计</span></span>
+                            <span class="skill-chip"><span class="lang-en">Prototyping</span><span class="lang-zh">原型制作</span></span>
                         </div>
                     </div>
                     <div class="hud-panel p-5 rounded-lg">
-                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2">Tools & Tech</h4>
+                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2"><span class="lang-en">Tools & Tech</span><span class="lang-zh">工具与技术</span></h4>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-chip">Unity</span>
-                            <span class="skill-chip">Unreal</span>
-                            <span class="skill-chip">RPG Maker</span>
-                            <span class="skill-chip">Pixel Art</span>
+                            <span class="skill-chip">C#</span>
+                            <span class="skill-chip">C++</span>
+                            <span class="skill-chip">HTML/CSS</span>
+                            <span class="skill-chip">Photoshop</span>
+                            <span class="skill-chip">Procreate</span>
                         </div>
                     </div>
                     <div class="hud-panel p-5 rounded-lg">
-                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2">Research</h4>
+                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2"><span class="lang-en">Practice</span><span class="lang-zh">实践</span></h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-chip">ACG Culture</span>
-                            <span class="skill-chip">Community Ops</span>
-                            <span class="skill-chip">User Analysis</span>
+                            <span class="skill-chip"><span class="lang-en">Playtesting</span><span class="lang-zh">试玩测试</span></span>
+                            <span class="skill-chip"><span class="lang-en">Documentation</span><span class="lang-zh">设计文档</span></span>
+                            <span class="skill-chip">Git</span>
                         </div>
                     </div>
                     <div class="hud-panel p-5 rounded-lg">
-                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2">Languages</h4>
+                        <h4 class="text-slate font-mono text-xs mb-3 uppercase border-b border-white/5 pb-2"><span class="lang-en">Languages</span><span class="lang-zh">语言能力</span></h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="skill-chip">Chinese (Native)</span>
-                            <span class="skill-chip">English (Fluent)</span>
+                            <span class="skill-chip"><span class="lang-en">Chinese (Native)</span><span class="lang-zh">中文（母语）</span></span>
+                            <span class="skill-chip"><span class="lang-en">English (Fluent)</span><span class="lang-zh">英语（流利）</span></span>
                         </div>
                     </div>
                 </div>
@@ -492,20 +518,32 @@
         </div>
     </main>
 
+    <script src="site-lang.js"></script>
     <script>
         lucide.createIcons();
 
         function applySavedLang() {
-            const isZh = localStorage.getItem('siteLang') === 'zh';
+            const isZh = (window.SiteLang ? SiteLang.resolve() : 'en') === 'zh';
             document.body.classList.toggle('zh-mode', isZh);
             document.documentElement.lang = isZh ? 'zh' : 'en';
+            document.title = isZh ? '关于我 | Celine' : 'About | Celine';
+            const lang = isZh ? 'zh' : 'en';
+            document.querySelectorAll('a[data-en]').forEach(function (link) {
+                const file = isZh ? (link.dataset.zh || link.dataset.en) : link.dataset.en;
+                link.href = file + '?lang=' + lang;
+            });
+            document.querySelectorAll('a.nav-box').forEach(function (link) {
+                const href = link.getAttribute('href') || '';
+                const page = href.split('?')[0].split('#')[0];
+                if (!page) return;
+                link.href = page + '?lang=' + lang;
+            });
         }
 
         function toggleLang() {
             const isZh = !document.body.classList.contains('zh-mode');
-            document.body.classList.toggle('zh-mode', isZh);
-            document.documentElement.lang = isZh ? 'zh' : 'en';
-            localStorage.setItem('siteLang', isZh ? 'zh' : 'en');
+            if (window.SiteLang) SiteLang.persist(isZh ? 'zh' : 'en');
+            applySavedLang();
         }
 
         applySavedLang();

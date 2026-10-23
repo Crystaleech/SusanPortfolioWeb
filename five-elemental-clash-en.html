@@ -2,18 +2,33 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <script>
-        (function() {
-            var lang = localStorage.getItem('siteLang');
-            if (lang === 'zh') {
-                window.location.replace('five-elemental-clash.html');
-            } else if (!lang) {
-                localStorage.setItem('siteLang', 'en');
+        (function () {
+            var enFile = "five-elemental-clash-en.html";
+            var zhFile = "five-elemental-clash.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || enFile;
             }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
         })();
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Five Elemental Clash - Project Detail</title>
+    <title>Five Elemental Clash | Celine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Cinzel:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -183,7 +198,7 @@
                     <a href="#systems" class="hover:text-ember">Systems</a>
                     <a href="#design-reflection" class="hover:text-ember">Design Reflection</a>
                 </div>
-                <button onclick="window.location.href='five-elemental-clash.html'" class="lang-switch text-mist/85 hover:text-ember text-sm">中文</button>
+                <button onclick="try{localStorage.setItem('siteLang','zh')}catch(e){} window.location.href='five-elemental-clash.html?lang=zh'+(location.hash||'')" class="lang-switch text-mist/85 hover:text-ember text-sm">中文</button>
             </div>
         </div>
     </nav>
@@ -193,7 +208,8 @@
             <div class="panel p-6 md:p-8">
                 <div class="text-xs font-mono tracking-[0.3em] text-ember uppercase mb-3">Game Design Document</div>
                 <h1 class="font-display text-4xl md:text-6xl text-mist mb-3">Five Elemental Clash</h1>
-                <p class="text-mist/85 mb-4">Title: Five Elemental Clash | Author: Susan Zhang</p>
+                <p class="text-mist/85 mb-4">Title: Five Elemental Clash | Author: Celine</p>
+                <p class="text-mist/85 mb-4">Individual tabletop prototype. Role: Solo Designer. Date: 2024.09–2024.12. Rules and design documentation are below.</p>
                 <div class="grid md:grid-cols-3 gap-4 text-sm">
                     <div class="panel p-4"><strong>Player Format</strong><br>2-4 Players (PvPvPvP)</div>
                     <div class="panel p-4"><strong>Estimated Play Time</strong><br>60-90 minutes</div>
@@ -206,6 +222,7 @@
                 <p class="text-mist/90 leading-relaxed mb-3">Five Elemental Clash is a tactical tabletop game inspired by the Chinese Five Elements (Metal, Wood, Water, Fire, Earth) philosophy.</p>
                 <p class="text-mist/90 leading-relaxed mb-3">Players explore a modular hex map, battle bosses, gather resources, and compete to defeat other elemental avatars.</p>
                 <p class="text-mist/90 leading-relaxed">The game combines dice-based uncertainty with strategic resource management, creating a balance between luck and tactical planning.</p>
+                <p class="text-mist/90 leading-relaxed mt-4">One movement decision: in a Wood forest, Wood above 60 costs 1 AP and moves freely. Wood from 30 to 60 costs 2 AP and needs a D100 roll at or under Agility. Wood under 30 costs 3 AP, then a D20 check for the Wood spirit; failure stops the move. One combat decision: a basic attack costs 2 AP, while an elemental attack costs 5 AP and adds an element check. Water above 80 attacking with Wood adds 2 damage. Full tables stay in the rules below.</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-6">
@@ -288,7 +305,7 @@
                     </div>
 
                     <div class="comp-character">
-                        <h3 class="text-ember text-xl mb-3">Character Cards（Blank Character Card Example）</h3>
+                        <h3 class="text-ember text-xl mb-3">Character Cards (Blank Character Card Example)</h3>
                         <div class="table-wrap mb-4">
                             <table>
                                 <thead>
@@ -488,7 +505,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1-4</td><td>Plain</td><td>Basic terrain with no extra obstacles or bonuses. Each move costs 1 AP.</td></tr>
+                            <tr><td>1-4</td><td>Plains</td><td>Basic terrain with no extra obstacles or bonuses. Each move costs 1 AP.</td></tr>
                             <tr><td>5-8</td><td>Forest (Wood)</td><td>High Wood attribute moves more easily; low Wood may be blocked.</td></tr>
                             <tr><td>9-12</td><td>Mountain (Earth)</td><td>High Earth climbs more easily; low Earth may require extra AP or fail checks.</td></tr>
                             <tr><td>13-15</td><td>Lava Zone (Fire)</td><td>Low Fire moves slower and takes fire damage.</td></tr>
@@ -680,7 +697,7 @@
                         <div class="panel p-4 border-l-4 border-ember/40">
                             <h4 class="text-ember font-medium mb-1">Issue 2 – Boss encounters were too risky</h4>
                             <p class="text-mist/90 text-sm mb-2">During early tests, players often avoided boss encounters entirely because the potential penalties outweighed the rewards.</p>
-                            <p class="text-mist/80 text-sm"><strong>Adjustment:</strong> Boss encounters were redesigned to include more attractive rewards (such as rare resources and equipment upgrades), creating a clearer risk–reward tradeoff.</p>
+                            <p class="text-mist/80 text-sm"><strong>Adjustment:</strong> Boss encounters were redesigned to include more attractive rewards (such as rare resources and equipment upgrades), creating a clearer risk–reward trade-off.</p>
                         </div>
                         <div class="panel p-4 border-l-4 border-ember/40">
                             <h4 class="text-ember font-medium mb-1">Issue 3 – Attribute distribution imbalance</h4>
@@ -714,7 +731,7 @@
             "Rules": "规则",
             "Systems": "系统",
             "Game Design Document": "游戏设计文档",
-            "题目：Five Elemental Clash ｜ 作者：Susan Zhang": "Title: Five Elemental Clash | Author: Susan Zhang",
+            "题目：Five Elemental Clash ｜ 作者：Celine": "Title: Five Elemental Clash | Author: Celine",
             "玩家形式": "Player Format",
             "预计时长": "Estimated Play Time",
             "类型": "Genre",
@@ -906,7 +923,7 @@
             "（": "(",
             "）": ")",
             "：": ": ",
-            "题目：Five Elemental Clash ｜ 作者：Susan Zhang": "Title: Five Elemental Clash | Author: Susan Zhang",
+            "题目：Five Elemental Clash ｜ 作者：Celine": "Title: Five Elemental Clash | Author: Celine",
             "玩家形式": "Player Format",
             "预计时长": "Estimated Play Time",
             "类型": "Genre",
@@ -1037,7 +1054,7 @@
 
         function applyEnPage() {
             document.documentElement.lang = "en";
-            document.title = "Five Elemental Clash - Project Detail";
+            document.title = "Five Elemental Clash | Celine";
             replaceTextNodes(document.body, zhToEn);
             if (localStorage.getItem("siteLang") !== "en") localStorage.setItem("siteLang", "en");
         }

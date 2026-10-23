@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milk Man Crushing - PLO 2 Case Study</title>
+    <title>Milk Man Crushing | Celine</title>
+    <meta name="author" content="Celine">
     <script>
-        if (localStorage.getItem('siteLang') === 'zh') {
-            window.location.replace('MilkManCrushing-zh.html');
-        } else {
-            localStorage.setItem('siteLang', 'en');
-        }
+        (function () {
+            var enFile = "MilkManCrushing.html";
+            var zhFile = "MilkManCrushing-zh.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || enFile;
+            }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
+        })();
     </script>
 
     <!-- Fonts -->
@@ -653,7 +672,7 @@ order: -1;
         </div>
     </nav>
 
-    <section class="hero">
+    <section id="overview" class="hero">
         <div class="hud-line-h hud-1"></div>
         <div class="hud-line-h hud-2"></div>
         <div class="hud-line-v hud-3"></div>
@@ -667,11 +686,11 @@ order: -1;
 
                 <div class="meta-chips">
                     <span class="meta-chip">Party Game</span>
-                    <span class="meta-chip">Top Down Arena</span>
+                    <span class="meta-chip">Top-Down Arena</span>
                     <span class="meta-chip">Chaotic Multiplayer</span>
                     <span class="meta-chip">Slippery Movement</span>
                     <span class="meta-chip">Cow Chase</span>
-                    <span class="meta-chip">PLO 2</span>
+                    <span class="meta-chip">Design Case Study</span>
                 </div>
 
                 <div class="hero-quote">
@@ -721,7 +740,7 @@ order: -1;
             <div class="content-panel p-6">
                 <p>The first playable version simplified the original concept into a functional prototype.</p>
                 <p>Players collected milk as a progress value. The win condition was reaching one hundred percent milk. Shooting was separated into another system with its own cooldown. Players used one trigger to collect milk and another trigger to shoot.</p>
-                <p>The game was presented as a top down 2D arena. Players were represented as simple colored shapes moving on a very slippery surface. Movement was intentionally unstable to create chaotic control and unpredictable interactions.</p>
+                <p>The game was presented as a top-down 2D arena. Players were represented as simple colored shapes moving on a very slippery surface. Movement was intentionally unstable to create chaotic control and unpredictable interactions.</p>
                 <p>The cow moved autonomously and could push players away. There was no health system, no elimination, and no ghost mechanic. The game focused entirely on reaching the milk goal before others.</p>
             </div>
         </section>
@@ -778,7 +797,7 @@ order: -1;
                 </article>
             </div>
             <div class="highlight-box">
-                <p>Key outcome: the project moved from one fixed play pattern to multiple player friendly modes.</p>
+                <p>Key outcome: the project moved from one fixed play pattern to multiple player-friendly modes.</p>
             </div>
         </section>
 
@@ -816,8 +835,9 @@ order: -1;
                 Final Validation
             </h2>
             <div class="content-panel p-6">
-                <p>After these adjustments, playtesting showed no major negative feedback.</p>
-                <p>Players remained active for most of the game. Interaction stayed frequent, but control was preserved. The game achieved a better balance between chaos and playability.</p>
+                <p>After the stun change, the write-up records that players stayed active, interaction stayed frequent, and control was preserved.</p>
+                <p>It does not list remaining complaints. Questions still worth testing are whether the one-second stun and the three difficulty modes hold across the stated 2–6 players.</p>
+                <p>This page has no gameplay screenshot or video. The bottle drawing is decoration.</p>
             </div>
             <div class="quote-box">
                 <p>The final version preserved the party game energy while making the system clearer, fairer, and more responsive across different player counts.</p>
@@ -841,13 +861,13 @@ order: -1;
     <footer>
         <div class="logo">Milk Man Crushing</div>
         <p>Game Design Case Study</p>
-        <p>Xiaohan Zhang</p>
+        <p>Celine</p>
     </footer>
 
     <script>
         function toggleLang() {
-            localStorage.setItem('siteLang', 'zh');
-            window.location.href = 'MilkManCrushing-zh.html';
+            try { localStorage.setItem('siteLang', 'zh'); } catch (e) {}
+            window.location.href = 'MilkManCrushing-zh.html?lang=zh' + (location.hash || '');
         }
 
         // Nav scroll effect

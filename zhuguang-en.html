@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zhuguang - Elegant Chinese Style</title>
+    <title>Zhuguang | Celine</title>
     <script>
-        if (localStorage.getItem('siteLang') === 'zh') {
-            window.location.replace('zhuguang.html');
-        } else {
-            localStorage.setItem('siteLang', 'en');
-        }
+        (function () {
+            var enFile = "zhuguang-en.html";
+            var zhFile = "zhuguang.html";
+            function currentFile() {
+                var name = (location.pathname || "").split("/").pop();
+                return name || enFile;
+            }
+            function resolve() {
+                try {
+                    var q = new URLSearchParams(location.search).get("lang");
+                    if (q === "en" || q === "zh") {
+                        try { localStorage.setItem("siteLang", q); } catch (e) {}
+                        return q;
+                    }
+                    var saved = localStorage.getItem("siteLang");
+                    if (saved === "en" || saved === "zh") return saved;
+                } catch (e) {}
+                return "en";
+            }
+            var code = resolve();
+            var target = code === "zh" ? zhFile : enFile;
+            if (currentFile() !== target) location.replace(target + "?lang=" + code + (location.hash || ""));
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -358,7 +376,7 @@
                 <a href="#design" class="nav-link text-sm sm:text-base">Systems</a>
                 <a href="#story" class="nav-link text-sm sm:text-base">Challenges</a>
                 <a href="#video" class="nav-link text-sm sm:text-base">Demo</a>
-                <button onclick="localStorage.setItem('siteLang','zh'); window.location.href='zhuguang.html';" class="nav-link border border-willow/30 rounded-lg px-2 py-1 text-xs sm:text-sm">中文</button>
+                <button onclick="try{localStorage.setItem('siteLang','zh')}catch(e){} window.location.href='zhuguang.html?lang=zh'+(location.hash||'');" class="nav-link border border-willow/30 rounded-lg px-2 py-1 text-xs sm:text-sm">中文</button>
             </div>
         </div>
     </nav>
@@ -367,8 +385,8 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <section id="overview" class="hero-section animate-fade-in">
                 <div class="text-center mb-6">
-                    <div class="text-xs text-willow uppercase tracking-widest mb-2 font-elegant">Third Person Action Stealth Prototype</div>
-                    <div class="text-xs text-willow uppercase tracking-widest mb-4 font-elegant">12 Day Production Sprint</div>
+                    <div class="text-xs text-willow uppercase tracking-widest mb-2 font-elegant">Third-Person Action Stealth Prototype</div>
+                    <div class="text-xs text-willow uppercase tracking-widest mb-4 font-elegant">12-Day Production Sprint</div>
                     <h1 class="game-title mb-4">逐光</h1>
                     <div class="flex flex-wrap justify-center gap-2 mb-6">
                         <span class="mini-tag">Scale Shift</span>
@@ -439,7 +457,7 @@
                             Human Form is larger and exposed. It is used for interaction and attack.
                         </p>
                         <p class="text-ink/80 leading-relaxed mt-3">
-                            Both form follows a different set of rules.
+                            Each form follows a different set of rules.
                         </p>
                         <p class="text-ink/80 leading-relaxed mt-3">
                             The player must switch between these two forms to progress.
@@ -502,10 +520,10 @@
                             A projection will be left in the display case for four hours to avoid detection.
                         </p>
                         <p class="text-ink/80 leading-relaxed mt-3">
-                            During this time, the player must escape the storage room, move through the museum, avoid guards, find keys, to unlock doors and reach the exhibition hall.
+                            During this time, the player must escape the storage room, move through the museum, avoid guards, find keys to unlock doors, and reach the exhibition hall.
                         </p>
                         <p class="text-ink/80 leading-relaxed mt-3">
-                            The goal is return to the light and restore existence.
+                            The goal is to return to the light and restore its existence.
                         </p>
                     </div>
                     <div class="elegant-panel md:col-span-2">
@@ -777,7 +795,7 @@ advance to the next area</pre>
                         After opening all required doors, the player can return the key to its original position.
                     </p>
                     <p class="text-ink/80 leading-relaxed mt-3">
-                        If the key is returned, the score increases back.
+                        If the key is returned, the score is restored.
                     </p>
                     <p class="text-ink/80 leading-relaxed mt-3">
                         This system was designed to encourage careful play and responsibility.
@@ -787,7 +805,7 @@ advance to the next area</pre>
                     </p>
                     <p class="text-ink/80 leading-relaxed mt-3">
                         For example:<br>
-                        If the player does not return all keys, the next day newspaper would report that museum keys have disappeared.<br>
+                        If the player does not return all keys, the next day’s newspaper would report that museum keys have disappeared.<br>
                         If the player performs well, the result would appear as a normal night with no incident.
                     </p>
 
@@ -829,7 +847,7 @@ advance to the next area</pre>
                         These systems were not implemented in the prototype in order to ensure a complete and stable playable experience within the 12-day timeframe.
                     </p>
                     <p class="text-ink/80 leading-relaxed mt-3">
-                        However, they are fully designed and can be integrated into future iterations. The Goal was to connect player behavior with narrative outcome, not just success or failure.
+                        However, they are fully designed and can be integrated into future iterations. The goal was to connect player behavior with narrative outcome, not just success or failure.
                     </p>
                 </div>
             </section>
@@ -839,7 +857,7 @@ advance to the next area</pre>
     <footer class="minimal-footer">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <p class="text-ink/50 text-sm">© 2026 Zhuguang Demo</p>
-            <p class="text-ink/30 text-xs mt-2">Design & Documentation: Xiaohan Zhang</p>
+            <p class="text-ink/30 text-xs mt-2">Design & Documentation: Celine</p>
         </div>
     </footer>
 
