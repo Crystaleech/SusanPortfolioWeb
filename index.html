@@ -125,6 +125,8 @@
         }
 
         /* Nav Box Styling */
+        .nav-box, .lang-switch, .nav-box span { white-space: nowrap; flex-shrink: 0; }
+        .nav-transparent-box { flex-wrap: nowrap; }
         .nav-box {
             display: flex;
             align-items: center;
@@ -265,8 +267,16 @@
         </div>
 
         <!-- Decorative Elements -->
-        <div class="absolute bottom-8 left-8 font-mono text-xs text-slate/30">
-            <span class="lang-en">Based in Pasadena, CA / Hangzhou, CN</span><span class="lang-zh">现居：美国加州帕萨迪纳 / 中国杭州</span>
+        <div class="absolute bottom-8 left-8 right-8 space-y-2">
+            <p class="text-sm leading-relaxed max-w-md">
+                <a id="homeSiteNote" href="contact.html#website-development" class="text-slate hover:text-neon-blue">
+                    <span class="lang-en">This portfolio website was developed with AI-assisted coding.</span>
+                    <span class="lang-zh">本作品集网站由 AI 代码辅助完成。</span>
+                </a>
+            </p>
+            <p class="font-mono text-xs text-slate/70">
+                <span class="lang-en">Based in Pasadena, CA / Hangzhou, CN</span><span class="lang-zh">现居：美国加州帕萨迪纳 / 中国杭州</span>
+            </p>
         </div>
     </div>
 
@@ -295,7 +305,7 @@
                 <li><a class="hover:text-neon-blue" data-en="tyrants-court.html" data-zh="tyrants-court-zh.html" href="tyrants-court.html?lang=en"><span class="lang-en">Tyrant's Court</span><span class="lang-zh">朝堂之上</span></a></li>
                 <li><a class="hover:text-neon-blue" data-en="wonder-tales.html" data-zh="wonder-tales.html" href="wonder-tales.html?lang=en"><span class="lang-en">Wonder Tales</span><span class="lang-zh">鬼神奇谭</span></a></li>
                 <li><a class="hover:text-neon-blue" data-en="one-inches-away.html" data-zh="one-inches-away.html" href="one-inches-away.html?lang=en"><span class="lang-en">One Inch Away</span><span class="lang-zh">一寸之遥</span></a></li>
-                <li><a class="hover:text-neon-blue" data-en="moderator.html" data-zh="moderator.html" href="moderator.html?lang=en"><span class="lang-en">Moderator</span><span class="lang-zh">审核员模拟器</span></a></li>
+                <li><a class="hover:text-neon-blue" data-en="vere.html" data-zh="vere.html" href="vere.html?lang=en"><span class="lang-en">Vere</span><span class="lang-zh">维尔</span></a></li>
             </ul>
         </div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTAgNDBMMCAwTDQwIDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgwLDI1NSwyNTUsMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiAvPjwvc3ZnPg==')] opacity-30 pointer-events-none"></div>
@@ -315,6 +325,8 @@
             const about = document.getElementById('aboutEntry');
             if (selected) selected.href = 'projects.html?lang=' + lang + '#selected';
             if (about) about.href = 'contact.html?lang=' + lang;
+            const siteNote = document.getElementById('homeSiteNote');
+            if (siteNote) siteNote.href = 'contact.html?lang=' + lang + '#website-development';
             document.querySelectorAll('a.nav-box[href*="index.html"]').forEach(function (link) {
                 if (link.id) return;
                 link.href = 'index.html?lang=' + lang;

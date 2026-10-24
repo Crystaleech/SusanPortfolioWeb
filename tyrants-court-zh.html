@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>朝堂之上 | Celine</title>
+    <link rel="stylesheet" href="site-chrome.css">
     <meta name="author" content="Celine">
     <script>
         (function () {
@@ -174,7 +175,7 @@
             z-index: 1;
             width: min(1100px, 94vw);
             margin: 0 auto;
-            padding: 100px 0 80px;
+            padding: 40px 0 80px;
         }
         .hero {
             display: grid;
@@ -498,26 +499,25 @@
     </style>
 </head>
 <body>
-    <nav class="top-nav-bar">
-        <div class="top-nav-bar-inner">
-            <a href="projects.html" class="back-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                返回项目页
-            </a>
-            <div class="top-nav-actions">
-                <div class="quick-nav">
-                    <a href="#snapshot">概要</a>
-                    <a href="#current">现行规则</a>
-                    <a href="#play">试玩</a>
-                    <a href="#gameplay">玩法</a>
-                    <a href="#initial">初版设计</a>
-                    <a href="#iteration1">迭代一</a>
-                    <a href="#iteration2">迭代二</a>
-                    <a href="#reflection">反思</a>
-                </div>
-                <button class="lang-switch" onclick="toggleLang()">EN</button>
+    <nav class="case-nav" style="--case-nav:#120b1a">
+        <a class="case-nav__back" href="projects.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>项目</span></a>
+        <div class="case-nav__items">
+            <div class="case-nav__links">
+                <a class="case-nav__link" href="#snapshot">概览</a>
+                <a class="case-nav__link" href="#current">玩法</a>
+                <a class="case-nav__link" href="#iteration1">迭代</a>
+                <a class="case-nav__link" href="#reflection">反思</a>
+            </div>
+            <button class="case-nav__menu-button" type="button" data-menu-toggle aria-expanded="false">目录</button>
+            <button class="lang-switch" type="button" onclick="toggleLang()">EN</button>
+            <div class="case-menu">
+                <a href="#snapshot">概览</a>
+                <a href="#current">玩法</a>
+                <a href="#gameplay">视频</a>
+                <a href="#initial">初版</a>
+                <a href="#iteration1">迭代一</a>
+                <a href="#iteration2">迭代二</a>
+                <a href="#reflection">反思</a>
             </div>
         </div>
     </nav>
@@ -537,17 +537,18 @@
 
         <section id="snapshot" class="section">
             <h2>项目概要</h2>
-            <table class="snapshot-grid">
-                <tr><th>项目类型</th><td>个人</td></tr>
-                <tr><th>创建背景</th><td>课程项目</td></tr>
-                <tr><th>职责</th><td>独立设计师</td></tr>
-                <tr><th>时间</th><td>2026.02 – 2026.04</td></tr>
-                <tr><th>工具</th><td>Unity 6</td></tr>
-                <tr><th>形式</th><td>可玩原型</td></tr>
-                <tr><th>当前状态</th><td>两个本地可玩原型：初版与修改版</td></tr>
-                <tr><th>成果</th><td>下面两个原型，以及这份迭代记录</td></tr>
-            </table>
-            <p>下面的视频是本地版本。页面里的试玩区是这个原型的单人网页版，不是在线多人。</p>
+            <div class="info-panel">
+                <div><span>项目类型</span><strong>个人</strong></div>
+                <div><span>创建背景</span><strong>课程项目</strong></div>
+                <div><span>职责</span><strong>独立设计师</strong></div>
+                <div><span>时间</span><strong>2026.02 – 2026.04</strong></div>
+                <div><span>工具</span><strong>Unity 6</strong></div>
+                <div><span>形式</span><strong>可玩原型</strong></div>
+                <div class="span-all"><span>当前状态</span><strong>两个本地可玩原型：初版与修改版</strong></div>
+                <div class="span-all"><span>成果</span><strong>下面两个原型，以及这份迭代记录</strong></div>
+            </div>
+            <p>下面的视频是本地版本的录屏。</p>
+            <p id="ai-use" class="ai-line">本项目使用了 AI 生成的图像素材，代码部分也使用了 AI 生成。我的贡献包括游戏机制与系统设计，并依据玩家反馈和试玩测试进行迭代。</p>
         </section>
         <section id="current" class="section">
             <h2>现行规则</h2>
@@ -563,14 +564,6 @@
                 <img src="Tyrant.png" alt="朝堂之上标题界面，中间有开始游戏按钮">
                 <figcaption>可玩原型的标题界面。它展示的是进入游戏的界面，不是一回合中的证据决策。</figcaption>
             </figure>
-        </section>
-        <section id="play" class="section">
-            <h2>在网页里试玩</h2>
-            <p>这是《朝堂之上》的网页版。点进游戏后，按开始界面上的操作来玩。它在这个网站的浏览器里运行。如果只是把网页文件下载到文件夹里双击打开，这个网页版无法启动。</p>
-            <div class="play-frame">
-                <iframe src="tyrant-play/index.html" title="朝堂之上网页版" allow="fullscreen; autoplay" allowfullscreen></iframe>
-            </div>
-            <p><a href="tyrant-play/index.html" target="_blank" rel="noopener">在新页面打开《朝堂之上》</a></p>
         </section>
         <section id="gameplay" class="video-section">
             <h2 class="section-title">玩法演示</h2>
@@ -754,8 +747,10 @@
     <footer class="minimal-footer">
         <p class="footer-line-main">© 2026 朝堂之上 Demo</p>
         <p class="footer-line-sub">设计与文档：Celine</p>
+        <p class="footer-line-sub"><a href="contact.html?lang=zh#website-development">本作品集网站由 AI 代码辅助完成。</a></p>
     </footer>
 
+    <script src="site-nav.js"></script>
     <script>
         function toggleLang() {
             try { localStorage.setItem('siteLang', 'en'); } catch (e) {}

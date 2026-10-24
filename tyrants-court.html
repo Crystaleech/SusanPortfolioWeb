@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyrant's Court | Celine</title>
+    <link rel="stylesheet" href="site-chrome.css">
     <meta name="author" content="Celine">
     <meta name="description" content="Tyrant's Court is an individual course project by Celine: a playable card prototype about evidence, exposure, and shared risk.">
     <script>
@@ -79,6 +80,7 @@
         }
 
         .snapshot-grid, .iter-table { width: 100%; border-collapse: collapse; margin: 1rem 0 0; }
+        .iter-table { min-width: 720px; }
         .snapshot-grid th, .snapshot-grid td, .iter-table th, .iter-table td {
             border: 1px solid var(--border-gold);
             padding: 0.7rem 0.8rem;
@@ -235,7 +237,7 @@
             z-index: 1;
             width: min(1100px, 94vw);
             margin: 0 auto;
-            padding: 100px 0 80px;
+            padding: 40px 0 80px;
         }
 
         .section img, .video-media { max-width: 100%; height: auto; }
@@ -797,26 +799,25 @@ display: grid;
 </head>
 <body>
     <!-- Fixed Top Navigation Bar -->
-    <nav class="top-nav-bar">
-        <div class="top-nav-bar-inner">
-            <a href="projects.html" class="back-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Back To Projects
-            </a>
-            <div class="top-nav-actions">
-                <div class="quick-nav">
-                    <a href="#snapshot">Snapshot</a>
-                    <a href="#current">Current Rules</a>
-                    <a href="#play">Play</a>
-                    <a href="#gameplay">Gameplay</a>
-                    <a href="#initial">Initial Design</a>
-                    <a href="#iteration1">Iteration 1</a>
-                    <a href="#iteration2">Iteration 2</a>
-                    <a href="#reflection">Reflection</a>
-                </div>
-                <button class="lang-switch" onclick="toggleLang()">中文</button>
+    <nav class="case-nav" style="--case-nav:#120b1a">
+        <a class="case-nav__back" href="projects.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span class="case-nav__long">Back to Projects</span><span class="case-nav__short">Projects</span></a>
+        <div class="case-nav__items">
+            <div class="case-nav__links">
+                <a class="case-nav__link" href="#snapshot">Overview</a>
+                <a class="case-nav__link" href="#current">Gameplay</a>
+                <a class="case-nav__link" href="#iteration1">Iteration</a>
+                <a class="case-nav__link" href="#reflection">Reflection</a>
+            </div>
+            <button class="case-nav__menu-button" type="button" data-menu-toggle aria-expanded="false">Contents</button>
+            <button class="lang-switch" type="button" onclick="toggleLang()">中文</button>
+            <div class="case-menu">
+                <a href="#snapshot">Overview</a>
+                <a href="#current">Gameplay</a>
+                <a href="#gameplay">Videos</a>
+                <a href="#initial">Initial Design</a>
+                <a href="#iteration1">Iteration 1</a>
+                <a href="#iteration2">Iteration 2</a>
+                <a href="#reflection">Reflection</a>
             </div>
         </div>
     </nav>
@@ -837,17 +838,18 @@ display: grid;
 
         <section id="snapshot" class="section">
             <h2>Project Snapshot</h2>
-            <table class="snapshot-grid">
-                <tr><th>Project Type</th><td>Individual</td></tr>
-                <tr><th>Context</th><td>Course Project</td></tr>
-                <tr><th>Role</th><td>Solo Designer</td></tr>
-                <tr><th>Duration</th><td>2026.02 – 2026.04</td></tr>
-                <tr><th>Tools</th><td>Unity 6</td></tr>
-                <tr><th>Format</th><td>Playable Prototype</td></tr>
-                <tr><th>Current Status</th><td>Two local playable prototypes: initial and refined</td></tr>
-                <tr><th>Deliverables</th><td>The two prototypes shown below, plus this iteration write-up</td></tr>
-            </table>
-            <p>The videos below are local builds. The browser section is a single-player web build of this prototype. It is not online multiplayer.</p>
+            <div class="info-panel">
+                <div><span>Project Type</span><strong>Individual</strong></div>
+                <div><span>Context</span><strong>Course Project</strong></div>
+                <div><span>Role</span><strong>Solo Designer</strong></div>
+                <div><span>Duration</span><strong>2026.02 – 2026.04</strong></div>
+                <div><span>Tools</span><strong>Unity 6</strong></div>
+                <div><span>Format</span><strong>Playable Prototype</strong></div>
+                <div class="span-all"><span>Current Status</span><strong>Two local playable prototypes: initial and refined</strong></div>
+                <div class="span-all"><span>Deliverables</span><strong>The two prototypes shown below, plus this iteration write-up</strong></div>
+            </div>
+            <p>The videos below are recordings of the local builds.</p>
+            <p id="ai-use" class="ai-line">This project uses AI-generated visual assets and AI-generated code. My contributions include game and systems design, with revisions guided by player feedback and playtesting.</p>
         </section>
 
         <section id="current" class="section">
@@ -864,15 +866,6 @@ display: grid;
                 <img src="Tyrant.png" alt="Tyrant's Court title screen with a Start Game button">
                 <figcaption class="shot-note">Title screen of the playable prototype. It shows the entry UI, not an Evidence decision during a round.</figcaption>
             </figure>
-        </section>
-
-        <section id="play" class="section">
-            <h2>Play the Prototype</h2>
-            <p>This is the web build of Tyrant's Court. Click the game, then use the controls shown on its start screen. It runs in the browser on this site. A downloaded copy of the page opened from a folder cannot start the web build.</p>
-            <div class="play-frame">
-                <iframe src="tyrant-play/index.html" title="Tyrant's Court web build" allow="fullscreen; autoplay" allowfullscreen></iframe>
-            </div>
-            <p class="shot-note"><a href="tyrant-play/index.html" target="_blank" rel="noopener">Open Tyrant's Court in a full page</a></p>
         </section>
 
         <section id="gameplay" class="video-section">
@@ -995,7 +988,7 @@ display: grid;
 
         <section id="iterations" class="section">
             <h2>Iteration Record</h2>
-            <table class="iter-table">
+            <div class="table-scroll"><table class="iter-table">
                 <thead>
                     <tr><th>Stage</th><th>Observed problem</th><th>Decision</th><th>Change</th><th>Result or remaining issue</th></tr>
                 </thead>
@@ -1022,7 +1015,7 @@ display: grid;
                         <td>Players described it as more focused. Depth, quiet turns, and planning against the draw are still open.</td>
                     </tr>
                 </tbody>
-            </table>
+            </table></div>
         </section>
 
         <section id="result" class="section">
@@ -1058,7 +1051,9 @@ display: grid;
     <footer class="minimal-footer">
         <p class="footer-line-main">© 2026 Tyrant's Court Demo</p>
         <p class="footer-line-sub">Design &amp; Documentation: Celine</p>
+        <p class="footer-line-sub"><a href="contact.html#website-development">This portfolio website was developed with AI-assisted coding.</a></p>
     </footer>
+    <script src="site-nav.js"></script>
     <script>
         function toggleLang() {
             try { localStorage.setItem('siteLang', 'zh'); } catch (e) {}

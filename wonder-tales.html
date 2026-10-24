@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wonder Tales | Celine</title>
+    <link rel="stylesheet" href="site-chrome.css">
     <meta name="author" content="Celine">
     <meta name="description" content="Wonder Tales is a narrative card horror game in development as a playable paper prototype by Celine. A digital version is not implemented.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -223,8 +224,9 @@
             transform: translate(-50%, -50%);
         }
 
+        .text-fog.text-xl { font-size: 1.05rem; line-height: 1.7; }
         .lead-copy {
-            font-size: 1.55rem;
+            font-size: 1.05rem;
             line-height: 1.7;
             color: #e8d8c8;
         }
@@ -249,7 +251,7 @@
             padding: 1.1rem 1.2rem;
             position: relative;
             overflow: hidden;
-            font-size: 1.28rem;
+            font-size: 1.05rem;
             line-height: 1.65;
             height: 100%;
             display: flex;
@@ -378,14 +380,10 @@
             background: rgba(20, 12, 24, 0.72);
             position: relative;
         }
-        .panel-shift-up-36 {
-            margin-top: -9rem;
-        }
-        .panel-shift-up-24 {
-            margin-top: -6rem;
-        }
+        .panel-shift-up-36,
+        .panel-shift-up-24,
         .panel-shift-up-12 {
-            margin-top: -3rem;
+            margin-top: 0;
         }
 
         .section-frame::before {
@@ -943,10 +941,10 @@
 
         @media (min-width: 768px) {
             .stagger-panels > *:nth-child(2n) {
-                margin-top: 0.4rem;
+                margin-top: 0;
             }
             .stagger-panels > *:nth-child(3n) {
-                margin-top: 0.8rem;
+                margin-top: 0;
             }
         }
 
@@ -994,26 +992,29 @@
     </style>
 </head>
 <body class="antialiased font-body">
-    <nav class="fixed top-0 w-full z-50 bg-ink/90 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="h-20 flex items-center justify-between">
-                <a href="projects.html" class="font-display text-ember tracking-widest uppercase hover:text-parchment transition-colors">Back To Projects</a>
-                <div class="flex items-center gap-4 md:gap-8">
-                    <div class="hidden md:flex items-center gap-8 text-sm font-mono uppercase tracking-wider">
-                        <a href="#snapshot" class="hover:text-ember transition-colors"><span class="lang-en">Snapshot</span><span class="lang-zh">概要</span></a>
-                        <a href="#paper" class="hover:text-ember transition-colors"><span class="lang-en">Paper Play</span><span class="lang-zh">纸面玩法</span></a>
-                        <a href="#research" class="hover:text-ember transition-colors"><span class="lang-en">Research</span><span class="lang-zh">研究</span></a>
-                        <a href="#gdd" class="hover:text-ember transition-colors"><span class="lang-en">GDD</span><span class="lang-zh">文档</span></a>
-                    </div>
-                    <button onclick="toggleLang()" class="lang-switch">
-                        <span class="lang-en">中文</span><span class="lang-zh">EN</span>
-                    </button>
-                </div>
+    <nav class="case-nav" style="--case-nav:#140c12;--case-ink:#f4ece1">
+        <a class="case-nav__back" href="projects.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span class="case-nav__long"><span class="lang-en">Back to Projects</span><span class="lang-zh">返回项目</span></span><span class="case-nav__short"><span class="lang-en">Projects</span><span class="lang-zh">项目</span></span></a>
+        <div class="case-nav__items">
+            <div class="case-nav__links">
+                <a class="case-nav__link" href="#snapshot"><span class="lang-en">Overview</span><span class="lang-zh">概览</span></a>
+                <a class="case-nav__link" href="#paper"><span class="lang-en">Prototype</span><span class="lang-zh">原型</span></a>
+                <a class="case-nav__link" href="#research"><span class="lang-en">Research</span><span class="lang-zh">研究</span></a>
+                <a class="case-nav__link" href="#gdd"><span class="lang-en">GDD</span><span class="lang-zh">文档</span></a>
+            </div>
+            <button class="case-nav__menu-button" type="button" data-menu-toggle aria-expanded="false"><span class="lang-en">Contents</span><span class="lang-zh">目录</span></button>
+            <button onclick="toggleLang()" class="lang-switch" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
+            <div class="case-menu">
+                <a href="#snapshot"><span class="lang-en">Overview</span><span class="lang-zh">概览</span></a>
+                <a href="#summary"><span class="lang-en">Design question</span><span class="lang-zh">设计问题</span></a>
+                <a href="#paper"><span class="lang-en">Prototype</span><span class="lang-zh">原型</span></a>
+                <a href="#research"><span class="lang-en">Research</span><span class="lang-zh">研究</span></a>
+                <a href="#setting"><span class="lang-en">Revision</span><span class="lang-zh">修改</span></a>
+                <a href="#gdd"><span class="lang-en">GDD</span><span class="lang-zh">文档</span></a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-20">
+    <main class="pt-8">
         <section class="min-h-[78vh] line-grid flex items-center">
             <div class="max-w-7xl mx-auto px-4 py-10 md:py-12 grid lg:grid-cols-2 gap-14 items-center">
                 <div class="space-y-8">
@@ -1707,6 +1708,7 @@
             <p class="line-sub">Design &amp; Documentation: Celine</p>
         </div>
     </footer>
+    <script src="site-nav.js"></script>
     <script src="site-lang.js"></script>
     <script>
         const zhMap = {

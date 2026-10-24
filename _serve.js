@@ -16,7 +16,8 @@ const types = {
   ".wasm": "application/wasm",
   ".data": "application/octet-stream",
   ".mp4": "video/mp4",
-  ".json": "application/json"
+  ".json": "application/json",
+  ".zip": "application/zip"
 };
 http.createServer((req, res) => {
   let u = decodeURIComponent((req.url || "/").split("?")[0]);
@@ -38,4 +39,4 @@ http.createServer((req, res) => {
     });
     res.end(data);
   });
-}).listen(8765, "127.0.0.1", () => console.log("ready http://127.0.0.1:8765/tyrants-court.html"));
+}).listen(8771, "127.0.0.1", () => console.log("ready http://127.0.0.1:8771/projects.html"));

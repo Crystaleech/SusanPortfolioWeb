@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Celine — Game Design Portfolio</title>
+<!--
+  Editable source for CelinePortfolio.pdf.
+  Export from this folder with Edge, after images have loaded:
+  msedge --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=CelinePortfolio.pdf portfolio-guide.html
+  The page size comes from @page { size: A4 landscape }. Do not scale the sheet back to portrait.
+-->
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #F3F1EB;
+    background: #0B111C;
+    font-size: 11.75pt;
+    line-height: 1.5;
+  }
+  a { color: #83CED0; text-decoration: none; }
+  .pdf-page {
+    width: 297mm;
+    height: 210mm;
+    box-sizing: border-box;
+    padding: 14mm 16mm 12mm;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 6mm;
+    break-after: page;
+    page-break-after: always;
+    background: #0B111C;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    overflow: visible;
+  }
+  .pdf-page:last-child { break-after: auto; page-break-after: auto; }
+  .pdf-page.cover-page { grid-template-rows: minmax(0, 1fr) auto; }
+  .kicker {
+    margin: 0 0 2mm;
+    color: #AFBAC9;
+    font-size: 10pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .name {
+    margin: 0;
+    font-size: 52pt;
+    line-height: 0.95;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+  .position {
+    margin: 4mm 0 0;
+    color: #CBB68C;
+    font-size: 13pt;
+    line-height: 1.35;
+  }
+  .intro { margin: 5mm 0 0; max-width: 42em; }
+  .visit {
+    display: inline-block;
+    margin-top: 6mm;
+    padding: 2.4mm 5mm;
+    border: 1px solid #83CED0;
+    color: #83CED0;
+    font-size: 12pt;
+    letter-spacing: 0.04em;
+  }
+  .contact { margin: 4mm 0 0; color: #AFBAC9; font-size: 10.5pt; line-height: 1.45; }
+  .contact a { color: #83CED0; }
+  .cover-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 8mm;
+    min-height: 0;
+    height: 100%;
+  }
+  .cover-copy {
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4mm;
+    min-height: 0;
+    height: 100%;
+  }
+  .tile {
+    margin: 0;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    background: #111B2B;
+    padding: 2.5mm;
+  }
+  .tile .frame {
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111B2B;
+  }
+  .tile img, .shot img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .tile figcaption, .cap {
+    margin: 1.6mm 0 0;
+    color: #AFBAC9;
+    font-size: 9.5pt;
+    line-height: 1.3;
+  }
+  .page-head { min-width: 0; }
+  .eyebrow {
+    display: flex;
+    justify-content: space-between;
+    gap: 6mm;
+    margin: 0 0 1.5mm;
+    color: #AFBAC9;
+    font-size: 10pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  h1.project {
+    margin: 0;
+    font-size: 32pt;
+    line-height: 1.05;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+  }
+  .rule { height: 0.6mm; width: 28mm; margin: 2.2mm 0 2.2mm; background: #83CED0; }
+  .rule.gold { background: #CBB68C; }
+  .meta { margin: 0; color: #AFBAC9; font-size: 10.5pt; }
+  .project-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 8mm;
+    min-height: 0;
+    height: 100%;
+  }
+  .media {
+    min-height: 0;
+    min-width: 0;
+    display: grid;
+    gap: 3.5mm;
+  }
+  .media.two { grid-template-rows: minmax(0, 1.35fr) minmax(0, 0.85fr); }
+  .media.stack { grid-template-rows: auto minmax(0, 1fr); }
+  .shot {
+    margin: 0;
+    min-height: 0;
+    background: #111B2B;
+    padding: 2.5mm;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+  .shot .frame {
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .diagram {
+    margin: 0;
+    background: #111B2B;
+    padding: 4mm 4mm 3.5mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3mm;
+  }
+  .diagram ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 2mm;
+  }
+  .diagram li {
+    flex: 1;
+    margin: 0;
+    padding: 3mm 2mm;
+    border: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+    font-size: 11pt;
+    line-height: 1.3;
+  }
+  .diagram li span {
+    display: block;
+    margin-bottom: 1mm;
+    color: #83CED0;
+    font-size: 9.5pt;
+    letter-spacing: 0.08em;
+  }
+  .copy {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2mm;
+  }
+  .copy h2 {
+    margin: 0 0 1mm;
+    font-size: 12pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #F3F1EB;
+  }
+  .copy p { margin: 0; }
+  .case-link {
+    display: inline-block;
+    margin-top: auto;
+    padding: 2.2mm 4.5mm;
+    border: 1px solid #83CED0;
+    color: #83CED0;
+    font-size: 11.5pt;
+  }
+  .url { margin: 1.5mm 0 0; color: #AFBAC9; font-size: 9.5pt; }
+  .url a { color: #83CED0; }
+  .page-foot {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 6mm;
+    align-items: end;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 2.5mm;
+    color: #AFBAC9;
+    font-size: 9.75pt;
+    line-height: 1.35;
+  }
+  .page-foot p { margin: 0; }
+  .page-foot strong { color: #F3F1EB; font-weight: 650; }
+</style>
+</head>
+<body>
+  <section class="pdf-page cover-page">
+    <div class="cover-layout">
+      <div class="cover-copy">
+        <p class="kicker">Game Design Portfolio</p>
+        <h1 class="name">Celine</h1>
+        <p class="position">Systems · Narrative · Playable Prototypes</p>
+        <p class="intro">I design gameplay systems and narrative experiences, using playable prototypes and player feedback to guide iteration.</p>
+        <a class="visit" href="https://crystaleech.github.io/SusanPortfolioWeb/index.html">Visit Portfolio Website</a>
+        <p class="contact">
+          <a href="https://crystaleech.github.io/SusanPortfolioWeb/index.html">crystaleech.github.io/SusanPortfolioWeb</a><br>
+          susa525795546@gmail.com
+        </p>
+      </div>
+      <div class="tiles">
+        <figure class="tile">
+          <div class="frame"><img src="pdf-assets/king.jpg" alt="Tyrant's Court key art"></div>
+          <figcaption>01 · Tyrant's Court</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="pdf-assets/wonder-cover.jpg" alt="Wonder Tales concept cover"></div>
+          <figcaption>02 · Wonder Tales · Concept cover</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="pdf-assets/oneinch-title.jpg" alt="One Inch Away title screen"></div>
+          <figcaption>03 · One Inch Away</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="pdf-assets/mod-queue.jpg" alt="Moderator queue screen"></div>
+          <figcaption>04 · Moderator</figcaption>
+        </figure>
+      </div>
+    </div>
+    <footer class="page-foot">
+      <p>Portfolio website developed with AI-assisted coding.</p>
+      <p>Celine</p>
+      <p>01</p>
+    </footer>
+  </section>
+
+  <section class="pdf-page">
+    <header class="page-head">
+      <p class="eyebrow"><span>01 · Individual / Course</span><span>Playable prototype</span></p>
+      <h1 class="project">Tyrant's Court</h1>
+      <div class="rule gold"></div>
+      <p class="meta">Solo Designer · Unity 6 · 2026.02–2026.04</p>
+    </header>
+    <div class="project-layout">
+      <div class="media two">
+        <figure class="shot">
+          <div class="frame"><img src="pdf-assets/king.jpg" alt="Tyrant's Court key art"></div>
+          <figcaption class="cap">Key art for Tyrant's Court. The word KING belongs to this project.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="pdf-assets/tyrant-title.jpg" alt="Tyrant's Court title screen"></div>
+          <figcaption class="cap">Title screen of the playable build. It is the entry UI, not an Evidence decision during a round.</figcaption>
+        </figure>
+      </div>
+      <div class="copy">
+        <div>
+          <h2>Concept</h2>
+          <p>A card prototype about information, exposure, and shared risk. In the current version, holding Evidence is the advantage, and that same Evidence becomes vulnerability once it is exposed.</p>
+        </div>
+        <div>
+          <h2>My Contribution</h2>
+          <p>I designed the game and its systems, then revised them from what players did in playtests.</p>
+        </div>
+        <div>
+          <h2>Design Focus</h2>
+          <p>Direct attacks crowded the earlier version. The current rules remove them. Players still affect one another because one player's Evidence changes the shared round-end punishment. The refined notes do not restate a separate win condition.</p>
+        </div>
+        <a class="case-link" href="https://crystaleech.github.io/SusanPortfolioWeb/tyrants-court.html?lang=en">View full case study</a>
+        <p class="url"><a href="https://crystaleech.github.io/SusanPortfolioWeb/tyrants-court.html?lang=en">crystaleech.github.io/SusanPortfolioWeb/tyrants-court.html</a></p>
+      </div>
+    </div>
+    <footer class="page-foot">
+      <p>AI use: generated visual assets and code.</p>
+      <p>Celine</p>
+      <p>02</p>
+    </footer>
+  </section>
+
+  <section class="pdf-page">
+    <header class="page-head">
+      <p class="eyebrow"><span>02 · Individual</span><span>In development</span></p>
+      <h1 class="project">Wonder Tales</h1>
+      <div class="rule"></div>
+      <p class="meta">Solo design and paper prototype · Playable paper prototype · Digital version not implemented</p>
+    </header>
+    <div class="project-layout">
+      <div class="media stack">
+        <figure class="diagram">
+          <figcaption class="cap">Diagram of the designed paper loop. This is not a photograph of a test.</figcaption>
+          <ol>
+            <li><span>01</span>Scene</li>
+            <li><span>02</span>Chosen action</li>
+            <li><span>03</span>Dice, 1–100</li>
+            <li><span>04</span>Facilitator result</li>
+            <li><span>05</span>Handwritten note</li>
+          </ol>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="pdf-assets/wonder-card.jpg" alt="Wonder Tales card gallery illustration"></div>
+          <figcaption class="cap">Card gallery art. It is not a photograph of the paper prototype, and the cover on page 1 is a concept cover, not a shipped digital game.</figcaption>
+        </figure>
+      </div>
+      <div class="copy">
+        <div>
+          <h2>Concept</h2>
+          <p>Wonder Tales asks whether investigation, choices, and cards can carry Chinese folk horror. I host the paper session. No computer resolves actions or runs a build.</p>
+        </div>
+        <div>
+          <h2>My Contribution</h2>
+          <p>I independently designed the game and the facilitated paper prototype, and I ran the paper sessions.</p>
+        </div>
+        <div>
+          <h2>Design Focus</h2>
+          <p>The first session needed too much folklore explained, split attention across the group, and left self-made characters outside the story. The revision moves toward a defined outsider investigator and a tighter sequence. That is the next question, not a measured result.</p>
+        </div>
+        <a class="case-link" href="https://crystaleech.github.io/SusanPortfolioWeb/wonder-tales.html?lang=en">View full case study</a>
+        <p class="url"><a href="https://crystaleech.github.io/SusanPortfolioWeb/wonder-tales.html?lang=en">crystaleech.github.io/SusanPortfolioWeb/wonder-tales.html</a></p>
+      </div>
+    </div>
+    <footer class="page-foot">
+      <p>Playable paper prototype, still in development. A digital version has not been implemented.</p>
+      <p>Celine</p>
+      <p>03</p>
+    </footer>
+  </section>
+
+  <section class="pdf-page">
+    <header class="page-head">
+      <p class="eyebrow"><span>03 · Group / Game Jam</span><span>Playable demo</span></p>
+      <h1 class="project">One Inch Away</h1>
+      <div class="rule"></div>
+      <p class="meta">Associate Director and Gameplay Developer · 7 people · 42 hours</p>
+    </header>
+    <div class="project-layout">
+      <div class="media two">
+        <figure class="shot">
+          <div class="frame"><img src="pdf-assets/oneinch-play.jpg" alt="One Inch Away cooperative level"></div>
+          <figcaption class="cap">Co-op level from the team build. Both characters are in the space, separated by the platforms.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="pdf-assets/oneinch-level.jpg" alt="One Inch Away vertical level space"></div>
+          <figcaption class="cap">Another level from the same build, with the two characters in separate vertical routes.</figcaption>
+        </figure>
+      </div>
+      <div class="copy">
+        <div>
+          <h2>Concept</h2>
+          <p>A cooperative platformer. Two magnets of the same polarity can never touch, so one player's position pushes the other through the level.</p>
+        </div>
+        <div>
+          <h2>My Contribution</h2>
+          <p>I implemented movement, magnetic repulsion, level interaction, and tuning, and I took part in the shared direction of the jam.</p>
+        </div>
+        <div>
+          <h2>Design Focus</h2>
+          <p>The push is always active, so movement is a negotiation. Standing closer increases that push and changes where the other player can land. The case study does not record a numeric force value from the tuning.</p>
+        </div>
+        <a class="case-link" href="https://crystaleech.github.io/SusanPortfolioWeb/one-inches-away.html?lang=en">View full case study</a>
+        <p class="url"><a href="https://crystaleech.github.io/SusanPortfolioWeb/one-inches-away.html?lang=en">crystaleech.github.io/SusanPortfolioWeb/one-inches-away.html</a></p>
+      </div>
+    </div>
+    <footer class="page-foot">
+      <p>Team build. The screenshots show the co-op levels.</p>
+      <p>Celine</p>
+      <p>04</p>
+    </footer>
+  </section>
+
+  <section class="pdf-page">
+    <header class="page-head">
+      <p class="eyebrow"><span>04 · Individual</span><span>Playable prototype</span></p>
+      <h1 class="project">Moderator</h1>
+      <div class="rule"></div>
+      <p class="meta">Solo Developer · Unity · 2026</p>
+    </header>
+    <div class="project-layout">
+      <div class="media two">
+        <figure class="shot">
+          <div class="frame"><img src="pdf-assets/mod-queue.jpg" alt="Moderator queue with four actions"></div>
+          <figcaption class="cap">A post in the queue, with four action buttons. The case study names the actions Promote, Send, Limit, and Ban.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><img src="pdf-assets/mod-metrics.jpg" alt="Moderator screen showing Security and Happiness"></div>
+          <figcaption class="cap">The same kind of screen after an action. It labels the two metrics Security 57 and Happiness 66.</figcaption>
+        </figure>
+      </div>
+      <div class="copy">
+        <div>
+          <h2>Concept</h2>
+          <p>A moderation prototype. Each post offers four actions, and the choice moves community happiness and information safety in different directions.</p>
+        </div>
+        <div>
+          <h2>My Contribution</h2>
+          <p>I designed and built the actions, the two metrics, and the selection of which material appears. The post text is not all my original writing.</p>
+        </div>
+        <div>
+          <h2>Design Focus</h2>
+          <p>For the example “Suspicious link detected...”, Promote changes happiness by 10 and safety by −20. Limit changes happiness by −5 and safety by 15. Send and Ban are in the prototype; this example does not assign numbers to them. No playtest revision is recorded.</p>
+        </div>
+        <a class="case-link" href="https://crystaleech.github.io/SusanPortfolioWeb/moderator.html?lang=en">View full case study</a>
+        <p class="url"><a href="https://crystaleech.github.io/SusanPortfolioWeb/moderator.html?lang=en">crystaleech.github.io/SusanPortfolioWeb/moderator.html</a></p>
+      </div>
+    </div>
+    <footer class="page-foot">
+      <p>Content sources: AI-generated text and selected comments from YouTube, Douyin, and X, obtained using open-source repository resources and filtered to exclude personal identifiers.</p>
+      <p>Celine</p>
+      <p>05</p>
+    </footer>
+  </section>
+</body>
+</html>

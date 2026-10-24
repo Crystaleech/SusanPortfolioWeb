@@ -29,6 +29,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>五行之争 | Celine</title>
+    <link rel="stylesheet" href="site-chrome.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Cinzel:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -187,23 +188,27 @@
     </style>
 </head>
 <body class="antialiased font-body">
-    <nav class="fixed top-0 w-full bg-[#fff8ed]/88 backdrop-blur border-b border-ember/16 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="projects.html" class="text-ember hover:text-mist text-sm uppercase tracking-widest font-mono">Back To Projects</a>
-            <div class="flex items-center gap-4">
-                <div class="hidden md:flex gap-8 text-sm text-mist/85 items-center">
-                    <a href="#overview" class="hover:text-ember">Overview</a>
-                    <a href="#setup" class="hover:text-ember">Setup</a>
-                    <a href="#rules" class="hover:text-ember">Rules</a>
-                    <a href="#systems" class="hover:text-ember">Systems</a>
-                    <a href="#design-reflection" class="hover:text-ember">Design Reflection</a>
-                </div>
-                <button onclick="try{localStorage.setItem('siteLang','en')}catch(e){} window.location.href='five-elemental-clash-en.html?lang=en'+(location.hash||'')" class="lang-switch text-mist/85 hover:text-ember text-sm">EN</button>
+    <nav class="case-nav case-nav--light" style="--case-nav:#fff8ed">
+        <a class="case-nav__back" href="projects.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span class="case-nav__long">返回项目</span><span class="case-nav__short">项目</span></a>
+        <div class="case-nav__items">
+            <div class="case-nav__links">
+                <a class="case-nav__link" href="#overview">概览</a>
+                <a class="case-nav__link" href="#rules">规则</a>
+                <a class="case-nav__link" href="#systems">系统</a>
+                <a class="case-nav__link" href="#design-reflection">反思</a>
+            </div>
+            <button class="case-nav__menu-button" type="button" data-menu-toggle aria-expanded="false">目录</button>
+            <button class="lang-switch" type="button" onclick="try{localStorage.setItem('siteLang','en')}catch(e){} window.location.href='five-elemental-clash-en.html?lang=en'+(location.hash||'')">EN</button>
+            <div class="case-menu">
+                <a href="#overview">概览</a>
+                <a href="#setup">准备</a>
+                <a href="#rules">规则</a>
+                <a href="#systems">系统</a>
+                <a href="#design-reflection">反思</a>
             </div>
         </div>
     </nav>
-
-    <main class="pt-24 pb-16">
+    <main class="pt-8 pb-16">
         <section id="overview" class="max-w-7xl mx-auto px-4 py-8 space-y-8">
             <div class="panel p-6 md:p-8">
                 <div class="text-xs font-mono tracking-[0.3em] text-ember uppercase mb-3">Game Design Document</div>
@@ -1018,5 +1023,6 @@
 
         applyZhPage();
     </script>
+<script src="site-nav.js"></script>
 </body>
 </html>

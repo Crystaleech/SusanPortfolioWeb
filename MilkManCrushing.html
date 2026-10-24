@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milk Man Crushing | Celine</title>
+    <link rel="stylesheet" href="site-chrome.css">
     <meta name="author" content="Celine">
     <script>
         (function () {
@@ -650,24 +651,25 @@ order: -1;
 <body>
     <div class="bg-grid"></div>
 
-    <nav>
-        <div class="nav-inner">
-            <a href="projects.html" class="nav-back">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Back to Projects
-            </a>
-            <div class="nav-actions">
-                <div class="nav-links">
-                    <a href="#overview" class="nav-link active">Overview</a>
-                    <a href="#prototype" class="nav-link">Prototype</a>
-                    <a href="#iteration-1" class="nav-link">Iteration 1</a>
-                    <a href="#iteration-2" class="nav-link">Iteration 2</a>
-                    <a href="#iteration-3" class="nav-link">Iteration 3</a>
-                    <a href="#result" class="nav-link">Result</a>
-                </div>
-                <button class="lang-switch" onclick="toggleLang()">中文</button>
+    <nav class="case-nav" style="--case-nav:#0c1320">
+        <a class="case-nav__back" href="projects.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span class="case-nav__long">Back to Projects</span><span class="case-nav__short">Projects</span></a>
+        <div class="case-nav__items">
+            <div class="case-nav__links">
+                <a class="case-nav__link" href="#overview">Overview</a>
+                <a class="case-nav__link" href="#prototype">Prototype</a>
+                <a class="case-nav__link" href="#iteration-1">Iteration</a>
+                <a class="case-nav__link" href="#result">Result</a>
+            </div>
+            <button class="case-nav__menu-button" type="button" data-menu-toggle aria-expanded="false">Contents</button>
+            <button class="lang-switch" type="button" onclick="toggleLang()">中文</button>
+            <div class="case-menu">
+                <a href="#overview">Overview</a>
+                <a href="#ai-use">AI Use</a>
+                <a href="#prototype">Prototype</a>
+                <a href="#iteration-1">Iteration 1</a>
+                <a href="#iteration-2">Iteration 2</a>
+                <a href="#iteration-3">Iteration 3</a>
+                <a href="#result">Result</a>
             </div>
         </div>
     </nav>
@@ -732,6 +734,12 @@ order: -1;
     </section>
 
     <main>
+        <section id="ai-use" class="section">
+            <h2 class="section-title">AI Use</h2>
+            <div class="content-panel p-6">
+                <p>Some visual assets in this project were generated using AI.</p>
+            </div>
+        </section>
         <section id="prototype" class="section">
             <h2 class="section-title">
                 <span class="section-badge">1</span>
@@ -862,8 +870,10 @@ order: -1;
         <div class="logo">Milk Man Crushing</div>
         <p>Game Design Case Study</p>
         <p>Celine</p>
+        <p><a href="contact.html#website-development">This portfolio website was developed with AI-assisted coding.</a></p>
     </footer>
 
+    <script src="site-nav.js"></script>
     <script>
         function toggleLang() {
             try { localStorage.setItem('siteLang', 'zh'); } catch (e) {}

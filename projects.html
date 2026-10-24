@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selected Projects | Celine</title>
+    <link rel="stylesheet" href="site-chrome.css">
     <meta name="author" content="Celine">
     <meta name="description" content="Selected and additional game design projects by Celine.">
 
@@ -187,11 +188,11 @@
         /* Projects Grid Container - Positioned right below banner */
         .projects-container {
             position: relative;
-            width: 100%;
+            width: min(1200px, 100%);
             height: auto;
-            margin-top: 8.5rem;
+            margin: 0 auto;
             overflow: visible;
-            padding-bottom: 3rem;
+            padding: 48px var(--page-pad) 24px;
         }
 
         .project-group {
@@ -216,7 +217,7 @@
         /* Card grid */
         .projects-slider {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             height: auto;
             width: 100%;
             padding: 0 0.75rem 0.5rem;
@@ -700,10 +701,8 @@
 
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .projects-container {
-                height: auto;
-                margin-top: 8.5rem;
-            }
+            .projects-container { height: auto; margin-top: 0; }
+            .additional-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .projects-slider {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 padding: 0 0.5rem 0.5rem;
@@ -723,10 +722,7 @@
                 transform: translateY(-1px);
             }
 
-            .projects-container {
-                height: auto;
-                margin-top: 9.5rem;
-            }
+            .projects-container { height: auto; margin-top: 0; }
         }
 
         @media (max-width: 480px) {
@@ -758,238 +754,244 @@
             }
 
             .nav-box, .lang-switch {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
+                padding: 0 14px;
+                font-size: 14px;
             }
 
-            .projects-container {
-                height: auto;
-                margin-top: 10.5rem;
-            }
+            .projects-container { height: auto; margin-top: 0; }
+            .selected-grid, .additional-grid { grid-template-columns: 1fr; }
         }
+
+        .page-kicker {
+            max-width: 40rem;
+            margin: 8px 0 40px;
+            color: #8892b0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .additional-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        @media (max-width: 1100px) {
+            .additional-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 680px) {
+            .selected-grid, .additional-grid { grid-template-columns: 1fr; }
+        }
+        a.case-card.project-card {
+            aspect-ratio: auto;
+            filter: none;
+            height: 100%;
+            perspective: none;
+            transform: none;
+            box-shadow: none;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(8, 14, 26, 0.92);
+            display: flex;
+            flex-direction: column;
+        }
+        a.case-card.project-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 255, 255, 0.55);
+            filter: none;
+        }
+        .case-cover { margin: 0; aspect-ratio: 16 / 10; background: #101826; position: relative; overflow: hidden; }
+        .case-cover img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+        .case-cover--contain img { object-fit: contain; }
+        .case-cover--five { background: #000; }
+        .case-flag {
+            position: absolute; top: 12px; left: 12px; padding: 4px 8px; border-radius: 999px;
+            background: rgba(5, 11, 20, 0.82); color: #fff; font-size: 12px; letter-spacing: 0.08em;
+        }
+        .case-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+        .case-body h3 { margin: 0; color: #e6f1ff; font-family: "Chakra Petch", sans-serif; font-size: 22px; line-height: 1.2; }
+        .case-blurb {
+            margin: 0; color: #c5d0e6; font-size: 15px; line-height: 1.55;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .case-role { margin: 0; color: #9fb4c8; font-size: 14px; }
+        .case-meta { margin-top: auto; display: flex; justify-content: space-between; gap: 12px; align-items: center; color: #e6f1ff; font-size: 13px; }
+        .case-go { color: #7ef9ff; white-space: nowrap; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
     <!-- Grid Background -->
     <div class="grid-bg"></div>
 
-    <!-- Banner Background Gradient Layer -->
-    <div class="banner-bg"></div>
-
-    <!-- Header Content with Adjusted Button Position (Same as About Me) -->
-    <div class="fixed top-0 left-0 w-full p-4 md:p-8 z-50 flex flex-col md:flex-row justify-between items-center md:items-start pointer-events-none gap-4">
-        <!-- Left: Project Title with Glitch Effect -->
-        <div class="pointer-events-auto z-50">
-            <h1 class="neon-title font-cyber font-black text-4xl md:text-7xl leading-tight tracking-tighter pl-0 md:pl-4 text-center md:text-left">
-                <span class="lang-en">PROJECTS</span><span class="lang-zh">项目</span>
-            </h1>
+    <header class="site-bar">
+        <a class="site-bar__brand" href="index.html">Celine</a>
+        <div class="site-bar__end">
+            <nav class="site-bar__links" aria-label="Site">
+                <a href="index.html" class="nav-box"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
+                <a href="projects.html" class="nav-box active"><span class="lang-en">Projects</span><span class="lang-zh">项目</span></a>
+                <a href="contact.html" class="nav-box"><span class="lang-en">About</span><span class="lang-zh">关于</span></a>
+                <a href="goals.html" class="nav-box"><span class="lang-en">Goals</span><span class="lang-zh">目标</span></a>
+            </nav>
+            <button class="site-bar__menu" type="button" data-menu-toggle aria-expanded="false" aria-controls="siteMenu"><span class="lang-en">Menu</span><span class="lang-zh">菜单</span></button>
+            <button onclick="toggleLang()" class="lang-switch" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
         </div>
-
-        <!-- Right: Navigation - Positioned like index.html -->
-        <div class="flex flex-wrap justify-center gap-2 md:gap-4 pointer-events-auto items-center z-50 nav-container">
-            <a href="index.html" class="nav-box"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
-            <a href="projects.html" class="nav-box active"><span class="lang-en">Projects</span><span class="lang-zh">项目</span></a>
-            <a href="contact.html" class="nav-box"><span class="lang-en">About me</span><span class="lang-zh">关于我</span></a>
-            <a href="goals.html" class="nav-box"><span class="lang-en">Goals</span><span class="lang-zh">目标</span></a>
-
-            <button onclick="toggleLang()" class="lang-switch ml-0 md:ml-4">
-                <span class="lang-en">中文</span><span class="lang-zh">EN</span>
-            </button>
-        </div>
-    </div>
+        <nav class="site-menu" id="siteMenu">
+            <a href="index.html"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
+            <a href="projects.html"><span class="lang-en">Projects</span><span class="lang-zh">项目</span></a>
+            <a href="contact.html"><span class="lang-en">About</span><span class="lang-zh">关于</span></a>
+            <a href="goals.html"><span class="lang-en">Goals</span><span class="lang-zh">目标</span></a>
+        </nav>
+    </header>
 
     <div class="projects-container">
+        <h1 class="neon-title font-cyber font-black text-4xl md:text-6xl"><span class="lang-en">Projects</span><span class="lang-zh">项目</span></h1>
+        <p class="page-kicker"><span class="lang-en">Selected work in systems design, narrative design, and playable prototyping.</span><span class="lang-zh">精选内容涵盖系统设计、叙事设计，以及可玩原型。</span></p>
         <section id="selected" class="project-group">
             <h2 class="group-title"><span class="lang-en">Selected Projects</span><span class="lang-zh">精选项目</span></h2>
-            <p class="group-note"><span class="lang-en">Four projects covering systems iteration, narrative research, team gameplay implementation, and data-driven design.</span><span class="lang-zh">四个项目分别对应系统迭代、叙事研究、团队中的玩法实现，以及数据驱动设计。</span></p>
-            <div class="projects-slider">
+            <div class="projects-slider selected-grid">
                 <article class="project-unit">
-                    <a href="tyrants-court.html?lang=en" class="project-card" data-en="tyrants-court.html" data-zh="tyrants-court-zh.html">
-                        <div class="corner-badge">Playable Prototype</div>
-                        <div class="corner-badge role-badge">SOLO</div>
-                        <div class="game-name long-title">
-                            <span class="lang-en">TYRANT'S COURT</span>
-                            <span class="lang-zh">朝堂之上</span>
-                        </div>
-                        <div class="tech-frame frame-tyrant"></div>
-                        <div class="card-image-container">
-                            <img src="king_cover_v3.png" alt="Tyrant's Court cover" class="card-image">
+                    <a href="tyrants-court.html?lang=en" class="case-card project-card" data-en="tyrants-court.html" data-zh="tyrants-court-zh.html">
+                        <figure class="case-cover">
+                            <img src="king_cover_v3.png" alt="Tyrant's Court cover">
+                            <span class="case-flag">SOLO</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">TYRANT'S COURT</span><span class="lang-zh">朝堂之上</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A card game prototype exploring information, exposure, and shared risk through playtest-driven iteration.</span><span class="lang-zh">一款卡牌原型，通过试玩迭代探讨信息、暴露与共享风险。</span></p>
+                            <p class="case-role"><span class="lang-en">Solo Designer</span><span class="lang-zh">独立设计师</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Playable Prototype</span><span class="lang-zh">可玩原型</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A card game prototype exploring information, exposure, and shared risk through playtest-driven iteration.</span><span class="lang-zh">一款卡牌原型，通过试玩迭代探讨信息、暴露与共享风险。</span></p>
-                        <p class="role"><span class="lang-en">Solo Designer</span><span class="lang-zh">独立设计师</span></p>
-                        <p class="tags">SOLO · Playable Prototype</p>
-                    </div>
                 </article>
 
                 <article class="project-unit">
-                    <a href="wonder-tales.html?lang=en" class="project-card" data-en="wonder-tales.html" data-zh="wonder-tales.html">
-                        <div class="corner-badge">Playable Prototype</div>
-                        <div class="corner-badge role-badge">SOLO</div>
-                        <div class="game-name">
-                            <span class="lang-en">WONDER TALES</span>
-                            <span class="lang-zh">鬼神奇谭</span>
-                        </div>
-                        <div class="tech-frame frame-wonder"></div>
-                        <div class="card-image-container">
-                            <img src="images/wonder-tales-cover.jpg" alt="Wonder Tales cover" class="card-image">
+                    <a href="wonder-tales.html?lang=en" class="case-card project-card" data-en="wonder-tales.html" data-zh="wonder-tales.html">
+                        <figure class="case-cover">
+                            <img src="images/wonder-tales-cover.jpg" alt="Wonder Tales cover">
+                            <span class="case-flag">SOLO</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">WONDER TALES</span><span class="lang-zh">鬼神奇谭</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A playable paper prototype exploring Chinese folk horror through investigation, choices, and cards.</span><span class="lang-zh">一个可玩的纸面原型，用调查、选择和卡牌探索中国民俗恐怖。</span></p>
+                            <p class="case-role"><span class="lang-en">Game &amp; Narrative Designer</span><span class="lang-zh">游戏与叙事设计</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Paper Prototype · In Development</span><span class="lang-zh">纸面原型 · 开发中</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A playable paper prototype exploring Chinese folk horror through investigation, choices, and cards.</span><span class="lang-zh">一个可玩的纸面原型，用调查、选择和卡牌探索中国民俗恐怖。</span></p>
-                        <p class="role"><span class="lang-en">Game &amp; Narrative Designer</span><span class="lang-zh">游戏与叙事设计</span></p>
-                        <p class="tags">SOLO · Playable Prototype · Paper Prototype · In Development</p>
-                    </div>
                 </article>
 
                 <article class="project-unit">
-                    <a href="one-inches-away.html?lang=en" class="project-card" data-en="one-inches-away.html" data-zh="one-inches-away.html">
-                        <div class="corner-badge">Playable Demo</div>
-                        <div class="corner-badge role-badge">TEAM</div>
-                        <div class="game-name long-title">
-                            <span class="lang-en">ONE INCH<br>AWAY</span>
-                            <span class="lang-zh">一寸之遥</span>
-                        </div>
-                        <div class="tech-frame frame-default"></div>
-                        <div class="card-image-container">
-                            <img src="OneInchesAway/Screenshot (99).png" alt="One Inch Away gameplay screenshot" class="card-image">
+                    <a href="one-inches-away.html?lang=en" class="case-card project-card" data-en="one-inches-away.html" data-zh="one-inches-away.html">
+                        <figure class="case-cover">
+                            <img src="OneInchesAway/Screenshot (99).png" alt="One Inch Away gameplay screenshot">
+                            <span class="case-flag">TEAM</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">ONE INCH AWAY</span><span class="lang-zh">一寸之遥</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A cooperative physics platformer built around the constant repulsion between two magnets.</span><span class="lang-zh">一款围绕两块磁铁持续排斥展开的合作物理平台游戏。</span></p>
+                            <p class="case-role"><span class="lang-en">Associate Director &amp; Gameplay Developer</span><span class="lang-zh">副导演与玩法开发</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Game Jam · Playable Demo</span><span class="lang-zh">Game Jam · 可玩 Demo</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A cooperative physics platformer built around the constant repulsion between two magnets.</span><span class="lang-zh">一款围绕两块磁铁持续排斥展开的合作物理平台游戏。</span></p>
-                        <p class="role"><span class="lang-en">Associate Director &amp; Gameplay Developer</span><span class="lang-zh">副导演与玩法开发</span></p>
-                        <p class="tags">TEAM · Playable Demo</p>
-                    </div>
                 </article>
 
                 <article class="project-unit">
-                    <a href="moderator.html?lang=en" class="project-card" data-en="moderator.html" data-zh="moderator.html">
-                        <div class="corner-badge">Playable Prototype</div>
-                        <div class="corner-badge role-badge">SOLO</div>
-                        <div class="game-name">
-                            <span class="lang-en">MODERATOR</span>
-                            <span class="lang-zh">审核员模拟器</span>
-                        </div>
-                        <div class="tech-frame frame-default"></div>
-                        <div class="card-image-container">
-                            <img src="Moderator/Screenshot (90).png" alt="Moderator screenshot" class="card-image">
+                    <a href="vere.html?lang=en" class="case-card project-card" data-en="vere.html" data-zh="vere.html">
+                        <figure class="case-cover">
+                            <img src="images/vere-screen-1.png" alt="Vere gameplay screenshot">
+                            <span class="case-flag">TEAM</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">VERE</span><span class="lang-zh">维尔</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A game-jam platformer where interface fragments fall into a decaying game world.</span><span class="lang-zh">一款 Game Jam 平台游戏，界面碎片坠入逐渐损坏的游戏世界。</span></p>
+                            <p class="case-role"><span class="lang-en">Concept, world direction, opening camera, selected interactions</span><span class="lang-zh">概念、世界方向、开场镜头与部分交互</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Game Jam · Playable Demo</span><span class="lang-zh">Game Jam · 可玩 Demo</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A data-driven simulation about balancing community happiness and information safety.</span><span class="lang-zh">一个数据驱动的模拟，权衡社区满意度与信息安全。</span></p>
-                        <p class="role"><span class="lang-en">Solo Developer</span><span class="lang-zh">独立开发</span></p>
-                        <p class="tags">SOLO · Playable Prototype</p>
-                    </div>
                 </article>
             </div>
         </section>
 
         <section id="additional" class="project-group">
             <h2 class="group-title"><span class="lang-en">Additional Projects</span><span class="lang-zh">其他项目</span></h2>
-            <div class="projects-slider">
+            <div class="projects-slider additional-grid">
                 <article class="project-unit">
-                    <a href="vere.html?lang=en" class="project-card" data-en="vere.html" data-zh="vere.html">
-                        <div class="corner-badge">Playable Demo</div>
-                        <div class="corner-badge role-badge">TEAM</div>
-                        <div class="game-name">
-                            <span class="lang-en">VERE</span>
-                            <span class="lang-zh">维尔</span>
-                        </div>
-                        <div class="tech-frame frame-vere"></div>
-                        <div class="card-image-container">
-                            <img src="images/vere-screen-1.png" alt="Vere gameplay screenshot" class="card-image">
+                    <a href="moderator.html?lang=en" class="case-card project-card" data-en="moderator.html" data-zh="moderator.html">
+                        <figure class="case-cover">
+                            <img src="Moderator/Screenshot (90).png" alt="Moderator screenshot">
+                            <span class="case-flag">SOLO</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">MODERATOR</span><span class="lang-zh">审核员模拟器</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A data-driven simulation about balancing community happiness and information safety.</span><span class="lang-zh">一个数据驱动的模拟，权衡社区满意度与信息安全。</span></p>
+                            <p class="case-role"><span class="lang-en">Solo Developer</span><span class="lang-zh">独立开发</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Playable Prototype</span><span class="lang-zh">可玩原型</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A game-jam platformer where interface fragments fall into a decaying game world.</span><span class="lang-zh">一款 Game Jam 平台游戏，界面碎片坠入逐渐损坏的游戏世界。</span></p>
-                        <p class="role"><span class="lang-en">Concept, world direction, opening camera, selected interactions</span><span class="lang-zh">概念、世界方向、开场镜头与部分交互</span></p>
-                        <p class="tags">TEAM · Playable Demo</p>
-                    </div>
                 </article>
 
                 <article class="project-unit">
-                    <a href="MilkManCrushing.html?lang=en" class="project-card" data-en="MilkManCrushing.html" data-zh="MilkManCrushing-zh.html">
-                        <div class="corner-badge">Design Case Study</div>
-                        <div class="corner-badge role-badge">SOLO</div>
-                        <div class="game-name long-title">
-                            <span class="lang-en">MILK MAN CRUSHING</span>
-                            <span class="lang-zh">牛奶人乱斗</span>
-                        </div>
-                        <div class="tech-frame frame-milk"></div>
-                        <div class="card-image-container">
-                            <img src="milkman_cover_v5.png" alt="Milk Man Crushing cover illustration" class="card-image">
+                    <a href="MilkManCrushing.html?lang=en" class="case-card project-card" data-en="MilkManCrushing.html" data-zh="MilkManCrushing-zh.html">
+                        <figure class="case-cover">
+                            <img src="milkman_cover_v5.png" alt="Milk Man Crushing cover illustration">
+                            <span class="case-flag">SOLO</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">MILK MAN CRUSHING</span><span class="lang-zh">牛奶人乱斗</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A party-game case study about chaotic movement, shared goals, and three recorded design iterations.</span><span class="lang-zh">一份派对游戏案例，记录混乱移动、共同目标，以及三轮已写下的设计迭代。</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Design Case Study</span><span class="lang-zh">设计案例</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A party-game case study about chaotic movement, shared goals, and three recorded design iterations.</span><span class="lang-zh">一份派对游戏案例，记录混乱移动、共同目标，以及三轮已写下的设计迭代。</span></p>
-                        <p class="tags">SOLO · Design Case Study</p>
-                    </div>
                 </article>
 
                 <article class="project-unit">
-                    <a href="five-elemental-clash-en.html?lang=en" class="project-card" data-en="five-elemental-clash-en.html" data-zh="five-elemental-clash.html">
-                        <div class="corner-badge">Tabletop Prototype</div>
-                        <div class="corner-badge role-badge">SOLO</div>
-                        <div class="game-name long-title">
-                            <span class="lang-en">FIVE ELEMENTAL<br>CLASH</span>
-                            <span class="lang-zh">五行之争</span>
-                        </div>
-                        <div class="tech-frame frame-default"></div>
-                        <div class="card-image-container">
-                            <img src="FiveElementalClah/五行.png" alt="Five Elemental Clash" class="card-image">
+                    <a href="five-elemental-clash-en.html?lang=en" class="case-card project-card" data-en="five-elemental-clash-en.html" data-zh="five-elemental-clash.html">
+                        <figure class="case-cover case-cover--contain case-cover--five">
+                            <img src="FiveElementalClah/五行.png" alt="Five Elemental Clash">
+                            <span class="case-flag">SOLO</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">FIVE ELEMENTAL CLASH</span><span class="lang-zh">五行之争</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A tabletop prototype where the five-element cycle changes movement and combat choices.</span><span class="lang-zh">一个桌面原型，五行循环会改变移动与战斗选择。</span></p>
+                            <p class="case-role"><span class="lang-en">Solo Designer</span><span class="lang-zh">独立设计师</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Tabletop Prototype</span><span class="lang-zh">桌面原型</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A tabletop prototype where the five-element cycle changes movement and combat choices.</span><span class="lang-zh">一个桌面原型，五行循环会改变移动与战斗选择。</span></p>
-                        <p class="role"><span class="lang-en">Solo Designer</span><span class="lang-zh">独立设计师</span></p>
-                        <p class="tags">SOLO · Tabletop Prototype · Rules / Design Documentation</p>
-                    </div>
                 </article>
 
                 <article class="project-unit">
-                    <a href="lynn-en.html?lang=en" class="project-card" data-en="lynn-en.html" data-zh="lynn.html">
-                        <div class="corner-badge">Playable Demo</div>
-                        <div class="corner-badge role-badge">SOLO</div>
-                        <div class="game-name">
-                            <span class="lang-en">LYNN'S LOG</span>
-                            <span class="lang-zh">林的养成日志</span>
-                        </div>
-                        <div class="tech-frame frame-default"></div>
-                        <div class="card-image-container">
-                            <img src="Lynn/游戏截图111.png" alt="Lynn's Daily Recovery Log screenshot" class="card-image">
+                    <a href="lynn-en.html?lang=en" class="case-card project-card" data-en="lynn-en.html" data-zh="lynn.html">
+                        <figure class="case-cover">
+                            <img src="Lynn/游戏截图111.png" alt="Lynn's Daily Recovery Log screenshot">
+                            <span class="case-flag">SOLO</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">LYNN'S LOG</span><span class="lang-zh">林的养成日志</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A fan-inspired narrative simulation about daily care after an original story.</span><span class="lang-zh">一个同人向叙事模拟，关注原作故事之后的日常照料。</span></p>
+                            <p class="case-role"><span class="lang-en">Game Designer</span><span class="lang-zh">游戏设计师</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Playable Demo</span><span class="lang-zh">可玩 Demo</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A fan-inspired narrative simulation about daily care after an original story.</span><span class="lang-zh">一个同人向叙事模拟，关注原作故事之后的日常照料。</span></p>
-                        <p class="role"><span class="lang-en">Game Designer</span><span class="lang-zh">游戏设计师</span></p>
-                        <p class="tags">SOLO · Playable Demo</p>
-                    </div>
                 </article>
 
                 <article class="project-unit">
-                    <a href="SushiGo.html?lang=en" class="project-card" data-en="SushiGo.html" data-zh="SushiGo.html">
-                        <div class="corner-badge">Playable Demo</div>
-                        <div class="corner-badge role-badge">TEAM</div>
-                        <div class="game-name long-title">
-                            <span class="lang-en">SUSHI<br>GO GO GO</span>
-                            <span class="lang-zh">寿司冲冲冲</span>
-                        </div>
-                        <div class="tech-frame frame-default"></div>
-                        <div class="card-image-container">
-                            <img src="Sushigogogo/64890D794071F873B68B7095DCCB53FC.png" alt="Sushi Go Go Go screenshot" class="card-image">
+                    <a href="SushiGo.html?lang=en" class="case-card project-card" data-en="SushiGo.html" data-zh="SushiGo.html">
+                        <figure class="case-cover">
+                            <img src="Sushigogogo/64890D794071F873B68B7095DCCB53FC.png" alt="Sushi Go Go Go screenshot">
+                            <span class="case-flag">TEAM</span>
+                        </figure>
+                        <div class="case-body">
+                            <h3><span class="lang-en">SUSHI GO GO GO</span><span class="lang-zh">寿司冲冲冲</span></h3>
+                            <p class="case-blurb"><span class="lang-en">A three-person cooking prototype. My part covers cutting, assembly, scoring, timing, and UI.</span><span class="lang-zh">一个三人烹饪原型。我负责切鱼、组装、计分、计时和界面。</span></p>
+                            <p class="case-role"><span class="lang-en">Unity Programmer &amp; Gameplay Designer</span><span class="lang-zh">Unity 程序与玩法设计</span></p>
+                            <p class="case-meta"><span><span class="lang-en">Playable Demo</span><span class="lang-zh">可玩 Demo</span></span><span class="case-go"><span class="lang-en">View case study</span><span class="lang-zh">查看案例</span></span></p>
                         </div>
                     </a>
-                    <div class="card-copy">
-                        <p><span class="lang-en">A three-person cooking prototype. My part covers cutting, assembly, scoring, timing, and UI.</span><span class="lang-zh">一个三人烹饪原型。我负责切鱼、组装、计分、计时和界面。</span></p>
-                        <p class="role"><span class="lang-en">Unity Programmer &amp; Gameplay Designer</span><span class="lang-zh">Unity 程序与玩法设计</span></p>
-                        <p class="tags">TEAM · Playable Demo</p>
-                    </div>
                 </article>
             </div>
         </section>
+        <p class="px-8 pb-10 text-sm leading-relaxed">
+            <a href="contact.html#website-development" id="siteDevNote" class="text-slate hover:text-white">
+                <span class="lang-en">This portfolio website was developed with AI-assisted coding.</span>
+                <span class="lang-zh">本作品集网站由 AI 代码辅助完成。</span>
+            </a>
+        </p>
     </div>
 
+    <script src="site-nav.js"></script>
     <script src="site-lang.js"></script>
     <script>
         lucide.createIcons();
@@ -999,6 +1001,8 @@
                 var file = lang === "zh" ? (card.dataset.zh || card.dataset.en) : card.dataset.en;
                 card.href = file + "?lang=" + lang;
             });
+            var note = document.getElementById("siteDevNote");
+            if (note) note.href = "contact.html?lang=" + lang + "#website-development";
             document.querySelectorAll("a.nav-box").forEach(function (link) {
                 var href = link.getAttribute("href") || "";
                 var page = href.split("?")[0].split("#")[0];

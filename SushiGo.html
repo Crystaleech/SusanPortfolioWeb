@@ -28,7 +28,7 @@
             line-height: 1.6;
             background-image: radial-gradient(var(--salmon-light) 1px, transparent 1px);
             background-size: 20px 20px;
-            padding-top: 80px; /* Space for fixed navbar */
+            padding-top: 0;
         }
 
         /* Navigation Bar */
@@ -445,27 +445,26 @@
 <body>
 
     <!-- Navigation Bar -->
-    <nav class="sushi-nav">
-        <div class="nav-left">
-            <a href="projects.html" class="back-link">
-                <span class="back-icon"></span>
-                <span class="lang-en">Back to Projects</span>
-                <span class="lang-zh">返回项目页</span>
-            </a>
-        </div>
-        <div class="nav-right">
-            <div class="nav-shortcuts">
-                <a href="#mission-brief" class="nav-link"><span class="lang-en">Overview</span><span class="lang-zh">概览</span></a>
-                <a href="#manual" class="nav-link"><span class="lang-en">Controls</span><span class="lang-zh">操作</span></a>
-                <a href="#workflow" class="nav-link"><span class="lang-en">Gameplay</span><span class="lang-zh">玩法</span></a>
-                <a href="#scoring" class="nav-link"><span class="lang-en">Scoring</span><span class="lang-zh">计分</span></a>
-                <a href="#visuals" class="nav-link"><span class="lang-en">Visuals</span><span class="lang-zh">视觉</span></a>
-                <a href="#notes" class="nav-link"><span class="lang-en">Design</span><span class="lang-zh">设计</span></a>
-                <a href="#log" class="nav-link"><span class="lang-en">Log</span><span class="lang-zh">日志</span></a>
+    <nav class="case-nav case-nav--light" style="--case-nav:#fffaf6">
+        <a class="case-nav__back" href="projects.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span class="case-nav__long"><span class="lang-en">Back to Projects</span><span class="lang-zh">返回项目</span></span><span class="case-nav__short"><span class="lang-en">Projects</span><span class="lang-zh">项目</span></span></a>
+        <div class="case-nav__items">
+            <div class="case-nav__links">
+                <a class="case-nav__link" href="#mission-brief"><span class="lang-en">Overview</span><span class="lang-zh">概览</span></a>
+                <a class="case-nav__link" href="#workflow"><span class="lang-en">Gameplay</span><span class="lang-zh">玩法</span></a>
+                <a class="case-nav__link" href="#notes"><span class="lang-en">Design</span><span class="lang-zh">设计</span></a>
+                <a class="case-nav__link" href="#log"><span class="lang-en">Contributions</span><span class="lang-zh">贡献</span></a>
             </div>
-            <button onclick="toggleLang()" class="lang-switch">
-                <span class="lang-en">中文</span><span class="lang-zh">EN</span>
-            </button>
+            <button class="case-nav__menu-button" type="button" data-menu-toggle aria-expanded="false"><span class="lang-en">Contents</span><span class="lang-zh">目录</span></button>
+            <button onclick="toggleLang()" class="lang-switch" type="button"><span class="lang-en">中文</span><span class="lang-zh">EN</span></button>
+            <div class="case-menu">
+                <a href="#mission-brief"><span class="lang-en">Overview</span><span class="lang-zh">概览</span></a>
+                <a href="#manual"><span class="lang-en">Controls</span><span class="lang-zh">操作</span></a>
+                <a href="#workflow"><span class="lang-en">Gameplay</span><span class="lang-zh">玩法</span></a>
+                <a href="#scoring"><span class="lang-en">Scoring</span><span class="lang-zh">计分</span></a>
+                <a href="#visuals"><span class="lang-en">Visuals</span><span class="lang-zh">视觉</span></a>
+                <a href="#notes"><span class="lang-en">Design</span><span class="lang-zh">设计</span></a>
+                <a href="#log"><span class="lang-en">Contributions</span><span class="lang-zh">贡献</span></a>
+            </div>
         </div>
     </nav>
 
@@ -491,7 +490,7 @@
                 <p><span class="lang-en"><strong>Sushi Go Go Go</strong> is a fast-paced cooking simulation prototype where players prepare sushi under time pressure. You take the role of a new sushi apprentice on their first day of work.</span><span class="lang-zh"><strong>《寿司冲冲冲》</strong>是一款快节奏的烹饪模拟原型，玩家需要在时间压力下制作寿司。你将扮演一名刚入职第一天的寿司学徒。</span></p>
                 
                 <!-- Video Section -->
-                <div class="media-frame" style="transform: rotate(1deg); max-width: 80%;">
+                <div class="media-frame" style="max-width: 80%;">
                     <div class="tape" style="top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);"></div>
                     <video controls muted playsinline preload="metadata">
                         <source src="Sushigogogo/SushiGoGoGo.mp4" type="video/mp4">
@@ -557,14 +556,14 @@
             <div class="card" id="visuals" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <h2><span class="square-icon"></span> Visual Evolution</h2>
                 <!-- Prototype (Top) -->
-                <div class="media-frame" style="transform: rotate(-1deg); margin: 5px auto; width: 90%;">
+                <div class="media-frame" style="margin: 5px auto; width: 90%;">
                     <div class="tape" style="top: -8px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 60px; height: 20px;"></div>
                     <img src="Sushigogogo/4fd0bc899f99b7c1506f6a732dea8d71.png" alt="Early Sketch">
                     <div class="media-caption" style="font-size: 0.8rem; color: #888;">Early Prototype</div>
                 </div>
 
                 <!-- Final (Bottom) -->
-                <div class="media-frame" style="transform: rotate(1deg); margin: 5px auto; width: 90%;">
+                <div class="media-frame" style="margin: 5px auto; width: 90%;">
                     <div class="tape" style="top: -6px; right: 20%; transform: rotate(5deg); width: 60px; height: 20px;"></div>
                     <img src="Sushigogogo/572c23bbb88f533ecd6f02d60f77f06f.png" alt="Final Gameplay">
                     <div class="media-caption" style="font-size: 0.8rem;"><span class="lang-en">Later build. Playtest notes said knife placement was confusing; tutorials, cut sounds, and money/time UI were added after that.</span><span class="lang-zh">后期版本。试玩记录说刀的位置一开始让人困惑；之后加了教程、切割音效，以及金钱和时间界面。</span></div>
@@ -633,6 +632,8 @@
         </footer>
     </div>
 
+    <link rel="stylesheet" href="site-chrome.css">
+    <script src="site-nav.js"></script>
     <script src="site-lang.js"></script>
     <script>
         const zhMap = {
