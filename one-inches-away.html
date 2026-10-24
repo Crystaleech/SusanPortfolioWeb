@@ -9,7 +9,7 @@
     <meta name="description" content="One Inch Away is a group game-jam platformer. Celine worked as associate director and gameplay developer.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #FDFCF5;
@@ -199,34 +199,125 @@
 
         /* Specific Card Styles */
 
-        /* Project Info Bar */
-        .info-bar {
+        /* Project facts */
+        .project-facts {
             grid-column: span 12;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background: white;
-            padding: 20px;
-            border-radius: 100px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            column-gap: 22px;
+            row-gap: 14px;
+            margin: 0;
+            padding: 24px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 6px 18px rgba(52, 70, 90, 0.07);
         }
-
-        .info-tag {
-            text-align: center;
+        .project-facts .fact {
+            min-width: 0;
+            margin: 0;
+            padding: 16px;
+            text-align: left;
+            border-radius: 14px;
+            background: #fff;
         }
-        .info-tag label {
+        .project-facts .fact-role {
+            background: #F3EDF9;
+        }
+        .project-facts dt,
+        .project-facts dd {
+            margin: 0;
+        }
+        .fact-label {
             display: block;
-            font-size: 0.8rem;
-            color: var(--text-light);
+            margin: 0 0 8px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: 0.07em;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+            color: #7B8797;
+            white-space: nowrap;
         }
-        .info-tag span {
+        .fact-value,
+        .fact-lines .line,
+        .event-name {
+            font-size: 17.5px;
             font-weight: 700;
-            color: var(--text-main);
-            font-size: 1.1rem;
+            line-height: 1.4;
+            color: #34465A;
+        }
+        .fact-lines .line,
+        .event-name,
+        .event-year {
+            display: block;
+        }
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            height: 28px;
+            padding: 0 10px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 700;
+            line-height: 1;
+            color: #34465A;
+        }
+        .chip-yellow { background: #FDF6C8; }
+        .chip-blue { background: #E7F4FA; }
+        .fact-metric {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .fact-number {
+            font-size: 29px;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .fact-team .fact-number { color: #4C92AD; }
+        .fact-duration .fact-number { color: #AD748B; }
+        .fact-unit,
+        .event-year {
+            font-size: 13.5px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: #7B8797;
+        }
+        .event-year { margin-top: 2px; }
+        .theme-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 10px;
+            background: #FDECF1;
+            box-shadow: inset 0 0 0 1px rgba(173, 116, 139, 0.28);
+            font-size: 16.5px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #34465A;
+        }
+        .project-facts .lang-en,
+        .project-facts .lang-zh {
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            text-transform: inherit;
+            color: inherit;
+        }
+        @media (max-width: 960px) {
+            .project-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 600px) {
+            .project-facts {
+                grid-template-columns: 1fr;
+                padding: 16px;
+            }
         }
 
         /* Overview - Big Card */
@@ -517,14 +608,49 @@
         <div class="grid-container">
             
             <!-- Info Bar -->
-            <div class="info-bar">
-                <div class="info-tag"><label><span class="lang-en">Project Type</span><span class="lang-zh">项目类型</span></label><span><span class="lang-en">Group / Game Jam</span><span class="lang-zh">团队 / Game Jam</span></span></div>
-                <div class="info-tag"><label><span class="lang-en">Role</span><span class="lang-zh">职责</span></label><span><span class="lang-en">Associate Director & Gameplay Dev</span><span class="lang-zh">副导演与玩法开发</span></span></div>
-                <div class="info-tag"><label><span class="lang-en">Team Size</span><span class="lang-zh">团队规模</span></label><span><span class="lang-en">7 Members</span><span class="lang-zh">7 人</span></span></div>
-                <div class="info-tag"><label><span class="lang-en">Development Time</span><span class="lang-zh">开发时长</span></label><span><span class="lang-en">42 Hours</span><span class="lang-zh">42 小时</span></span></div>
-                <div class="info-tag"><label><span class="lang-en">Event</span><span class="lang-zh">活动</span></label><span>ArtCenter Game Jam 2025</span></div>
-                <div class="info-tag"><label><span class="lang-en">Theme</span><span class="lang-zh">主题</span></label><span><span class="lang-en">Unlikely Allies</span><span class="lang-zh">非典型盟友</span></span></div>
-            </div>
+            <dl class="project-facts">
+                <div class="fact fact-type">
+                    <dt class="fact-label"><span class="lang-en">Project Type</span><span class="lang-zh">项目类型</span></dt>
+                    <dd class="chip-row">
+                        <span class="chip chip-yellow"><span class="lang-en">Group</span><span class="lang-zh">团队</span></span>
+                        <span class="chip chip-blue">Game Jam</span>
+                    </dd>
+                </div>
+                <div class="fact fact-role">
+                    <dt class="fact-label"><span class="lang-en">My Role</span><span class="lang-zh">我的职责</span></dt>
+                    <dd class="fact-lines">
+                        <span class="line"><span class="lang-en">Associate Director</span><span class="lang-zh">副导演</span></span>
+                        <span class="line"><span class="lang-en">Gameplay Developer</span><span class="lang-zh">玩法开发</span></span>
+                    </dd>
+                </div>
+                <div class="fact fact-team">
+                    <dt class="fact-label"><span class="lang-en">Team Size</span><span class="lang-zh">团队规模</span></dt>
+                    <dd class="fact-metric">
+                        <span class="fact-number">7</span>
+                        <span class="fact-unit"><span class="lang-en">Members</span><span class="lang-zh">人</span></span>
+                    </dd>
+                </div>
+                <div class="fact fact-duration">
+                    <dt class="fact-label"><span class="lang-en">Duration</span><span class="lang-zh">开发时长</span></dt>
+                    <dd class="fact-metric">
+                        <span class="fact-number">42</span>
+                        <span class="fact-unit"><span class="lang-en">Hours</span><span class="lang-zh">小时</span></span>
+                    </dd>
+                </div>
+                <div class="fact fact-event">
+                    <dt class="fact-label"><span class="lang-en">Event</span><span class="lang-zh">活动</span></dt>
+                    <dd>
+                        <span class="event-name">ArtCenter Game Jam</span>
+                        <span class="event-year">2025</span>
+                    </dd>
+                </div>
+                <div class="fact fact-theme">
+                    <dt class="fact-label"><span class="lang-en">Theme</span><span class="lang-zh">主题</span></dt>
+                    <dd>
+                        <span class="theme-pill"><span class="lang-en">Unlikely Allies</span><span class="lang-zh">非典型盟友</span></span>
+                    </dd>
+                </div>
+            </dl>
 
             <!-- Overview -->
             <div class="card overview" id="overview">
